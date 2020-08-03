@@ -1,4 +1,4 @@
-namespace DentalScheduler.DAL.Models
+namespace DentalScheduler.Entities
 {
     public enum JobType
     {

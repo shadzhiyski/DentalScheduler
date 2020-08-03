@@ -1,16 +1,14 @@
 using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalScheduler.DAL.Models
+namespace DentalScheduler.Entities
 {
-    public class Dentist
+    public class Patient
     {
         public Guid Id { get; set; }
 
         public Guid IdentityUserId { get; set; }
 
         public virtual IdentityUser IdentityUser { get; set; }
-
-        public JobType JobType { get; set; }
     }
 }

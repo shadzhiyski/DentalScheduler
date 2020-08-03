@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Web.UI", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.DAL", "DentalScheduler.DAL\DentalScheduler.DAL.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Entities", "DentalScheduler.Entities\DentalScheduler.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{5037E98D-7A87-4364-BA4A-5F2790CB0B28}.Release|x64.Build.0 = Release|Any CPU
 		{5037E98D-7A87-4364-BA4A-5F2790CB0B28}.Release|x86.ActiveCfg = Release|Any CPU
 		{5037E98D-7A87-4364-BA4A-5F2790CB0B28}.Release|x86.Build.0 = Release|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Debug|x64.Build.0 = Debug|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Debug|x86.Build.0 = Debug|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Release|x64.ActiveCfg = Release|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Release|x64.Build.0 = Release|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Release|x86.ActiveCfg = Release|Any CPU
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalScheduler.DAL.Models
+namespace DentalScheduler.Entities
 {
     public class Room
     {

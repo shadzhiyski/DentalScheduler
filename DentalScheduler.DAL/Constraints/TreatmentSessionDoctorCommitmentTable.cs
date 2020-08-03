@@ -1,4 +1,4 @@
-using DentalScheduler.DAL.Models;
+using DentalScheduler.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
