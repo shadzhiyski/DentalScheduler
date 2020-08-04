@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Entities", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Interfaces", "DentalScheduler.Interfaces\DentalScheduler.Interfaces.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.UseCases", "DentalScheduler.UseCases\DentalScheduler.UseCases.csproj", "{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Config", "DentalScheduler.Config\DentalScheduler.Config.csproj", "{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.DTO", "DentalScheduler.DTO\DentalScheduler.DTO.csproj", "{7511CA65-9D07-4D88-965C-0828C0B17059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,5 +104,29 @@ Global
 		{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}.Release|x64.Build.0 = Release|Any CPU
 		{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}.Release|x86.ActiveCfg = Release|Any CPU
 		{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}.Release|x86.Build.0 = Release|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Debug|x64.Build.0 = Debug|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Debug|x86.Build.0 = Debug|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x64.ActiveCfg = Release|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x64.Build.0 = Release|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x86.Build.0 = Release|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x64.Build.0 = Debug|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x86.Build.0 = Debug|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x64.ActiveCfg = Release|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x64.Build.0 = Release|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x86.ActiveCfg = Release|Any CPU
+		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
