@@ -4,7 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DentalScheduler.Config.DI;
+using DentalScheduler.Config.Mappings;
 using DentalScheduler.DAL;
+using DentalScheduler.Interfaces.Infrastructure;
+using DentalScheduler.Web.RestService.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +39,13 @@ namespace DentalScheduler.Web.RestService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.RegisterDependencies();
+            services.AddTransient<IJwtAuthManager, JwtAuthManager>();
+            services.AddTransient<IUserService<IdentityUser>, UserService>();
+            services.AddTransient<IRoleService<IdentityRole>, RoleService>();
+
+            services.ApplyMappings();
+            
             services.AddControllers();
 
             services.AddEntityFrameworkNpgsql()

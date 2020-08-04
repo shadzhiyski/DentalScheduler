@@ -2,6 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalScheduler.DAL\DentalScheduler.DAL.csproj" />
+    <ProjectReference Include="..\DentalScheduler.DTO\DentalScheduler.DTO.csproj" />
+    <ProjectReference Include="..\DentalScheduler.Config\DentalScheduler.Config.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -19,5 +21,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="Mapster" Version="6.1.0" />
   </ItemGroup>
 </Project>
