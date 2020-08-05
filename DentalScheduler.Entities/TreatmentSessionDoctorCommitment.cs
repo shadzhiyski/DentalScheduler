@@ -10,8 +10,8 @@ namespace DentalScheduler.Entities
 
         public virtual TreatmentSession TreatmentSession { get; set; }
 
-        public Guid DentistId { get; set; }
+        public Guid DentalWorkerId { get; set; }
 
-        public virtual Dentist Dentist { get; set; }
+        public virtual DentalWorker DentalWorker { get; set; }
     }
 }

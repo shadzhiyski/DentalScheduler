@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DentalScheduler.DAL.Configurations
 {
-    public class DentistTable : IEntityTypeConfiguration<Dentist>
+    public class DentalWorkerTable : IEntityTypeConfiguration<Entities.DentalWorker>
     {
-        public void Configure(EntityTypeBuilder<Dentist> builder)
+        public void Configure(EntityTypeBuilder<Entities.DentalWorker> builder)
         {
             builder.HasKey(e => e.Id);
             

@@ -16,7 +16,7 @@ namespace DentalScheduler.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new RoomTable());
-            modelBuilder.ApplyConfiguration(new DentistTable());
+            modelBuilder.ApplyConfiguration(new DentalWorkerTable());
             modelBuilder.ApplyConfiguration(new PatientTable());
             modelBuilder.ApplyConfiguration(new TreatmentSessionTable());
             modelBuilder.ApplyConfiguration(new TreatmentSessionDoctorCommitmentTable());

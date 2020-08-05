@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DentalScheduler.Entities
 {
-    public class Dentist
+    public class DentalWorker
     {
         public Guid Id { get; set; }
 
