@@ -2,7 +2,7 @@ using DentalScheduler.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DentalScheduler.DAL.Constraints
+namespace DentalScheduler.DAL.Configurations
 {
     public class TreatmentSessionDoctorCommitmentTable 
         : IEntityTypeConfiguration<TreatmentSessionDoctorCommitment>
