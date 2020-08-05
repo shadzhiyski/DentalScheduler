@@ -10,6 +10,10 @@ namespace DentalScheduler.Entities
 
         public virtual Patient Patient { get; set; }
 
+        public Guid DentalTeamId { get; set; }
+
+        public virtual DentalTeam DentalTeam { get; set; }
+
         public Guid RoomId { get; set; }
 
         public virtual Room Room { get; set; }
