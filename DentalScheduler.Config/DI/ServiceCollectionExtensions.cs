@@ -28,6 +28,7 @@ namespace DentalScheduler.Config.DI
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             // UseCases
+            services.AddTransient<AbstractValidator<ICreateRoleInput>, CreateRoleValidator>();
             services.AddTransient<AbstractValidator<IUserCredentialsInput>, UserCredentialsValidator>();
             services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
             services.AddTransient<ILoginCommand, LoginCommand>();
