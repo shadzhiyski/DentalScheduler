@@ -1,3 +1,4 @@
+using System.Linq;
 using DentalScheduler.Interfaces.UseCases.Validation;
 using FluentValidation;
 using Mapster;
@@ -18,8 +19,23 @@ namespace DentalScheduler.UseCases.Validation
 
         public IValidationResult Validate(TModel model)
         {
-            return FluentValidator.Validate(model)
+            var fluentValidationResult = FluentValidator.Validate(model);
+
+            var errors = fluentValidationResult.Errors
+                .GroupBy(ve => ve.PropertyName)
+                .Select(veg => new ValidationError
+                {
+                    PropertyName = veg.Key,
+                    Messages = veg.Select(ve => ve.ErrorMessage).ToList()
+                })
+                .Cast<IValidationError>()
+                .ToList();
+
+            var validationResult = FluentValidator.Validate(model)
                 .Adapt<IValidationResult>(MappingConfig);
+            validationResult.Errors = errors;
+
+            return validationResult;
         }
     }
 }
