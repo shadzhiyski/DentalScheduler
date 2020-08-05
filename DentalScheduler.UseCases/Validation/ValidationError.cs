@@ -12,6 +12,6 @@ namespace DentalScheduler.UseCases.Validation
 
         public string PropertyName { get; set; }
 
-        public IEnumerable<string> Messages { get; set; }
+        public IList<string> Messages { get; set; }
     }
 }
