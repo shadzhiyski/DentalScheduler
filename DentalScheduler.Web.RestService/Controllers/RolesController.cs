@@ -19,18 +19,14 @@ namespace DentalScheduler.Web.RestService.Controllers
     {
         public ICreateRoleCommand CreateRoleCommand { get; }
 
-        public RoleManager<IdentityRole> RoleManager { get; }
-
-        public UserManager<IdentityUser> UserManager { get; }
+        public ILinkUserAndRoleCommand LinkUserAndRoleCommand { get; }
 
         public RolesController(
             ICreateRoleCommand createRoleCommand, 
-            RoleManager<IdentityRole> roleManager, 
-            UserManager<IdentityUser> userManager)
+            ILinkUserAndRoleCommand linkUserAndRoleCommand)
         {
-            UserManager = userManager;
             CreateRoleCommand = createRoleCommand;
-            RoleManager = roleManager;
+            LinkUserAndRoleCommand = linkUserAndRoleCommand;
         }
 
         [HttpPost]
@@ -43,30 +39,10 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         [HttpPost]
         [Route("/user/update")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserRoleInputModel model)
+        public async Task<IActionResult> UpdateUser([FromBody] LinkUserAndRoleInput model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.ValidationState);
-            }
-
-            var role = await RoleManager.FindByNameAsync(model.RoleName);
-            if (role == null)
-            {
-                ModelState.AddModelError(nameof(model.RoleName), "Role doesn't exist");
-                return BadRequest(ModelState);
-            }
-
-            var user = await UserManager.FindByNameAsync(model.UserName);
-            if (user == null)
-            {
-                ModelState.AddModelError(nameof(model.RoleName), "User doesn't exist");
-                return BadRequest(ModelState);
-            }
-            
-            await UserManager.AddToRoleAsync(user, role.Name);
-
-            return Ok($"\"{model.RoleName}\" role set to user \"{model.UserName}\"");
+            var result = await LinkUserAndRoleCommand.ExecuteAsync(model);
+            return PresentResult(result);
         }
     }
 }
