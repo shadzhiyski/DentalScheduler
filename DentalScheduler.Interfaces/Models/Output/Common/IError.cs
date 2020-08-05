@@ -1,6 +1,6 @@
 namespace DentalScheduler.Interfaces.Models.Output.Common
 {
-    public interface IError : IMessageOutput
+    public interface IError
     {
         ErrorType Type { get; }
     }
