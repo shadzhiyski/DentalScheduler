@@ -12,6 +12,6 @@ namespace DentalScheduler.DTO.Output.Common
 
         public ErrorType Type { get; }
 
-        public string Message { get; }
+        public string Message { get; set; }
     }
 }

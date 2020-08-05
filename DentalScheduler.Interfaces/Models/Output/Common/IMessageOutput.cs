@@ -2,6 +2,6 @@ namespace DentalScheduler.Interfaces.Models.Output.Common
 {
     public interface IMessageOutput
     {
-        string Message { get; }
+        string Message { get; set; }
     }
 }
