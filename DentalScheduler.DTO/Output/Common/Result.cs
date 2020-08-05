@@ -10,7 +10,7 @@ namespace DentalScheduler.DTO.Output.Common
         { }
 
         public Result(IEnumerable<IError> errors)
-            : this(default(TValue), new List<IError>())
+            : this(default(TValue), errors)
         { }
 
         private Result(TValue value, IEnumerable<IError> errors) 
