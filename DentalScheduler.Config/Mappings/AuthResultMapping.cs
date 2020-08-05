@@ -16,7 +16,7 @@ namespace DentalScheduler.Config.Mappings
                 .MapWith((src) => 
                     new AuthResult(
                         src.Succeeded, 
-                        src.Errors.Select(e => e.Adapt<IError>())
+                        src.Errors.Select(e => e.Adapt<IError>(config))
                     )
                 );
         }

@@ -8,7 +8,6 @@ using DentalScheduler.UseCases;
 using DentalScheduler.UseCases.Validation;
 using FluentValidation;
 using Mapster;
-using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,8 +18,8 @@ namespace DentalScheduler.Config.DI
         public static IServiceCollection RegisterDependencies(this IServiceCollection services)
         {
             // Mappings
-            services.AddSingleton(TypeAdapterConfig.GlobalSettings);
-            services.AddScoped<IMapper, ServiceMapper>();
+            var config = new TypeAdapterConfig();
+            services.AddSingleton<TypeAdapterConfig>(config);
             
             // DAL
             services.AddTransient<DbContext, DentalSchedulerDbContext>();

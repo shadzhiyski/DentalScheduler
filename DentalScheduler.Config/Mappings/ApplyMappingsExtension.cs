@@ -1,4 +1,5 @@
 using Mapster;
+using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.Mappings
@@ -7,8 +8,8 @@ namespace DentalScheduler.Config.Mappings
     {
         public static IServiceCollection ApplyMappings(this IServiceCollection services)
         {
-
-            TypeAdapterConfig.GlobalSettings.Apply(
+            var config = services.BuildServiceProvider().GetService<TypeAdapterConfig>();
+            config.Apply(
                 new AuthResultMapping(),
                 new ErrorMapping(),
                 new ValidationErrorMapping(),

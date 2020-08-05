@@ -9,6 +9,7 @@ namespace DentalScheduler.Config.Mappings
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<ValidationFailure, IValidationError>()
+                .ConstructUsing(dest => new UseCases.Validation.ValidationError())
                 .Map(dest => dest.Message, src => src.ErrorMessage);
         }
     }

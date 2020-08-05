@@ -10,7 +10,11 @@ namespace DentalScheduler.Config.Mappings
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<ValidationResult, IValidationResult>()
-                .Map(dest => dest.Errors, src => src.Errors.Select(e => e.Adapt<IValidationError>()).ToList());
+                .ConstructUsing(dest => new UseCases.Validation.ValidationResult())
+                .Map(
+                    dest => dest.Errors, 
+                    src => src.Errors.Select(e => e.Adapt<IValidationError>(config)).ToList()
+                );
         }
     }
 }
