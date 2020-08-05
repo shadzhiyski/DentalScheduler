@@ -2,7 +2,7 @@ using DentalScheduler.Interfaces.Models.Output.Common;
 
 namespace DentalScheduler.DTO.Output.Common
 {
-    public class Error : IError
+    public class Error : IError, IMessageOutput
     {
         public Error(ErrorType type, string message)
         {
