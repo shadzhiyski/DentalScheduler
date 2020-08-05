@@ -43,10 +43,10 @@ namespace DentalScheduler.UseCases
                 var validationError = new ValidationError()
                 {
                     PropertyName = nameof(inputModel.RoleName),
-                    Messages = new List<string>()
+                    Errors = new List<string>()
                 };
 
-                validationError.Messages.Add("Role doesn't exist");
+                validationError.Errors.Add("Role doesn't exist");
 
                 validationResult.Errors.Add(validationError);
             }
@@ -57,10 +57,10 @@ namespace DentalScheduler.UseCases
                 var validationError = new ValidationError()
                 {
                     PropertyName = nameof(inputModel.UserName),
-                    Messages = new List<string>()
+                    Errors = new List<string>()
                 };
 
-                validationError.Messages.Add("User doesn't exist");
+                validationError.Errors.Add("User doesn't exist");
 
                 validationResult.Errors.Add(validationError);
             }

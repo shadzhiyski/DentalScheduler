@@ -26,7 +26,7 @@ namespace DentalScheduler.UseCases.Validation
                 .Select(veg => new ValidationError
                 {
                     PropertyName = veg.Key,
-                    Messages = veg.Select(ve => ve.ErrorMessage).ToList()
+                    Errors = veg.Select(ve => ve.ErrorMessage).ToList()
                 })
                 .Cast<IValidationError>()
                 .ToList();

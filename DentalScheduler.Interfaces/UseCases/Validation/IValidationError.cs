@@ -7,6 +7,6 @@ namespace DentalScheduler.Interfaces.UseCases.Validation
     {
         string PropertyName { get; set; }
 
-        IList<string> Messages { get; set; }
+        IList<string> Errors { get; set; }
     }
 }
