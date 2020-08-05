@@ -33,6 +33,7 @@ namespace DentalScheduler.Config.DI
             services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
             services.AddTransient<ILoginCommand, LoginCommand>();
             services.AddTransient<IRegisterUserCommand, RegisterUserCommand>();
+            services.AddTransient<ICreateRoleCommand, CreateRoleCommand>();
 
             return services;
         }
