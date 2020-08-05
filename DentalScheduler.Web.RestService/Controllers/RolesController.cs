@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using DentalScheduler.DTO.Input;
+using DentalScheduler.Interfaces.UseCases;
 using DentalScheduler.Web.RestService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,35 +15,30 @@ namespace DentalScheduler.Web.RestService.Controllers
     [ApiController]
     [Route("[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer", Roles=Roles.Admin)]
-    public class RolesController : ControllerBase
+    public class RolesController : BaseApiController
     {
+        public ICreateRoleCommand CreateRoleCommand { get; }
+
         public RoleManager<IdentityRole> RoleManager { get; }
 
         public UserManager<IdentityUser> UserManager { get; }
 
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public RolesController(
+            ICreateRoleCommand createRoleCommand, 
+            RoleManager<IdentityRole> roleManager, 
+            UserManager<IdentityUser> userManager)
         {
             UserManager = userManager;
+            CreateRoleCommand = createRoleCommand;
             RoleManager = roleManager;
         }
 
         [HttpPost]
         [Route("/create")]
-        public async Task<IActionResult> Create([FromBody] RoleInputModel model)
+        public async Task<IActionResult> Create([FromBody] CreateRoleInput model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.ValidationState);
-            }
-
-            var role = new IdentityRole()
-            {
-                Name = model.Name
-            };
-
-            await RoleManager.CreateAsync(role);
-
-            return Ok($"Role \"{model.Name}\" created.");
+            var result = await CreateRoleCommand.CreateAsync(model);
+            return PresentResult(result);
         }
 
         [HttpPost]
