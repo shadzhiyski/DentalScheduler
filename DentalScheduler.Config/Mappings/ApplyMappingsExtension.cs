@@ -12,7 +12,6 @@ namespace DentalScheduler.Config.Mappings
             config.Apply(
                 new AuthResultMapping(),
                 new ErrorMapping(),
-                new ValidationErrorMapping(),
                 new ValidationResultMapping()
             );
 
