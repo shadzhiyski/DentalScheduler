@@ -9,21 +9,25 @@ namespace DentalScheduler.Web.RestService.Helpers
 {
     public class UserService : IUserService<IdentityUser>
     {
-        public UserManager<IdentityUser> UserManager { get; set; }
+        public TypeAdapterConfig MappingConfig { get; }
+        public UserManager<IdentityUser> UserManager { get; }
 
-        public UserService(UserManager<IdentityUser> userManager)
+        public UserService(TypeAdapterConfig mappingConfig, UserManager<IdentityUser> userManager)
         {
-            this.UserManager = userManager;
+            MappingConfig = mappingConfig;
+            UserManager = userManager;
 
         }
         public async Task<IAuthResult> AddToRoleAsync(IdentityUser user, string roleName)
         {
-            return (await UserManager.AddToRoleAsync(user, roleName)).Adapt<IAuthResult>();
+            return (await UserManager.AddToRoleAsync(user, roleName))
+                .Adapt<IAuthResult>(MappingConfig);
         }
 
         public async Task<IAuthResult> CreateAsync(IdentityUser user, string password)
         {
-            return (await UserManager.CreateAsync(user, password)).Adapt<IAuthResult>();
+            return (await UserManager.CreateAsync(user, password))
+                .Adapt<IAuthResult>(MappingConfig);
         }
 
         public async Task<IdentityUser> FindByNameAsync(string name)
