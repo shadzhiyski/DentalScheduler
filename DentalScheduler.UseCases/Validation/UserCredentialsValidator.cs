@@ -10,6 +10,16 @@ namespace DentalScheduler.UseCases.Validation
     {
         public UserCredentialsValidator()
         {
+            RuleFor(userInput => userInput.UserName)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull()
+                .NotEmpty();
+
+            RuleFor(userInput => userInput.Password)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull()
+                .NotEmpty();
+            
             RuleFor(userInput => userInput.Password)
                 .MinimumLength(6);
         }

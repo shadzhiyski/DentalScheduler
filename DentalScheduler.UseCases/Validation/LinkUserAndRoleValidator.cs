@@ -8,10 +8,12 @@ namespace DentalScheduler.UseCases.Validation
         public LinkUserAndRoleValidator()
         {
             RuleFor(model => model.UserName)
+                .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
                 .NotNull();
             
             RuleFor(model => model.RoleName)
+                .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
                 .NotNull();
         }
