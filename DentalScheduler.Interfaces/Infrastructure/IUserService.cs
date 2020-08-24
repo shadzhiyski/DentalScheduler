@@ -7,6 +7,8 @@ namespace DentalScheduler.Interfaces.Infrastructure
     public interface IUserService<TUser>
     {
         Task<TUser> FindByNameAsync(string name);
+
+        Task<bool> CheckPasswordAsync(TUser user, string password);
         
         Task<IAuthResult> CreateAsync(TUser user, string password);
 

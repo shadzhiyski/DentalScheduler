@@ -24,6 +24,11 @@ namespace DentalScheduler.Web.RestService.Helpers
                 .Adapt<IAuthResult>(MappingConfig);
         }
 
+        public async Task<bool> CheckPasswordAsync(IdentityUser user, string password)
+        {
+            return (await UserManager.CheckPasswordAsync(user, password));
+        }
+
         public async Task<IAuthResult> CreateAsync(IdentityUser user, string password)
         {
             return (await UserManager.CreateAsync(user, password))
