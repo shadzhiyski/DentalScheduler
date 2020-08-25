@@ -1,0 +1,92 @@
+@page "/auth/login"
+@layout LoginLayout
+@using Microsoft.AspNetCore.Components.Authorization
+@using DentalScheduler.Interfaces.UseCases.Validation
+@using DentalScheduler.Interfaces.Models.Input
+@using DentalScheduler.Interfaces.Models.Output
+@using DentalScheduler.DTO.Input
+@using DentalScheduler.Web.UI.Services
+@inject NavigationManager NavigationManager
+@inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
+@inject IAuthService AuthService
+
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">DentalScheduler.Web.UI</a>
+    <h2 class="navbar"><b>Login</b></h2>
+</div>
+
+<EditForm EditContext="@EditContext" OnValidSubmit="LoginClick">
+    <ApplicationValidator TModel="@IUserCredentialsInput" />
+    <div>
+        <br /><br /><br /><br /><br />
+    </div>
+    <div>
+        <h3>Dental Scheduler Login</h3>
+    </div>
+    <div>
+        <br />
+    </div>
+    <div class="form-group col-12 row">
+        <label for="@nameof(Model.UserName)">@nameof(Model.UserName)</label>
+        <InputText id="@nameof(Model.UserName)" @bind-Value="Model.UserName" class="form-control" placeholder="User Name" />
+        <ValidationMessage For="@(() => Model.UserName)" />
+    </div>
+    <br />
+    <div class="form-group col-12 row">
+        <label for="@nameof(Model.Password)">@nameof(Model.Password)</label>
+        <InputText id="@nameof(Model.Password)" @bind-Value="Model.Password" class="form-control" type="password" placeholder="Password" />
+        <ValidationMessage For="@(() => Model.Password)" />
+    </div>
+    <br />
+    <div class="form-group col-12 row">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <span>&nbsp;</span>
+        <button class="btn btn-primary" @onclick="@(e => NavigationManager.NavigateTo("/auth/register/"))">Register</button>
+    </div>
+    <br />
+    <div class="form-group col-12 row">
+        @ResponseMessage
+    </div>
+</EditForm>
+
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    public EditContext EditContext { get; set; }
+    
+    public IUserCredentialsInput Model { get; set; } = new UserCredentialsInput();
+
+    public string ResponseMessage { get; set; } = "Response Message";
+
+    protected async override Task OnInitializedAsync()
+    {
+        var claimsPrincipal = (await authenticationStateTask).User;
+        if (claimsPrincipal.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("");
+        }
+
+        EditContext = new EditContext(Model);
+    }
+
+    private async Task<bool> LoginClick()
+    {
+        System.Console.WriteLine(Model.UserName + " " + Model.Password);
+        
+        var result = await AuthService.LoginAsync(Model);
+        if (result.Value == null)
+        {
+            ResponseMessage = string.Join($"; <br />", ((IValidationError)result.Errors.First()).Errors);
+        }
+        else 
+        {
+            await AuthenticationStateProvider.MarkUserAsLoggedInAsync(Model, result.Value.AccessToken);
+
+            NavigationManager.NavigateTo("", true);
+        }
+
+        return true;
+    }
+}
