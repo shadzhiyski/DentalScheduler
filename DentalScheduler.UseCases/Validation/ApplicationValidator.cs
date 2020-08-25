@@ -21,6 +21,8 @@ namespace DentalScheduler.UseCases.Validation
         {
             var fluentValidationResult = FluentValidator.Validate(model);
 
+            var validationResult = new ValidationResult();
+
             var errors = fluentValidationResult.Errors
                 .GroupBy(ve => ve.PropertyName)
                 .Select(veg => new ValidationError
@@ -31,8 +33,6 @@ namespace DentalScheduler.UseCases.Validation
                 .Cast<IValidationError>()
                 .ToList();
 
-            var validationResult = FluentValidator.Validate(model)
-                .Adapt<IValidationResult>(MappingConfig);
             validationResult.Errors = errors;
 
             return validationResult;
