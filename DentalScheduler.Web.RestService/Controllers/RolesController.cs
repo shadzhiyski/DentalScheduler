@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DentalScheduler.Web.RestService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer", Roles=Roles.Admin)]
     public class RolesController : BaseApiController
     {
@@ -24,7 +24,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         }
 
         [HttpPost]
-        [Route("/create")]
+        [Route("create")]
         public async Task<IActionResult> Create([FromBody] CreateRoleInput model)
         {
             var result = await CreateRoleCommand.CreateAsync(model);
@@ -32,7 +32,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         }
 
         [HttpPost]
-        [Route("/user/update")]
+        [Route("user/update")]
         public async Task<IActionResult> UpdateUser([FromBody] LinkUserAndRoleInput model)
         {
             var result = await LinkUserAndRoleCommand.ExecuteAsync(model);
