@@ -12,6 +12,7 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Linq;
 using DentalScheduler.Web.UI.Services;
+using Radzen;
 
 namespace DentalScheduler.Web.UI
 {
@@ -37,6 +38,9 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddScoped<ApplicationAuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             
             builder.Services.AddScoped(sp => new HttpClient());
+
+            builder.Services.AddScoped<DialogService>();
+            builder.Services.AddScoped<NotificationService>();
 
             builder.RootComponents.Add<App>("app");
 
