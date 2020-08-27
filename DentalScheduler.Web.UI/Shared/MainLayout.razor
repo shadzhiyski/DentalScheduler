@@ -5,18 +5,22 @@
 
 @inject ILocalStorageService LocalStorage
 
+<RadzenDialog />
+<RadzenNotification />
+
 <div class="sidebar">
     <NavMenu />
 </div>
 
 <div class="main">
     <div class="top-row px-4">
+        <a href="http://blazor.net" target="_blank" class="d-inline-flex p-2">About</a>
         <AuthorizeView>
             <Authorized>
-                <a href="http://blazor.net" target="_blank">Hello, @UserName</a>
+                <a href="http://blazor.net" target="_blank" class="d-inline-flex p-2">Hello, @UserName</a>
+                <RadzenGravatar Email="@UserName" class="d-inline-flex" />
             </Authorized>
         </AuthorizeView>
-        <a href="http://blazor.net" target="_blank">About</a>
     </div>
 
     <div class="content px-4">
