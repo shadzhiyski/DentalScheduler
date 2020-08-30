@@ -1,0 +1,76 @@
+@page "/schedule"
+@attribute [Authorize(Roles = "Patient")]
+
+@using Microsoft.AspNetCore.Authorization;
+@using System.Linq
+@using Radzen
+@using Components
+
+@inject DialogService DialogService
+
+<div class="row">
+    <div class="col-md-12">
+    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="AppointmentData" Data="@appointmentsData" StartProperty="Start" EndProperty="End" 
+        TextProperty="Text" SelectedIndex="2" 
+        SlotSelect="@OnSlotSelect" AppointmentSelect="@OnAppointmentSelect" AppointmentRender="@OnAppointmentRender">
+        <RadzenDayView />
+        <RadzenWeekView />
+        <RadzenMonthView />
+    </RadzenScheduler>
+    </div>
+</div>
+
+@code {
+    RadzenScheduler<AppointmentData> scheduler;
+
+    IList<AppointmentData> appointmentsData = new List<AppointmentData>
+    {
+        new AppointmentData() { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
+        new AppointmentData() { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
+        new AppointmentData() { Start = DateTime.Today.AddDays(-10), End = DateTime.Today.AddDays(-8), Text = "Work from home" },
+        new AppointmentData() { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(12), Text = "Online meeting" },
+        new AppointmentData() { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(13), Text = "Skype call" },
+        new AppointmentData() { Start = DateTime.Today.AddHours(14), End = DateTime.Today.AddHours(14).AddMinutes(30), Text = "Dentist appointment" },
+        new AppointmentData() { Start = DateTime.Today.AddDays(1), End = DateTime.Today.AddDays(12), Text = "Vacation" },
+    };
+
+    async Task OnSlotSelect(SchedulerSlotSelectEventArgs args)
+    {
+        AppointmentData data = await DialogService.OpenAsync<EditAppointment>("Add Appointment",
+            new Dictionary<string, object> 
+            { 
+                { 
+                    "Appointment", new AppointmentData() 
+                    { 
+                        Start = args.Start, 
+                        End = args.End
+                    } 
+                } 
+            });
+
+        if (data != null)
+        {
+            appointmentsData.Add(data);
+
+            // Either call the Reload method or reassign the Data property of the Scheduler
+            scheduler.Reload();
+        }
+    }
+
+    async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<AppointmentData> args)
+    {
+        await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
+            new Dictionary<string, object> { { "Appointment", args.Data } });
+
+        scheduler.Reload();
+    }
+
+    void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<AppointmentData> args)
+    {
+        // Never call StateHasChanged in AppointmentRender - would lead to infinite loop
+        if (args.Data.Text == "Birthday")
+        {
+            args.Attributes["style"] = "background: red";
+        }
+    }
+}

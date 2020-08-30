@@ -1,0 +1,80 @@
+@attribute [Authorize(Roles = "Patient")]
+
+@using Mapster
+@using Microsoft.AspNetCore.Authorization;
+@using Radzen
+@using Models
+@using DentalScheduler.DTO.Input
+@using DentalScheduler.Interfaces.Models.Input
+
+@inject DialogService DialogService
+
+<EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
+    <ApplicationValidator TModel="@ITreatmentSessionInput" />
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.Reason)">@nameof(Model.Reason)</label>
+        </div>
+        <div class="col">
+            <RadzenTextArea @bind-Value="@Model.Reason" MaxLength="256" Cols="64" Rows="4" Placeholder="Describe reason here..." />
+            <ValidationMessage For="@(() => Model.Reason)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.Start)">@nameof(Model.Start)</label>
+        </div>
+        <div class="col">
+            <RadzenDatePicker @bind-Value="@PeriodWrapperModel.Start" Name="Model.Start" ShowTime="true" />
+            <ValidationMessage For="@(() => Model.Start)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.End)">@nameof(Model.End)</label>
+        </div>
+        <div class="col">
+            <RadzenDatePicker @bind-Value="@PeriodWrapperModel.End" Name="Model.End" ShowTime="true" />
+            <ValidationMessage For="@(() => Model.End)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3"></div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public AppointmentData Appointment { get; set; }
+
+    public EditContext EditContext { get; set; }
+    
+    public TreatmentSessionPeriodWrapperModel PeriodWrapperModel { get; set; }
+
+    public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
+
+    protected async override Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(Model);
+
+        PeriodWrapperModel = new TreatmentSessionPeriodWrapperModel(Model);
+    }
+
+    protected override void OnParametersSet()
+    {
+        Model.Start = Appointment.Start;
+        Model.End = Appointment.End;
+    }
+
+    async Task<bool> OnSubmit()
+    {
+        DialogService.Close(Model);
+
+        return true;
+    }
+}
