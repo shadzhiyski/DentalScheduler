@@ -47,8 +47,13 @@ namespace DentalScheduler.Web.UI.Shared.Validation
         void ValidationRequested(object sender, ValidationRequestedEventArgs args)
         {
             ValidationMessageStore.Clear();
-            IValidationResult result = Validator.Validate(EditContext.Model as TModel);
-            AddValidationResult(EditContext.Model, result);
+
+            var model = EditContext.Model as TModel;
+            if (model != null)
+            {
+                IValidationResult result = Validator.Validate(model);
+                AddValidationResult(EditContext.Model, result);
+            }
         }
 
         void FieldChanged(object sender, FieldChangedEventArgs args)
@@ -56,9 +61,12 @@ namespace DentalScheduler.Web.UI.Shared.Validation
             FieldIdentifier fieldIdentifier = args.FieldIdentifier;
             ValidationMessageStore.Clear(fieldIdentifier);
             
-            IValidationResult result = Validator.Validate(fieldIdentifier.Model as TModel);
-            
-            AddValidationResult(fieldIdentifier.Model, result);
+            var model = fieldIdentifier.Model as TModel;
+            if (model != null)
+            {
+                IValidationResult result = Validator.Validate(model);
+                AddValidationResult(fieldIdentifier.Model, result);
+            }
         }
 
         void AddValidationResult(object model, IValidationResult validationResult)
