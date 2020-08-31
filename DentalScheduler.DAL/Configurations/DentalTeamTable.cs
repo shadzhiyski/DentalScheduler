@@ -13,7 +13,10 @@ namespace DentalScheduler.DAL.Configurations
 
             builder.Property(e => e.ReferenceId).HasValueGenerator<ReferenceIdGenerator>();
 
+            builder.HasOne(e => e.Room);
+
             builder.Property(e => e.Name).IsRequired();
+            builder.Property(e => e.RoomId).IsRequired();
 
             builder.HasIndex(e => e.Name).IsUnique();
             builder.HasIndex(e => e.ReferenceId).IsUnique();
