@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using DentalScheduler.Entities;
+using DentalScheduler.Interfaces.Gateways;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Interfaces.Models.Input;
 using Microsoft.AspNetCore.Identity;
@@ -15,9 +18,12 @@ namespace DentalScheduler.Web.RestService.Helpers
     {
         public IConfiguration Config { get; }
 
-        public JwtAuthManager(IConfiguration config)
+        public IGenericRepository<Patient> PatientRepository { get; }
+
+        public JwtAuthManager(IConfiguration config, IGenericRepository<Patient> patientRepository)
         {
             Config = config;
+            PatientRepository = patientRepository;
         }
         
         public string GenerateJwt(IUserCredentialsInput userInfo, string roleName)
@@ -27,13 +33,20 @@ namespace DentalScheduler.Web.RestService.Helpers
 
             int expiryInMinutes = Convert.ToInt32(Config["Jwt:ExpiryInMinutes"]);
 
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userInfo.UserName),
                 new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.UserName.ToString()),
                 new Claim(ClaimTypes.Role, roleName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
+
+            var patient = PatientRepository.SingleOrDefault(p => p.IdentityUser.UserName == userInfo.UserName);
+            if (patient != null)
+            {
+                var patientClaims = new Claim("PatientReferenceId", patient.ReferenceId.ToString());
+                claims.Add(patientClaims);
+            }
 
             var token = new JwtSecurityToken(
                 issuer: Config["Jwt:Issuer"],
