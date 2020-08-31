@@ -7,6 +7,6 @@ namespace DentalScheduler.Interfaces.UseCases
 {
     public interface IRegisterUserCommand
     {
-        Task<IResult<IAccessTokenOutput>> RegisterAsync(IUserCredentialsInput userInput);
+        Task<IResult<IAccessTokenOutput>> RegisterAsync(IRegisterUserInput userInput);
     }
 }

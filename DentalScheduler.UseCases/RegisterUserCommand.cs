@@ -1,8 +1,11 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Input;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Entities;
+using DentalScheduler.Interfaces.Gateways;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
@@ -26,21 +29,37 @@ namespace DentalScheduler.UseCases
 
         public ILoginCommand LoginCommand { get; }
 
+        public ILinkUserAndRoleCommand LinkUserAndRoleCommand { get; }
+
+        public IGenericRepository<Patient> PatientRepo { get; }
+
+        public IGenericRepository<DentalWorker> DentalWorkerRepo { get; }
+
+        public IUnitOfWork UoW { get; }
+
         public RegisterUserCommand(
             IConfiguration config,
             IUserService<IdentityUser> userService, 
             IApplicationValidator<IUserCredentialsInput> validator,
             IJwtAuthManager jwtAuthManager,
-            ILoginCommand loginCommand)
+            ILoginCommand loginCommand,
+            ILinkUserAndRoleCommand linkUserAndRoleCommand,
+            IGenericRepository<Patient> patientRepo,
+            IGenericRepository<DentalWorker> dentalWorkerRepo,
+            IUnitOfWork uoW)
         {
             Config = config;
             UserService = userService;
             Validator = validator;
             JwtAuthManager = jwtAuthManager;
             LoginCommand = loginCommand;
+            LinkUserAndRoleCommand = linkUserAndRoleCommand;
+            PatientRepo = patientRepo;
+            DentalWorkerRepo = dentalWorkerRepo;
+            UoW = uoW;
         }
 
-        public async Task<IResult<IAccessTokenOutput>> RegisterAsync(IUserCredentialsInput userInput)
+        public async Task<IResult<IAccessTokenOutput>> RegisterAsync(IRegisterUserInput userInput)
         {
             var validationResult = Validator.Validate(userInput);
             if (validationResult.Errors.Count > 0)
@@ -61,6 +80,38 @@ namespace DentalScheduler.UseCases
             {
                 return new Result<IAccessTokenOutput>(identityResult.Errors);
             }
+
+            var linkUserWithRoleResult = await LinkUserAndRoleCommand.ExecuteAsync(new LinkUserAndRoleInput 
+            { 
+                UserName = userInput.UserName,
+                RoleName = userInput.RoleType.ToString()
+            });     
+
+            if (linkUserWithRoleResult.Errors.Count() > 0)
+            {
+                return new Result<IAccessTokenOutput>(linkUserWithRoleResult.Errors);
+            }
+
+            if (userInput.RoleType.Equals(RoleType.Patient))
+            {
+                PatientRepo.Add(new Patient
+                {
+                    IdentityUserId = user.Id,
+
+                });
+            }
+            else
+            {
+                var dentalWorker = new DentalWorker
+                {
+                    IdentityUserId = user.Id,
+                    JobType = JobType.Dentist
+                };
+
+                DentalWorkerRepo.Add(dentalWorker);
+            }
+
+            UoW.Save();
 
             // Auto login after registrаtion (successful user registration should return access_token)
             return await LoginCommand.LoginAsync(new UserCredentialsInput()

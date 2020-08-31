@@ -26,7 +26,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route ("register")]
-        public async Task<IActionResult> Register(UserCredentialsInput model) 
+        public async Task<IActionResult> Register(RegisterUserInput model) 
         {
             var result =  await RegisterUserCommand.RegisterAsync(model);
             return PresentResult(result);
