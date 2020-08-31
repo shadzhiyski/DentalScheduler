@@ -7,8 +7,6 @@ namespace DentalScheduler.Interfaces.Models.Input
         Guid? DentalTeamId { get; set; }
 
         Guid? PatientId { get; set; }
-        
-        Guid? RoomId { get; set; }
 
         DateTimeOffset? Start { get; set; }
 

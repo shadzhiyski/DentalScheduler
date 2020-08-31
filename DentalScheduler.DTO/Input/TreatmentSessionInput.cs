@@ -9,8 +9,6 @@ namespace DentalScheduler.DTO.Input
 
         public Guid? PatientId { get; set; }
 
-        public Guid? RoomId { get; set; }
-
         public DateTimeOffset? Start { get; set; }
 
         public DateTimeOffset? End { get; set; }
