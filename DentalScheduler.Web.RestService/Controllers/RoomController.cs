@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DentalScheduler.Web.RestService.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("odata/[controller]")]
     // [Authorize(AuthenticationSchemes = "Bearer")]
     public class RoomController : BaseApiController
     {
