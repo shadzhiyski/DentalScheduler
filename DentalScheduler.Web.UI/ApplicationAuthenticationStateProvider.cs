@@ -7,6 +7,7 @@ using DentalScheduler.Interfaces.Models.Output;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System;
 
 namespace DentalScheduler.Web.UI
 {
@@ -35,11 +36,18 @@ namespace DentalScheduler.Web.UI
             var roleName = jwtSecurityToken.Claims
                 .FirstOrDefault(c => c.Type.Equals(ClaimTypes.Role))
                 ?.Value;
-            System.Console.WriteLine($" Role Name: {roleName}");
 
             await LocalStorage.SetItemAsync("UserName", credentials.UserName);
             await LocalStorage.SetItemAsync("Role", roleName);
             await LocalStorage.SetItemAsync("AccessToken", accessToken);
+
+            var patienReferenceIdAsString = jwtSecurityToken.Claims
+                .FirstOrDefault(c => c.Type.Equals("PatientReferenceId"))
+                ?.Value;
+            var patienReferenceId = patienReferenceIdAsString != null
+                ? new Guid(patienReferenceIdAsString)
+                : Guid.Empty;
+            await LocalStorage.SetItemAsync("PatientReferenceId", patienReferenceId);
 
             var claimsPrincipal = await GetClaimsPrincipalAsync();
 
@@ -51,6 +59,7 @@ namespace DentalScheduler.Web.UI
             await LocalStorage.RemoveItemAsync("UserName");
             await LocalStorage.RemoveItemAsync("Role");
             await LocalStorage.RemoveItemAsync("AccessToken");
+            await LocalStorage.RemoveItemAsync("PatientReferenceId");
 
             var claimsPrincipal = await GetClaimsPrincipalAsync();
             
