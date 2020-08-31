@@ -20,11 +20,6 @@ namespace DentalScheduler.UseCases.Validation
                 .NotNull()
                 .NotEmpty();
 
-            RuleFor(model => model.RoomId)
-                .Cascade(CascadeMode.StopOnFirstFailure)
-                .NotNull()
-                .NotEmpty();
-
             RuleFor(model => model.Start)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
