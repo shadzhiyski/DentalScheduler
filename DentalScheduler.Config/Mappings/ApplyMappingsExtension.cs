@@ -12,7 +12,9 @@ namespace DentalScheduler.Config.Mappings
             config.Apply(
                 new AuthResultMapping(),
                 new ErrorMapping(),
-                new RoomMapping()
+                new RoomMapping(),
+                new DentalTeamMapping(),
+                new TreatmentSessionMapping()
             );
 
             return services;
