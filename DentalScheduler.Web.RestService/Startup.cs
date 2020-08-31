@@ -134,15 +134,6 @@ namespace DentalScheduler.Web.RestService
                         Version = "v1" 
                     });
             });
-
-            // services.AddCors(options =>
-            // {
-            //     options.AddPolicy(name: "MyAllowSpecificOrigins",
-            //         builder =>
-            //         {
-            //             builder.WithOrigins("http://localhost:5001");
-            //         });
-            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -159,8 +150,6 @@ namespace DentalScheduler.Web.RestService
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            // app.UseOData(GetEdmModel());
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -194,6 +183,10 @@ namespace DentalScheduler.Web.RestService
                 .EntityType.HasKey(e => e.ReferenceId)
                 .Count().Filter().OrderBy().Expand().Select()
                 .Ignore(e => e.Id);
+
+            odataBuilder.EntitySet<TreatmentSession>("TreatmentSession")
+                .EntityType.HasKey(e => e.Id)
+                .Count().Filter().OrderBy().Expand().Select();
 
             return odataBuilder.GetEdmModel();
         }
