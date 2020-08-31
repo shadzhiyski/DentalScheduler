@@ -1,29 +1,28 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using DentalScheduler.Config.DI;
 using DentalScheduler.Config.Mappings;
 using DentalScheduler.DAL;
+using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Web.RestService.Helpers;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OData.Edm;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace DentalScheduler.Web.RestService
 {
@@ -89,7 +88,21 @@ namespace DentalScheduler.Web.RestService
                 });
             services.AddAuthorization();
 
-            services.AddMvc();
+            services.AddOData();
+            
+            // services.AddMvc();
+            services.AddMvcCore(options =>
+            {
+                foreach (var outputFormatter in options.OutputFormatters.OfType<OutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+                {
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+
+                foreach (var inputFormatter in options.InputFormatters.OfType<InputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+                {
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -121,6 +134,15 @@ namespace DentalScheduler.Web.RestService
                         Version = "v1" 
                     });
             });
+
+            // services.AddCors(options =>
+            // {
+            //     options.AddPolicy(name: "MyAllowSpecificOrigins",
+            //         builder =>
+            //         {
+            //             builder.WithOrigins("http://localhost:5001");
+            //         });
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,16 +160,42 @@ namespace DentalScheduler.Web.RestService
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // app.UseOData(GetEdmModel());
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            app.UseCors(policy => policy.WithOrigins(new string[] { "https://localhost:5001" })
+                .AllowAnyHeader()
+                .AllowCredentials());
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.EnableDependencyInjection();
                 endpoints.MapControllers();
+                endpoints.Select().Filter().Expand().OrderBy().Count();
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
             });
+        }
+
+        private IEdmModel GetEdmModel()
+        {
+            ODataModelBuilder odataBuilder = new ODataConventionModelBuilder();
+
+            odataBuilder.EntitySet<Room>("Room")
+                .EntityType.HasKey(e => e.ReferenceId)
+                .Count().Filter().OrderBy().Expand().Select()
+                .Ignore(e => e.Id);
+
+            odataBuilder.EntitySet<DentalTeam>("DentalTeam")
+                .EntityType.HasKey(e => e.ReferenceId)
+                .Count().Filter().OrderBy().Expand().Select()
+                .Ignore(e => e.Id);
+
+            return odataBuilder.GetEdmModel();
         }
     }
 }

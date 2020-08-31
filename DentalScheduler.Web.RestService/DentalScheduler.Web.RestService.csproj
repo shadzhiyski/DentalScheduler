@@ -21,6 +21,8 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="Swashbuckle.OData" Version="4.0.0-beta2" />
     <PackageReference Include="Mapster" Version="6.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.4.1" />
   </ItemGroup>
 </Project>
