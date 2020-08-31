@@ -19,5 +19,7 @@ namespace DentalScheduler.Entities
         public DateTimeOffset End { get; set; }
 
         public string Reason { get; set; }
+
+        public TreatmentSessionStatus Status { get; set; }
     }
 }

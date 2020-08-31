@@ -18,6 +18,8 @@ namespace DentalScheduler.DAL.Configurations
             builder.Property(e => e.Start).IsRequired();
             builder.Property(e => e.End).IsRequired();
 
+            builder.Property(e => e.Status).HasDefaultValue(TreatmentSessionStatus.Requested);
+
             builder.Property(e => e.Reason).HasMaxLength(256);
 
             builder.HasIndex(e => new { e.PatientId, e.DentalTeamId, e.Start, e.End }).IsUnique();
