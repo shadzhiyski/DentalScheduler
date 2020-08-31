@@ -11,7 +11,8 @@ namespace DentalScheduler.Config.Mappings
             var config = services.BuildServiceProvider().GetService<TypeAdapterConfig>();
             config.Apply(
                 new AuthResultMapping(),
-                new ErrorMapping()
+                new ErrorMapping(),
+                new RoomMapping()
             );
 
             return services;
