@@ -22,10 +22,10 @@ namespace DentalScheduler.Config.DI
             services.AddSingleton<TypeAdapterConfig>(config);
             
             // DAL
-            services.AddTransient<DbContext, DentalSchedulerDbContext>();
-            services.AddTransient<DentalSchedulerDbContext>();
+            services.AddScoped<DbContext, DentalSchedulerDbContext>();
+            services.AddScoped<DentalSchedulerDbContext>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // UseCases
             services.AddTransient<AbstractValidator<ILinkUserAndRoleInput>, LinkUserAndRoleValidator>();
