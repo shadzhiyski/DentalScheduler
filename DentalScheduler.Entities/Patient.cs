@@ -7,6 +7,8 @@ namespace DentalScheduler.Entities
     {
         public Guid Id { get; set; }
 
+        public Guid ReferenceId { get; set; }
+
         public string IdentityUserId { get; set; }
 
         public virtual IdentityUser IdentityUser { get; set; }
