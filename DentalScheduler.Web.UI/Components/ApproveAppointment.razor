@@ -1,0 +1,97 @@
+@attribute [Authorize(Roles = "Dentist")]
+
+@using Interfaces.Models.Input
+@using Interfaces.Models.Output
+@using DTO.Input
+@using Radzen
+
+@inject DialogService DialogService
+@inject ILocalStorageService LocalStorage
+
+<EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
+    <ApplicationValidator TModel="@ITreatmentSessionInput" />
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.Reason)">@nameof(Model.Reason)</label>
+        </div>
+        <div class="col">
+            @Model.Reason
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.Start)">@nameof(Model.Start)</label>
+        </div>
+        <div class="col">
+            @Model.Start
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.End)">@nameof(Model.End)</label>
+        </div>
+        <div class="col">
+            @Model.End
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3"></div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary" @onclick="Approve">Approve</button>
+            <button type="submit" class="btn btn-danger" @onclick="Reject">Reject</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public ITreatmentSessionOutput TreatmentSession { get; set; }
+
+    public EditContext EditContext { get; set; }
+
+    public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
+
+    protected async override Task OnInitializedAsync()
+    {
+        EditContext = new EditContext(Model);
+    }
+
+    protected override async void OnParametersSet()
+    {
+        Model.Status = TreatmentSession.Status ?? "Requested";
+        Model.Start = TreatmentSession.Start;
+        Model.End = TreatmentSession.End;
+        Model.Reason = TreatmentSession.Reason;
+        Model.DentalTeamId = TreatmentSession.DentalTeam.ReferenceId;
+        if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
+        {
+            Model.DentalTeamId = null;    
+        }
+
+        System.Console.WriteLine($"DentalTeamId: {Model.DentalTeamId}");
+
+        Model.PatientId = await LocalStorage.ContainKeyAsync("PatientReferenceId")
+            ? await LocalStorage.GetItemAsync<Guid>("PatientReferenceId")
+            : Guid.Empty;
+
+        System.Console.WriteLine($"PatientId: {Model.PatientId}");
+    }
+
+    void Approve()
+    {
+        Model.Status = "Accepted";
+    }
+
+    void Reject()
+    {
+        Model.Status = "Rejected";
+    }
+
+    async Task<bool> OnSubmit()
+    {
+        DialogService.Close(Model);
+
+        return true;
+    }
+}
