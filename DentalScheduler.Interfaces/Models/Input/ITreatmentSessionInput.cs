@@ -13,5 +13,7 @@ namespace DentalScheduler.Interfaces.Models.Input
         DateTimeOffset? End { get; set; }
 
         string Reason { get; set; }
+
+        string Status { get; set; }
     }
 }

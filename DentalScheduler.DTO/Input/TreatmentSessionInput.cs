@@ -15,5 +15,7 @@ namespace DentalScheduler.DTO.Input
 
         public string Reason { get; set; }
 
+        public string Status { get; set; }
+
     }
 }
