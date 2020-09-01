@@ -159,6 +159,7 @@ namespace DentalScheduler.Web.RestService
 
             app.UseCors(policy => policy.WithOrigins(new string[] { "https://localhost:5001" })
                 .AllowAnyHeader()
+                .AllowAnyMethod()
                 .AllowCredentials());
 
             app.UseEndpoints(endpoints =>
