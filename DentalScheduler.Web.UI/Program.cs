@@ -39,7 +39,7 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddScoped<AuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             builder.Services.AddScoped<ApplicationAuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             
-            builder.Services.AddScoped(sp => new HttpClient());
+            builder.Services.AddTransient(sp => new HttpClient());
 
             builder.Services.AddScoped<DialogService>();
             builder.Services.AddScoped<NotificationService>();
