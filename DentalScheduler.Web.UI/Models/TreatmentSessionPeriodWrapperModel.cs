@@ -12,13 +12,17 @@ namespace DentalScheduler.Web.UI.Models
 
         public DateTime? Start 
         {
-            get => TreatmentSessionInput.Start.Value.DateTime;
+            get => TreatmentSessionInput.Start != null
+                ? TreatmentSessionInput.Start.Value.DateTime
+                : default(DateTime?);
             set => TreatmentSessionInput.Start = value;
         }
 
         public DateTime? End 
         {
-            get => TreatmentSessionInput.End.Value.DateTime;
+            get => TreatmentSessionInput.End != null
+                ? TreatmentSessionInput.End.Value.DateTime 
+                : default(DateTime?);
             set => TreatmentSessionInput.End = value;
         }
 
