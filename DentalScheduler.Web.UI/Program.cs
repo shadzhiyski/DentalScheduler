@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using System.Linq;
 using DentalScheduler.Web.UI.Services;
 using Radzen;
+using DentalScheduler.Config.Mappings;
 
 namespace DentalScheduler.Web.UI
 {
@@ -32,6 +33,7 @@ namespace DentalScheduler.Web.UI
             RegisterServices(builder.Services);
 
             builder.Services.RegisterDependencies();
+            builder.Services.ApplyMappings();
 
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
