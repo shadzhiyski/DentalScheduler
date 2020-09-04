@@ -42,8 +42,6 @@ namespace DentalScheduler.Web.RestService
             services.AddTransient<IJwtAuthManager, JwtAuthManager>();
             services.AddTransient<IUserService<IdentityUser>, UserService>();
             services.AddTransient<IRoleService<IdentityRole>, RoleService>();
-
-            services.ApplyMappings();
             
             services.AddControllers();
 

@@ -1,14 +1,5 @@
-using DentalScheduler.DAL;
-using DentalScheduler.DAL.Repositories;
-using DentalScheduler.Interfaces.Gateways;
-using DentalScheduler.Interfaces.Models.Input;
-using DentalScheduler.Interfaces.UseCases;
-using DentalScheduler.Interfaces.UseCases.Validation;
-using DentalScheduler.UseCases;
-using DentalScheduler.UseCases.Validation;
-using FluentValidation;
+using DentalScheduler.Config.Mappings;
 using Mapster;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI
@@ -17,26 +8,13 @@ namespace DentalScheduler.Config.DI
     {
         public static IServiceCollection RegisterDependencies(this IServiceCollection services)
         {
-            // Mappings
-            var config = new TypeAdapterConfig();
-            services.AddSingleton<TypeAdapterConfig>(config);
+            services.RegisterMappingsDependencies();
             
-            // DAL
-            services.AddScoped<DbContext, DentalSchedulerDbContext>();
-            services.AddScoped<DentalSchedulerDbContext>();
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.RegisterDalDependencies();
 
-            // UseCases
-            services.AddTransient<AbstractValidator<ILinkUserAndRoleInput>, LinkUserAndRoleValidator>();
-            services.AddTransient<AbstractValidator<ICreateRoleInput>, CreateRoleValidator>();
-            services.AddTransient<AbstractValidator<IUserCredentialsInput>, UserCredentialsValidator>();
-            services.AddTransient<AbstractValidator<ITreatmentSessionInput>, TreatmentSessionValidator>();
-            services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
-            services.AddTransient<ILoginCommand, LoginCommand>();
-            services.AddTransient<IRegisterUserCommand, RegisterUserCommand>();
-            services.AddTransient<ICreateRoleCommand, CreateRoleCommand>();
-            services.AddTransient<ILinkUserAndRoleCommand, LinkUserAndRoleCommand>();
+            services.RegisterValidationDependencies();
+
+            services.RegisterUseCasesDependencies();
 
             return services;
         }

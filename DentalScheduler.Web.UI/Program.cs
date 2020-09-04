@@ -33,7 +33,6 @@ namespace DentalScheduler.Web.UI
             RegisterServices(builder.Services);
 
             builder.Services.RegisterDependencies();
-            builder.Services.ApplyMappings();
 
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();

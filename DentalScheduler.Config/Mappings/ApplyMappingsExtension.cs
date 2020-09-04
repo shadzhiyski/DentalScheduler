@@ -6,9 +6,11 @@ namespace DentalScheduler.Config.Mappings
 {
     public static class ApplyMappingsExtension
     {
-        public static IServiceCollection ApplyMappings(this IServiceCollection services)
+        public static IServiceCollection RegisterMappingsDependencies(this IServiceCollection services)
         {
-            var config = services.BuildServiceProvider().GetService<TypeAdapterConfig>();
+            var config = new TypeAdapterConfig();
+            services.AddSingleton<TypeAdapterConfig>(config);
+
             config.Apply(
                 new AuthResultMapping(),
                 new ErrorMapping(),
