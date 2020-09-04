@@ -20,8 +20,6 @@ namespace DentalScheduler.Web.UI
 
         public ILocalStorageService LocalStorage { get; }
 
-        public string AccessToken { get; private set; }
-
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var claimsPrincipal = await GetClaimsPrincipalAsync();
