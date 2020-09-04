@@ -40,7 +40,7 @@ namespace DentalScheduler.Web.UI.Services
         {
             var response = await HttpClient.GetAsync("TreatmentSession");
 
-            var result = (await response.Content.ReadFromJsonAsync<List<DTO.Serialization.Json.SerializedTreatmentSession>>())
+            var result = (await response.Content.ReadFromJsonAsync<List<DTO.Serialization.Json.DeserializedTreatmentSession>>())
                 .Select(sts => sts.Adapt<ITreatmentSessionOutput>())
                 .ToList();
             
