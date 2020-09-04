@@ -1,5 +1,6 @@
 @attribute [Authorize(Roles = "Patient")]
 
+@using System.Linq
 @using Mapster
 @using Microsoft.AspNetCore.Authorization;
 @using Radzen
@@ -10,6 +11,7 @@
 
 @inject DialogService DialogService
 @inject ILocalStorageService LocalStorage
+@inject IDentalTeamService DentalTeamService
 
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />
@@ -21,7 +23,8 @@
         <div class="col">
             <RadzenDropDown AllowClear="true" TValue="string"
                 Data="@DentalTeams"
-                TextProperty="Text" ValueProperty="Value" @bind-Value="DentalTeamId" Change="@(args => Change(args))" />
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="DentalTeamId" Change="@(args => Change(args))" >
+            </RadzenDropDown>
             <ValidationMessage For="@(() => Model.DentalTeamId)" />
         </div>
     </div>
@@ -70,13 +73,13 @@
 
 @code {
     [Parameter]
-    public AppointmentData Appointment { get; set; }
+    public ITreatmentSessionOutput TreatmentSession { get; set; }
 
     public EditContext EditContext { get; set; }
     
     public string DentalTeamId 
     { 
-        get => Model.DentalTeamId.ToString(); 
+        get => Model.DentalTeamId?.ToString(); 
         set
         {
             if (value != null)
@@ -90,9 +93,9 @@
         }
     }
 
-    public IEnumerable<DentalTeamDropDownWrapper> DentalTeams { get; set; }
+    public IList<DentalTeamDropDownViewModel> DentalTeams { get; set; }
 
-    public TreatmentSessionPeriodWrapperModel PeriodWrapperModel { get; set; }
+    public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
 
     public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
 
@@ -100,22 +103,20 @@
     {
         EditContext = new EditContext(Model);
 
-        DentalTeams = new List<IDentalTeamOutput>()
-        {
-            new DTO.Output.DentalTeamOutput()
-            {
-                ReferenceId = Guid.NewGuid(),
-                Name = "Some Dental Team"
-            }
-        }.Select(dt => new DentalTeamDropDownWrapper(dt));
-
-        PeriodWrapperModel = new TreatmentSessionPeriodWrapperModel(Model);
+        DentalTeams = await DentalTeamService.GetDentalTeamsDropDownListAsync();
     }
 
     protected override async void OnParametersSet()
     {
-        Model.Start = Appointment.Start;
-        Model.End = Appointment.End;
+        Model.Status = TreatmentSession.Status ?? "Requested";
+        Model.Start = TreatmentSession.Start;
+        Model.End = TreatmentSession.End;
+        Model.Reason = TreatmentSession.Reason;
+        Model.DentalTeamId = TreatmentSession.DentalTeam.ReferenceId;
+        if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
+        {
+            Model.DentalTeamId = null;    
+        }
 
         Model.PatientId = await LocalStorage.ContainKeyAsync("PatientReferenceId")
             ? await LocalStorage.GetItemAsync<Guid>("PatientReferenceId")
@@ -124,7 +125,7 @@
 
     void Change(object value)
     {
-        System.Console.WriteLine($"Model: {Model.DentalTeamId.ToString()}; Value: {DentalTeamId}");
+        System.Console.WriteLine($"Change Model: {Model.DentalTeamId.ToString()}; Value: {DentalTeamId}");
         
         StateHasChanged();
     }
