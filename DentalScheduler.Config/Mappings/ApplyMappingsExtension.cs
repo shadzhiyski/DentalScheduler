@@ -14,7 +14,8 @@ namespace DentalScheduler.Config.Mappings
                 new ErrorMapping(),
                 new RoomMapping(),
                 new DentalTeamMapping(),
-                new TreatmentSessionMapping()
+                new TreatmentSessionMapping(),
+                new CommonMappings()
             );
 
             return services;
