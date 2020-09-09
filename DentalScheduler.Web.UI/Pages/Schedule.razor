@@ -78,7 +78,7 @@
         var user = (await AuthenticationStateTask).User;
         if (user.IsInRole("Patient"))
         {
-            data = await DialogService.OpenAsync<EditAppointment>("Approve Appointment", 
+            data = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
                 new Dictionary<string, object> { { "TreatmentSession", args.Data } });
         }
         else if (user.IsInRole("Dentist"))
