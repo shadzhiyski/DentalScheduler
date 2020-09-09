@@ -52,12 +52,12 @@
 
     public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
 
-    protected async override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         EditContext = new EditContext(Model);
     }
 
-    protected override async void OnParametersSet()
+    protected override void OnParametersSet()
     {
         Model.Status = TreatmentSession.Status ?? "Requested";
         Model.Start = TreatmentSession.Start;
