@@ -66,14 +66,12 @@
         Model.DentalTeamId = TreatmentSession.DentalTeam.ReferenceId;
         if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
         {
-            Model.DentalTeamId = null;    
+            Model.DentalTeamId = null;
         }
 
         System.Console.WriteLine($"DentalTeamId: {Model.DentalTeamId}");
 
-        Model.PatientId = await LocalStorage.ContainKeyAsync("PatientReferenceId")
-            ? await LocalStorage.GetItemAsync<Guid>("PatientReferenceId")
-            : Guid.Empty;
+        Model.PatientId = TreatmentSession.PatientReferenceId;
 
         System.Console.WriteLine($"PatientId: {Model.PatientId}");
     }
