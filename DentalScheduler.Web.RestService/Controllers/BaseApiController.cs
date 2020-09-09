@@ -12,6 +12,12 @@ namespace DentalScheduler.Web.RestService.Controllers
             {
                 return Ok(result.Value);
             }
+
+            if (result.Errors.Count() == 1
+                && result.Errors.First().Type == ErrorType.NotFound)
+            {
+                return NotFound(result.Errors.First());
+            }
             
             return BadRequest(result.Errors);
         }
