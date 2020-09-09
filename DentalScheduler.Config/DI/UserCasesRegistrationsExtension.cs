@@ -13,6 +13,7 @@ namespace DentalScheduler.Config.DI
             services.AddTransient<ICreateRoleCommand, CreateRoleCommand>();
             services.AddTransient<ILinkUserAndRoleCommand, LinkUserAndRoleCommand>();
             services.AddTransient<IAddTreatmentSessionCommand, AddTreatmentSessionCommand>();
+            services.AddTransient<IUpdateTreatmentSessionCommand, UpdateTreatmentSessionCommand>();
             
             return services;
         }
