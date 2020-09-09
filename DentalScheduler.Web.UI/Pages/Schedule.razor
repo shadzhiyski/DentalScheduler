@@ -65,9 +65,6 @@
             await ScheduleService.AddAppointmentsAsync(data);
 
             AppointmentsData = await GetAppointmentsAsync();
-            
-            // Either call the Reload method or reassign the Data property of the Scheduler
-            scheduler.Reload();
         }
     }
 
@@ -95,8 +92,6 @@
         await ScheduleService.EditAppointmentsAsync(data);
 
         AppointmentsData = await GetAppointmentsAsync();
-
-        scheduler.Reload();
     }
 
     void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<TreatmentSessionViewModel> args)
