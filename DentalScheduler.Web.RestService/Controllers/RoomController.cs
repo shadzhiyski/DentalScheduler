@@ -30,7 +30,7 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public async Task<IQueryable<RoomOutput>> GetAsync(ODataQueryOptions<Room> options)
+        public IQueryable<RoomOutput> Get(ODataQueryOptions<Room> options)
         {
             return options.ApplyTo(Repository.AsQueryable())
                 .ProjectToType<RoomOutput>(MappingConfig);
