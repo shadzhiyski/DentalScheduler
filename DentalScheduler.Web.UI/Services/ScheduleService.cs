@@ -10,6 +10,7 @@ using System.Net.Http.Json;
 using Mapster;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Web.UI.Models;
 
 namespace DentalScheduler.Web.UI.Services
 {
@@ -23,7 +24,6 @@ namespace DentalScheduler.Web.UI.Services
             HttpClient = httpClient;
             AppSettings = appSettings.Value;
             LocalStorage = localStorage;
-
             HttpClient.BaseAddress = new Uri($"{AppSettings.ApiBaseAddress}odata/");
 
             SetAccessTokenAsync();
@@ -35,15 +35,14 @@ namespace DentalScheduler.Web.UI.Services
 
         public ILocalStorageService LocalStorage { get; }
 
-        public async Task<IList<ITreatmentSessionOutput>> GetAppointmentsAsync(
+        public async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync(
             DateTimeOffset periodStart, DateTimeOffset periodEnd)
         {
             var response = await HttpClient.GetAsync("TreatmentSession");
 
-            var result = (await response.Content.ReadFromJsonAsync<List<DTO.Serialization.Json.DeserializedTreatmentSession>>())
-                .Select(sts => sts.Adapt<ITreatmentSessionOutput>())
+            var result = (await response.Content.ReadFromJsonAsync<List<TreatmentSessionViewModel>>())
                 .ToList();
-            
+
             return result;
         }
 

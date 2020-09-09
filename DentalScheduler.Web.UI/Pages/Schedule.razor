@@ -6,14 +6,13 @@
 @using Radzen
 @using Components
 @using Interfaces.Models.Input
-@using Models
 
 @inject DialogService DialogService
 @inject IScheduleService ScheduleService
 
 <div class="row">
     <div class="col-md-12">
-    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionOutputWrapper" Data="@AppointmentsData" StartProperty="Start" EndProperty="End" 
+    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@AppointmentsData" StartProperty="Start" EndProperty="End" 
         TextProperty="Reason" SelectedIndex="2" 
         SlotSelect="@OnSlotSelect" AppointmentSelect="@OnAppointmentSelect" AppointmentRender="@OnAppointmentRender">
         <RadzenDayView />
@@ -27,18 +26,13 @@
     [CascadingParameter]
     public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
-    RadzenScheduler<TreatmentSessionOutputWrapper> scheduler;
+    RadzenScheduler<TreatmentSessionViewModel> scheduler;
 
-    IList<TreatmentSessionOutputWrapper> AppointmentsData { get; set; }
+    IList<TreatmentSessionViewModel> AppointmentsData { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        AppointmentsData = (await ScheduleService.GetAppointmentsAsync(
-                DateTimeOffset.UtcNow.AddMonths(-1),
-                DateTimeOffset.UtcNow.AddMonths(1)
-            ))
-            .Select(ts => new TreatmentSessionOutputWrapper(ts))
-            .ToList();
+        AppointmentsData = await GetAppointmentsAsync();
     }
     async Task OnSlotSelect(SchedulerSlotSelectEventArgs args)
     {
@@ -53,12 +47,12 @@
             new Dictionary<string, object> 
             { 
                 { 
-                    "TreatmentSession", new DTO.Output.TreatmentSessionOutput() 
+                    "TreatmentSession", new TreatmentSessionViewModel() 
                     { 
                         Start = args.Start,
                         End = args.End,
                         Reason = string.Empty,
-                        DentalTeam = new DTO.Output.DentalTeamOutput()
+                        DentalTeam = new DentalTeamViewModel()
                         { 
                             ReferenceId = Guid.Empty
                         }
@@ -70,31 +64,14 @@
         {
             await ScheduleService.AddAppointmentsAsync(data);
 
-            var viewModel = new DTO.Output.TreatmentSessionOutput()
-            {
-                Start = data.Start.Value,
-                End = data.End.Value,
-                Reason = data.Reason,
-                DentalTeam = new DTO.Output.DentalTeamOutput()
-                {
-                    ReferenceId = data.DentalTeamId.Value,
-                },
-                PatientReferenceId = data.PatientId.Value,
-                Status = data.Status
-            };
-
-            @* AppointmentsData = await ScheduleService.GetAppointmentsAsync(
-                DateTimeOffset.UtcNow.AddMonths(-1),
-                DateTimeOffset.UtcNow.AddMonths(1)
-            ); *@
-            @* AppointmentsData.Add(new TreatmentSessionOutputWrapper(viewModel)); *@
-
+            AppointmentsData = await GetAppointmentsAsync();
+            
             // Either call the Reload method or reassign the Data property of the Scheduler
             scheduler.Reload();
         }
     }
 
-    async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<TreatmentSessionOutputWrapper> args)
+    async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<TreatmentSessionViewModel> args)
     {
         DTO.Input.TreatmentSessionInput data = null;
 
@@ -102,12 +79,12 @@
         if (user.IsInRole("Patient"))
         {
             data = await DialogService.OpenAsync<EditAppointment>("Approve Appointment", 
-                new Dictionary<string, object> { { "TreatmentSession", args.Data.TreatmentSessionOutput } });
+                new Dictionary<string, object> { { "TreatmentSession", args.Data } });
         }
         else if (user.IsInRole("Dentist"))
         {
             data = await DialogService.OpenAsync<ApproveAppointment>("Approve Appointment", 
-                new Dictionary<string, object> { { "TreatmentSession", args.Data.TreatmentSessionOutput } });
+                new Dictionary<string, object> { { "TreatmentSession", args.Data } });
         }
 
         if (data == null)
@@ -115,24 +92,21 @@
             return;
         }
 
-        args.Data.TreatmentSessionOutput.Reason = data.Reason;
-        args.Data.TreatmentSessionOutput.Start = data.Start.Value;
-        args.Data.TreatmentSessionOutput.End = data.End.Value;
-        args.Data.TreatmentSessionOutput.Status = data.Status;
+        await ScheduleService.EditAppointmentsAsync(data);
 
-        @* await ScheduleService.EditAppointmentsAsync(data); *@
+        AppointmentsData = await GetAppointmentsAsync();
 
         scheduler.Reload();
     }
 
-    void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<TreatmentSessionOutputWrapper> args)
+    void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<TreatmentSessionViewModel> args)
     {
         // Never call StateHasChanged in AppointmentRender - would lead to infinite loop
-        if (args.Data.TreatmentSessionOutput.Status == "Requested")
+        if (args.Data.Status == "Requested")
         {
             args.Attributes["style"] = "background: orange";
         }
-        else if (args.Data.TreatmentSessionOutput.Status == "Accepted")
+        else if (args.Data.Status == "Accepted")
         {
             args.Attributes["style"] = "background: blue";
         }
@@ -140,5 +114,13 @@
         {
             args.Attributes["style"] = "background: red";
         }
+    }
+
+    private async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync()
+    {
+        return (await ScheduleService.GetAppointmentsAsync(
+                DateTimeOffset.UtcNow.AddMonths(-1),
+                DateTimeOffset.UtcNow.AddMonths(1)
+            ));
     }
 }
