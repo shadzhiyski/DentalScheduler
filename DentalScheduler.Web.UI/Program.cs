@@ -1,19 +1,12 @@
-using System;
 using System.Net.Http;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using DentalScheduler.Config.DI;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Linq;
 using DentalScheduler.Web.UI.Services;
 using Radzen;
-using DentalScheduler.Config.Mappings;
 
 namespace DentalScheduler.Web.UI
 {

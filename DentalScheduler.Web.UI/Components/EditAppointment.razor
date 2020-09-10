@@ -1,13 +1,9 @@
 @attribute [Authorize(Roles = "Patient")]
 
-@using System.Linq
-@using Mapster
 @using Microsoft.AspNetCore.Authorization;
 @using Radzen
-@using Models
 @using DentalScheduler.DTO.Input
 @using DentalScheduler.Interfaces.Models.Input
-@using Interfaces.Models.Output
 
 @inject DialogService DialogService
 @inject ILocalStorageService LocalStorage
