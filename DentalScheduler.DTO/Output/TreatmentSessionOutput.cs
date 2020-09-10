@@ -9,6 +9,8 @@ namespace DentalScheduler.DTO.Output
 
         public IDentalTeamOutput DentalTeam { get; set; }
 
+        public ITreatmentOutput Treatment { get; set; }
+
         public DateTimeOffset Start { get; set; }
 
         public DateTimeOffset End { get; set; }

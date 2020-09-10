@@ -8,6 +8,8 @@ namespace DentalScheduler.Interfaces.Models.Output
 
         IDentalTeamOutput DentalTeam { get; set; }
 
+        ITreatmentOutput Treatment { get; set; }
+
         DateTimeOffset Start { get; set; }
 
         DateTimeOffset End { get; set; }
