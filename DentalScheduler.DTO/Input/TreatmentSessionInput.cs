@@ -9,6 +9,8 @@ namespace DentalScheduler.DTO.Input
 
         public Guid? PatientId { get; set; }
 
+        public Guid? TreatmentReferenceId { get; set; }
+
         public DateTimeOffset? Start { get; set; }
 
         public DateTimeOffset? End { get; set; }
@@ -16,6 +18,5 @@ namespace DentalScheduler.DTO.Input
         public string Reason { get; set; }
 
         public string Status { get; set; }
-
     }
 }

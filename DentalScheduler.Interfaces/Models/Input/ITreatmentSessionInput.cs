@@ -8,6 +8,8 @@ namespace DentalScheduler.Interfaces.Models.Input
 
         Guid? PatientId { get; set; }
 
+        Guid? TreatmentReferenceId { get; set; }
+
         DateTimeOffset? Start { get; set; }
 
         DateTimeOffset? End { get; set; }
