@@ -1,3 +1,4 @@
+using DentalScheduler.DAL.Helpers;
 using DentalScheduler.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,6 +10,8 @@ namespace DentalScheduler.DAL.Configurations
         public void Configure(EntityTypeBuilder<TreatmentSession> builder)
         {
             builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.ReferenceId).HasValueGenerator<ReferenceIdGenerator>();
 
             builder.HasOne(e => e.Patient);
             builder.HasOne(e => e.DentalTeam);
@@ -24,7 +27,9 @@ namespace DentalScheduler.DAL.Configurations
 
             builder.Property(e => e.Reason).HasMaxLength(256);
 
-            builder.HasIndex(e => new { e.PatientId, e.DentalTeamId, e.Start, e.End }).IsUnique();
+            builder.HasIndex(e => e.ReferenceId).IsUnique();
+            builder.HasIndex(e => new { e.PatientId, e.Start, e.End }).IsUnique();
+            builder.HasIndex(e => new { e.DentalTeamId, e.Start, e.End }).IsUnique();
         }
     }
 }
