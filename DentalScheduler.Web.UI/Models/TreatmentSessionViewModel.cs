@@ -10,6 +10,8 @@ namespace DentalScheduler.Web.UI.Models
 
         public TreatmentViewModel Treatment { get; set; }
 
+        public string TreatmentName => Treatment.Name;
+
         public DateTime Start { get; set; }
 
         public DateTime End { get; set; }
