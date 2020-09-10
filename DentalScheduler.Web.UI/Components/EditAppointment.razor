@@ -39,15 +39,6 @@
     </div>
     <div class="form-group row">
         <div class="col-md-3">
-            <label for="@nameof(Model.Reason)">@nameof(Model.Reason)</label>
-        </div>
-        <div class="col">
-            <RadzenTextArea @bind-Value="@Model.Reason" MaxLength="256" Cols="64" Rows="4" Placeholder="Describe reason here..." />
-            <ValidationMessage For="@(() => Model.Reason)" />
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-md-3">
             <label for="@nameof(Model.Start)">@nameof(Model.Start)</label>
         </div>
         <div class="col">
@@ -139,7 +130,6 @@
         Model.Status = TreatmentSession.Status ?? "Requested";
         Model.Start = TreatmentSession.Start;
         Model.End = TreatmentSession.End;
-        Model.Reason = TreatmentSession.Reason;
         Model.DentalTeamReferenceId = TreatmentSession.DentalTeam.ReferenceId;
         if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
         {

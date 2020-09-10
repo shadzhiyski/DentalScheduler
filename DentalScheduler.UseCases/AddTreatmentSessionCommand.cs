@@ -55,7 +55,6 @@ namespace DentalScheduler.UseCases
                 PatientId = patient.Id,
                 DentalTeamId = dentalTeam.Id,
                 TreatmentId = treatment.Id,
-                Reason = input.Reason,
                 Start = input.Start.Value,
                 End = input.End.Value
             };

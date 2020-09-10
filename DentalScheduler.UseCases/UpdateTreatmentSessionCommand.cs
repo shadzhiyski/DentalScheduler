@@ -75,7 +75,6 @@ namespace DentalScheduler.UseCases
                 );
             }
 
-            treatmentSession.Reason = input.Reason;
             treatmentSession.Status = treatmentSessionStatus;
 
             await UoW.SaveAsync();
