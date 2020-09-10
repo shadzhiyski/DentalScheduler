@@ -34,14 +34,6 @@ namespace DentalScheduler.UseCases.Validation
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
                 .NotEmpty();
-
-            RuleFor(model => model.Reason)
-                .Cascade(CascadeMode.StopOnFirstFailure)
-                .NotNull()
-                .NotEmpty();
-
-            RuleFor(model => model.Reason)
-                .MaximumLength(256);
             
             RuleFor(model => model.End)
                 .GreaterThan(model => model.Start);
