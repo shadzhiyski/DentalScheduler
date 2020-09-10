@@ -45,10 +45,12 @@ namespace DentalScheduler.UseCases
 
             var patient = PatientRepository.SingleOrDefault(p => p.ReferenceId == input.PatientId);
             var dentalTeam = DentalTeamRepository.SingleOrDefault(dt => dt.ReferenceId == input.DentalTeamId);
+            var treatment = DentalTeamRepository.SingleOrDefault(t => t.ReferenceId == input.TreatmentReferenceId);
             var treatmentSession = new TreatmentSession()
             {
                 PatientId = patient.Id,
                 DentalTeamId = dentalTeam.Id,
+                TreatmentId = treatment.Id,
                 Reason = input.Reason,
                 Start = input.Start.Value,
                 End = input.End.Value
