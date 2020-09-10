@@ -15,6 +15,7 @@ namespace DentalScheduler.Config.Mappings
                 {
                     PatientReferenceId = src.Patient.ReferenceId,
                     DentalTeam = src.DentalTeam.Adapt<IDentalTeamOutput>(config),
+                    Treatment = src.DentalTeam.Adapt<ITreatmentOutput>(config),
                     Start = src.Start,
                     End = src.End,
                     Reason = src.Reason
