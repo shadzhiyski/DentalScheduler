@@ -14,6 +14,10 @@ namespace DentalScheduler.Entities
 
         public virtual DentalTeam DentalTeam { get; set; }
 
+        public Guid TreatmentId { get; set; }
+
+        public virtual Treatment Treatment { get; set; }
+
         public DateTimeOffset Start { get; set; }
 
         public DateTimeOffset End { get; set; }

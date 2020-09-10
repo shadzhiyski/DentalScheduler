@@ -12,9 +12,11 @@ namespace DentalScheduler.DAL.Configurations
 
             builder.HasOne(e => e.Patient);
             builder.HasOne(e => e.DentalTeam);
+            builder.HasOne(e => e.Treatment);
 
             builder.Property(e => e.PatientId).IsRequired();
             builder.Property(e => e.DentalTeamId).IsRequired();
+            builder.Property(e => e.TreatmentId).IsRequired();
             builder.Property(e => e.Start).IsRequired();
             builder.Property(e => e.End).IsRequired();
 
