@@ -86,10 +86,8 @@
         Model.Status = "Rejected";
     }
 
-    async Task<bool> OnSubmit()
+    private void OnSubmit()
     {
         DialogService.Close(Model);
-
-        return true;
     }
 }
