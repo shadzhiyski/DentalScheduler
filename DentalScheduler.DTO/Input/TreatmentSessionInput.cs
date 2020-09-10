@@ -7,7 +7,7 @@ namespace DentalScheduler.DTO.Input
     {
         public Guid? DentalTeamReferenceId { get; set; }
 
-        public Guid? PatientId { get; set; }
+        public Guid? PatientReferenceId { get; set; }
 
         public Guid? TreatmentReferenceId { get; set; }
 

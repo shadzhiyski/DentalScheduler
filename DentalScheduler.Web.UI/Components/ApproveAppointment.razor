@@ -71,9 +71,9 @@
 
         System.Console.WriteLine($"DentalTeamId: {Model.DentalTeamReferenceId}");
 
-        Model.PatientId = TreatmentSession.PatientReferenceId;
+        Model.PatientReferenceId = TreatmentSession.PatientReferenceId;
 
-        System.Console.WriteLine($"PatientId: {Model.PatientId}");
+        System.Console.WriteLine($"PatientId: {Model.PatientReferenceId}");
     }
 
     void Approve()

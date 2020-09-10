@@ -146,7 +146,7 @@
             Model.DentalTeamReferenceId = null;    
         }
 
-        Model.PatientId = await LocalStorage.ContainKeyAsync("PatientReferenceId")
+        Model.PatientReferenceId = await LocalStorage.ContainKeyAsync("PatientReferenceId")
             ? await LocalStorage.GetItemAsync<Guid>("PatientReferenceId")
             : Guid.Empty;
     }

@@ -47,7 +47,7 @@ namespace DentalScheduler.UseCases
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
 
-            var patient = PatientRepository.SingleOrDefault(p => p.ReferenceId == input.PatientId);
+            var patient = PatientRepository.SingleOrDefault(p => p.ReferenceId == input.PatientReferenceId);
             var dentalTeam = DentalTeamRepository.SingleOrDefault(dt => dt.ReferenceId == input.DentalTeamReferenceId);
             var treatment = TreatmentRepository.SingleOrDefault(t => t.ReferenceId == input.TreatmentReferenceId);
             var treatmentSession = new TreatmentSession()
