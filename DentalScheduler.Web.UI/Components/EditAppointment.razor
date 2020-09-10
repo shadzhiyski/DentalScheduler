@@ -8,6 +8,7 @@
 @inject DialogService DialogService
 @inject ILocalStorageService LocalStorage
 @inject IDentalTeamService DentalTeamService
+@inject ITreatmentService TreatmentService
 
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />
@@ -22,6 +23,18 @@
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="DentalTeamReferenceId" >
             </RadzenDropDown>
             <ValidationMessage For="@(() => Model.DentalTeamReferenceId)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.TreatmentReferenceId)">Dental Team</label>
+        </div>
+        <div class="col">
+            <RadzenDropDown AllowClear="true" TValue="string"
+                Data="@Treatments"
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="TreatmentReferenceId" Change="@(args => Change(args))" >
+            </RadzenDropDown>
+            <ValidationMessage For="@(() => Model.TreatmentReferenceId)" />
         </div>
     </div>
     <div class="form-group row">
@@ -89,7 +102,25 @@
         }
     }
 
+    public string TreatmentReferenceId 
+    { 
+        get => Model.TreatmentReferenceId?.ToString(); 
+        set
+        {
+            if (value != null)
+            {
+                Model.TreatmentReferenceId = new Guid(value);
+            }
+            else 
+            {
+                Model.TreatmentReferenceId = null;
+            }
+        }
+    }
+
     public IList<DentalTeamDropDownViewModel> DentalTeams { get; set; }
+
+    public IList<TreatmentDropDownViewModel> Treatments { get; set; }
 
     public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
 
@@ -100,6 +131,7 @@
         EditContext = new EditContext(Model);
 
         DentalTeams = await DentalTeamService.GetDentalTeamsDropDownListAsync();
+        Treatments = await TreatmentService.GetTreatmentsAsync();
     }
 
     protected override async void OnParametersSet()
@@ -121,7 +153,7 @@
 
     void Change(object value)
     {
-        System.Console.WriteLine($"Change Model: {Model.DentalTeamReferenceId.ToString()}; Value: {DentalTeamReferenceId}");
+        System.Console.WriteLine($"Change Model: {Model.TreatmentReferenceId.ToString()}; Value: {TreatmentReferenceId}");
         
         StateHasChanged();
     }
