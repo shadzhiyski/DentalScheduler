@@ -48,6 +48,7 @@ namespace DentalScheduler.Web.UI
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IScheduleService, ScheduleService>();
             services.AddTransient<IDentalTeamService, DentalTeamService>();
+            services.AddTransient<ITreatmentService, TreatmentService>();
         }
     }
 }
