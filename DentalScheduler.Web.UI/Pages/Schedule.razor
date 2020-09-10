@@ -9,11 +9,12 @@
 
 @inject DialogService DialogService
 @inject IScheduleService ScheduleService
+@inject ILocalStorageService LocalStorage
 
 <div class="row">
     <div class="col-md-12">
     <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@AppointmentsData" StartProperty="Start" EndProperty="End" 
-        TextProperty="Reason" SelectedIndex="2" 
+        TextProperty="TreatmentName" SelectedIndex="2" 
         SlotSelect="@OnSlotSelect" AppointmentSelect="@OnAppointmentSelect" AppointmentRender="@OnAppointmentRender">
         <RadzenDayView />
         <RadzenWeekView />
@@ -45,18 +46,18 @@
         DTO.Input.TreatmentSessionInput data = await DialogService.OpenAsync<EditAppointment>(
             "Add Treatment Session",
             new Dictionary<string, object> 
-            { 
-                { 
-                    "TreatmentSession", new TreatmentSessionViewModel() 
-                    { 
+            {
+                {
+                    "Model", new DTO.Input.TreatmentSessionInput()
+                    {
+                        Status = "Requested",
+                        DentalTeamReferenceId = default,
+                        PatientReferenceId = await LocalStorage.GetItemAsync<Guid>("PatientReferenceId"),
+                        TreatmentReferenceId = default,
                         Start = args.Start,
-                        End = args.End,
-                        DentalTeam = new DentalTeamViewModel()
-                        { 
-                            ReferenceId = Guid.Empty
-                        }
-                    } 
-                } 
+                        End = args.End
+                    }
+                }
             });
 
         if (data != null)
@@ -69,26 +70,36 @@
 
     async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<TreatmentSessionViewModel> args)
     {
-        DTO.Input.TreatmentSessionInput data = null;
+        DTO.Input.TreatmentSessionInput dataToSet = new DTO.Input.TreatmentSessionInput()
+        {
+            Status = args.Data.Status,
+            DentalTeamReferenceId = args.Data.DentalTeam.ReferenceId,
+            PatientReferenceId = args.Data.PatientReferenceId,
+            TreatmentReferenceId = args.Data.Treatment.ReferenceId,
+            Start = args.Start,
+            End = args.End
+        };
+
+        DTO.Input.TreatmentSessionInput resultData = null;
 
         var user = (await AuthenticationStateTask).User;
         if (user.IsInRole("Patient"))
         {
-            data = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
-                new Dictionary<string, object> { { "TreatmentSession", args.Data } });
+            resultData = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
+                new Dictionary<string, object> { { "Model", dataToSet } });
         }
         else if (user.IsInRole("Dentist"))
         {
-            data = await DialogService.OpenAsync<ApproveAppointment>("Approve Appointment", 
-                new Dictionary<string, object> { { "TreatmentSession", args.Data } });
+            resultData = await DialogService.OpenAsync<ApproveAppointment>("Approve Appointment", 
+                new Dictionary<string, object> { { "Model", dataToSet } });
         }
 
-        if (data == null)
+        if (resultData == null)
         {
             return;
         }
 
-        await ScheduleService.EditAppointmentsAsync(data);
+        await ScheduleService.EditAppointmentsAsync(resultData);
 
         AppointmentsData = await GetAppointmentsAsync();
     }

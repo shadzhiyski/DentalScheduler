@@ -1,12 +1,9 @@
 @attribute [Authorize(Roles = "Dentist")]
 
 @using Interfaces.Models.Input
-@using Interfaces.Models.Output
-@using DTO.Input
 @using Radzen
 
 @inject DialogService DialogService
-@inject ILocalStorageService LocalStorage
 
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />
@@ -37,34 +34,14 @@
 </EditForm>
 
 @code {
-    [Parameter]
-    public TreatmentSessionViewModel TreatmentSession { get; set; }
-
     public EditContext EditContext { get; set; }
 
-    public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
+    [Parameter]
+    public ITreatmentSessionInput Model { get; set; }
 
     protected override void OnInitialized()
     {
         EditContext = new EditContext(Model);
-    }
-
-    protected override void OnParametersSet()
-    {
-        Model.Status = TreatmentSession.Status ?? "Requested";
-        Model.Start = TreatmentSession.Start;
-        Model.End = TreatmentSession.End;
-        Model.DentalTeamReferenceId = TreatmentSession.DentalTeam.ReferenceId;
-        if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
-        {
-            Model.DentalTeamReferenceId = null;
-        }
-
-        System.Console.WriteLine($"DentalTeamId: {Model.DentalTeamReferenceId}");
-
-        Model.PatientReferenceId = TreatmentSession.PatientReferenceId;
-
-        System.Console.WriteLine($"PatientId: {Model.PatientReferenceId}");
     }
 
     void Approve()

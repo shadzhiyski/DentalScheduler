@@ -2,11 +2,9 @@
 
 @using Microsoft.AspNetCore.Authorization;
 @using Radzen
-@using DentalScheduler.DTO.Input
 @using DentalScheduler.Interfaces.Models.Input
 
 @inject DialogService DialogService
-@inject ILocalStorageService LocalStorage
 @inject IDentalTeamService DentalTeamService
 @inject ITreatmentService TreatmentService
 
@@ -72,9 +70,6 @@
 </EditForm>
 
 @code {
-    [Parameter]
-    public TreatmentSessionViewModel TreatmentSession { get; set; }
-
     public EditContext EditContext { get; set; }
     
     public string DentalTeamReferenceId 
@@ -115,7 +110,8 @@
 
     public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
 
-    public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
+    [Parameter]
+    public ITreatmentSessionInput Model { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
@@ -123,22 +119,6 @@
 
         DentalTeams = await DentalTeamService.GetDentalTeamsDropDownListAsync();
         Treatments = await TreatmentService.GetTreatmentsAsync();
-    }
-
-    protected override async void OnParametersSet()
-    {
-        Model.Status = TreatmentSession.Status ?? "Requested";
-        Model.Start = TreatmentSession.Start;
-        Model.End = TreatmentSession.End;
-        Model.DentalTeamReferenceId = TreatmentSession.DentalTeam.ReferenceId;
-        if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
-        {
-            Model.DentalTeamReferenceId = null;    
-        }
-
-        Model.PatientReferenceId = await LocalStorage.ContainKeyAsync("PatientReferenceId")
-            ? await LocalStorage.GetItemAsync<Guid>("PatientReferenceId")
-            : Guid.Empty;
     }
 
     void Change(object value)
