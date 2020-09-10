@@ -16,12 +16,14 @@ namespace DentalScheduler.UseCases
             IGenericRepository<TreatmentSession> treatmentSessionRepository,
             IGenericRepository<Patient> patientRepository,
             IGenericRepository<DentalTeam> dentalTeamRepository,
+            IGenericRepository<Treatment> treatmentRepository,
             IUnitOfWork uoW)
         {
             Validator = validator;
             TreatmentSessionRepository = treatmentSessionRepository;
             PatientRepository = patientRepository;
             DentalTeamRepository = dentalTeamRepository;
+            TreatmentRepository = treatmentRepository;
             UoW = uoW;
         }
 
@@ -32,6 +34,8 @@ namespace DentalScheduler.UseCases
         public IGenericRepository<Patient> PatientRepository { get; }
         
         public IGenericRepository<DentalTeam> DentalTeamRepository { get; }
+
+        public IGenericRepository<Treatment> TreatmentRepository { get; }
 
         public IUnitOfWork UoW { get; }
 
@@ -45,7 +49,7 @@ namespace DentalScheduler.UseCases
 
             var patient = PatientRepository.SingleOrDefault(p => p.ReferenceId == input.PatientId);
             var dentalTeam = DentalTeamRepository.SingleOrDefault(dt => dt.ReferenceId == input.DentalTeamId);
-            var treatment = DentalTeamRepository.SingleOrDefault(t => t.ReferenceId == input.TreatmentReferenceId);
+            var treatment = TreatmentRepository.SingleOrDefault(t => t.ReferenceId == input.TreatmentReferenceId);
             var treatmentSession = new TreatmentSession()
             {
                 PatientId = patient.Id,
