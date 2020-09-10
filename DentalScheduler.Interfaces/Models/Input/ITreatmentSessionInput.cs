@@ -4,7 +4,7 @@ namespace DentalScheduler.Interfaces.Models.Input
 {
     public interface ITreatmentSessionInput
     {
-        Guid? DentalTeamId { get; set; }
+        Guid? DentalTeamReferenceId { get; set; }
 
         Guid? PatientId { get; set; }
 

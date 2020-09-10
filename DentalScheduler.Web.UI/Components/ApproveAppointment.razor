@@ -63,13 +63,13 @@
         Model.Start = TreatmentSession.Start;
         Model.End = TreatmentSession.End;
         Model.Reason = TreatmentSession.Reason;
-        Model.DentalTeamId = TreatmentSession.DentalTeam.ReferenceId;
+        Model.DentalTeamReferenceId = TreatmentSession.DentalTeam.ReferenceId;
         if (TreatmentSession.DentalTeam.ReferenceId == Guid.Empty)
         {
-            Model.DentalTeamId = null;
+            Model.DentalTeamReferenceId = null;
         }
 
-        System.Console.WriteLine($"DentalTeamId: {Model.DentalTeamId}");
+        System.Console.WriteLine($"DentalTeamId: {Model.DentalTeamReferenceId}");
 
         Model.PatientId = TreatmentSession.PatientReferenceId;
 

@@ -10,7 +10,7 @@ namespace DentalScheduler.UseCases.Validation
     {
         public TreatmentSessionValidator()
         {
-            RuleFor(model => model.DentalTeamId)
+            RuleFor(model => model.DentalTeamReferenceId)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
                 .NotEmpty();

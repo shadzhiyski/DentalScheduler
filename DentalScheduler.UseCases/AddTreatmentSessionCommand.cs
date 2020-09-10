@@ -48,7 +48,7 @@ namespace DentalScheduler.UseCases
             }
 
             var patient = PatientRepository.SingleOrDefault(p => p.ReferenceId == input.PatientId);
-            var dentalTeam = DentalTeamRepository.SingleOrDefault(dt => dt.ReferenceId == input.DentalTeamId);
+            var dentalTeam = DentalTeamRepository.SingleOrDefault(dt => dt.ReferenceId == input.DentalTeamReferenceId);
             var treatment = TreatmentRepository.SingleOrDefault(t => t.ReferenceId == input.TreatmentReferenceId);
             var treatmentSession = new TreatmentSession()
             {

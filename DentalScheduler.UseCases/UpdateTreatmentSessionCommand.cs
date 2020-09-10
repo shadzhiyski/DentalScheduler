@@ -57,7 +57,7 @@ namespace DentalScheduler.UseCases
 
             var treatmentSession = TreatmentSessionRepository.SingleOrDefault(
                 ts => ts.Patient.ReferenceId == input.PatientId
-                    && ts.DentalTeam.ReferenceId == input.DentalTeamId
+                    && ts.DentalTeam.ReferenceId == input.DentalTeamReferenceId
                     && ts.Start == input.Start
                     && ts.End == input.End
             );
