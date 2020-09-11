@@ -30,9 +30,9 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<RoomOutput> Get(ODataQueryOptions<Room> options)
+        public IQueryable<RoomOutput> Get()
         {
-            return options.ApplyTo(Repository.AsQueryable())
+            return Repository.AsQueryable()
                 .ProjectToType<RoomOutput>(MappingConfig);
         }
     }

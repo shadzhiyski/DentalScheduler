@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities;
@@ -27,9 +28,9 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<TreatmentOutput> Get(ODataQueryOptions<Treatment> options)
+        public IQueryable<TreatmentOutput> Get()
         {
-            return options.ApplyTo(Repository.AsQueryable())
+            return Repository.AsQueryable()
                 .ProjectToType<TreatmentOutput>(MappingConfig);
         }
     }

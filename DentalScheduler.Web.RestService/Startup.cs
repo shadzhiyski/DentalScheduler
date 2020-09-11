@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DentalScheduler.Config.DI;
-using DentalScheduler.Config.Mappings;
 using DentalScheduler.DAL;
-using DentalScheduler.Entities;
+using DentalScheduler.DTO.Output;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Web.RestService.Helpers;
 using Microsoft.AspNet.OData.Builder;
@@ -15,7 +14,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -174,19 +172,17 @@ namespace DentalScheduler.Web.RestService
         {
             ODataModelBuilder odataBuilder = new ODataConventionModelBuilder();
 
-            odataBuilder.EntitySet<Room>("Room")
-                .EntityType.HasKey(e => e.ReferenceId)
-                .Count().Filter().OrderBy().Expand().Select()
-                .Ignore(e => e.Id);
+            odataBuilder.EntitySet<RoomOutput>("Room")
+                .EntityType.HasKey(e => e.ReferenceId);
 
-            odataBuilder.EntitySet<DentalTeam>("DentalTeam")
-                .EntityType.HasKey(e => e.ReferenceId)
-                .Count().Filter().OrderBy().Expand().Select()
-                .Ignore(e => e.Id);
+            odataBuilder.EntitySet<DentalTeamOutput>("DentalTeam")
+                .EntityType.HasKey(e => e.ReferenceId);
 
-            odataBuilder.EntitySet<TreatmentSession>("TreatmentSession")
-                .EntityType.HasKey(e => e.Id)
-                .Count().Filter().OrderBy().Expand().Select();
+            odataBuilder.EntitySet<TreatmentSessionOutput>("TreatmentSession")
+                .EntityType.HasKey(e => new { e.PatientReferenceId, e.Start, e.End });
+
+            odataBuilder.EntitySet<TreatmentOutput>("Treatment")
+                .EntityType.HasKey(e => e.ReferenceId);
 
             return odataBuilder.GetEdmModel();
         }

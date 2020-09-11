@@ -25,7 +25,7 @@ namespace DentalScheduler.DAL.Repositories
 
         public IQueryable<TEntity> AsQueryable()
         {
-            return DbContext.Set<TEntity>().AsQueryable();
+            return DbContext.Set<TEntity>();
         }
 
         public void Remove(TEntity entity)
