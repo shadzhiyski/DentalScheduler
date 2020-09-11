@@ -10,6 +10,7 @@ using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Web.RestService.Helpers;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -91,12 +92,12 @@ namespace DentalScheduler.Web.RestService
             // services.AddMvc();
             services.AddMvcCore(options =>
             {
-                foreach (var outputFormatter in options.OutputFormatters.OfType<OutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
                 {
                     outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
                 }
 
-                foreach (var inputFormatter in options.InputFormatters.OfType<InputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
+                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
                 {
                     inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
                 }
@@ -165,7 +166,7 @@ namespace DentalScheduler.Web.RestService
                 endpoints.EnableDependencyInjection();
                 endpoints.MapControllers();
                 endpoints.Select().Filter().Expand().OrderBy().Count();
-                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
+                endpoints.MapODataRoute(routeName: "odata", routePrefix: "odata", model: GetEdmModel());
             });
         }
 
