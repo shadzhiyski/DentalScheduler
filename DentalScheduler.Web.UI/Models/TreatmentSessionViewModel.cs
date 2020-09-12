@@ -4,6 +4,8 @@ namespace DentalScheduler.Web.UI.Models
 {
     public class TreatmentSessionViewModel
     {
+        public Guid ReferenceId { get; set; }
+        
         public Guid PatientReferenceId { get; set; }
 
         public DentalTeamViewModel DentalTeam { get; set; }
