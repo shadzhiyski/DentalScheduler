@@ -4,6 +4,8 @@ namespace DentalScheduler.Interfaces.Models.Output
 {
     public interface ITreatmentSessionOutput
     {
+        Guid ReferenceId { get; set; }
+        
         Guid PatientReferenceId { get; set; }
 
         IDentalTeamOutput DentalTeam { get; }

@@ -5,6 +5,8 @@ namespace DentalScheduler.DTO.Output
 {
     public class TreatmentSessionOutput : ITreatmentSessionOutput
     {
+        public Guid ReferenceId { get; set; }
+
         public Guid PatientReferenceId { get; set; }
 
         IDentalTeamOutput ITreatmentSessionOutput.DentalTeam => DentalTeam;

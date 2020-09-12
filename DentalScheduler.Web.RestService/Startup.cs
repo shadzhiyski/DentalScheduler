@@ -178,8 +178,8 @@ namespace DentalScheduler.Web.RestService
             odataBuilder.EntitySet<DentalTeamOutput>("DentalTeam")
                 .EntityType.HasKey(e => e.ReferenceId);
 
-            odataBuilder.EntitySet<TreatmentSessionOutput>("TreatmentSession")
-                .EntityType.HasKey(e => new { e.PatientReferenceId, e.Start, e.End });
+            var ts = odataBuilder.EntitySet<TreatmentSessionOutput>("TreatmentSession")
+                .EntityType.HasKey(e => e.ReferenceId);
 
             odataBuilder.EntitySet<TreatmentOutput>("Treatment")
                 .EntityType.HasKey(e => e.ReferenceId);
