@@ -13,12 +13,14 @@ namespace DentalScheduler.Config.Mappings
                 .MapWith((src) => 
                 new TreatmentSessionOutput
                 {
+                    ReferenceId = src.ReferenceId,
                     PatientReferenceId = src.Patient.ReferenceId,
                     DentalTeam = src.DentalTeam.Adapt<DentalTeamOutput>(config),
                     Treatment = src.DentalTeam.Adapt<TreatmentOutput>(config),
                     Start = src.Start,
                     End = src.End,
-                    Reason = src.Reason
+                    Reason = src.Reason,
+                    Status = src.Status.ToString()
                 });
         }
     }
