@@ -30,7 +30,7 @@
         <div class="col">
             <RadzenDropDown AllowClear="true" TValue="string"
                 Data="@Treatments"
-                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="TreatmentReferenceId" Change="@(args => Change(args))" >
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="TreatmentReferenceId" Change="@(args => OnTreatmentChange(args))" >
             </RadzenDropDown>
             <ValidationMessage For="@(() => Model.TreatmentReferenceId)" />
         </div>
@@ -121,8 +121,14 @@
         Treatments = await TreatmentService.GetTreatmentsAsync();
     }
 
-    void Change(object value)
+    void OnTreatmentChange(object value)
     {
+        var durationInMinutes = Treatments.SingleOrDefault(
+                t => t.ReferenceId.Equals(Model.TreatmentReferenceId.ToString())
+            )
+            .DurationInMinutes;
+        Model.End = Model.Start.Value.AddMinutes(durationInMinutes);
+
         System.Console.WriteLine($"Change Model: {Model.TreatmentReferenceId.ToString()}; Value: {TreatmentReferenceId}");
         
         StateHasChanged();
