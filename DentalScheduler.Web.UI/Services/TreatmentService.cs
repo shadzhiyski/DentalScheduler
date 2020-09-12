@@ -21,20 +21,19 @@ namespace DentalScheduler.Web.UI.Services
             AppSettings = appSettings.Value;
 
             HttpClient.BaseAddress = new Uri($"{AppSettings.ApiBaseAddress}odata/");
-
-            SetAccessTokenAsync();
         }
 
         public AppSettings AppSettings { get; }
 
         public async Task<IList<TreatmentDropDownViewModel>> GetTreatmentsAsync()
         {
-            var response = await HttpClient.GetAsync("Treatment");
+            await SetAccessTokenAsync();
 
-            var result = (await response.Content.ReadFromJsonAsync<List<TreatmentDropDownViewModel>>())
-                .ToList();
+            var result = await ODataClient
+                .For<TreatmentDropDownViewModel>("Treatment")
+                .FindEntriesAsync();
 
-            return result;
+            return result.ToList();
         }
     }
 }
