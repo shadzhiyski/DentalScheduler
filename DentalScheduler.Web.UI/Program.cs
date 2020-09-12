@@ -14,7 +14,7 @@ namespace DentalScheduler.Web.UI
     {
         public static async Task Main(string[] args)
         {
-            // Simple.OData.Client.V4Adapter.Reference();
+            Simple.OData.Client.V4Adapter.Reference();
 
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
