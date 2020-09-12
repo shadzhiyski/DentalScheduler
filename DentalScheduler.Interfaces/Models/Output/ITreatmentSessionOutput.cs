@@ -16,8 +16,6 @@ namespace DentalScheduler.Interfaces.Models.Output
 
         DateTimeOffset End { get; set; }
 
-        string Reason { get; set; }
-
         string Status { get; set; }
     }
 }

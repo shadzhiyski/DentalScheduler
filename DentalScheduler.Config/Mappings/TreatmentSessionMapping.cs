@@ -19,7 +19,6 @@ namespace DentalScheduler.Config.Mappings
                     Treatment = src.DentalTeam.Adapt<TreatmentOutput>(config),
                     Start = src.Start,
                     End = src.End,
-                    Reason = src.Reason,
                     Status = src.Status.ToString()
                 });
         }
