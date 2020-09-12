@@ -8,6 +8,6 @@ namespace DentalScheduler.Interfaces.Models.Output
         
         string Name { get; set; }
 
-        IRoomOutput Room { get; set; }
+        IRoomOutput Room { get; }
     }
 }

@@ -15,7 +15,7 @@ namespace DentalScheduler.Config.Mappings
                 {
                     Name = src.Name,
                     ReferenceId = src.ReferenceId,
-                    Room = src.Room.Adapt<IRoomOutput>(config)
+                    Room = src.Room.Adapt<RoomOutput>(config)
                 });
         }
     }

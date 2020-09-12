@@ -7,16 +7,20 @@ namespace DentalScheduler.DTO.Output
     {
         public Guid PatientReferenceId { get; set; }
 
-        public IDentalTeamOutput DentalTeam { get; set; }
+        IDentalTeamOutput ITreatmentSessionOutput.DentalTeam => DentalTeam;
 
-        public ITreatmentOutput Treatment { get; set; }
+        public DentalTeamOutput DentalTeam { get; set; }
+
+        ITreatmentOutput ITreatmentSessionOutput.Treatment => Treatment;
+
+        public TreatmentOutput Treatment { get; set; }
 
         public DateTimeOffset Start { get; set; }
 
         public DateTimeOffset End { get; set; }
 
         public string Reason { get; set; }
-        
+
         public string Status { get; set; }
     }
 }

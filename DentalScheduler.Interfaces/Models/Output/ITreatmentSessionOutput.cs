@@ -6,9 +6,9 @@ namespace DentalScheduler.Interfaces.Models.Output
     {
         Guid PatientReferenceId { get; set; }
 
-        IDentalTeamOutput DentalTeam { get; set; }
+        IDentalTeamOutput DentalTeam { get; }
 
-        ITreatmentOutput Treatment { get; set; }
+        ITreatmentOutput Treatment { get; }
 
         DateTimeOffset Start { get; set; }
 
