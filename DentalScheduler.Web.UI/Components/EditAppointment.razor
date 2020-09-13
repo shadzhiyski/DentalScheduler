@@ -1,8 +1,6 @@
 @attribute [Authorize(Roles = "Patient")]
 
-@using Microsoft.AspNetCore.Authorization;
-@using Radzen
-@using DentalScheduler.Interfaces.Models.Input
+@using Interfaces.Models.Input
 
 @inject DialogService DialogService
 @inject IDentalTeamService DentalTeamService

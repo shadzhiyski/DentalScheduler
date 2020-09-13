@@ -1,12 +1,6 @@
 @page "/schedule"
 @attribute [Authorize(Roles = "Patient, Dentist")]
 
-@using Microsoft.AspNetCore.Authorization;
-@using System.Linq
-@using Radzen
-@using Components
-@using Interfaces.Models.Input
-
 @inject DialogService DialogService
 @inject NotificationService NotificationService
 @inject IScheduleService ScheduleService
