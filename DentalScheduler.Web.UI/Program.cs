@@ -7,6 +7,7 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using DentalScheduler.Web.UI.Services;
 using Radzen;
+using DentalScheduler.Web.UI.Handlers;
 
 namespace DentalScheduler.Web.UI
 {
@@ -25,6 +26,8 @@ namespace DentalScheduler.Web.UI
 
             RegisterServices(builder.Services);
 
+            RegisterHandlers(builder.Services);
+
             builder.Services.RegisterDependencies();
 
             builder.Services.AddOptions();
@@ -33,7 +36,13 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddScoped<AuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             builder.Services.AddScoped<ApplicationAuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             
-            builder.Services.AddTransient(sp => new HttpClient());
+            builder.Services.AddTransient(sp => 
+                {
+                    var httpRequestHandler = sp.GetRequiredService<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>();
+                    httpRequestHandler.InnerHandler = new HttpClientHandler();
+
+                    return new HttpClient(httpRequestHandler);
+                });
 
             builder.Services.AddScoped<DialogService>();
             builder.Services.AddScoped<NotificationService>();
@@ -49,6 +58,13 @@ namespace DentalScheduler.Web.UI
             services.AddTransient<IScheduleService, ScheduleService>();
             services.AddTransient<IDentalTeamService, DentalTeamService>();
             services.AddTransient<ITreatmentService, TreatmentService>();
+            
+            services.AddScoped<ISpinnerService, SpinnerService>();
+        }
+
+        private static void RegisterHandlers(IServiceCollection services)
+        {
+            services.AddTransient<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>();
         }
     }
 }
