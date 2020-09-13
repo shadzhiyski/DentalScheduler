@@ -8,6 +8,7 @@
 @using Interfaces.Models.Input
 
 @inject DialogService DialogService
+@inject NotificationService NotificationService
 @inject IScheduleService ScheduleService
 @inject ILocalStorageService LocalStorage
 
@@ -64,6 +65,14 @@
         {
             await ScheduleService.AddAppointmentsAsync(data);
 
+            NotificationService.Notify(new NotificationMessage()
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Created",
+                Detail = "Treatment session successfully created.",
+                Duration = 4000
+            });
+
             AppointmentsData = await GetAppointmentsAsync();
         }
     }
@@ -106,6 +115,14 @@
         }
 
         await ScheduleService.EditAppointmentsAsync(resultData);
+
+        NotificationService.Notify(new NotificationMessage()
+        {
+            Severity = NotificationSeverity.Success,
+            Summary = "Edited",
+            Detail = "Treatment session successfully edited.",
+            Duration = 4000
+        });
 
         AppointmentsData = await GetAppointmentsAsync();
     }
