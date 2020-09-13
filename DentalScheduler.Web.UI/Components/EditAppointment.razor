@@ -16,7 +16,7 @@
             <label for="@nameof(Model.DentalTeamReferenceId)">Dental Team</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" TValue="string"
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" TValue="string" LoadData="@LoadDentalTeams" 
                 Data="@DentalTeams"
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="DentalTeamReferenceId" >
             </RadzenDropDown>
@@ -28,7 +28,7 @@
             <label for="@nameof(Model.TreatmentReferenceId)">Treatment</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" TValue="string"
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" TValue="string" LoadData="@LoadTreatments" 
                 Data="@Treatments"
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="TreatmentReferenceId" Change="@(args => OnTreatmentChange(args))" >
             </RadzenDropDown>
@@ -64,7 +64,7 @@
     <div class="form-group row">
         <div class="col-md-3"></div>
         <div class="col">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
         </div>
     </div>
 </EditForm>
@@ -104,20 +104,27 @@
         }
     }
 
-    public IList<DentalTeamDropDownViewModel> DentalTeams { get; set; }
+    public IEnumerable<DentalTeamDropDownViewModel> DentalTeams { get; set; }
 
-    public IList<TreatmentDropDownViewModel> Treatments { get; set; }
+    public IEnumerable<TreatmentDropDownViewModel> Treatments { get; set; }
 
     public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
 
     [Parameter]
     public ITreatmentSessionInput Model { get; set; }
 
-    protected async override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         EditContext = new EditContext(Model);
+    }
 
+    async Task LoadDentalTeams()
+    {
         DentalTeams = await DentalTeamService.GetDentalTeamsDropDownListAsync();
+    }
+
+    async Task LoadTreatments()
+    {
         Treatments = await TreatmentService.GetTreatmentsAsync();
     }
 
