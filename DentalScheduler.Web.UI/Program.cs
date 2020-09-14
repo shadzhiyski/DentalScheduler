@@ -55,7 +55,7 @@ namespace DentalScheduler.Web.UI
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<IScheduleService, ScheduleService>();
+            services.AddTransient<ITreatmentSessionService, TreatmentSessionService>();
             services.AddTransient<IDentalTeamService, DentalTeamService>();
             services.AddTransient<ITreatmentService, TreatmentService>();
             

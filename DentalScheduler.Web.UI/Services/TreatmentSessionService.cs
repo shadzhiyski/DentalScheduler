@@ -12,9 +12,9 @@ using Simple.OData.Client;
 
 namespace DentalScheduler.Web.UI.Services
 {
-    public class ScheduleService : BaseDataService, IScheduleService
+    public class TreatmentSessionService : BaseDataService, ITreatmentSessionService
     {
-        public ScheduleService(
+        public TreatmentSessionService(
                 HttpClient httpClient, 
                 IOptions<AppSettings> appSettings,
                 ILocalStorageService localStorage)

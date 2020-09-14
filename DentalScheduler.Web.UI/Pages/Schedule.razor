@@ -3,7 +3,7 @@
 
 @inject DialogService DialogService
 @inject NotificationService NotificationService
-@inject IScheduleService ScheduleService
+@inject ITreatmentSessionService TreatmentSessionService
 @inject ILocalStorageService LocalStorage
 
 <div class="row">
@@ -57,7 +57,7 @@
 
         if (data != null)
         {
-            await ScheduleService.AddAppointmentsAsync(data);
+            await TreatmentSessionService.AddAppointmentsAsync(data);
 
             NotificationService.Notify(new NotificationMessage()
             {
@@ -108,7 +108,7 @@
             return;
         }
 
-        await ScheduleService.EditAppointmentsAsync(resultData);
+        await TreatmentSessionService.EditAppointmentsAsync(resultData);
 
         NotificationService.Notify(new NotificationMessage()
         {
@@ -140,7 +140,7 @@
 
     private async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync()
     {
-        return (await ScheduleService.GetAppointmentsAsync(
+        return (await TreatmentSessionService.GetAppointmentsAsync(
                 DateTimeOffset.UtcNow.AddMonths(-1),
                 DateTimeOffset.UtcNow.AddMonths(1)
             ));

@@ -6,7 +6,7 @@ using DentalScheduler.Web.UI.Models;
 
 namespace DentalScheduler.Web.UI.Services
 {
-    public interface IScheduleService
+    public interface ITreatmentSessionService
     {
         Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync(
             DateTimeOffset periodStart, DateTimeOffset periodEnd);
