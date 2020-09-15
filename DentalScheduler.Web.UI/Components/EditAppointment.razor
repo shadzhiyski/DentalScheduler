@@ -38,7 +38,7 @@
             <label for="@nameof(Model.Start)">@nameof(Model.Start)</label>
         </div>
         <div class="col">
-            <RadzenDatePicker @bind-Value="@PeriodWrapperModel.Start" Name="Model.Start" ShowTime="true" />
+            <RadzenDatePicker @bind-Value="@PeriodWrapperModel.Start" Name="Model.Start" ShowTime="true" Change="@(args => OnStartChange())" />
             <ValidationMessage For="@(() => Model.Start)" />
         </div>
     </div>
@@ -128,15 +128,21 @@
 
     void OnTreatmentChange(object value)
     {
+        ChangeTreatmentSessionDuration();
+    }
+
+    void OnStartChange()
+    {
+        ChangeTreatmentSessionDuration();
+    }
+
+    private void ChangeTreatmentSessionDuration()
+    {
         var durationInMinutes = Treatments.SingleOrDefault(
                 t => t.ReferenceId.Equals(Model.TreatmentReferenceId.ToString())
             )
             .DurationInMinutes;
         Model.End = Model.Start.Value.AddMinutes(durationInMinutes);
-
-        System.Console.WriteLine($"Change Model: {Model.TreatmentReferenceId.ToString()}; Value: {TreatmentReferenceId}");
-        
-        StateHasChanged();
     }
 
     private void OnSubmit()
