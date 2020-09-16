@@ -26,25 +26,19 @@ namespace DentalScheduler.Web.UI.Services
 
         public async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync(
             DateTimeOffset periodStart, DateTimeOffset periodEnd)
-        {
-            var result = await ODataClient
-                .For<TreatmentSessionViewModel>("TreatmentSession")
-                .Expand(m => m.DentalTeam)
-                .Expand(m => m.Treatment)
-                .Filter(m => m.Start <= periodEnd && m.End >= periodStart)
-                .FindEntriesAsync();
-            
-            return result.ToList();
-        }
+            => (await ODataClient
+                    .For<TreatmentSessionViewModel>("TreatmentSession")
+                    .Expand(m => m.DentalTeam)
+                    .Expand(m => m.Treatment)
+                    .Filter(m => m.Start <= periodEnd && m.End >= periodStart)
+                    .FindEntriesAsync()
+                )
+                .ToList();
 
         public async Task AddAppointmentsAsync(ITreatmentSessionInput input)
-        {
-            var response = await HttpClient.PostAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
-        }
+            => await HttpClient.PostAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
 
-        public async Task EditAppointmentsAsync(ITreatmentSessionInput input)
-        {
-            var response = await HttpClient.PutAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
-        }
+        public async Task EditAppointmentsAsync(ITreatmentSessionInput input) 
+            => await HttpClient.PutAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
     }
 }

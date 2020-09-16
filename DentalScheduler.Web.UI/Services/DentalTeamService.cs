@@ -16,12 +16,10 @@ namespace DentalScheduler.Web.UI.Services
         public ODataClient ODataClient { get; }
 
         public async Task<IList<DentalTeamDropDownViewModel>> GetDentalTeamsDropDownListAsync()
-        {
-            var result = await ODataClient
-                .For<DentalTeamDropDownViewModel>("DentalTeam")
-                .FindEntriesAsync();
-
-            return result.ToList();
-        }
+            => (await ODataClient
+                    .For<DentalTeamDropDownViewModel>("DentalTeam")
+                    .FindEntriesAsync()
+                )
+                .ToList();
     }
 }
