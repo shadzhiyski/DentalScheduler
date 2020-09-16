@@ -3,8 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
-using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Web.UI.Models;
@@ -12,26 +10,23 @@ using Simple.OData.Client;
 
 namespace DentalScheduler.Web.UI.Services
 {
-    public class TreatmentSessionService : BaseDataService, ITreatmentSessionService
+    public class TreatmentSessionService : ITreatmentSessionService
     {
         public TreatmentSessionService(
-                HttpClient httpClient, 
-                IOptions<AppSettings> appSettings,
-                ILocalStorageService localStorage)
-            : base(httpClient, localStorage)
+                ODataClient oDataClient,
+                IHttpClientFactory httpClientFactory)
         {
-            AppSettings = appSettings.Value;
-
-            HttpClient.BaseAddress = new Uri($"{AppSettings.ApiBaseAddress}odata/");
+            ODataClient = oDataClient;
+            HttpClient = httpClientFactory.CreateClient("DataClient");
         }
         
-        public AppSettings AppSettings { get; }
+        public ODataClient ODataClient { get; }
+
+        public HttpClient HttpClient { get; }
 
         public async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync(
             DateTimeOffset periodStart, DateTimeOffset periodEnd)
         {
-            await SetAccessTokenAsync();
-
             var result = await ODataClient
                 .For<TreatmentSessionViewModel>("TreatmentSession")
                 .Expand(m => m.DentalTeam)
@@ -44,20 +39,12 @@ namespace DentalScheduler.Web.UI.Services
 
         public async Task AddAppointmentsAsync(ITreatmentSessionInput input)
         {
-            await SetAccessTokenAsync();
-
             var response = await HttpClient.PostAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
-
-            System.Console.WriteLine("{response.StatusCode}");
         }
 
         public async Task EditAppointmentsAsync(ITreatmentSessionInput input)
         {
-            await SetAccessTokenAsync();
-
             var response = await HttpClient.PutAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
-
-            System.Console.WriteLine("{response.StatusCode}");
         }
     }
 }

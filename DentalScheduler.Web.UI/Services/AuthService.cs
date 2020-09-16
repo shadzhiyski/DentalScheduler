@@ -9,23 +9,17 @@ using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
 using DentalScheduler.UseCases.Validation;
-using Microsoft.Extensions.Options;
 
 namespace DentalScheduler.Web.UI.Services
 {
     public class AuthService : IAuthService
     {
-        public AuthService(HttpClient httpClient, IOptions<AppSettings> appSettings)
+        public AuthService(IHttpClientFactory httpClientFactory)
         {
-            HttpClient = httpClient;
-            AppSettings = appSettings.Value;
-
-            HttpClient.BaseAddress = new Uri(AppSettings.ApiBaseAddress);
+            HttpClient = httpClientFactory.CreateClient("AuthClient");
         }
 
         public HttpClient HttpClient { get; }
-
-        public AppSettings AppSettings { get; }
 
         public async Task<IResult<IAccessTokenOutput>> LoginAsync(IUserCredentialsInput input)
         {

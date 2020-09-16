@@ -1,33 +1,22 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
 using DentalScheduler.Web.UI.Models;
-using Microsoft.Extensions.Options;
+using Simple.OData.Client;
 
 namespace DentalScheduler.Web.UI.Services
 {
-    public class TreatmentService : BaseDataService, ITreatmentService
+    public class TreatmentService : ITreatmentService
     {
-        public TreatmentService(
-                HttpClient httpClient, 
-                IOptions<AppSettings> appSettings,
-                ILocalStorageService localStorage)
-            : base(httpClient, localStorage)
+        public TreatmentService(ODataClient oDataClient)
         {
-            AppSettings = appSettings.Value;
-
-            HttpClient.BaseAddress = new Uri($"{AppSettings.ApiBaseAddress}odata/");
+            ODataClient = oDataClient;
         }
 
-        public AppSettings AppSettings { get; }
+        public ODataClient ODataClient { get; }
 
         public async Task<IList<TreatmentDropDownViewModel>> GetTreatmentsAsync()
         {
-            await SetAccessTokenAsync();
-
             var result = await ODataClient
                 .For<TreatmentDropDownViewModel>("Treatment")
                 .FindEntriesAsync();

@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Components.Authorization;
 using DentalScheduler.Web.UI.Services;
 using Radzen;
 using DentalScheduler.Web.UI.Handlers;
+using System;
+using Microsoft.Extensions.Options;
+using Simple.OData.Client;
 
 namespace DentalScheduler.Web.UI
 {
@@ -36,12 +39,30 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddScoped<AuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             builder.Services.AddScoped<ApplicationAuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             
-            builder.Services.AddTransient(sp => 
+            var seriveProvider = builder.Services.BuildServiceProvider();
+            builder.Services.AddHttpClient("AuthClient", client => 
                 {
-                    var httpRequestHandler = sp.GetRequiredService<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>();
-                    httpRequestHandler.InnerHandler = new HttpClientHandler();
-
-                    return new HttpClient(httpRequestHandler);
+                    var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
+                    client.BaseAddress = new Uri($"{appSettings.Value.ApiBaseAddress}/");
+                })
+                .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
+                .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
+            
+            builder.Services.AddHttpClient("DataClient", client => 
+                {
+                    var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
+                    client.BaseAddress = new Uri($"{appSettings.Value.ApiBaseAddress}/odata/");
+                })
+                .AddHttpMessageHandler<AuthorizationHeaderHttpHandler>()
+                .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
+                .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
+            builder.Services.AddScoped<ODataClient>(sp => 
+                {
+                    var httpClient = sp.GetRequiredService<IHttpClientFactory>()
+                        .CreateClient("DataClient");
+                    var clientSettings = new ODataClientSettings(httpClient);
+                    
+                    return new ODataClient(clientSettings);
                 });
 
             builder.Services.AddScoped<DialogService>();
@@ -64,6 +85,7 @@ namespace DentalScheduler.Web.UI
 
         private static void RegisterHandlers(IServiceCollection services)
         {
+            services.AddTransient<AuthorizationHeaderHttpHandler>();
             services.AddTransient<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>();
         }
     }
