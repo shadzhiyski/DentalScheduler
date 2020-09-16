@@ -80,7 +80,7 @@ namespace DentalScheduler.Web.UI
             services.AddTransient<IDentalTeamService, DentalTeamService>();
             services.AddTransient<ITreatmentService, TreatmentService>();
             
-            services.AddScoped<ISpinnerService, SpinnerService>();
+            services.AddSingleton<ISpinnerService, SpinnerService>();
         }
 
         private static void RegisterHandlers(IServiceCollection services)
