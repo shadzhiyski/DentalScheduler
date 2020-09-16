@@ -2,10 +2,6 @@
 
 @using Interfaces.Models.Input
 
-@inject DialogService DialogService
-@inject IDentalTeamService DentalTeamService
-@inject ITreatmentService TreatmentService
-
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />
 
@@ -79,96 +75,3 @@
     </div>
 </EditForm>
 
-@code {
-    public EditContext EditContext { get; set; }
-
-    public int DefaultDurationInMinutes => 30;
-
-    public int? StandardDurationInMinutes 
-        => Treatments?.SingleOrDefault(
-            t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
-        )
-        ?.DurationInMinutes;
-
-    public int DurationInMinutes { get; set; }
-    
-    public string DentalTeamReferenceId 
-    { 
-        get => Model.DentalTeamReferenceId?.ToString(); 
-        set
-        {
-            if (value != null)
-            {
-                Model.DentalTeamReferenceId = new Guid(value);
-            }
-            else 
-            {
-                Model.DentalTeamReferenceId = null;
-            }
-        }
-    }
-
-    public string TreatmentReferenceId 
-    { 
-        get => Model.TreatmentReferenceId?.ToString(); 
-        set
-        {
-            if (value != null)
-            {
-                Model.TreatmentReferenceId = new Guid(value);
-            }
-            else 
-            {
-                Model.TreatmentReferenceId = null;
-            }
-        }
-    }
-
-    public IEnumerable<DentalTeamDropDownViewModel> DentalTeams { get; set; }
-
-    public IEnumerable<TreatmentDropDownViewModel> Treatments { get; set; }
-
-    public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
-
-    [Parameter]
-    public ITreatmentSessionInput Model { get; set; }
-
-    protected override void OnInitialized()
-    {
-        EditContext = new EditContext(Model);
-    }
-
-    async Task LoadDentalTeams()
-    {
-        DentalTeams = await DentalTeamService.GetDentalTeamsDropDownListAsync();
-    }
-
-    async Task LoadTreatments()
-    {
-        Treatments = await TreatmentService.GetTreatmentsAsync();
-
-        SetDurationInMinutes();
-    }
-
-    void OnTreatmentChange()
-    {
-        SetDurationInMinutes();
-
-        SetPeriod();
-    }
-
-    void OnPeriodChange()
-        => SetPeriod();
-
-    void SetDurationInMinutes()
-        => DurationInMinutes = Treatments.SingleOrDefault(
-                t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
-            )
-            ?.DurationInMinutes ?? DefaultDurationInMinutes;
-
-    void SetPeriod()
-        => Model.End = Model.Start.Value.AddMinutes(DurationInMinutes);
-
-    private void OnSubmit()
-        => DialogService.Close(Model);
-}
