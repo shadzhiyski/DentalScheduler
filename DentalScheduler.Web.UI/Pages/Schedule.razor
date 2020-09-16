@@ -73,7 +73,8 @@
 
     async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<TreatmentSessionViewModel> args)
     {
-        if (args.Data.Status.Equals("Accepted"))
+        var user = (await AuthenticationStateTask).User;
+        if (args.Data.Status.Equals("Accepted") && user.IsInRole("Patient"))
         {
             return;
         }
@@ -91,7 +92,6 @@
 
         DTO.Input.TreatmentSessionInput resultData = null;
 
-        var user = (await AuthenticationStateTask).User;
         if (user.IsInRole("Patient"))
         {
             resultData = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
