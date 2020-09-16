@@ -25,7 +25,7 @@ namespace DentalScheduler.Web.UI.Components
         public EditContext EditContext { get; set; }
 
         public const int DefaultDurationInMinutes = 30;
-        
+
         public int? StandardDurationInMinutes => Treatments?.SingleOrDefault(
                 t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
             )?.DurationInMinutes;
@@ -35,33 +35,17 @@ namespace DentalScheduler.Web.UI.Components
         public string DentalTeamReferenceId
         {
             get => Model.DentalTeamReferenceId?.ToString();
-            set
-            {
-                if (value != null)
-                {
-                    Model.DentalTeamReferenceId = new Guid(value);
-                }
-                else
-                {
-                    Model.DentalTeamReferenceId = null;
-                }
-            }
+            set => Model.DentalTeamReferenceId = value != default
+                ? new Guid(value)
+                : default;
         }
 
         public string TreatmentReferenceId
         {
             get => Model.TreatmentReferenceId?.ToString();
-            set
-            {
-                if (value != null)
-                {
-                    Model.TreatmentReferenceId = new Guid(value);
-                }
-                else
-                {
-                    Model.TreatmentReferenceId = null;
-                }
-            }
+            set => Model.TreatmentReferenceId = value != default
+                ? new Guid(value)
+                : default;
         }
 
         public IEnumerable<DentalTeamDropDownViewModel> DentalTeams { get; set; }
@@ -97,6 +81,7 @@ namespace DentalScheduler.Web.UI.Components
 
         void OnPeriodChange() 
             => SetPeriod();
+        
         void SetDurationInMinutes() 
             => DurationInMinutes = Treatments.SingleOrDefault(
                     t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
