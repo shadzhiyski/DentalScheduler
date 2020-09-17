@@ -4,6 +4,10 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body {
+    padding-top: 85px;
+}
+
 a, .btn-link {
     color: #0366d6;
 }
@@ -172,11 +176,7 @@ app {
         padding-right: 1.5rem !important;
     }
 
-    .navbar-toggler {
-        display: none;
-    }
-
-    .sidebar .collapse {
+    .sidebar {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }

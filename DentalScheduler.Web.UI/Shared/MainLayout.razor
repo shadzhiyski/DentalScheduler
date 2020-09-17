@@ -7,20 +7,8 @@
 
 <Spinner />
 
-<div class="sidebar">
-    <NavMenu />
-</div>
-
 <div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="d-inline-flex p-2">About</a>
-        <AuthorizeView>
-            <Authorized>
-                <a href="http://blazor.net" target="_blank" class="d-inline-flex p-2">Hello, @UserName</a>
-                <RadzenGravatar Email="@UserName" class="d-inline-flex" />
-            </Authorized>
-        </AuthorizeView>
-    </div>
+    <NavMenu />
 
     <div class="content px-4">
         @Body
