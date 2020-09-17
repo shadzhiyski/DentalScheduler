@@ -70,7 +70,17 @@
     <div class="form-group row">
         <div class="col-md-3"></div>
         <div class="col">
-            <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+            <AuthorizeView Roles="Patient">
+                <Authorized Context="Auth">
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+                </Authorized>
+            </AuthorizeView>
+            <AuthorizeView Roles="Dentist">
+                <Authorized Context="Auth">
+                    <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Info" Icon="done" Text="Accept" Click="@(args => Approve())" />
+                    <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Danger" Icon="cancel" Text="Reject" Click="@(args => Reject())" />
+                </Authorized>
+            </AuthorizeView>
         </div>
     </div>
 </EditForm>

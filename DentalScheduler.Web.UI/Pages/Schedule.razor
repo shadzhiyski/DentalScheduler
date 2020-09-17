@@ -92,16 +92,8 @@
 
         DTO.Input.TreatmentSessionInput resultData = null;
 
-        if (user.IsInRole("Patient"))
-        {
-            resultData = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
-                new Dictionary<string, object> { { "Model", dataToSet } });
-        }
-        else if (user.IsInRole("Dentist"))
-        {
-            resultData = await DialogService.OpenAsync<ApproveAppointment>("Approve Appointment", 
-                new Dictionary<string, object> { { "Model", dataToSet } });
-        }
+        resultData = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
+            new Dictionary<string, object> { { "Model", dataToSet } });
 
         if (resultData == null)
         {

@@ -90,6 +90,13 @@ namespace DentalScheduler.Web.UI.Components
 
         void SetPeriod() 
             => Model.End = Model.Start.Value.AddMinutes(DurationInMinutes);
+
+        void Approve()
+            => Model.Status = "Accepted";
+
+        void Reject()
+            => Model.Status = "Rejected";
+        
         private void OnSubmit() 
             => DialogService.Close(Model);
     }
