@@ -8,11 +8,20 @@ using DentalScheduler.Web.UI.Models;
 using Radzen;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Web.UI.Services;
+using Microsoft.AspNetCore.Components.Authorization;
+using DentalScheduler.DTO.Input;
 
 namespace DentalScheduler.Web.UI.Components
 {
     public partial class EditAppointment
     {
+        [CascadingParameter]
+        public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+        public bool IsTreatmentDropDownDisabled { get; set; }
+
+        public bool IsDentalTeamDropDownDisabled { get; set; }
+
         [Inject]
         DialogService DialogService { get; set; }
         
@@ -37,7 +46,7 @@ namespace DentalScheduler.Web.UI.Components
             get => Model.DentalTeamReferenceId?.ToString();
             set => Model.DentalTeamReferenceId = value != default
                 ? new Guid(value)
-                : default;
+                : default(Guid?);
         }
 
         public string TreatmentReferenceId
@@ -45,7 +54,7 @@ namespace DentalScheduler.Web.UI.Components
             get => Model.TreatmentReferenceId?.ToString();
             set => Model.TreatmentReferenceId = value != default
                 ? new Guid(value)
-                : default;
+                : default(Guid?);
         }
 
         public IEnumerable<DentalTeamDropDownViewModel> DentalTeams { get; set; }
@@ -55,11 +64,15 @@ namespace DentalScheduler.Web.UI.Components
         public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
         
         [Parameter]
-        public ITreatmentSessionInput Model { get; set; }
+        public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
 
-        protected override void OnInitialized()
+        protected async override Task OnInitializedAsync()
         {
             EditContext = new EditContext(Model);
+
+            var user = (await AuthenticationStateTask).User;
+            IsTreatmentDropDownDisabled = user.IsInRole("Dentist");
+            IsDentalTeamDropDownDisabled = user.IsInRole("Dentist");
         }
 
         async Task LoadDentalTeams()

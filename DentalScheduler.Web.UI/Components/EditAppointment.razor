@@ -10,7 +10,7 @@
             <label for="@nameof(Model.DentalTeamReferenceId)">Dental Team</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" AllowFiltering="true" TValue="string" LoadData="@LoadDentalTeams" 
+            <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="string" LoadData="@LoadDentalTeams" 
                 Data="@DentalTeams"
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="DentalTeamReferenceId" >
             </RadzenDropDown>
@@ -22,7 +22,7 @@
             <label for="@nameof(Model.TreatmentReferenceId)">Treatment</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" AllowFiltering="true" TValue="string" LoadData="@LoadTreatments" 
+            <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="string" LoadData="@LoadTreatments" 
                 Data="@Treatments"
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="TreatmentReferenceId" Change="@(args => OnTreatmentChange())" >
             </RadzenDropDown>
