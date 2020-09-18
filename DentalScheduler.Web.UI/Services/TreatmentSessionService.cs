@@ -7,6 +7,7 @@ using System.Net.Http.Json;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Web.UI.Models;
 using Simple.OData.Client;
+using DentalScheduler.DTO.Output;
 
 namespace DentalScheduler.Web.UI.Services
 {
@@ -34,6 +35,17 @@ namespace DentalScheduler.Web.UI.Services
                     .FindEntriesAsync()
                 )
                 .ToList();
+
+        public async Task<TreatmentSessionOutput> GetAppointment(Guid referenceId, Guid patientReferenceId)
+            => await ODataClient
+                .For<TreatmentSessionOutput>("TreatmentSession")
+                .Expand(m => m.DentalTeam)
+                .Expand(m => m.Treatment)
+                .Filter(
+                    m => m.ReferenceId == referenceId
+                        && m.PatientReferenceId == patientReferenceId
+                )
+                .FindEntryAsync();
 
         public async Task AddAppointmentsAsync(ITreatmentSessionInput input)
             => await HttpClient.PostAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
