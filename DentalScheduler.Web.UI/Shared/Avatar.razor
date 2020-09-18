@@ -1,5 +1,6 @@
 @inject NavigationManager NavigationManager
 @inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
+@inject ILocalStorageService LocalStorage
 
 <AuthorizeView>
     <NotAuthorized>
@@ -13,6 +14,9 @@
     </NotAuthorized>
     <Authorized>
         <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item nav-link">
+                <strong>Hello, @UserName</strong>
+            </li>
             <li class="nav-item avatar dropdown @AvatarCssClass">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" @onclick="ToggleAvatarMenu">
@@ -31,6 +35,8 @@
 </AuthorizeView>
 
 @code {
+    public string UserName { get; set; }
+
     private bool showAvatarMenu = false;
 
     private string AvatarCssClass => showAvatarMenu ? "show" : null;
@@ -45,5 +51,13 @@
         await AuthenticationStateProvider.MarkUserAsLoggedOutAsync();
 
         NavigationManager.NavigateTo("", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if ((await LocalStorage.ContainKeyAsync("UserName")))
+        {
+            UserName = await LocalStorage.GetItemAsync<string>("UserName");
+        }
     }
 }
