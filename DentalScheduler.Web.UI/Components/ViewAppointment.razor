@@ -1,0 +1,57 @@
+@attribute [Authorize(Roles = "Patient")]
+
+@using Interfaces.Models.Input
+
+@inject DialogService DialogService
+
+<RadzenCard Style="margin-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-6">
+            <div>Requested Treatment:</div>
+            <b>@Model.TreatmentReferenceId</b>
+            <div style="margin-top:20px">Patient:</div>
+            <b>@("John" + " " + "Doe")</b>
+            <br />
+            <div class="image-cropper">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
+                alt="avatar image">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>@nameof(Model.Start):</div>
+            <b>@Model.Start</b>
+            <div style="margin-top:20px">@nameof(Model.End):</div>
+            <b>@Model.End</b>
+            <div style="margin-top:20px">Duration:</div>
+            <b>@((Model.End - Model.Start).Value.TotalMinutes)</b>
+        </div>
+    </div>
+</RadzenCard>
+
+<style>
+    .image-cropper {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        background-position: center;
+    }
+</style>
+
+@code {
+    public EditContext EditContext { get; set; }
+
+    [Parameter]
+    public ITreatmentSessionInput Model { get; set; }
+
+    protected override void OnInitialized()
+    {
+        EditContext = new EditContext(Model);
+    }
+
+    private void OnSubmit()
+    {
+        DialogService.Close(Model);
+    }
+}
