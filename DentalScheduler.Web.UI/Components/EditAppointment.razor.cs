@@ -15,9 +15,11 @@ namespace DentalScheduler.Web.UI.Components
 {
     public partial class EditAppointment
     {
+        public const int DefaultDurationInMinutes = 30;
+        
         [Parameter]
         public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
-        
+
         [CascadingParameter]
         public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
@@ -35,8 +37,6 @@ namespace DentalScheduler.Web.UI.Components
         public bool IsTreatmentDropDownDisabled { get; set; }
 
         public bool IsDentalTeamDropDownDisabled { get; set; }
-
-        public const int DefaultDurationInMinutes = 30;
 
         public int? StandardDurationInMinutes => Treatments?.SingleOrDefault(
                 t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
