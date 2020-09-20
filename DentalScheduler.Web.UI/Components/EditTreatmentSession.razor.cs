@@ -44,22 +44,6 @@ namespace DentalScheduler.Web.UI.Components
         
         public int DurationInMinutes { get; set; }
 
-        public string DentalTeamReferenceId
-        {
-            get => Model.DentalTeamReferenceId?.ToString();
-            set => Model.DentalTeamReferenceId = value != default
-                ? new Guid(value)
-                : default(Guid?);
-        }
-
-        public string TreatmentReferenceId
-        {
-            get => Model.TreatmentReferenceId?.ToString();
-            set => Model.TreatmentReferenceId = value != default
-                ? new Guid(value)
-                : default(Guid?);
-        }
-
         public IEnumerable<DentalTeamDropDownViewModel> DentalTeams { get; set; }
 
         public IEnumerable<TreatmentDropDownViewModel> Treatments { get; set; }

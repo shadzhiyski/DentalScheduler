@@ -10,9 +10,9 @@
             <label for="@nameof(Model.DentalTeamReferenceId)">Dental Team</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="string" LoadData="@LoadDentalTeams" 
+            <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="Guid?" LoadData="@LoadDentalTeams" 
                 Data="@DentalTeams"
-                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="DentalTeamReferenceId" >
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="Model.DentalTeamReferenceId" >
             </RadzenDropDown>
             <ValidationMessage For="@(() => Model.DentalTeamReferenceId)" />
         </div>
@@ -22,9 +22,9 @@
             <label for="@nameof(Model.TreatmentReferenceId)">Treatment</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="string" LoadData="@LoadTreatments" 
+            <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="Guid?" LoadData="@LoadTreatments" 
                 Data="@Treatments"
-                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="TreatmentReferenceId" Change="@(args => OnTreatmentChange())" >
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="Model.TreatmentReferenceId" Change="@(args => OnTreatmentChange())" >
             </RadzenDropDown>
             <ValidationMessage For="@(() => Model.TreatmentReferenceId)" />
         </div>
