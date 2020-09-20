@@ -25,7 +25,7 @@ namespace DentalScheduler.Web.UI.Services
 
         public HttpClient HttpClient { get; }
 
-        public async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync(
+        public async Task<List<TreatmentSessionViewModel>> GetAppointmentsAsync(
             DateTimeOffset periodStart, DateTimeOffset periodEnd)
             => (await ODataClient
                     .For<TreatmentSessionViewModel>("TreatmentSession")
