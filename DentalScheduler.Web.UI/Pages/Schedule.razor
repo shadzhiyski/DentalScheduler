@@ -86,7 +86,7 @@
             return;
         }
         
-        DTO.Input.TreatmentSessionInput data = await DialogService.OpenAsync<EditAppointment>(
+        DTO.Input.TreatmentSessionInput data = await DialogService.OpenAsync<EditTreatmentSession>(
             "Add Treatment Session",
             new Dictionary<string, object> 
             {
@@ -146,7 +146,7 @@
 
         DTO.Input.TreatmentSessionInput resultData = null;
 
-        resultData = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", 
+        resultData = await DialogService.OpenAsync<EditTreatmentSession>("Edit Treatment Session", 
             new Dictionary<string, object> { { "Model", dataToSet } });
 
         if (resultData == null)

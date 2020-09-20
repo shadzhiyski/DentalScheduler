@@ -13,7 +13,7 @@ using DentalScheduler.DTO.Input;
 
 namespace DentalScheduler.Web.UI.Components
 {
-    public partial class EditAppointment
+    public partial class EditTreatmentSession
     {
         public const int DefaultDurationInMinutes = 30;
         
