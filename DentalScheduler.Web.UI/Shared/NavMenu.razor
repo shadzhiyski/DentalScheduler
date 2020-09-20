@@ -9,19 +9,19 @@
             <AuthorizeView>
                 <Authorized>
                     <li class="nav-item @(ActivePage == "home" ? "active" : "")">
-                        <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="@(() => ActivePage = "home")">
+                        <NavLink class="nav-link font-weight-bold" href="" Match="NavLinkMatch.All" @onclick="@(() => ActivePage = "home")">
                             <span class="oi oi-home" aria-hidden="true"></span> Home
                         </NavLink>
                     </li>
                     <li class="nav-item @(ActivePage == "schedule" ? "active" : "")">
-                        <NavLink class="nav-link" href="schedule" @onclick="@(() => ActivePage = "schedule")">
-                            <span class="oi oi-list-rich" aria-hidden="true"></span> Schedule
+                        <NavLink class="nav-link font-weight-bold" href="schedule" @onclick="@(() => ActivePage = "schedule")">
+                            <span class="oi oi-calendar" aria-hidden="true"> </span> Schedule
                         </NavLink>
                     </li>
                 </Authorized>
             </AuthorizeView>
             <li class="nav-item @(ActivePage == "about" ? "active " : "")">
-                <a href="http://blazor.net" target="_blank" class="nav-link"><span class="oi oi-list-rich" aria-hidden="true"></span> About</a>
+                <a href="http://blazor.net" target="_blank" class="nav-link font-weight-bold"><span class="oi oi-list-rich" aria-hidden="true"></span> About</a>
             </li>
         </ul>
         <Avatar />
