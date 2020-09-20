@@ -39,7 +39,7 @@ namespace DentalScheduler.Web.UI.Components
         public bool IsDentalTeamDropDownDisabled { get; set; }
 
         public int? StandardDurationInMinutes => Treatments?.SingleOrDefault(
-                t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
+                t => Model.TreatmentReferenceId?.Equals(t.ReferenceId) ?? false
             )?.DurationInMinutes;
         
         public int DurationInMinutes { get; set; }
@@ -80,10 +80,7 @@ namespace DentalScheduler.Web.UI.Components
             => SetPeriod();
         
         void SetDurationInMinutes() 
-            => DurationInMinutes = Treatments.SingleOrDefault(
-                    t => t.ReferenceId.Equals(Model.TreatmentReferenceId?.ToString() ?? Guid.Empty.ToString())
-                )
-                ?.DurationInMinutes ?? DefaultDurationInMinutes;
+            => DurationInMinutes = StandardDurationInMinutes ?? DefaultDurationInMinutes;
 
         void SetPeriod() 
             => Model.End = Model.Start.Value.AddMinutes(DurationInMinutes);
