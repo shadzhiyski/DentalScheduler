@@ -8,8 +8,8 @@
 
 <div class="row">
     <div class="col-md-12">
-    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@AppointmentsData" StartProperty="Start" EndProperty="End" 
-        TextProperty="TreatmentName" SelectedIndex="2" 
+    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@TreatmentSessions" StartProperty="Start" EndProperty="End" 
+        TextProperty="TreatmentName" SelectedIndex="2" LoadData="@LoadAppointments"
         SlotSelect="@OnSlotSelect" AppointmentSelect="@OnAppointmentSelect" AppointmentRender="@OnAppointmentRender">
         <RadzenDayView />
         <RadzenWeekView />
@@ -22,14 +22,62 @@
     [CascadingParameter]
     public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
+    public DateTimeOffset SchedulePeriodStart { get; set; }
+
+    public DateTimeOffset SchedulePeriodEnd { get; set; }
+
     RadzenScheduler<TreatmentSessionViewModel> scheduler;
 
-    IList<TreatmentSessionViewModel> AppointmentsData { get; set; }
+    List<TreatmentSessionViewModel> TreatmentSessions { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        AppointmentsData = await GetAppointmentsAsync();
+        var currentDate = DateTimeOffset.UtcNow;
+        var currentMonthStart = new DateTimeOffset(
+            currentDate.Year, currentDate.Month, 01, 00, 00, 00, 
+            currentDate.Offset
+        );
+
+        SchedulePeriodStart = currentMonthStart.AddMonths(-1);
+        SchedulePeriodEnd = currentMonthStart.AddMonths(2).AddMinutes(-1);
+        TreatmentSessions = new List<TreatmentSessionViewModel>();
     }
+
+    async Task LoadAppointments(SchedulerLoadDataEventArgs args)
+    {
+        var queryPeriodStart = SchedulePeriodStart;
+        var queryPeriodEnd = SchedulePeriodEnd;
+        var isPeriodExtendedBack = args.Start < SchedulePeriodStart;
+        var isPeriodExtendedAhead = SchedulePeriodEnd < args.End;
+        if (isPeriodExtendedBack)
+        {
+            queryPeriodStart = args.Start;
+            queryPeriodEnd = SchedulePeriodStart.AddMinutes(-1);
+            
+            SchedulePeriodStart = queryPeriodStart;
+        }
+        else if (isPeriodExtendedAhead)
+        {
+            queryPeriodStart = SchedulePeriodEnd.AddMinutes(1);
+            queryPeriodEnd = args.End;
+
+            SchedulePeriodEnd = queryPeriodEnd;
+        }
+
+        var hasNoData = TreatmentSessions.Count == 0;
+        if (hasNoData || isPeriodExtendedBack || isPeriodExtendedAhead)
+        {
+            var loadedAppointments = await TreatmentSessionService.GetAppointmentsAsync(
+                queryPeriodStart,
+                queryPeriodEnd
+            );
+
+            TreatmentSessions.AddRange(loadedAppointments);
+            
+            await scheduler.Reload();
+        }
+    }
+
     async Task OnSlotSelect(SchedulerSlotSelectEventArgs args)
     {
         var user = (await AuthenticationStateTask).User;
@@ -67,7 +115,10 @@
                 Duration = 4000
             });
 
-            AppointmentsData = await GetAppointmentsAsync();
+            TreatmentSessions = await TreatmentSessionService.GetAppointmentsAsync(
+                SchedulePeriodStart,
+                SchedulePeriodEnd
+            );
         }
     }
 
@@ -113,7 +164,10 @@
             Duration = 4000
         });
 
-        AppointmentsData = await GetAppointmentsAsync();
+        TreatmentSessions = await TreatmentSessionService.GetAppointmentsAsync(
+            SchedulePeriodStart,
+            SchedulePeriodEnd
+        );
     }
 
     void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<TreatmentSessionViewModel> args)
@@ -131,13 +185,5 @@
         {
             args.Attributes["style"] = "background: red";
         }
-    }
-
-    private async Task<IList<TreatmentSessionViewModel>> GetAppointmentsAsync()
-    {
-        return (await TreatmentSessionService.GetAppointmentsAsync(
-                DateTimeOffset.UtcNow.AddMonths(-1),
-                DateTimeOffset.UtcNow.AddMonths(1)
-            ));
     }
 }
