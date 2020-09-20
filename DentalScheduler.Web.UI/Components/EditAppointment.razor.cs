@@ -15,12 +15,11 @@ namespace DentalScheduler.Web.UI.Components
 {
     public partial class EditAppointment
     {
+        [Parameter]
+        public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
+        
         [CascadingParameter]
         public Task<AuthenticationState> AuthenticationStateTask { get; set; }
-
-        public bool IsTreatmentDropDownDisabled { get; set; }
-
-        public bool IsDentalTeamDropDownDisabled { get; set; }
 
         [Inject]
         DialogService DialogService { get; set; }
@@ -32,6 +31,10 @@ namespace DentalScheduler.Web.UI.Components
         ITreatmentService TreatmentService { get; set; }
 
         public EditContext EditContext { get; set; }
+
+        public bool IsTreatmentDropDownDisabled { get; set; }
+
+        public bool IsDentalTeamDropDownDisabled { get; set; }
 
         public const int DefaultDurationInMinutes = 30;
 
@@ -62,9 +65,6 @@ namespace DentalScheduler.Web.UI.Components
         public IEnumerable<TreatmentDropDownViewModel> Treatments { get; set; }
 
         public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
-        
-        [Parameter]
-        public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
 
         protected async override Task OnInitializedAsync()
         {
