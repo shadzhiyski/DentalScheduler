@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Input;
 using DentalScheduler.Interfaces.UseCases.Identity;
@@ -11,13 +12,13 @@ namespace DentalScheduler.Web.RestService.Controllers
     [Authorize (AuthenticationSchemes = "Bearer")]
     public class AuthController : BaseApiController 
     {
-        public ILoginCommand LoginCommand { get; }
+        public Lazy<ILoginCommand> LoginCommand { get; }
 
-        public IRegisterUserCommand RegisterUserCommand { get; }
+        public Lazy<IRegisterUserCommand> RegisterUserCommand { get; }
 
         public AuthController(
-            ILoginCommand loginCommand, 
-            IRegisterUserCommand registerUserCommand) 
+            Lazy<ILoginCommand> loginCommand, 
+            Lazy<IRegisterUserCommand> registerUserCommand) 
         {
             RegisterUserCommand = registerUserCommand;
             LoginCommand = loginCommand;
@@ -28,7 +29,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         [Route ("register")]
         public async Task<IActionResult> Register(RegisterUserInput model) 
         {
-            var result =  await RegisterUserCommand.RegisterAsync(model);
+            var result =  await RegisterUserCommand.Value.RegisterAsync(model);
             return PresentResult(result);
         }
 
@@ -37,7 +38,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         [Route ("login")]
         public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials) 
         {
-            var result =  await LoginCommand.LoginAsync(loginCredentials);
+            var result =  await LoginCommand.Value.LoginAsync(loginCredentials);
             return PresentResult(result);
         }
     }

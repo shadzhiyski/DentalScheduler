@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Input;
 using DentalScheduler.Interfaces.UseCases.Identity;
@@ -11,13 +12,13 @@ namespace DentalScheduler.Web.RestService.Controllers
     [Authorize(AuthenticationSchemes = "Bearer", Roles=Roles.Admin)]
     public class RolesController : BaseApiController
     {
-        public ICreateRoleCommand CreateRoleCommand { get; }
+        public Lazy<ICreateRoleCommand> CreateRoleCommand { get; }
 
-        public ILinkUserAndRoleCommand LinkUserAndRoleCommand { get; }
+        public Lazy<ILinkUserAndRoleCommand> LinkUserAndRoleCommand { get; }
 
         public RolesController(
-            ICreateRoleCommand createRoleCommand, 
-            ILinkUserAndRoleCommand linkUserAndRoleCommand)
+            Lazy<ICreateRoleCommand> createRoleCommand, 
+            Lazy<ILinkUserAndRoleCommand> linkUserAndRoleCommand)
         {
             CreateRoleCommand = createRoleCommand;
             LinkUserAndRoleCommand = linkUserAndRoleCommand;
@@ -27,7 +28,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] CreateRoleInput model)
         {
-            var result = await CreateRoleCommand.CreateAsync(model);
+            var result = await CreateRoleCommand.Value.CreateAsync(model);
             return PresentResult(result);
         }
 
@@ -35,7 +36,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         [Route("user/update")]
         public async Task<IActionResult> UpdateUser([FromBody] LinkUserAndRoleInput model)
         {
-            var result = await LinkUserAndRoleCommand.ExecuteAsync(model);
+            var result = await LinkUserAndRoleCommand.Value.ExecuteAsync(model);
             return PresentResult(result);
         }
     }

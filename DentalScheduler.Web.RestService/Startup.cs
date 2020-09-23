@@ -37,6 +37,8 @@ namespace DentalScheduler.Web.RestService
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterDependencies();
+
+            services.AddTransient(typeof(Lazy<>), typeof(Lazy<>));
             
             services.AddControllers();
 

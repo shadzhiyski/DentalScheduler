@@ -21,10 +21,10 @@ namespace DentalScheduler.Web.RestService.Controllers
     public class TreatmentSessionController : BaseApiController
     {
         public TreatmentSessionController(
-            TypeAdapterConfig mappingConfig,
-            IGenericRepository<TreatmentSession> repository,
-            IAddTreatmentSessionCommand addTreatmentSessionCommand,
-            IUpdateTreatmentSessionCommand updateTreatmentSessionCommand)
+            Lazy<TypeAdapterConfig> mappingConfig,
+            Lazy<IGenericRepository<TreatmentSession>> repository,
+            Lazy<IAddTreatmentSessionCommand> addTreatmentSessionCommand,
+            Lazy<IUpdateTreatmentSessionCommand> updateTreatmentSessionCommand)
         {
             MappingConfig = mappingConfig;
             Repository = repository;
@@ -32,26 +32,26 @@ namespace DentalScheduler.Web.RestService.Controllers
             UpdateTreatmentSessionCommand = updateTreatmentSessionCommand;
         }
 
-        public TypeAdapterConfig MappingConfig { get; }
+        public Lazy<TypeAdapterConfig> MappingConfig { get; }
 
-        public IGenericRepository<TreatmentSession> Repository { get; }
+        public Lazy<IGenericRepository<TreatmentSession>> Repository { get; }
 
-        public IAddTreatmentSessionCommand AddTreatmentSessionCommand { get; }
+        public Lazy<IAddTreatmentSessionCommand> AddTreatmentSessionCommand { get; }
 
-        public IUpdateTreatmentSessionCommand UpdateTreatmentSessionCommand { get; }
+        public Lazy<IUpdateTreatmentSessionCommand> UpdateTreatmentSessionCommand { get; }
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
         public IQueryable<TreatmentSessionOutput> Get([FromQuery] ODataParametersInputModel filter)
         {
-            return Repository.AsQueryable()
-                .ProjectToType<TreatmentSessionOutput>(MappingConfig);
+            return Repository.Value.AsQueryable()
+                .ProjectToType<TreatmentSessionOutput>(MappingConfig.Value);
         }
 
         [HttpPost]
         public async Task<IActionResult> PostAsync(TreatmentSessionInput input)
         {
-            var result = await AddTreatmentSessionCommand.ExecuteAsync(input);
+            var result = await AddTreatmentSessionCommand.Value.ExecuteAsync(input);
 
             return PresentResult(result);
         }
@@ -59,7 +59,7 @@ namespace DentalScheduler.Web.RestService.Controllers
         [HttpPut]
         public async Task<IActionResult> PutAsync(TreatmentSessionInput input)
         {
-            var result = await UpdateTreatmentSessionCommand.ExecuteAsync(input);
+            var result = await UpdateTreatmentSessionCommand.Value.ExecuteAsync(input);
 
             return PresentResult(result);
         }
