@@ -1,3 +1,4 @@
+using DentalScheduler.Entities.Identity;
 using DentalScheduler.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +9,7 @@ namespace DentalScheduler.UseCases.Tests.DI
     {
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = true;
 
