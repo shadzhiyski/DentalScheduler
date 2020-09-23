@@ -11,9 +11,9 @@ using Xunit;
 
 namespace DentalScheduler.UseCases.Tests.TreatmentSessions
 {
-    public class AddTreatmentSessionCommandTests : BaseIntegrationTests
+    public class AddTreatmentSessionCommandIntegrationTests : BaseIntegrationTests
     {
-        public AddTreatmentSessionCommandTests() : base(new ServiceCollection())
+        public AddTreatmentSessionCommandIntegrationTests() : base(new ServiceCollection())
         {
             Sut = ServiceProvider.GetRequiredService<IAddTreatmentSessionCommand>();
             
