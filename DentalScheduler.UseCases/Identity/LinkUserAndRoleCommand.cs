@@ -6,7 +6,7 @@ using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
 using DentalScheduler.Interfaces.UseCases.Identity;
-using DentalScheduler.Interfaces.UseCases.Validation;
+using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Validation;
 using Microsoft.AspNetCore.Identity;
 

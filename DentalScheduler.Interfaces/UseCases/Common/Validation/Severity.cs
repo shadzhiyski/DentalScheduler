@@ -1,4 +1,4 @@
-namespace DentalScheduler.Interfaces.UseCases.Validation
+namespace DentalScheduler.Interfaces.UseCases.Common.Validation
 {
     public enum Severity
     {

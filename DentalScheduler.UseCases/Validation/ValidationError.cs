@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using DentalScheduler.Interfaces.Models.Output.Common;
-using DentalScheduler.Interfaces.UseCases.Validation;
+using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using Newtonsoft.Json;
 
 namespace DentalScheduler.UseCases.Validation
