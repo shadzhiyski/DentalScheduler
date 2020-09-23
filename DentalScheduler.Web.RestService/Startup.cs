@@ -6,8 +6,6 @@ using DentalScheduler.Config.DI;
 using DentalScheduler.Infrastructure.Persistence;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities.Identity;
-using DentalScheduler.Interfaces.Infrastructure;
-using DentalScheduler.Web.RestService.Helpers;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
@@ -39,9 +37,6 @@ namespace DentalScheduler.Web.RestService
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterDependencies();
-            services.AddTransient<IJwtAuthManager, JwtAuthManager>();
-            services.AddTransient<IUserService<User>, UserService>();
-            services.AddTransient<IRoleService<IdentityRole>, RoleService>();
             
             services.AddControllers();
 

@@ -18,8 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DentalScheduler.UseCases\DentalScheduler.UseCases.csproj" />
     <ProjectReference Include="..\DentalScheduler.Config\DentalScheduler.Config.csproj" />
-
-    <ProjectReference Include="..\DentalScheduler.Web.RestService\DentalScheduler.Web.RestService.csproj" />
   </ItemGroup>
 
 </Project>

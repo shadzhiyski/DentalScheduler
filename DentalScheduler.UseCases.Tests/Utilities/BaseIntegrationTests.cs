@@ -20,9 +20,6 @@ namespace DentalScheduler.UseCases.Tests.Utilities
             ServiceCollection = serviceCollection;
 
             ServiceCollection.RegisterDependencies();
-            ServiceCollection.AddTransient<IJwtAuthManager, JwtAuthManager>();
-            ServiceCollection.AddTransient<IUserService<User>, UserService>();
-            ServiceCollection.AddTransient<IRoleService<IdentityRole>, RoleService>();
 
             ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
 

@@ -12,6 +12,8 @@ namespace DentalScheduler.Config.DI
             
             services.RegisterDalDependencies();
 
+            services.RegisterIdentityDependencies();
+
             services.RegisterValidationDependencies();
 
             services.RegisterUseCasesDependencies();
