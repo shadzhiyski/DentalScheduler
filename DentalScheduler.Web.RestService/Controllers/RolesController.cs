@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Input;
-using DentalScheduler.Interfaces.UseCases;
+using DentalScheduler.Interfaces.UseCases.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

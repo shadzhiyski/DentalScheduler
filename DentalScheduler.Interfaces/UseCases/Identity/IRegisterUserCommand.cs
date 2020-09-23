@@ -3,10 +3,10 @@ using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
 
-namespace DentalScheduler.Interfaces.UseCases
+namespace DentalScheduler.Interfaces.UseCases.Identity
 {
-    public interface ILoginCommand
+    public interface IRegisterUserCommand
     {
-        Task<IResult<IAccessTokenOutput>> LoginAsync(IUserCredentialsInput userInput);
+        Task<IResult<IAccessTokenOutput>> RegisterAsync(IRegisterUserInput userInput);
     }
 }
