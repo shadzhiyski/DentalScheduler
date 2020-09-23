@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DentalScheduler.Interfaces.Gateways;
 using Microsoft.EntityFrameworkCore;
 
-namespace DentalScheduler.DAL.Repositories
+namespace DentalScheduler.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class

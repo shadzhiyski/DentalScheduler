@@ -1,9 +1,9 @@
-using DentalScheduler.DAL.Helpers;
+using DentalScheduler.Infrastructure.Persistence.Helpers;
 using DentalScheduler.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DentalScheduler.DAL.Configurations
+namespace DentalScheduler.Infrastructure.Persistence.Configurations
 {
     public class PatientTable : IEntityTypeConfiguration<Patient>
     {

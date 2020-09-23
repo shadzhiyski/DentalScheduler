@@ -2,7 +2,7 @@ using DentalScheduler.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DentalScheduler.DAL.Configurations
+namespace DentalScheduler.Infrastructure.Persistence.Configurations
 {
     public class UserTable : IEntityTypeConfiguration<User>
     {

@@ -1,4 +1,4 @@
-using DentalScheduler.DAL;
+using DentalScheduler.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,10 +1,10 @@
-﻿using DentalScheduler.DAL.Configurations;
+﻿using DentalScheduler.Infrastructure.Persistence.Configurations;
 using DentalScheduler.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DentalScheduler.DAL
+namespace DentalScheduler.Infrastructure.Persistence
 {
     public class DentalSchedulerDbContext : IdentityDbContext<User>
     {

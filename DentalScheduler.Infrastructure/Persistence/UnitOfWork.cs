@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using DentalScheduler.Interfaces.Gateways;
 using Microsoft.EntityFrameworkCore;
 
-namespace DentalScheduler.DAL
+namespace DentalScheduler.Infrastructure.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {

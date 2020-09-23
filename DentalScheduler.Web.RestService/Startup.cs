@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DentalScheduler.Config.DI;
-using DentalScheduler.DAL;
+using DentalScheduler.Infrastructure.Persistence;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure;
