@@ -1,6 +1,6 @@
 using DentalScheduler.Infrastructure.Persistence;
 using DentalScheduler.Infrastructure.Persistence.Repositories;
-using DentalScheduler.Interfaces.Gateways;
+using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

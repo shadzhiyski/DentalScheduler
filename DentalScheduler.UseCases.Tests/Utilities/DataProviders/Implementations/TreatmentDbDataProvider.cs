@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.Gateways;
+using DentalScheduler.Interfaces.Infrastructure.Persistence;
 
 namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DentalScheduler.DTO.Input;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.Gateways;
+using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.UseCases;
 using DentalScheduler.Web.RestService.Models;
 using Mapster;

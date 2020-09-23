@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using DentalScheduler.Interfaces.Gateways;
+using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalScheduler.Infrastructure.Persistence.Repositories
