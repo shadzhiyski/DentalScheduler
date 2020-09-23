@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI
 {
-    public static class DalRegistrationsExtension
+    public static class PersistenceRegistrationsExtension
     {
         public static IServiceCollection RegisterDalDependencies(this IServiceCollection services)
         {
