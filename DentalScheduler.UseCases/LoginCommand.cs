@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
@@ -19,7 +20,7 @@ namespace DentalScheduler.UseCases
     {
         public IConfiguration Config { get; }
 
-        public IUserService<IdentityUser> UserService { get; }
+        public IUserService<User> UserService { get; }
 
         public IApplicationValidator<IUserCredentialsInput> Validator { get; }
 
@@ -27,7 +28,7 @@ namespace DentalScheduler.UseCases
 
         public LoginCommand(
             IConfiguration config,
-            IUserService<IdentityUser> userService, 
+            IUserService<User> userService, 
             IApplicationValidator<IUserCredentialsInput> validator,
             IJwtAuthManager jwtAuthManager)
         {

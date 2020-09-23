@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
@@ -12,7 +13,7 @@ namespace DentalScheduler.UseCases
     public class CreateRoleCommand : ICreateRoleCommand
     {
         public CreateRoleCommand(
-            IUserService<IdentityUser> userService,
+            IUserService<User> userService,
             IRoleService<IdentityRole> roleService,
             IApplicationValidator<ICreateRoleInput> validator)
         {
@@ -21,7 +22,7 @@ namespace DentalScheduler.UseCases
             Validator = validator;
         }
 
-        public IUserService<IdentityUser> UserService { get; }
+        public IUserService<User> UserService { get; }
 
         public IRoleService<IdentityRole> RoleService { get; }
         

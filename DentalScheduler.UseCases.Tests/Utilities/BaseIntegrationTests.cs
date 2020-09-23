@@ -9,6 +9,7 @@ using DentalScheduler.Web.RestService.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using DentalScheduler.Entities.Identity;
 
 namespace DentalScheduler.UseCases.Tests.Utilities
 {
@@ -20,7 +21,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities
 
             ServiceCollection.RegisterDependencies();
             ServiceCollection.AddTransient<IJwtAuthManager, JwtAuthManager>();
-            ServiceCollection.AddTransient<IUserService<IdentityUser>, UserService>();
+            ServiceCollection.AddTransient<IUserService<User>, UserService>();
             ServiceCollection.AddTransient<IRoleService<IdentityRole>, RoleService>();
 
             ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));

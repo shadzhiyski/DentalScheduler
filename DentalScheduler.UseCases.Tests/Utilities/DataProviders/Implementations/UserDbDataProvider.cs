@@ -1,15 +1,15 @@
 using System;
 using DentalScheduler.Entities;
+using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Gateways;
 using DentalScheduler.Interfaces.Infrastructure;
-using Microsoft.AspNetCore.Identity;
 
 namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {
     public class UserDbDataProvider : IUserDbDataProvider
     {
         public UserDbDataProvider(
-            IUserService<IdentityUser> userService,
+            IUserService<User> userService,
             IGenericRepository<Patient> patientRepository,
             IGenericRepository<DentalWorker> dentistRepository,
             IUnitOfWork uoW)
@@ -20,7 +20,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             UoW = uoW;
         }
 
-        public IUserService<IdentityUser> UserService { get; }
+        public IUserService<User> UserService { get; }
 
         public IGenericRepository<Patient> PatientRepository { get; }
 
@@ -28,9 +28,9 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
 
-        public IdentityUser ProvideAdmin(string userName, string password)
+        public User ProvideAdmin(string userName, string password)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 Email = userName,
                 UserName = userName,
@@ -43,9 +43,9 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             return user;
         }
 
-        public (IdentityUser, DentalWorker) ProvideDentist(string userName, string password)
+        public (User, DentalWorker) ProvideDentist(string userName, string password)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 Email = userName,
                 UserName = userName,
@@ -68,9 +68,9 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             return (user, dentist);
         }
 
-        public (IdentityUser, Patient) ProvidePatient(string userName, string password)
+        public (User, Patient) ProvidePatient(string userName, string password)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 Email = userName,
                 UserName = userName,

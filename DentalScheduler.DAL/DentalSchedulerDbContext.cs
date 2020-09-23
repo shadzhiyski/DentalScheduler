@@ -1,11 +1,12 @@
 ﻿using DentalScheduler.DAL.Configurations;
+using DentalScheduler.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalScheduler.DAL
 {
-    public class DentalSchedulerDbContext : IdentityDbContext<IdentityUser>
+    public class DentalSchedulerDbContext : IdentityDbContext<User>
     {
         public DentalSchedulerDbContext(DbContextOptions<DentalSchedulerDbContext> options)
             : base(options)
@@ -15,6 +16,7 @@ namespace DentalScheduler.DAL
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfiguration(new UserTable());
             modelBuilder.ApplyConfiguration(new RoomTable());
             modelBuilder.ApplyConfiguration(new DentalWorkerTable());
             modelBuilder.ApplyConfiguration(new PatientTable());

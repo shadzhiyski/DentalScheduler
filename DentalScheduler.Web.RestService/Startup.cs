@@ -5,6 +5,7 @@ using System.Text;
 using DentalScheduler.Config.DI;
 using DentalScheduler.DAL;
 using DentalScheduler.DTO.Output;
+using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Web.RestService.Helpers;
 using Microsoft.AspNet.OData.Builder;
@@ -39,7 +40,7 @@ namespace DentalScheduler.Web.RestService
         {
             services.RegisterDependencies();
             services.AddTransient<IJwtAuthManager, JwtAuthManager>();
-            services.AddTransient<IUserService<IdentityUser>, UserService>();
+            services.AddTransient<IUserService<User>, UserService>();
             services.AddTransient<IRoleService<IdentityRole>, RoleService>();
             
             services.AddControllers();
@@ -51,7 +52,7 @@ namespace DentalScheduler.Web.RestService
                 );
 
             // Add Identity
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = true;
 

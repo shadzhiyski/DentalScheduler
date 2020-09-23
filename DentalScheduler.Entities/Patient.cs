@@ -1,4 +1,5 @@
 using System;
+using DentalScheduler.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace DentalScheduler.Entities
@@ -11,6 +12,6 @@ namespace DentalScheduler.Entities
 
         public string IdentityUserId { get; set; }
 
-        public virtual IdentityUser IdentityUser { get; set; }
+        public virtual User IdentityUser { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
@@ -13,14 +14,14 @@ namespace DentalScheduler.UseCases
 {
     public class LinkUserAndRoleCommand : ILinkUserAndRoleCommand
     {
-        public IUserService<IdentityUser> UserService { get; }
+        public IUserService<User> UserService { get; }
 
         public IRoleService<IdentityRole> RoleService { get; }
         
         public IApplicationValidator<ILinkUserAndRoleInput> Validator { get; }
         
         public LinkUserAndRoleCommand(
-            IUserService<IdentityUser> userService,
+            IUserService<User> userService,
             IRoleService<IdentityRole> roleService,
             IApplicationValidator<ILinkUserAndRoleInput> validator)
         {
