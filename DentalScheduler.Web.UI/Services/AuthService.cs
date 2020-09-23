@@ -8,7 +8,7 @@ using DentalScheduler.DTO.Output.Common;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
-using DentalScheduler.UseCases.Validation;
+using DentalScheduler.UseCases.Common.Validation;
 
 namespace DentalScheduler.Web.UI.Services
 {

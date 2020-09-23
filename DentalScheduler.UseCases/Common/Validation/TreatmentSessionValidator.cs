@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DentalScheduler.Interfaces.Models.Input;
 using FluentValidation;
 
-namespace DentalScheduler.UseCases.Validation
+namespace DentalScheduler.UseCases.Common.Validation
 {
     public class TreatmentSessionValidator : AbstractValidator<ITreatmentSessionInput>
     {

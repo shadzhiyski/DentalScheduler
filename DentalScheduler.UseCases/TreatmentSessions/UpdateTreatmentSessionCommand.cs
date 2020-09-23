@@ -8,7 +8,7 @@ using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
 using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
-using DentalScheduler.UseCases.Validation;
+using DentalScheduler.UseCases.Common.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalScheduler.UseCases.TreatmentSessions

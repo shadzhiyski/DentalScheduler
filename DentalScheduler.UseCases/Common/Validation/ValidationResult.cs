@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 
-namespace DentalScheduler.UseCases.Validation
+namespace DentalScheduler.UseCases.Common.Validation
 {
     public class ValidationResult : IValidationResult
     {

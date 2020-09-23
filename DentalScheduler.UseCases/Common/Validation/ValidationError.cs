@@ -3,7 +3,7 @@ using DentalScheduler.Interfaces.Models.Output.Common;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using Newtonsoft.Json;
 
-namespace DentalScheduler.UseCases.Validation
+namespace DentalScheduler.UseCases.Common.Validation
 {
     public class ValidationError : IValidationError
     {

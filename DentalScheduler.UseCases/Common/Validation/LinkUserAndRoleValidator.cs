@@ -1,7 +1,7 @@
 using DentalScheduler.Interfaces.Models.Input;
 using FluentValidation;
 
-namespace DentalScheduler.UseCases.Validation
+namespace DentalScheduler.UseCases.Common.Validation
 {
     public class LinkUserAndRoleValidator : AbstractValidator<ILinkUserAndRoleInput>
     {

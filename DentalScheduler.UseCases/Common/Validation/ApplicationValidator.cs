@@ -3,7 +3,7 @@ using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using FluentValidation;
 using Mapster;
 
-namespace DentalScheduler.UseCases.Validation
+namespace DentalScheduler.UseCases.Common.Validation
 {
     public class ApplicationValidator<TModel> : IApplicationValidator<TModel>
     {
