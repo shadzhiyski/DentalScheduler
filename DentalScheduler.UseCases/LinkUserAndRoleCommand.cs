@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Output.Common;
 using DentalScheduler.Entities.Identity;
-using DentalScheduler.Interfaces.Infrastructure;
+using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
 using DentalScheduler.Interfaces.UseCases;

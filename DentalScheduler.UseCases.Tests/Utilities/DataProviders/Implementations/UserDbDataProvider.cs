@@ -2,7 +2,7 @@ using System;
 using DentalScheduler.Entities;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Gateways;
-using DentalScheduler.Interfaces.Infrastructure;
+using DentalScheduler.Interfaces.Infrastructure.Identity;
 
 namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {

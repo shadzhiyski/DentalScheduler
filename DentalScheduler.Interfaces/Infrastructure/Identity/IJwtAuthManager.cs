@@ -1,6 +1,6 @@
 using DentalScheduler.Interfaces.Models.Input;
 
-namespace DentalScheduler.Interfaces.Infrastructure
+namespace DentalScheduler.Interfaces.Infrastructure.Identity
 {
     public interface IJwtAuthManager
     {

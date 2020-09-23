@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Gateways;
-using DentalScheduler.Interfaces.Infrastructure;
+using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Input;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

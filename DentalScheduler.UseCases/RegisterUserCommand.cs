@@ -7,7 +7,7 @@ using DentalScheduler.DTO.Output.Common;
 using DentalScheduler.Entities;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Gateways;
-using DentalScheduler.Interfaces.Infrastructure;
+using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
