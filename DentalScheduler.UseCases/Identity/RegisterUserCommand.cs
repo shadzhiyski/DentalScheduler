@@ -16,7 +16,7 @@ using DentalScheduler.Interfaces.UseCases.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
-namespace DentalScheduler.UseCases
+namespace DentalScheduler.UseCases.Identity
 {
     public class RegisterUserCommand : IRegisterUserCommand
     {

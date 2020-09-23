@@ -1,6 +1,7 @@
 using DentalScheduler.Interfaces.UseCases.TreatmentSession;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using DentalScheduler.UseCases;
+using DentalScheduler.UseCases.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI

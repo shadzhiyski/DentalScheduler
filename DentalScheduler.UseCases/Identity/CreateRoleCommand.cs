@@ -8,7 +8,7 @@ using DentalScheduler.Interfaces.UseCases.Identity;
 using DentalScheduler.Interfaces.UseCases.Validation;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalScheduler.UseCases
+namespace DentalScheduler.UseCases.Identity
 {
     public class CreateRoleCommand : ICreateRoleCommand
     {

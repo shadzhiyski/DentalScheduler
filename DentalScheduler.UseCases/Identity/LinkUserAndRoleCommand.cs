@@ -10,7 +10,7 @@ using DentalScheduler.Interfaces.UseCases.Validation;
 using DentalScheduler.UseCases.Validation;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalScheduler.UseCases
+namespace DentalScheduler.UseCases.Identity
 {
     public class LinkUserAndRoleCommand : ILinkUserAndRoleCommand
     {
