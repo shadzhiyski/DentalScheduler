@@ -4,7 +4,7 @@ using DentalScheduler.Interfaces.Models.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalScheduler.Web.RestService.Helpers
+namespace DentalScheduler.Infrastructure.Identity
 {
     public class RoleService : IRoleService<IdentityRole>
     {

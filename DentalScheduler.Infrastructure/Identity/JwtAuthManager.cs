@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DentalScheduler.Web.RestService.Helpers
+namespace DentalScheduler.Infrastructure.Identity
 {
     public class JwtAuthManager : IJwtAuthManager
     {
