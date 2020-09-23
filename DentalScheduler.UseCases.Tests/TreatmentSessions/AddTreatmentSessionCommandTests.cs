@@ -9,7 +9,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace DentalScheduler.UseCases.Tests.TreatmentSession
+namespace DentalScheduler.UseCases.Tests.TreatmentSessions
 {
     public class AddTreatmentSessionCommandTests : BaseIntegrationTests
     {
