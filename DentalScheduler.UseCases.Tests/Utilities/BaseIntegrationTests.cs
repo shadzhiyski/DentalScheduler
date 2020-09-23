@@ -2,14 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using DentalScheduler.Config.DI;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.Infrastructure;
 using DentalScheduler.UseCases.Tests.Utilities.DataProviders;
 using DentalScheduler.UseCases.Tests.DI;
-using DentalScheduler.Web.RestService.Helpers;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using DentalScheduler.Entities.Identity;
 
 namespace DentalScheduler.UseCases.Tests.Utilities
 {
