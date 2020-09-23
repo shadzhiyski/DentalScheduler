@@ -1,6 +1,8 @@
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Common.Validation;
+using DentalScheduler.UseCases.Identity.Validation;
+using DentalScheduler.UseCases.TreatmentSessions.Validation;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
