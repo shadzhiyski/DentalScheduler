@@ -3,7 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DentalScheduler.Interfaces\DentalScheduler.Interfaces.csproj" />
     <ProjectReference Include="..\DentalScheduler.UseCases\DentalScheduler.UseCases.csproj" />
-    <ProjectReference Include="..\DentalScheduler.DAL\DentalScheduler.DAL.csproj" />
+    <ProjectReference Include="..\DentalScheduler.Infrastructure\DentalScheduler.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

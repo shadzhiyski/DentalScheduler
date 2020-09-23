@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Web.RestSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Web.UI", "DentalScheduler.Web.UI\DentalScheduler.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.DAL", "DentalScheduler.DAL\DentalScheduler.DAL.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Infrastructure", "DentalScheduler.Infrastructure\DentalScheduler.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Entities", "DentalScheduler.Entities\DentalScheduler.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
 EndProject
