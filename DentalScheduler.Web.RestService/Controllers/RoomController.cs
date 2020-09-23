@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Gateways;
+using DentalScheduler.Web.RestService.Models;
 using Mapster;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
@@ -30,7 +31,7 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<RoomOutput> Get()
+        public IQueryable<RoomOutput> Get([FromQuery] ODataParametersInputModel filter)
         {
             return Repository.AsQueryable()
                 .ProjectToType<RoomOutput>(MappingConfig);
