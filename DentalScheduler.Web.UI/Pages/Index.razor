@@ -1,7 +1,81 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@inject ITreatmentService TreatmentService
 
-Welcome to your new app.
+<h1 class="text-center">Dental Scheduler</h1>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<p class="text-center">Welcome to your new dental scheduler.</p>
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade bg-secondary container-fluid" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @for (int i = 0; i < Treatments.Count; i++)
+        {
+            int currIndex = i;
+
+            <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@(GetActive(currIndex))" @onclick="@(() => CarouselItemIndex = currIndex)"></li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        @for (int i = 0; i < Treatments.Count; i++)
+        {
+            var imgIndex = i;
+            <div class="carousel-item @(GetActive(i))" style="height: 576px;">
+                @* <RadzenImage Path="https://dentalcomfort.bg/wp-content/themes/dentalcomfort/images/icn-profi.svg" class="d-block w-100" /> *@
+                @* <img src="@(Images[imgIndex])" class="img-fluid d-block col-md-4" alt=""> *@
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>@Treatments[i].Name</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" @onclick="@(() => CarouselItemIndex = CarouselItemIndex == 0 ? (Treatments.Count - 1) : (CarouselItemIndex - 1))">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" @onclick="@(() => CarouselItemIndex = CarouselItemIndex == (Treatments.Count - 1) ? 0 : (CarouselItemIndex + 1))">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+@code
+{
+    public int CarouselItemIndex { get; set; }
+
+    public IList<TreatmentDropDownViewModel> Treatments { get; set; } = new List<TreatmentDropDownViewModel>();
+
+    public IList<string> Images { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Treatments = await TreatmentService.GetTreatmentsAsync();
+        @* new List<TreatmentViewModel>()
+        {
+            new TreatmentViewModel
+            {
+                Name = "Bonding",
+                DurationInMinutes = 45
+            },
+            new TreatmentViewModel
+            {
+                Name = "Filling and Repair",
+                DurationInMinutes = 60
+            },
+            new TreatmentViewModel
+            {
+                Name = "Braces",
+                DurationInMinutes = 60
+            }
+        };
+
+        Images = new List<string>()
+        {
+            "/assets/images/aestetics.svg",
+            "/assets/images/implants.svg",
+            "/assets/images/endodontics.svg"
+        }; *@
+    }
+
+    private string GetActive(int index)
+        => CarouselItemIndex == index ? "active" : "";
+}
