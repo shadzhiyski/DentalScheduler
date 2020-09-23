@@ -1,5 +1,7 @@
+using DentalScheduler.DTO.Input;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities;
+using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using Mapster;
 
@@ -16,7 +18,20 @@ namespace DentalScheduler.Config.Mappings
                     ReferenceId = src.ReferenceId,
                     PatientReferenceId = src.Patient.ReferenceId,
                     DentalTeam = src.DentalTeam.Adapt<DentalTeamOutput>(config),
-                    Treatment = src.DentalTeam.Adapt<TreatmentOutput>(config),
+                    Treatment = src.Treatment.Adapt<TreatmentOutput>(config),
+                    Start = src.Start,
+                    End = src.End,
+                    Status = src.Status.ToString()
+                });
+
+            config.NewConfig<ITreatmentSessionOutput, TreatmentSessionInput>()
+                .MapWith((src) => 
+                new TreatmentSessionInput
+                {
+                    ReferenceId = src.ReferenceId,
+                    PatientReferenceId = src.PatientReferenceId,
+                    DentalTeamReferenceId = src.DentalTeam.ReferenceId,
+                    TreatmentReferenceId = src.Treatment.ReferenceId,
                     Start = src.Start,
                     End = src.End,
                     Status = src.Status.ToString()
