@@ -5,7 +5,7 @@ using DentalScheduler.DTO.Input;
 using DentalScheduler.DTO.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
-using DentalScheduler.Interfaces.UseCases;
+using DentalScheduler.Interfaces.UseCases.TreatmentSession;
 using DentalScheduler.Web.RestService.Models;
 using Mapster;
 using Microsoft.AspNet.OData;

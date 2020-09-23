@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.UseCases;
+using DentalScheduler.Interfaces.UseCases.TreatmentSession;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using DentalScheduler.UseCases;
 using Microsoft.Extensions.DependencyInjection;

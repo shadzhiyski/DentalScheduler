@@ -4,7 +4,7 @@ using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
-using DentalScheduler.Interfaces.UseCases;
+using DentalScheduler.Interfaces.UseCases.TreatmentSession;
 using DentalScheduler.Interfaces.UseCases.Validation;
 
 namespace DentalScheduler.UseCases
