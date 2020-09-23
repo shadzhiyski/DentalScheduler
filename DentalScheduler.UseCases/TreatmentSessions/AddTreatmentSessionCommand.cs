@@ -7,7 +7,7 @@ using DentalScheduler.Interfaces.Models.Output.Common;
 using DentalScheduler.Interfaces.UseCases.TreatmentSession;
 using DentalScheduler.Interfaces.UseCases.Validation;
 
-namespace DentalScheduler.UseCases
+namespace DentalScheduler.UseCases.TreatmentSessions
 {
     public class AddTreatmentSessionCommand : IAddTreatmentSessionCommand
     {

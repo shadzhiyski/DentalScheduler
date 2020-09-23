@@ -11,7 +11,7 @@ using DentalScheduler.Interfaces.UseCases.Validation;
 using DentalScheduler.UseCases.Validation;
 using Microsoft.EntityFrameworkCore;
 
-namespace DentalScheduler.UseCases
+namespace DentalScheduler.UseCases.TreatmentSessions
 {
     public class UpdateTreatmentSessionCommand : IUpdateTreatmentSessionCommand
     {
