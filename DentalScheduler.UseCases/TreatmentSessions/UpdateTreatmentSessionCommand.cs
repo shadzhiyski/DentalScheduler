@@ -6,7 +6,7 @@ using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output.Common;
-using DentalScheduler.Interfaces.UseCases.TreatmentSession;
+using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
 using DentalScheduler.Interfaces.UseCases.Validation;
 using DentalScheduler.UseCases.Validation;
 using Microsoft.EntityFrameworkCore;

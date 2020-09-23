@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.UseCases.TreatmentSession;
+using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using DentalScheduler.UseCases.TreatmentSessions;
 using DentalScheduler.UseCases.Identity;

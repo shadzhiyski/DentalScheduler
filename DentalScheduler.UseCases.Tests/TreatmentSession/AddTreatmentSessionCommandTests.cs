@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using DentalScheduler.DTO.Input;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.UseCases.TreatmentSession;
+using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
 using DentalScheduler.UseCases.Tests.Utilities;
 using DentalScheduler.UseCases.Tests.Utilities.DataProviders;
 using FluentAssertions;
