@@ -14,9 +14,9 @@ namespace DentalScheduler.Web.UI.Services
 {
     public class AuthService : IAuthService
     {
-        public AuthService(IHttpClientFactory httpClientFactory)
+        public AuthService(HttpClient httpClient)
         {
-            HttpClient = httpClientFactory.CreateClient("AuthClient");
+            HttpClient = httpClient;
         }
 
         public HttpClient HttpClient { get; }

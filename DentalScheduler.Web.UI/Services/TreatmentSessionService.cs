@@ -15,10 +15,10 @@ namespace DentalScheduler.Web.UI.Services
     {
         public TreatmentSessionService(
                 ODataClient oDataClient,
-                IHttpClientFactory httpClientFactory)
+                HttpClient httpClient)
         {
             ODataClient = oDataClient;
-            HttpClient = httpClientFactory.CreateClient("DataClient");
+            HttpClient = httpClient;
         }
         
         public ODataClient ODataClient { get; }
