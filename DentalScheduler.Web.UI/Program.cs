@@ -91,6 +91,7 @@ namespace DentalScheduler.Web.UI
             services.AddTransient<IUserService, UserService>();
 
             services.AddHttpClient<IAuthService, AuthService>("AuthClient");
+            services.AddHttpClient<IUserService, UserService>("UserClient");
             services.AddHttpClient<ITreatmentSessionService, TreatmentSessionService>("DataClient");
             
             services.AddSingleton<ISpinnerService, SpinnerService>();
