@@ -48,6 +48,15 @@ namespace DentalScheduler.Web.UI
                 .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
                 .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
             
+            builder.Services.AddHttpClient("UserClient", client => 
+                {
+                    var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
+                    client.BaseAddress = new Uri($"{appSettings.Value.ApiBaseAddress}/");
+                })
+                .AddHttpMessageHandler<AuthorizationHeaderHttpHandler>()
+                .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
+                .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
+
             builder.Services.AddHttpClient("DataClient", client => 
                 {
                     var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
@@ -79,6 +88,7 @@ namespace DentalScheduler.Web.UI
             services.AddTransient<ITreatmentSessionService, TreatmentSessionService>();
             services.AddTransient<IDentalTeamService, DentalTeamService>();
             services.AddTransient<ITreatmentService, TreatmentService>();
+            services.AddTransient<IUserService, UserService>();
             
             services.AddSingleton<ISpinnerService, SpinnerService>();
         }
