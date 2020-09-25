@@ -42,8 +42,7 @@ namespace DentalScheduler.Web.RestService
             
             services.AddControllers();
 
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DentalSchedulerDbContext>(opt => 
+            services.AddDbContext<DentalSchedulerDbContext>(opt => 
                     opt.UseNpgsql(Configuration.GetConnectionString("DentalSchedulerDbConnection"),
                             x => x.MigrationsAssembly("DentalScheduler.Infrastructure"))
                 );

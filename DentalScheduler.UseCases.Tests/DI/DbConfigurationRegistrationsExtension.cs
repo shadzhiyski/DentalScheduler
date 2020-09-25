@@ -7,8 +7,7 @@ namespace DentalScheduler.UseCases.Tests.DI
     public static class DbConfigurationRegistrationsExtension
     {
         public static IServiceCollection ConfigureDatabase(this IServiceCollection services)
-            => services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DentalSchedulerDbContext>(opt => 
+            => services.AddDbContext<DentalSchedulerDbContext>(opt => 
                     opt.UseInMemoryDatabase("DentalScheduler_test")
                 );
     }
