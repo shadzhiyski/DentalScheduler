@@ -29,13 +29,11 @@ namespace DentalScheduler.Web.UI.Services
             if (responseStatusCode == HttpStatusCode.BadRequest)
             {
                 var errors = await response.Content.ReadFromJsonAsync<IEnumerable<ValidationError>>();
-                System.Console.WriteLine(string.Join(Environment.NewLine, errors));
 
                 return new Result<IAccessTokenOutput>(errors);
             }
 
             var accessToken = await response.Content.ReadFromJsonAsync<DTO.Output.AccessTokenOutput>();
-            System.Console.WriteLine(accessToken.AccessToken);
 
             return new Result<IAccessTokenOutput>(accessToken);
         }

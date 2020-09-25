@@ -14,8 +14,6 @@ namespace DentalScheduler.Web.UI.Services
         {
             HttpClient = httpClient;
             LocalStorage = localStorage;
-
-            System.Console.WriteLine(httpClient.BaseAddress);
         }
 
         public HttpClient HttpClient { get; }

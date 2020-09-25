@@ -40,10 +40,6 @@
         <span>&nbsp;</span>
         <button class="btn btn-primary" @onclick="@(e => NavigationManager.NavigateTo("/auth/register/"))">Register</button>
     </div>
-    <br />
-    <div class="form-group col-12 row">
-        @ResponseMessage
-    </div>
 </EditForm>
 
 
@@ -70,8 +66,6 @@
 
     private async Task<bool> LoginClick()
     {
-        System.Console.WriteLine(Model.UserName + " " + Model.Password);
-        
         var result = await AuthService.LoginAsync(Model);
         if (result.Value == null)
         {
