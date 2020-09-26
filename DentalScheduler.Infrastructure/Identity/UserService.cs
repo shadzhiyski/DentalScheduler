@@ -10,15 +10,17 @@ namespace DentalScheduler.Infrastructure.Identity
 {
     public class UserService : IUserService<User>
     {
-        public TypeAdapterConfig MappingConfig { get; }
-        public UserManager<User> UserManager { get; }
-
         public UserService(TypeAdapterConfig mappingConfig, UserManager<User> userManager)
         {
             MappingConfig = mappingConfig;
             UserManager = userManager;
 
         }
+
+        public TypeAdapterConfig MappingConfig { get; }
+        
+        public UserManager<User> UserManager { get; }
+
         public async Task<IAuthResult> AddToRoleAsync(User user, string roleName)
         {
             return (await UserManager.AddToRoleAsync(user, roleName))
