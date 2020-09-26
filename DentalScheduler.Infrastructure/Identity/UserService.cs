@@ -1,25 +1,35 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Output;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace DentalScheduler.Infrastructure.Identity
 {
     public class UserService : IUserService<User>
     {
-        public UserService(TypeAdapterConfig mappingConfig, UserManager<User> userManager)
+        public UserService(
+            TypeAdapterConfig mappingConfig, 
+            UserManager<User> userManager,
+            IHttpContextAccessor accessor)
         {
             MappingConfig = mappingConfig;
             UserManager = userManager;
-
+            Accessor = accessor;
         }
 
         public TypeAdapterConfig MappingConfig { get; }
         
         public UserManager<User> UserManager { get; }
+
+        public IHttpContextAccessor Accessor { get; }
+
+        public User CurrentUser 
+            => FindByNameAsync(Accessor?.HttpContext?.User?.Identity?.Name).Result;
 
         public async Task<IAuthResult> AddToRoleAsync(User user, string roleName)
         {

@@ -17,8 +17,9 @@ namespace DentalScheduler.UseCases.Identity
 
         public IUserService<User> UserService { get; }
 
-        public async Task<IUserProfileOutput> ExecuteAsync(string userName)
-            => (await UserService.FindByNameAsync(userName))
-                .Adapt<UserProfileOutput>();
+        public async Task<IUserProfileOutput> ExecuteAsync()
+            => await Task.FromResult(
+                UserService.CurrentUser.Adapt<UserProfileOutput>()
+            );
     }
 }

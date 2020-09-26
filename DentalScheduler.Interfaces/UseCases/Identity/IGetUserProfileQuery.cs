@@ -5,6 +5,6 @@ namespace DentalScheduler.Interfaces.UseCases.Identity
 {
     public interface IGetUserProfileQuery
     {
-        Task<IUserProfileOutput> ExecuteAsync(string userName);
+        Task<IUserProfileOutput> ExecuteAsync();
     }
 }

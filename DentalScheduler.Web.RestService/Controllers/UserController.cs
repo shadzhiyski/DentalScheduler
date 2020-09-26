@@ -4,6 +4,7 @@ using DentalScheduler.DTO.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalScheduler.Web.RestService.Controllers
@@ -22,11 +23,10 @@ namespace DentalScheduler.Web.RestService.Controllers
         public Lazy<IGetUserProfileQuery> GetUserProfileQuery { get; }
 
         [HttpGet]
-        [Route ("profile")]
+        [Route("profile")]
         public async Task<IUserProfileOutput> GetProfile() 
         {
-            var currentUserName = User.Identity.Name;
-            var result = await GetUserProfileQuery.Value.ExecuteAsync(currentUserName);
+            var result = await GetUserProfileQuery.Value.ExecuteAsync();
             
             return result;
         }
