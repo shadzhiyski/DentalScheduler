@@ -45,5 +45,11 @@ namespace DentalScheduler.Infrastructure.Identity
         {
             return await UserManager.GetRolesAsync(user);
         }
+
+        public async Task<IAuthResult> UpdateAsync(User user)
+        {
+            return (await UserManager.UpdateAsync(user))
+                .Adapt<IAuthResult>(MappingConfig);
+        }
     }
 }

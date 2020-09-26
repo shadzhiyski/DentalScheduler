@@ -15,5 +15,7 @@ namespace DentalScheduler.Interfaces.Infrastructure.Identity
         Task<IAuthResult> AddToRoleAsync(TUser user, string roleName);
 
         Task<IList<string>> GetRolesAsync(TUser user);
+
+        Task<IAuthResult> UpdateAsync(TUser user);
     }
 }
