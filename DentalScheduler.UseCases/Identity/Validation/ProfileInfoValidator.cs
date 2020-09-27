@@ -19,16 +19,19 @@ namespace DentalScheduler.UseCases.Identity.Validation
                 .NotEmpty();
             
             RuleFor(model => model.Avatar)
-                .Must(IsImage);
+                .Must(IsImage)
+                .WithMessage("Invalid image format.");
         }
 
         private static bool IsImage(byte[] content)
-            => string.Empty.Equals(GetImageType(content));
+            => content == null || content.Length == 0
+                ? true
+                : !string.Empty.Equals(GetImageType(content));
 
         private static string GetImageType(byte[] content)
         {
             string headerCode = GetHeaderInfo(content).ToUpper();
-
+            
             if (headerCode.StartsWith("FFD8FFE0"))
             {
                 return "JPG";
