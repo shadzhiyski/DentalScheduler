@@ -14,12 +14,3 @@
         @Body
     </div>
 </div>
-
-@code {
-    public string UserName { get; set; }
-
-    protected async override void OnInitialized()
-    {
-        UserName = await LocalStorage.GetItemAsync<string>("UserName");
-    }
-}
