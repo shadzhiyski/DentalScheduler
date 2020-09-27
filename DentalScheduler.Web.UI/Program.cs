@@ -11,6 +11,7 @@ using DentalScheduler.Web.UI.Handlers;
 using System;
 using Microsoft.Extensions.Options;
 using Simple.OData.Client;
+using Tewr.Blazor.FileReader;
 
 namespace DentalScheduler.Web.UI
 {
@@ -77,6 +78,10 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddScoped<DialogService>();
             builder.Services.AddScoped<NotificationService>();
 
+            builder.Services.AddFileReaderService(
+                options => options.UseWasmSharedBuffer = true
+            );
+            
             builder.RootComponents.Add<App>("app");
 
             await builder.Build().RunAsync();
