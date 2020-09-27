@@ -1,0 +1,107 @@
+@page "/user/profile"
+
+@using Tewr.Blazor.FileReader
+@using System.Threading
+@using Interfaces.Models.Input
+@using DTO.Input
+@using Mapster
+
+@inject IFileReaderService FileReaderService
+
+<h1>Edit Profile</h1>
+<hr>
+<EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
+    <ApplicationValidator TModel="@IProfileInfoInput" />
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="@(ImageBase64 ?? "//placehold.it/100")" height="100" class="avatar rounded-circle" alt="avatar">
+                <h6>Upload a different photo...</h6>
+                
+                <input type="file" class="form-control" @ref="FileUpload" id="@(nameof(Model.Avatar))" @onchange="OnImagePicked">
+                <ValidationMessage For="@(() => Model.Avatar)" />
+            </div>
+        </div>
+        
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+            <h3>Personal info</h3>
+            
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="@nameof(Model.FirstName)" class="col-lg-3 control-label">First Name</label>
+                    <div class="col-lg-8">
+                        <InputText id="@nameof(Model.FirstName)" @bind-Value="Model.FirstName" class="form-control" placeholder="First Name" />
+                        <ValidationMessage For="@(() => Model.FirstName)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@nameof(Model.LastName)" class="col-lg-3 control-label">Last Name</label>
+                    <div class="col-lg-8">
+                        <InputText id="@nameof(Model.LastName)" @bind-Value="Model.LastName" class="form-control" placeholder="Last Name" />
+                        <ValidationMessage For="@(() => Model.LastName)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Inject]
+    public Mapster.TypeAdapterConfig MappingConfig { get; set; }
+
+    [Inject]
+    public IUserService UserService { get; set; }
+
+    public EditContext EditContext { get; set; }
+
+    public IProfileInfoInput Model { get; set; } = new ProfileInfoInput();
+
+    public ElementReference FileUpload { get; set; }
+
+    public string ImageBase64 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        EditContext = new EditContext(Model);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        var result = await UserService.GetProfile();
+        result.Adapt(Model, MappingConfig);
+    }
+
+    async Task OnImagePicked()
+    {
+        var files = await FileReaderService.CreateReference(FileUpload).EnumerateFilesAsync();
+
+        if (files == null || files.Count() == 0)
+            return;
+
+        var base64Stream = await files.First().OpenReadBase64Async();
+        var imageBase64Data = await base64Stream.ReadAsync(
+            0, 
+            (int)base64Stream.Length, 
+            new CancellationTokenSource().Token
+        );
+
+        ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
+
+        var stream = await files.First().CreateMemoryStreamAsync();
+        Model.Avatar = stream.ToArray();
+    }
+
+    private void OnSubmit()
+    {
+        // TODO: send request to update user profile
+    }
+}
