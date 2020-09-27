@@ -31,9 +31,9 @@
         <ValidationMessage For="@(() => Model.Password)" />
     </div>
     <hr class="my-4">
-    <button type="submit" class="form-control btn btn-primary">Login</button>
+    <button type="submit" class="form-control btn btn-primary btn-lg">Login</button>
     <span>&nbsp;</span>
-    <button class="form-control btn btn-primary" @onclick="@(e => NavigationManager.NavigateTo("/auth/register/"))">Register</button>
+    <button class="form-control btn btn-primary btn-lg" @onclick="@(e => NavigationManager.NavigateTo("/auth/register/"))">Register</button>
 </EditForm>
 
 <style>
@@ -44,7 +44,6 @@
     overflow: hidden;
 }
 .form-signin .btn {
-    font-size: 80%;
     border-radius: 5rem;
     letter-spacing: .1rem;
     font-weight: bold;
