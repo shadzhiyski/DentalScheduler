@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DentalScheduler.DTO.Input;
+using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -15,12 +16,16 @@ namespace DentalScheduler.Web.RestService.Controllers
     public class UserController : BaseApiController 
     {
         public UserController(
-            Lazy<IGetUserProfileQuery> getUserProfileQuery) 
+            Lazy<IGetUserProfileQuery> getUserProfileQuery,
+            Lazy<IUpdateProfileCommand> updateProfileCommand) 
         {
             GetUserProfileQuery = getUserProfileQuery;
+            UpdateProfileCommand = updateProfileCommand;
         }
 
         public Lazy<IGetUserProfileQuery> GetUserProfileQuery { get; }
+
+        public Lazy<IUpdateProfileCommand> UpdateProfileCommand { get; }
 
         [HttpGet]
         [Route("profile")]
@@ -29,6 +34,15 @@ namespace DentalScheduler.Web.RestService.Controllers
             var result = await GetUserProfileQuery.Value.ExecuteAsync();
             
             return result;
+        }
+
+        [HttpPost]
+        [Route("profile")]
+        public async Task<IActionResult> UpdateProfile([FromForm] ProfileInfoInput input) 
+        {
+            var result = await UpdateProfileCommand.Value.ExecuteAsync(input);
+            
+            return PresentResult(result);
         }
     }
 }
