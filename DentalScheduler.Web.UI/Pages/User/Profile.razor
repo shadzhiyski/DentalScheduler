@@ -5,6 +5,7 @@
 @using Interfaces.Models.Input
 @using DTO.Input
 @using Mapster
+@using Microsoft.AspNetCore.Http.Internal
 
 @inject IFileReaderService FileReaderService
 
@@ -63,7 +64,7 @@
 
     public EditContext EditContext { get; set; }
 
-    public IProfileInfoInput Model { get; set; } = new ProfileInfoInput();
+    public ProfileInfoInput Model { get; set; } = new ProfileInfoInput();
 
     public ElementReference FileUpload { get; set; }
 
@@ -97,7 +98,7 @@
         ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
 
         var stream = await files.First().CreateMemoryStreamAsync();
-        Model.Avatar = stream.ToArray();
+        Model.Avatar = new FormFile(stream, 0, stream.Length, "", "");
     }
 
     private void OnSubmit()

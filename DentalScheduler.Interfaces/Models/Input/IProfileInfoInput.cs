@@ -1,8 +1,10 @@
+using System.IO;
+
 namespace DentalScheduler.Interfaces.Models.Input
 {
     public interface IProfileInfoInput
     {
-        byte[] Avatar { get; set; }
+        byte[] Avatar { get; }
   
         string FirstName { get; set; }
 
