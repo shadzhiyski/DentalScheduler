@@ -1,0 +1,17 @@
+using System.IO;
+
+namespace DentalScheduler.Common.Helpers.Extensions
+{
+    public static class HelpersExtensions
+    {
+        public static byte[] ToArray(this Stream stream)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+
+                return memoryStream.ToArray();
+            }
+        }
+    }
+}
