@@ -12,7 +12,7 @@
 
 <h1>Edit Profile</h1>
 <hr>
-<EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
+<EditForm EditContext="@EditContext">
     <ApplicationValidator TModel="@IProfileInfoInput" />
     <div class="row">
         <!-- left column -->
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8">
-                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                        <input type="button" class="btn btn-primary" @onclick="OnSubmit" value="Save Changes">
                     </div>
                 </div>
             </form>
@@ -81,7 +81,13 @@
         var result = await UserService.GetProfile();
         result.Adapt(Model, MappingConfig);
 
-        Model.Avatar = new FormFile(new MemoryStream(result.Avatar), 0, result.Avatar.LongLength, "", "");
+        Model.Avatar = new FormFile(
+            new MemoryStream(result.Avatar),
+            0, 
+            result.Avatar.LongLength, 
+            nameof(result.Avatar), 
+            nameof(result.Avatar)
+        );
 
         var imageBase64Data = Convert.ToBase64String(result.Avatar);
         SetImageView(imageBase64Data);
@@ -112,8 +118,12 @@
         ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
     }
 
-    private void OnSubmit()
+    protected async Task OnSubmit()
     {
-        // TODO: send request to update user profile
+        if (EditContext.Validate())
+        {
+            System.Console.WriteLine("Valid Submit send");
+            await UserService.SetProfile(Model);
+        }
     }
 }
