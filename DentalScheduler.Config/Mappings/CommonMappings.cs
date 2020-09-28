@@ -1,5 +1,7 @@
 using System;
+using DentalScheduler.Common.Helpers.Extensions;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 
 namespace DentalScheduler.Config.Mappings
 {
@@ -12,6 +14,9 @@ namespace DentalScheduler.Config.Mappings
             
             config.NewConfig<DateTimeOffset?, DateTime?>()
                 .MapWith(src => src != null ? src.Value.DateTime : default(DateTime?));
+
+            config.NewConfig<IFormFile, byte[]>()
+                .MapWith(src => src.ToArray());
         }
     }
 }
