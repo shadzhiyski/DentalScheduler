@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.DTO", "Dent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.UseCases.Tests", "DentalScheduler.UseCases.Tests\DentalScheduler.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Common", "DentalScheduler.Common\DentalScheduler.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,5 +144,17 @@ Global
 		{02580A82-759D-47E5-A00B-7E9B7572ABBB}.Release|x64.Build.0 = Release|Any CPU
 		{02580A82-759D-47E5-A00B-7E9B7572ABBB}.Release|x86.ActiveCfg = Release|Any CPU
 		{02580A82-759D-47E5-A00B-7E9B7572ABBB}.Release|x86.Build.0 = Release|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Debug|x64.Build.0 = Debug|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Debug|x86.Build.0 = Debug|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x64.ActiveCfg = Release|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x64.Build.0 = Release|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x86.ActiveCfg = Release|Any CPU
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
