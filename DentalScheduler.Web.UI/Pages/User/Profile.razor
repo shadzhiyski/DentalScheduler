@@ -1,5 +1,6 @@
 @page "/user/profile"
 
+@using System.IO
 @using Tewr.Blazor.FileReader
 @using System.Threading
 @using Interfaces.Models.Input
@@ -79,6 +80,11 @@
     {
         var result = await UserService.GetProfile();
         result.Adapt(Model, MappingConfig);
+
+        Model.Avatar = new FormFile(new MemoryStream(result.Avatar), 0, result.Avatar.LongLength, "", "");
+
+        var imageBase64Data = Convert.ToBase64String(result.Avatar);
+        SetImageView(imageBase64Data);
     }
 
     async Task OnImagePicked()
@@ -95,10 +101,15 @@
             new CancellationTokenSource().Token
         );
 
-        ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
+        SetImageView(imageBase64Data);
 
         var stream = await files.First().CreateMemoryStreamAsync();
         Model.Avatar = new FormFile(stream, 0, stream.Length, "", "");
+    }
+
+    private void SetImageView(string imageBase64Data)
+    {
+        ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
     }
 
     private void OnSubmit()
