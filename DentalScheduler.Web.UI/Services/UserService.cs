@@ -3,8 +3,8 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using DentalScheduler.DTO.Output;
+using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
-using DentalScheduler.Web.UI.Models;
 
 namespace DentalScheduler.Web.UI.Services
 {
@@ -28,5 +28,21 @@ namespace DentalScheduler.Web.UI.Services
             )
             .Content
             .ReadFromJsonAsync<UserProfileOutput>();
+
+        public async Task SetProfile(IProfileInfoInput input)
+        {
+            var content = new MultipartFormDataContent();
+
+            content.Add(
+                content: new ByteArrayContent(input.Avatar, 0, input.Avatar.Length), 
+                name: nameof(input.Avatar), 
+                fileName: nameof(input.Avatar)
+            );
+
+            content.Add(content: new StringContent(input.FirstName), name: nameof(input.FirstName));
+            content.Add(content: new StringContent(input.LastName), name: nameof(input.LastName));
+
+            await HttpClient.PostAsync("api/User/profile", content);
+        }
     }
 }
