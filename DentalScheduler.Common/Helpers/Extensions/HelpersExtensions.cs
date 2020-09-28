@@ -1,4 +1,5 @@
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace DentalScheduler.Common.Helpers.Extensions
 {
@@ -13,5 +14,8 @@ namespace DentalScheduler.Common.Helpers.Extensions
                 return memoryStream.ToArray();
             }
         }
+
+        public static byte[] ToArray(this IFormFile formFile)
+            => formFile.OpenReadStream().ToArray();
     }
 }
