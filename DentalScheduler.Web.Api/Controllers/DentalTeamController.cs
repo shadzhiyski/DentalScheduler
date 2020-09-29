@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using DentalScheduler.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
-using DentalScheduler.Web.RestService.Models;
+using DentalScheduler.Web.Api.Models;
 using Mapster;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalScheduler.Web.RestService.Controllers
+namespace DentalScheduler.Web.Api.Controllers
 {
     [ApiController]
     [Route("odata/[controller]")]

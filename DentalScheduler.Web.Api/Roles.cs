@@ -1,4 +1,4 @@
-namespace DentalScheduler.Web.RestService
+namespace DentalScheduler.Web.Api
 {
     public static class Roles
     {

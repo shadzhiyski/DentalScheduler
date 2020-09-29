@@ -1,23 +1,25 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DentalScheduler.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
-using DentalScheduler.Web.RestService.Models;
+using DentalScheduler.Web.Api.Models;
 using Mapster;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalScheduler.Web.RestService.Controllers
+namespace DentalScheduler.Web.Api.Controllers
 {
     [ApiController]
     [Route("odata/[controller]")]
-    public class TreatmentController : BaseApiController
+    // [Authorize(AuthenticationSchemes = "Bearer")]
+    public class RoomController : BaseApiController
     {
-        public TreatmentController(
-            TypeAdapterConfig mappingConfig, 
-            IGenericRepository<Treatment> repository)
+        public RoomController(
+            TypeAdapterConfig mappingConfig,
+            IGenericRepository<Room> repository)
         {
             MappingConfig = mappingConfig;
             Repository = repository;
@@ -25,14 +27,14 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         public TypeAdapterConfig MappingConfig { get; }
 
-        public IGenericRepository<Treatment> Repository { get; }
+        public IGenericRepository<Room> Repository { get; }
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<TreatmentOutput> Get([FromQuery] ODataParametersInputModel filter)
+        public IQueryable<RoomOutput> Get([FromQuery] ODataParametersInputModel filter)
         {
             return Repository.AsQueryable()
-                .ProjectToType<TreatmentOutput>(MappingConfig);
+                .ProjectToType<RoomOutput>(MappingConfig);
         }
     }
 }

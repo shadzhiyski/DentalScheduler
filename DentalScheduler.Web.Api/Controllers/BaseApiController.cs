@@ -2,7 +2,7 @@ using System.Linq;
 using DentalScheduler.Interfaces.Dto.Output.Common;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalScheduler.Web.RestService.Controllers
+namespace DentalScheduler.Web.Api.Controllers
 {
     public abstract class BaseApiController : ControllerBase
     {

@@ -5,7 +5,7 @@ using DentalScheduler.Interfaces.UseCases.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalScheduler.Web.RestService.Controllers
+namespace DentalScheduler.Web.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

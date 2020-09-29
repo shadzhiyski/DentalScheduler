@@ -22,7 +22,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.OData.Edm;
 using Microsoft.OpenApi.Models;
 
-namespace DentalScheduler.Web.RestService
+namespace DentalScheduler.Web.Api
 {
     public class Startup
     {

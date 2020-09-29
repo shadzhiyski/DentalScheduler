@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace DentalScheduler.Web.RestService.Models
+namespace DentalScheduler.Web.Api.Models
 {
     public class ODataParametersInputModel
     {
