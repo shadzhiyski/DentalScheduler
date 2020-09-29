@@ -1,5 +1,5 @@
 using System;
-using DentalScheduler.Common.Helpers.Extensions;
+using DentalScheduler.Shared.Helpers.Extensions;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 

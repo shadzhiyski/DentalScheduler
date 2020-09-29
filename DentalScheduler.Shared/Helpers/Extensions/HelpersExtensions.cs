@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Http;
 
-namespace DentalScheduler.Common.Helpers.Extensions
+namespace DentalScheduler.Shared.Helpers.Extensions
 {
     public static class HelpersExtensions
     {

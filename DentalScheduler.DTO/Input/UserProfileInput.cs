@@ -1,4 +1,4 @@
-using DentalScheduler.Common.Helpers.Extensions;
+using DentalScheduler.Shared.Helpers.Extensions;
 using DentalScheduler.Interfaces.Models.Input;
 using Microsoft.AspNetCore.Http;
 
