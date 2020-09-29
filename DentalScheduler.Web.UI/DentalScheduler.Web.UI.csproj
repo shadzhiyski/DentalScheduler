@@ -26,7 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DentalScheduler.Config\DentalScheduler.Config.csproj" />
     <ProjectReference Include="..\DentalScheduler.Interfaces\DentalScheduler.Interfaces.csproj" />
-    <ProjectReference Include="..\DentalScheduler.DTO\DentalScheduler.DTO.csproj" />
+    <ProjectReference Include="..\DentalScheduler.Dto\DentalScheduler.Dto.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.UseCases", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Config", "DentalScheduler.Config\DentalScheduler.Config.csproj", "{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.DTO", "DentalScheduler.DTO\DentalScheduler.DTO.csproj", "{7511CA65-9D07-4D88-965C-0828C0B17059}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Dto", "DentalScheduler.Dto\DentalScheduler.Dto.csproj", "{7511CA65-9D07-4D88-965C-0828C0B17059}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.UseCases.Tests", "DentalScheduler.UseCases.Tests\DentalScheduler.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
 EndProject
