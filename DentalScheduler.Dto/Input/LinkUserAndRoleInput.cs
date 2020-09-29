@@ -1,6 +1,6 @@
 using DentalScheduler.Interfaces.Models.Input;
 
-namespace DentalScheduler.DTO.Input
+namespace DentalScheduler.Dto.Input
 {
     public class LinkUserAndRoleInput : ILinkUserAndRoleInput
     {

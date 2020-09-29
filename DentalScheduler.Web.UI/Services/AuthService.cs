@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Dto.Output.Common;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
@@ -33,7 +33,7 @@ namespace DentalScheduler.Web.UI.Services
                 return new Result<IAccessTokenOutput>(errors);
             }
 
-            var accessToken = await response.Content.ReadFromJsonAsync<DTO.Output.AccessTokenOutput>();
+            var accessToken = await response.Content.ReadFromJsonAsync<Dto.Output.AccessTokenOutput>();
 
             return new Result<IAccessTokenOutput>(accessToken);
         }

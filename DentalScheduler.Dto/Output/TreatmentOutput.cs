@@ -1,7 +1,7 @@
 using System;
 using DentalScheduler.Interfaces.Models.Output;
 
-namespace DentalScheduler.DTO.Output
+namespace DentalScheduler.Dto.Output
 {
     public class TreatmentOutput : ITreatmentOutput
     {

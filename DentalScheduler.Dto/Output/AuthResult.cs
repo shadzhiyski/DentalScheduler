@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
 
-namespace DentalScheduler.DTO.Output 
+namespace DentalScheduler.Dto.Output 
 {
     public class AuthResult : IAuthResult 
     {

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Dto.Output.Common;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Input;

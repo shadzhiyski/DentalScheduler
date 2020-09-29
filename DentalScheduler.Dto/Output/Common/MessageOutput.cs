@@ -1,6 +1,6 @@
 using DentalScheduler.Interfaces.Models.Output.Common;
 
-namespace DentalScheduler.DTO.Output.Common
+namespace DentalScheduler.Dto.Output.Common
 {
     public class MessageOutput : IMessageOutput
     {

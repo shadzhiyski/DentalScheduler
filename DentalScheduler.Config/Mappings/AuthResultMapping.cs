@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using DentalScheduler.DTO.Output;
+using DentalScheduler.Dto.Output;
 using DentalScheduler.Interfaces.Models.Output;
 using DentalScheduler.Interfaces.Models.Output.Common;
 using Mapster;

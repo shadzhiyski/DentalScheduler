@@ -1,4 +1,4 @@
-using DentalScheduler.DTO.Output;
+using DentalScheduler.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Models.Output;
 using Mapster;

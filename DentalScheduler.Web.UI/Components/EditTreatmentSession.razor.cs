@@ -9,7 +9,7 @@ using Radzen;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Web.UI.Services;
 using Microsoft.AspNetCore.Components.Authorization;
-using DentalScheduler.DTO.Input;
+using DentalScheduler.Dto.Input;
 
 namespace DentalScheduler.Web.UI.Components
 {

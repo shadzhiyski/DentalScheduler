@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using DentalScheduler.DTO.Output;
+using DentalScheduler.Dto.Output;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Interfaces.Models.Output;
 

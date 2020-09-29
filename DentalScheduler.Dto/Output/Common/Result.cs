@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DentalScheduler.Interfaces.Models.Output.Common;
 
-namespace DentalScheduler.DTO.Output.Common
+namespace DentalScheduler.Dto.Output.Common
 {
     public class Result<TValue> : IResult<TValue> where TValue : class
     {

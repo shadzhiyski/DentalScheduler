@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using DentalScheduler.DTO.Input;
+using DentalScheduler.Dto.Input;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
 using DentalScheduler.UseCases.Tests.Utilities;

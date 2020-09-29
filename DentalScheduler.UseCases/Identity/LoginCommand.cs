@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DentalScheduler.DTO.Output;
-using DentalScheduler.DTO.Output.Common;
+using DentalScheduler.Dto.Output;
+using DentalScheduler.Dto.Output.Common;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Models.Input;

@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 using DentalScheduler.Interfaces.Models.Input;
 using DentalScheduler.Web.UI.Models;
 using Simple.OData.Client;
-using DentalScheduler.DTO.Output;
+using DentalScheduler.Dto.Output;
 
 namespace DentalScheduler.Web.UI.Services
 {

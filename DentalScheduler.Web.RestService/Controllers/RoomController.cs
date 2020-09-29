@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using DentalScheduler.DTO.Output;
+using DentalScheduler.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Web.RestService.Models;
