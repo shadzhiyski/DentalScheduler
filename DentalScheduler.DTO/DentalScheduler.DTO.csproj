@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\DentalScheduler.Common\DentalScheduler.Common.csproj" />
+    <ProjectReference Include="..\DentalScheduler.Shared\DentalScheduler.Shared.csproj" />
     <ProjectReference Include="..\DentalScheduler.Interfaces\DentalScheduler.Interfaces.csproj" />
   </ItemGroup>
 
