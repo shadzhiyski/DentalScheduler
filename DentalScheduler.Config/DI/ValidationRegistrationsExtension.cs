@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Interfaces.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Identity.Validation;

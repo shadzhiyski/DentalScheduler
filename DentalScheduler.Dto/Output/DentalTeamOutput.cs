@@ -1,5 +1,5 @@
 using System;
-using DentalScheduler.Interfaces.Models.Output;
+using DentalScheduler.Interfaces.Dto.Output;
 
 namespace DentalScheduler.Dto.Output
 {

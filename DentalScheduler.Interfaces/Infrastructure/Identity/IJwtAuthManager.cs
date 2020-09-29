@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Interfaces.Dto.Input;
 
 namespace DentalScheduler.Interfaces.Infrastructure.Identity
 {

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DentalScheduler.Interfaces.Models.Output;
+using DentalScheduler.Interfaces.Dto.Output;
 
 namespace DentalScheduler.Interfaces.UseCases.Identity
 {

@@ -1,4 +1,4 @@
-namespace DentalScheduler.Interfaces.Models.Input
+namespace DentalScheduler.Interfaces.Dto.Input
 {
     public interface ICreateRoleInput
     {

@@ -1,8 +1,8 @@
 using DentalScheduler.Dto.Input;
 using DentalScheduler.Dto.Output;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.Models.Input;
-using DentalScheduler.Interfaces.Models.Output;
+using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.Dto.Output;
 using Mapster;
 
 namespace DentalScheduler.Config.Mappings

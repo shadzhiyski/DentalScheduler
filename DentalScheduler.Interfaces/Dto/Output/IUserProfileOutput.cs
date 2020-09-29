@@ -1,4 +1,4 @@
-namespace DentalScheduler.Interfaces.Models.Output
+namespace DentalScheduler.Interfaces.Dto.Output
 {
     public interface IUserProfileOutput
     {

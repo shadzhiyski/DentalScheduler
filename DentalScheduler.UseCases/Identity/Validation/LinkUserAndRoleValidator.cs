@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Interfaces.Dto.Input;
 using FluentValidation;
 
 namespace DentalScheduler.UseCases.Identity.Validation

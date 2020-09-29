@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
-using DentalScheduler.Interfaces.Models.Output;
+using DentalScheduler.Interfaces.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

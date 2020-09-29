@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 using DentalScheduler.Dto.Output.Common;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
-using DentalScheduler.Interfaces.Models.Input;
-using DentalScheduler.Interfaces.Models.Output.Common;
+using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.Dto.Output.Common;
 using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 

@@ -1,5 +1,5 @@
 using System;
-using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Interfaces.Dto.Input;
 
 namespace DentalScheduler.Web.UI.Models
 {

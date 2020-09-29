@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DentalScheduler.Interfaces.Models.Output.Common;
+using DentalScheduler.Interfaces.Dto.Output.Common;
 
 namespace DentalScheduler.Dto.Output.Common
 {

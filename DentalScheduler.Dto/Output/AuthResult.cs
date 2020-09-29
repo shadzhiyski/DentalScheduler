@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using DentalScheduler.Interfaces.Models.Output;
-using DentalScheduler.Interfaces.Models.Output.Common;
+using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.Dto.Output.Common;
 
 namespace DentalScheduler.Dto.Output 
 {

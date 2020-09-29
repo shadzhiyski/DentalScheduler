@@ -1,5 +1,5 @@
 using DentalScheduler.Shared.Helpers.Extensions;
-using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Interfaces.Dto.Input;
 using Microsoft.AspNetCore.Http;
 
 namespace DentalScheduler.Dto.Input

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DentalScheduler.Interfaces.Models.Output.Common
+namespace DentalScheduler.Interfaces.Dto.Output.Common
 {
     public interface IResult<TValue> where TValue : class
     {

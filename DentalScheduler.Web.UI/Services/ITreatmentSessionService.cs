@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalScheduler.Dto.Output;
-using DentalScheduler.Interfaces.Models.Input;
+using DentalScheduler.Interfaces.Dto.Input;
 using DentalScheduler.Web.UI.Models;
 
 namespace DentalScheduler.Web.UI.Services

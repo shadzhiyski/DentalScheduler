@@ -1,5 +1,5 @@
 using System.Linq;
-using DentalScheduler.Interfaces.Models.Output.Common;
+using DentalScheduler.Interfaces.Dto.Output.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalScheduler.Web.RestService.Controllers

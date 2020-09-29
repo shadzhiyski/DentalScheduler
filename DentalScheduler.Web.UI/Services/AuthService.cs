@@ -5,9 +5,9 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using DentalScheduler.Dto.Output.Common;
-using DentalScheduler.Interfaces.Models.Input;
-using DentalScheduler.Interfaces.Models.Output;
-using DentalScheduler.Interfaces.Models.Output.Common;
+using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.Dto.Output.Common;
 using DentalScheduler.UseCases.Common.Validation;
 
 namespace DentalScheduler.Web.UI.Services

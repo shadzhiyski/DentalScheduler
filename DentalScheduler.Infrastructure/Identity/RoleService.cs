@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
-using DentalScheduler.Interfaces.Models.Output;
+using DentalScheduler.Interfaces.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 
