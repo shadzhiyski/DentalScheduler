@@ -38,7 +38,7 @@ namespace DentalScheduler.Web.RestService.Controllers
 
         [HttpPost]
         [Route("profile")]
-        public async Task<IActionResult> UpdateProfile([FromForm] ProfileInfoInput input) 
+        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input) 
         {
             var result = await UpdateProfileCommand.Value.ExecuteAsync(input);
             

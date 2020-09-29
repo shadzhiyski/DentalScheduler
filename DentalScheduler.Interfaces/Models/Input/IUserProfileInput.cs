@@ -2,7 +2,7 @@ using System.IO;
 
 namespace DentalScheduler.Interfaces.Models.Input
 {
-    public interface IProfileInfoInput
+    public interface IUserProfileInput
     {
         byte[] Avatar { get; }
   

@@ -14,7 +14,7 @@ namespace DentalScheduler.UseCases.Identity
     {
         public UpdateProfileCommand(
             TypeAdapterConfig mappingConfig,
-            IApplicationValidator<IProfileInfoInput> validator,
+            IApplicationValidator<IUserProfileInput> validator,
             IUserService<User> userService)
         {
             MappingConfig = mappingConfig;
@@ -24,11 +24,11 @@ namespace DentalScheduler.UseCases.Identity
 
         public TypeAdapterConfig MappingConfig { get; }
 
-        public IApplicationValidator<IProfileInfoInput> Validator { get; }
+        public IApplicationValidator<IUserProfileInput> Validator { get; }
 
         public IUserService<User> UserService { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(IProfileInfoInput input)
+        public async Task<IResult<IMessageOutput>> ExecuteAsync(IUserProfileInput input)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)

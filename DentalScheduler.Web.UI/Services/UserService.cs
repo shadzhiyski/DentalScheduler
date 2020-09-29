@@ -29,7 +29,7 @@ namespace DentalScheduler.Web.UI.Services
             .Content
             .ReadFromJsonAsync<UserProfileOutput>();
 
-        public async Task SetProfile(IProfileInfoInput input)
+        public async Task SetProfile(IUserProfileInput input)
         {
             var content = new MultipartFormDataContent();
 

@@ -7,6 +7,6 @@ namespace DentalScheduler.Interfaces.UseCases.Identity
 {
     public interface IUpdateProfileCommand
     {
-        Task<IResult<IMessageOutput>> ExecuteAsync(IProfileInfoInput input);
+        Task<IResult<IMessageOutput>> ExecuteAsync(IUserProfileInput input);
     }
 }

@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace DentalScheduler.UseCases.Identity.Validation
 {
-    public class ProfileInfoValidator : AbstractValidator<IProfileInfoInput>
+    public class UserProfileValidator : AbstractValidator<IUserProfileInput>
     {
-        public ProfileInfoValidator()
+        public UserProfileValidator()
         {
             RuleFor(model => model.FirstName)
                 .Cascade(CascadeMode.StopOnFirstFailure)

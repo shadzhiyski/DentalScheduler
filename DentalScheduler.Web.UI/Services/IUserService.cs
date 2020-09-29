@@ -9,6 +9,6 @@ namespace DentalScheduler.Web.UI.Services
     {
         Task<IUserProfileOutput> GetProfile();
 
-        Task SetProfile(IProfileInfoInput input);
+        Task SetProfile(IUserProfileInput input);
     }
 }

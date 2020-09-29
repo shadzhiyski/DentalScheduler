@@ -13,7 +13,7 @@
 <h1>Edit Profile</h1>
 <hr>
 <EditForm EditContext="@EditContext">
-    <ApplicationValidator TModel="@IProfileInfoInput" />
+    <ApplicationValidator TModel="@IUserProfileInput" />
     <div class="row">
         <!-- left column -->
         <div class="col-md-3">
@@ -65,7 +65,7 @@
 
     public EditContext EditContext { get; set; }
 
-    public ProfileInfoInput Model { get; set; } = new ProfileInfoInput();
+    public UserProfileInput Model { get; set; } = new UserProfileInput();
 
     public ElementReference FileUpload { get; set; }
 

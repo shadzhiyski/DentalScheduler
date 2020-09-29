@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace DentalScheduler.DTO.Input
 {
-    public class ProfileInfoInput : IProfileInfoInput
+    public class UserProfileInput : IUserProfileInput
     {
         public IFormFile Avatar { get; set; }
 
-        byte[] IProfileInfoInput.Avatar => Avatar.ToArray();
+        byte[] IUserProfileInput.Avatar => Avatar.ToArray();
 
         public string FirstName { get; set; }
 
