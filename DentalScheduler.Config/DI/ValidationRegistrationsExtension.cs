@@ -17,6 +17,8 @@ namespace DentalScheduler.Config.DI
             services.AddTransient<AbstractValidator<IUserCredentialsInput>, UserCredentialsValidator>();
             services.AddTransient<AbstractValidator<ITreatmentSessionInput>, TreatmentSessionValidator>();
             services.AddTransient<AbstractValidator<IUserProfileInput>, UserProfileValidator>();
+
+            services.AddTransient<ImageValidator>();
             
             services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
             
