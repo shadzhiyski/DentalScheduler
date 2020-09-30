@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DentalScheduler.Common.Helpers.Extensions
 {
-    public static class HelpersExtensions
+    public static class IOExtensions
     {
         public static byte[] ToArray(this Stream stream)
         {
