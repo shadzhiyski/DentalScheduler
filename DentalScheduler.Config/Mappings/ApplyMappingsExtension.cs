@@ -1,12 +1,11 @@
 using Mapster;
-using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.Mappings
 {
     public static class ApplyMappingsExtension
     {
-        public static IServiceCollection RegisterMappingsDependencies(this IServiceCollection services)
+        public static IServiceCollection RegisterMappings(this IServiceCollection services)
         {
             var config = new TypeAdapterConfig();
             services.AddSingleton<TypeAdapterConfig>(config);
