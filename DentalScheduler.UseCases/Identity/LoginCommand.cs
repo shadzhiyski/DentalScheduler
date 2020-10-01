@@ -47,7 +47,18 @@ namespace DentalScheduler.UseCases.Identity
             }
 
             var user = await UserService.FindByNameAsync(userInput.UserName);
-            if (!(await UserService.CheckPasswordAsync(user, userInput.Password)))
+            if (user == null)
+            {
+                validationResult.Errors.Add(
+                    new ValidationError()
+                    {
+                        PropertyName = nameof(IUserCredentialsInput.UserName),
+                        Errors = new [] { "User does not exist." }
+                    }
+                );
+            }
+
+            if (user != null && !(await UserService.CheckPasswordAsync(user, userInput.Password)))
             {
                 validationResult.Errors.Add(
                     new ValidationError()
@@ -56,7 +67,10 @@ namespace DentalScheduler.UseCases.Identity
                         Errors = new [] { "Invalid password." }
                     }
                 );
+            }
 
+            if (validationResult.Errors.Count > 0)
+            {
                 return new Result<IAccessTokenOutput>(validationResult.Errors);
             }
 
