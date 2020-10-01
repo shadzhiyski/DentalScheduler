@@ -1,11 +1,17 @@
 @page "/auth/login"
+
 @layout LoginLayout
+
 @using DentalScheduler.Interfaces.UseCases.Common.Validation
 @using DentalScheduler.Interfaces.Dto.Input
+@using DentalScheduler.Interfaces.Dto.Output
+@using DentalScheduler.Interfaces.Dto.Output.Common
 @using DentalScheduler.Dto.Input
+
 @inject NavigationManager NavigationManager
 @inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
 @inject IAuthService AuthService
+@inject NotificationService NotificationService
 
 @* <div class="row mb-4 px-3">
     <h6 class="mb-0 mr-4 mt-2">Sign in with</h6>
@@ -70,8 +76,6 @@
     
     public IUserCredentialsInput Model { get; set; } = new UserCredentialsInput();
 
-    public string ResponseMessage { get; set; } = "Response Message";
-
     protected async override Task OnInitializedAsync()
     {
         var claimsPrincipal = (await authenticationStateTask).User;
@@ -83,20 +87,31 @@
         EditContext = new EditContext(Model);
     }
 
-    private async Task<bool> LoginClick()
+    private async Task LoginClick()
     {
         var result = await AuthService.LoginAsync(Model);
-        if (result.Value == null)
+        if (result.Errors.Any())
         {
-            ResponseMessage = string.Join($"; <br />", ((IValidationError)result.Errors.First()).Errors);
+            ShowErrors(result);
+            return;
         }
-        else 
-        {
-            await AuthenticationStateProvider.MarkUserAsLoggedInAsync(Model, result.Value.AccessToken);
+        
+        await AuthenticationStateProvider.MarkUserAsLoggedInAsync(Model, result.Value.AccessToken);
 
-            NavigationManager.NavigateTo("", true);
-        }
-
-        return true;
+        NavigationManager.NavigateTo("", true);
     }
+
+    private void ShowErrors(IResult<IAccessTokenOutput> result)
+        => result.Errors.Cast<IValidationError>()
+            .Select(ve => ve.Errors.Select(vem => (ve.PropertyName, ErrorMessage: vem)))
+            .SelectMany(ve => ve)
+            .Select(ve => new NotificationMessage()
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = ve.PropertyName,
+                Detail = ve.ErrorMessage,
+                Duration = 8000
+            })
+            .ToList()
+            .ForEach(nm => NotificationService.Notify(nm));
 }
