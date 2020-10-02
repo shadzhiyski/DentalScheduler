@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 
@@ -17,5 +18,8 @@ namespace DentalScheduler.Common.Helpers.Extensions
 
         public static byte[] ToArray(this IFormFile formFile)
             => formFile.OpenReadStream().ToArray();
+
+        public static string ToBase64String(this byte[] content)
+            => Convert.ToBase64String(content);
     }
 }
