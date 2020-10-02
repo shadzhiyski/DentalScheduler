@@ -1,3 +1,6 @@
+@using DentalScheduler.Common.Helpers.Extensions
+
+@inject IUserService UserService
 @inject NavigationManager NavigationManager
 @inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
 @inject ILocalStorageService LocalStorage
@@ -20,7 +23,7 @@
             <li class="nav-item avatar dropdown @AvatarCssClass">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" @onclick="ToggleAvatarMenu">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" width="45" height="45" class="rounded-circle z-depth-0"
+                    <img src="@AvatarBase64" width="45" height="45" class="rounded-circle z-depth-0"
                     alt="avatar image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary bg-primary @AvatarCssClass"
@@ -38,7 +41,12 @@
 </AuthorizeView>
 
 @code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
     public string UserName { get; set; }
+
+    public string AvatarBase64 { get; set; }
 
     private bool showAvatarMenu = false;
 
@@ -58,9 +66,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if ((await LocalStorage.ContainKeyAsync("UserName")))
+        var user = (await AuthenticationStateTask).User;
+        if (user != null)
         {
             UserName = await LocalStorage.GetItemAsync<string>("UserName");
+
+            var avatarBase64Data = (await UserService.GetAvatar())
+                .ToBase64String();
+            AvatarBase64 = $"data:image/jpg;base64,{avatarBase64Data}";
         }
     }
 }

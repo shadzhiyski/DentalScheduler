@@ -22,6 +22,12 @@ namespace DentalScheduler.Web.UI.Services
 
         public ILocalStorageService LocalStorage { get; }
 
+        public async Task<byte[]> GetAvatar()
+            => await (
+                    await HttpClient.GetAsync("api/User/avatar")
+                )
+                .Content.ReadAsByteArrayAsync();
+
         public async Task<IUserProfileOutput> GetProfile()
             => await (
                 await HttpClient.GetAsync("api/User/profile")

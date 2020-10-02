@@ -7,6 +7,8 @@ namespace DentalScheduler.Web.UI.Services
 {
     public interface IUserService
     {
+        Task<byte[]> GetAvatar();
+
         Task<IUserProfileOutput> GetProfile();
 
         Task SetProfile(IUserProfileInput input);
