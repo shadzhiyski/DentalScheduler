@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using DentalScheduler.Dto.Input;
 using DentalScheduler.Interfaces.Dto.Input;
@@ -26,6 +27,15 @@ namespace DentalScheduler.Web.Api.Controllers
         public Lazy<IGetUserProfileQuery> GetUserProfileQuery { get; }
 
         public Lazy<IUpdateProfileCommand> UpdateProfileCommand { get; }
+
+        [HttpGet]
+        [Route("avatar")]
+        public async Task<IActionResult> GetAvatar() 
+        {
+            var result = await GetUserProfileQuery.Value.ExecuteAsync();
+
+            return File(result.Avatar, "image/jpeg");
+        }
 
         [HttpGet]
         [Route("profile")]
