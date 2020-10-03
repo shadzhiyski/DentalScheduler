@@ -29,7 +29,9 @@ namespace DentalScheduler.Infrastructure.Identity
         public IHttpContextAccessor Accessor { get; }
 
         public User CurrentUser 
-            => FindByNameAsync(Accessor?.HttpContext?.User?.Identity?.Name).Result;
+            => FindByNameAsync(Accessor?.HttpContext?.User?.Identity?.Name)
+                .GetAwaiter()
+                .GetResult();
 
         public async Task<IAuthResult> AddToRoleAsync(User user, string roleName)
         {
