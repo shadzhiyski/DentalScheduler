@@ -6,12 +6,12 @@ using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.Dto.Input;
 using DentalScheduler.Interfaces.Dto.Output.Common;
-using DentalScheduler.Interfaces.UseCases.TreatmentSessions;
+using DentalScheduler.Interfaces.UseCases.Scheduling;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Common.Validation;
 using Microsoft.EntityFrameworkCore;
 
-namespace DentalScheduler.UseCases.TreatmentSessions
+namespace DentalScheduler.UseCases.Scheduling
 {
     public class UpdateTreatmentSessionCommand : IUpdateTreatmentSessionCommand
     {

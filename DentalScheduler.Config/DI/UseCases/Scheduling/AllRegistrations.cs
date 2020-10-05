@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalScheduler.Config.DI.UseCases.TreatmentSessions
+namespace DentalScheduler.Config.DI.UseCases.Scheduling
 {
     public static class AllRegistrations
     {

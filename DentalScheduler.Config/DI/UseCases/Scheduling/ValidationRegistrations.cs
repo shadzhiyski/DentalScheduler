@@ -1,9 +1,9 @@
 using DentalScheduler.Interfaces.Dto.Input;
-using DentalScheduler.UseCases.TreatmentSessions.Validation;
+using DentalScheduler.UseCases.Scheduling.Validation;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalScheduler.Config.DI.UseCases.TreatmentSessions
+namespace DentalScheduler.Config.DI.UseCases.Scheduling
 {
     static class ValidationRegistrations
     {

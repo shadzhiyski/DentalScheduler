@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using DentalScheduler.Interfaces.Dto.Input;
 using DentalScheduler.Interfaces.Dto.Output.Common;
 
-namespace DentalScheduler.Interfaces.UseCases.TreatmentSessions
+namespace DentalScheduler.Interfaces.UseCases.Scheduling
 {
     public interface IAddTreatmentSessionCommand
     {
