@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using DentalScheduler.Dto.Input;
-using DentalScheduler.Interfaces.Dto.Input;
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.UseCases.Identity.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

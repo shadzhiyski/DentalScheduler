@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using DentalScheduler.Dto.Output;
+using DentalScheduler.UseCases.Identity.Dto.Output;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using Mapster;
 

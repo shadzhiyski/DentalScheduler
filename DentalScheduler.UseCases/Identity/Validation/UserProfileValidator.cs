@@ -1,5 +1,5 @@
 using System.Linq;
-using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.UseCases.Common.Validation;
 using FluentValidation;
 

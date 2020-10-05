@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace DentalScheduler.Interfaces.Dto.Input
+namespace DentalScheduler.Interfaces.UseCases.Identity.Dto.Input
 {
     public interface IUserProfileInput
     {

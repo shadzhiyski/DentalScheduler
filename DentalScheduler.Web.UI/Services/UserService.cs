@@ -2,9 +2,9 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using DentalScheduler.Dto.Output;
-using DentalScheduler.Interfaces.Dto.Input;
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.UseCases.Identity.Dto.Output;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 
 namespace DentalScheduler.Web.UI.Services
 {

@@ -1,8 +1,8 @@
 using DentalScheduler.Common.Helpers.Extensions;
-using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using Microsoft.AspNetCore.Http;
 
-namespace DentalScheduler.Dto.Input
+namespace DentalScheduler.UseCases.Identity.Dto.Input
 {
     public class UserProfileInput : IUserProfileInput
     {

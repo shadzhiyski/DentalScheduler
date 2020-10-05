@@ -1,6 +1,6 @@
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 
-namespace DentalScheduler.Dto.Output
+namespace DentalScheduler.UseCases.Identity.Dto.Output
 {
     public class AccessTokenOutput : IAccessTokenOutput
     {

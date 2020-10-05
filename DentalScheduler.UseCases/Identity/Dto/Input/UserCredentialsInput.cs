@@ -1,6 +1,6 @@
-using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 
-namespace DentalScheduler.Dto.Input
+namespace DentalScheduler.UseCases.Identity.Dto.Input
 {
     public class UserCredentialsInput : IUserCredentialsInput
     {

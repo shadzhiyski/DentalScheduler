@@ -1,4 +1,4 @@
-namespace DentalScheduler.Interfaces.Dto.Output
+namespace DentalScheduler.Interfaces.UseCases.Identity.Dto.Output
 {
     public interface IAccessTokenOutput
     {
