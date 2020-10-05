@@ -17,14 +17,14 @@ namespace DentalScheduler.Infrastructure.Common.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserTable());
-            modelBuilder.ApplyConfiguration(new RoomTable());
-            modelBuilder.ApplyConfiguration(new DentalWorkerTable());
-            modelBuilder.ApplyConfiguration(new PatientTable());
-            modelBuilder.ApplyConfiguration(new TreatmentTable());
-            modelBuilder.ApplyConfiguration(new TreatmentSessionTable());
-            modelBuilder.ApplyConfiguration(new DentalTeamTable());
-            modelBuilder.ApplyConfiguration(new DentalTeamParticipantTable());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new RoomConfiguration());
+            modelBuilder.ApplyConfiguration(new DentalWorkerConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
+            modelBuilder.ApplyConfiguration(new TreatmentSessionConfiguration());
+            modelBuilder.ApplyConfiguration(new DentalTeamConfiguration());
+            modelBuilder.ApplyConfiguration(new DentalTeamParticipantConfiguration());
         }
     }
 }

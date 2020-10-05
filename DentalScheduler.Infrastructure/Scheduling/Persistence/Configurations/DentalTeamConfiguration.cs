@@ -5,19 +5,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DentalScheduler.Infrastructure.Scheduling.Persistence.Configurations
 {
-    public class PatientTable : IEntityTypeConfiguration<Patient>
+    public class DentalTeamConfiguration : IEntityTypeConfiguration<DentalTeam>
     {
-        public void Configure(EntityTypeBuilder<Patient> builder)
+        public void Configure(EntityTypeBuilder<DentalTeam> builder)
         {
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.ReferenceId).HasValueGenerator<ReferenceIdGenerator>();
-            
-            builder.HasOne(e => e.IdentityUser);
 
-            builder.Property(e => e.IdentityUserId).IsRequired();
+            builder.HasOne(e => e.Room);
 
-            builder.HasIndex(e => e.IdentityUserId).IsUnique();
+            builder.Property(e => e.Name).IsRequired();
+            builder.Property(e => e.RoomId).IsRequired();
+
+            builder.HasIndex(e => e.Name).IsUnique();
             builder.HasIndex(e => e.ReferenceId).IsUnique();
         }
     }

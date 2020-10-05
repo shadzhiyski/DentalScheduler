@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DentalScheduler.Infrastructure.Scheduling.Persistence.Configurations
 {
-    public class DentalTeamParticipantTable
+    public class DentalTeamParticipantConfiguration
         : IEntityTypeConfiguration<DentalTeamParticipant>
     {
         public void Configure(EntityTypeBuilder<DentalTeamParticipant> builder)
