@@ -1,5 +1,5 @@
 using DentalScheduler.Entities.Identity;
-using DentalScheduler.Infrastructure.Identity;
+using DentalScheduler.Infrastructure.Identity.Services;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

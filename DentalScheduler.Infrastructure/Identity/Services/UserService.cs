@@ -8,7 +8,7 @@ using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalScheduler.Infrastructure.Identity
+namespace DentalScheduler.Infrastructure.Identity.Services
 {
     public class UserService : IUserService<User>
     {

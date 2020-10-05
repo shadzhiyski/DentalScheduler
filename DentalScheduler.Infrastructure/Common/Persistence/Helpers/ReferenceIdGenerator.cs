@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace DentalScheduler.Infrastructure.Persistence.Helpers
+namespace DentalScheduler.Infrastructure.Common.Persistence.Helpers
 {
     public class ReferenceIdGenerator : ValueGenerator
     {

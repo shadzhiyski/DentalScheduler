@@ -1,10 +1,10 @@
 using System;
-using DentalScheduler.Infrastructure.Persistence.Helpers;
+using DentalScheduler.Infrastructure.Common.Persistence.Helpers;
 using DentalScheduler.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DentalScheduler.Infrastructure.Persistence.Configurations
+namespace DentalScheduler.Infrastructure.Scheduling.Persistence.Configurations
 {
     public class RoomTable : IEntityTypeConfiguration<Room>
     {

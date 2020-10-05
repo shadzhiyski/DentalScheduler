@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace DentalScheduler.Infrastructure.Persistence
+namespace DentalScheduler.Infrastructure.Common.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {

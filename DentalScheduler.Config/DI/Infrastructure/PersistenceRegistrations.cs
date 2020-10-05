@@ -1,5 +1,5 @@
-using DentalScheduler.Infrastructure.Persistence;
-using DentalScheduler.Infrastructure.Persistence.Repositories;
+using DentalScheduler.Infrastructure.Common.Persistence;
+using DentalScheduler.Infrastructure.Common.Persistence.Repositories;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
