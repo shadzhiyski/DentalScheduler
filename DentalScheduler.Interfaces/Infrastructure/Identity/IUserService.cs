@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.Infrastructure.Identity.Dto.Output;
 
 namespace DentalScheduler.Interfaces.Infrastructure.Identity
 {

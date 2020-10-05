@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.Infrastructure.Identity.Dto.Output;
 using DentalScheduler.Interfaces.Dto.Output.Common;
 
-namespace DentalScheduler.Dto.Output 
+namespace DentalScheduler.Infrastructure.Identity.Dto.Output 
 {
     public class AuthResult : IAuthResult 
     {
