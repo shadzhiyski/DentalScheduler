@@ -1,7 +1,7 @@
 using System;
-using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 
-namespace DentalScheduler.Dto.Input
+namespace DentalScheduler.UseCases.Scheduling.Dto.Input
 {
     public class TreatmentSessionInput : ITreatmentSessionInput
     {

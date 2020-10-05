@@ -1,7 +1,7 @@
 using System;
-using DentalScheduler.Interfaces.Dto.Output;
+using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Output;
 
-namespace DentalScheduler.Dto.Output
+namespace DentalScheduler.UseCases.Scheduling.Dto.Output
 {
     public class RoomOutput : IRoomOutput
     {

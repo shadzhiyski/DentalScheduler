@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.Dto.Input;
+using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 using DentalScheduler.UseCases.Scheduling.Validation;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;

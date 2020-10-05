@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DentalScheduler.Dto.Input;
-using DentalScheduler.Dto.Output;
+using DentalScheduler.UseCases.Scheduling.Dto.Input;
+using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.UseCases.Scheduling;

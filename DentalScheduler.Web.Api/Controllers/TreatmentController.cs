@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using DentalScheduler.Dto.Output;
+using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Web.Api.Models;

@@ -1,6 +1,6 @@
 @attribute [Authorize(Roles = "Patient, Dentist")]
 
-@using Interfaces.Dto.Input
+@using Interfaces.UseCases.Scheduling.Dto.Input
 
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />

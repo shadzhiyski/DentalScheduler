@@ -1,6 +1,8 @@
 @page "/schedule"
 @attribute [Authorize(Roles = "Patient, Dentist")]
 
+@using DentalScheduler.UseCases.Scheduling.Dto.Input
+
 @inject DialogService DialogService
 @inject NotificationService NotificationService
 @inject ITreatmentSessionService TreatmentSessionService
@@ -86,12 +88,12 @@
             return;
         }
         
-        Dto.Input.TreatmentSessionInput data = await DialogService.OpenAsync<EditTreatmentSession>(
+        TreatmentSessionInput data = await DialogService.OpenAsync<EditTreatmentSession>(
             "Add Treatment Session",
             new Dictionary<string, object> 
             {
                 {
-                    "Model", new Dto.Input.TreatmentSessionInput()
+                    "Model", new TreatmentSessionInput()
                     {
                         Status = "Requested",
                         DentalTeamReferenceId = default,
@@ -133,7 +135,7 @@
             return;
         }
 
-        Dto.Input.TreatmentSessionInput dataToSet = new Dto.Input.TreatmentSessionInput()
+        TreatmentSessionInput dataToSet = new TreatmentSessionInput()
         {
             ReferenceId = args.Data.ReferenceId,
             Status = args.Data.Status,
@@ -144,7 +146,7 @@
             End = args.End
         };
 
-        Dto.Input.TreatmentSessionInput resultData = null;
+        TreatmentSessionInput resultData = null;
 
         resultData = await DialogService.OpenAsync<EditTreatmentSession>("Edit Treatment Session", 
             new Dictionary<string, object> { { "Model", dataToSet } });

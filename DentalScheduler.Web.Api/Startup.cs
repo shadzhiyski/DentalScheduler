@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DentalScheduler.Config.DI;
 using DentalScheduler.Infrastructure.Common.Persistence;
-using DentalScheduler.Dto.Output;
+using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities.Identity;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
