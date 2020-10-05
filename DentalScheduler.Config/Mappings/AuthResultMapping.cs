@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DentalScheduler.Infrastructure.Identity.Dto.Output;
 using DentalScheduler.Interfaces.Infrastructure.Identity.Dto.Output;
-using DentalScheduler.Interfaces.Dto.Output.Common;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 

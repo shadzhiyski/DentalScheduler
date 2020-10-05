@@ -1,5 +1,5 @@
-using DentalScheduler.Dto.Output.Common;
-using DentalScheduler.Interfaces.Dto.Output.Common;
+using DentalScheduler.UseCases.Common.Dto.Output;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 

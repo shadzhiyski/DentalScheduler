@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DentalScheduler.Dto.Output.Common;
+using DentalScheduler.UseCases.Common.Dto.Output;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Dto.Input;
-using DentalScheduler.Interfaces.Dto.Output.Common;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Identity;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Common.Validation;

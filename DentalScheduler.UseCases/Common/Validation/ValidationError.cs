@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DentalScheduler.Interfaces.Dto.Output.Common;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using Newtonsoft.Json;
 

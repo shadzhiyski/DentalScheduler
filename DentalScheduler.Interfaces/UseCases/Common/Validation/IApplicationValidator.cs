@@ -1,4 +1,4 @@
-using DentalScheduler.Interfaces.Dto.Output.Common;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 
 namespace DentalScheduler.Interfaces.UseCases.Common.Validation
 {

@@ -1,4 +1,4 @@
-namespace DentalScheduler.Interfaces.Dto.Output.Common
+namespace DentalScheduler.Interfaces.UseCases.Common.Dto.Output
 {
     public interface IError
     {
