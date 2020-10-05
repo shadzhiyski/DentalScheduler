@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\DentalScheduler.Dto\DentalScheduler.Dto.csproj" />
+    <ProjectReference Include="..\DentalScheduler.Interfaces\DentalScheduler.Interfaces.csproj" />
     <ProjectReference Include="..\DentalScheduler.Config\DentalScheduler.Config.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalScheduler.Interfaces\DentalScheduler.Interfaces.csproj" />
-    <ProjectReference Include="..\DentalScheduler.Dto\DentalScheduler.Dto.csproj" />
+    <ProjectReference Include="..\DentalScheduler.Common\DentalScheduler.Common.csproj" />
     <ProjectReference Include="..\DentalScheduler.Entities\DentalScheduler.Entities.csproj" />
   </ItemGroup>
 

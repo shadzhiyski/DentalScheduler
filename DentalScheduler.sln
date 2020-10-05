@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.UseCases", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Config", "DentalScheduler.Config\DentalScheduler.Config.csproj", "{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Dto", "DentalScheduler.Dto\DentalScheduler.Dto.csproj", "{7511CA65-9D07-4D88-965C-0828C0B17059}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.UseCases.Tests", "DentalScheduler.UseCases.Tests\DentalScheduler.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalScheduler.Common", "DentalScheduler.Common\DentalScheduler.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
@@ -120,18 +118,6 @@ Global
 		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x64.Build.0 = Release|Any CPU
 		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x86.ActiveCfg = Release|Any CPU
 		{A5A4E87F-EAC3-4ECC-B8B9-D72053C26801}.Release|x86.Build.0 = Release|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x64.Build.0 = Debug|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Debug|x86.Build.0 = Debug|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x64.ActiveCfg = Release|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x64.Build.0 = Release|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x86.ActiveCfg = Release|Any CPU
-		{7511CA65-9D07-4D88-965C-0828C0B17059}.Release|x86.Build.0 = Release|Any CPU
 		{02580A82-759D-47E5-A00B-7E9B7572ABBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02580A82-759D-47E5-A00B-7E9B7572ABBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02580A82-759D-47E5-A00B-7E9B7572ABBB}.Debug|x64.ActiveCfg = Debug|Any CPU
