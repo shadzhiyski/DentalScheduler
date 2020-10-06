@@ -7,12 +7,11 @@ namespace DentalScheduler.Web.Api.Controllers
     public abstract class BaseApiController : ControllerBase
     {
         protected IActionResult PresentResult<T>(IResult<T> result) where T : class
-            =>
-            result.Status switch
+            => result.Status switch
             {
-                (ResultStatus.Success) => Ok(result.Value),
-                (ResultStatus.Invalid) => BadRequest(result.Errors),
-                (ResultStatus.NotFound) => NotFound(result.Errors)
+                ResultStatus.Success => Ok(result.Value),
+                ResultStatus.Invalid => BadRequest(result.Errors),
+                ResultStatus.NotFound => NotFound(result.Errors)
             };
     }
 }
