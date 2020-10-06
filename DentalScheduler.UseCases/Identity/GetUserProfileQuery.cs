@@ -18,8 +18,14 @@ namespace DentalScheduler.UseCases.Identity
         public IUserService<User> UserService { get; }
 
         public async Task<IUserProfileOutput> ExecuteAsync()
-            => await Task.FromResult(
+        {
+            var profile = await Task.FromResult(
                 UserService.CurrentUser.Adapt<UserProfileOutput>()
             );
+
+            profile.Avatar = profile.Avatar ?? new byte[0];
+
+            return profile;
+        }
     }
 }
