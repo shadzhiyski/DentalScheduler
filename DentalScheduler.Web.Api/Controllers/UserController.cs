@@ -34,7 +34,7 @@ namespace DentalScheduler.Web.Api.Controllers
         {
             var result = await GetUserProfileQuery.Value.ExecuteAsync();
 
-            return File(result.Avatar, "image/jpeg");
+            return File(result.Avatar ?? new byte[0], "image/jpeg");
         }
 
         [HttpGet]
