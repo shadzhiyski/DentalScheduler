@@ -7,5 +7,7 @@ namespace DentalScheduler.Interfaces.UseCases.Common.Dto.Output
         TValue Value { get; }
 
         IEnumerable<IError> Errors { get; }
+
+        ResultStatus Status { get; }
     }
 }

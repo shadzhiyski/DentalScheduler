@@ -78,7 +78,8 @@ namespace DentalScheduler.UseCases.Scheduling
                             ErrorType.NotFound, 
                             $"Treatment session for the given Patient, Dental Team and period cannot be found."
                         )
-                    }
+                    },
+                    ResultStatus.NotFound
                 );
             }
             

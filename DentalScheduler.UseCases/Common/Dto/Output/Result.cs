@@ -6,21 +6,29 @@ namespace DentalScheduler.UseCases.Common.Dto.Output
     public class Result<TValue> : IResult<TValue> where TValue : class
     {
         public Result(TValue value)
-            : this(value, new List<IError>())
+            : this(value, new List<IError>(), ResultStatus.Success)
         { }
 
-        public Result(IEnumerable<IError> errors)
-            : this(default(TValue), errors)
+        public Result(
+            IEnumerable<IError> errors,
+            ResultStatus status = ResultStatus.Invalid)
+            : this(default(TValue), errors, status)
         { }
 
-        private Result(TValue value, IEnumerable<IError> errors) 
+        private Result(
+            TValue value,
+            IEnumerable<IError> errors,
+            ResultStatus status) 
         {
             Value = value;
             Errors = errors;
+            Status = status;
         }
 
         public TValue Value { get; }
 
         public IEnumerable<IError> Errors { get; }
+
+        public ResultStatus Status { get; }
     }
 }
