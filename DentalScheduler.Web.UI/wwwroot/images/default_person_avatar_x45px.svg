@@ -1,0 +1,13 @@
+<svg width="45" height="45" xmlns="http://www.w3.org/2000/svg" class="bi-person-fill b-icon bi">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="47" width="47" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g stroke="black" id="svg_1">
+   <path stroke="black" id="svg_2" d="m6.16667,42s-3.16667,0 -3.16667,-3.25s3.16667,-13 19,-13s19,9.75 19,13s-3.16667,3.25 -3.16667,3.25l-31.66667,0zm15.83333,-19.5a9.5,9.75 0 1 0 0,-19.5a9.5,9.75 0 0 0 0,19.5z" fill-rule="evenodd"/>
+  </g>
+ </g>
+</svg>

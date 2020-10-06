@@ -23,7 +23,7 @@
             <li class="nav-item avatar dropdown @AvatarCssClass">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" @onclick="ToggleAvatarMenu">
-                    <img src="@AvatarBase64" width="45" height="45" class="rounded-circle z-depth-0"
+                    <img src="@(AvatarBase64 ?? DefaultAvatarPath)" width="45" height="45" class="rounded-circle z-depth-0"
                     alt="avatar image">
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary bg-primary @AvatarCssClass"
@@ -41,6 +41,8 @@
 </AuthorizeView>
 
 @code {
+    public const string DefaultAvatarPath = "images/default_person_avatar_x45px.svg";
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
@@ -67,13 +69,16 @@
     protected override async Task OnInitializedAsync()
     {
         var user = (await AuthenticationStateTask).User;
-        if (user != null)
+        if (user.Identity.IsAuthenticated)
         {
             UserName = await LocalStorage.GetItemAsync<string>("UserName");
 
-            var avatarBase64Data = (await UserService.GetAvatar())
-                .ToBase64String();
-            AvatarBase64 = $"data:image/jpg;base64,{avatarBase64Data}";
+            var avatar = await UserService.GetAvatar();
+            if (avatar.LongLength > 0)
+            {
+                var avatarBase64Data = avatar.ToBase64String();
+                AvatarBase64 = $"data:image/jpg;base64,{avatarBase64Data}";
+            }
         }
     }
 }
