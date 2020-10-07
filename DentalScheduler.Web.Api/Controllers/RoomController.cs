@@ -14,7 +14,7 @@ namespace DentalScheduler.Web.Api.Controllers
 {
     [ApiController]
     [Route("odata/[controller]")]
-    // [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class RoomController : BaseApiController
     {
         public RoomController(
