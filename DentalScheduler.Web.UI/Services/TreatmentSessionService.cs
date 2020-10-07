@@ -29,8 +29,19 @@ namespace DentalScheduler.Web.UI.Services
             DateTimeOffset periodStart, DateTimeOffset periodEnd)
             => (await ODataClient
                     .For<TreatmentSessionViewModel>("TreatmentSession")
-                    .Expand(m => m.DentalTeam)
                     .Expand(m => m.Treatment)
+                    .Select(m => new 
+                    {
+                        m.ReferenceId,
+                        m.PatientReferenceId,
+                        m.Status,
+                        m.Start,
+                        m.End,
+                        Treatment = new
+                        {
+                            m.Treatment.Name
+                        }
+                    })
                     .Filter(m => m.Start <= periodEnd && m.End >= periodStart)
                     .FindEntriesAsync()
                 )

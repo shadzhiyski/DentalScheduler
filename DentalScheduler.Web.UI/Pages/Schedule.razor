@@ -138,12 +138,7 @@
         TreatmentSessionInput dataToSet = new TreatmentSessionInput()
         {
             ReferenceId = args.Data.ReferenceId,
-            Status = args.Data.Status,
-            DentalTeamReferenceId = args.Data.DentalTeam.ReferenceId,
-            PatientReferenceId = args.Data.PatientReferenceId,
-            TreatmentReferenceId = args.Data.Treatment.ReferenceId,
-            Start = args.Start,
-            End = args.End
+            PatientReferenceId = args.Data.PatientReferenceId
         };
 
         TreatmentSessionInput resultData = null;

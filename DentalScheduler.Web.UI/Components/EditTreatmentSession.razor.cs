@@ -32,6 +32,9 @@ namespace DentalScheduler.Web.UI.Components
         [Inject]
         ITreatmentService TreatmentService { get; set; }
 
+        [Inject]
+        ITreatmentSessionService TreatmentSessionService { get; set; }
+
         public EditContext EditContext { get; set; }
 
         public bool IsTreatmentDropDownDisabled { get; set; }
@@ -57,6 +60,26 @@ namespace DentalScheduler.Web.UI.Components
             var user = (await AuthenticationStateTask).User;
             IsTreatmentDropDownDisabled = user.IsInRole("Dentist");
             IsDentalTeamDropDownDisabled = user.IsInRole("Dentist");
+
+            await LoadTreatmentSession();
+        }
+
+        async Task LoadTreatmentSession()
+        {
+            if (Model.ReferenceId != Guid.Empty)
+            {
+                var result = await TreatmentSessionService.GetAppointment(
+                    Model.ReferenceId, 
+                    Model.PatientReferenceId.Value
+                );
+
+                Model.Status = result.Status;
+                Model.DentalTeamReferenceId = result.DentalTeam.ReferenceId;
+                Model.PatientReferenceId = result.PatientReferenceId;
+                Model.TreatmentReferenceId = result.Treatment.ReferenceId;
+                Model.Start = result.Start;
+                Model.End = result.End;
+            }
         }
 
         async Task LoadDentalTeams()

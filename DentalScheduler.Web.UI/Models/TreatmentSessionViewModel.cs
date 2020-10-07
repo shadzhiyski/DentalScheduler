@@ -8,8 +8,6 @@ namespace DentalScheduler.Web.UI.Models
         
         public Guid PatientReferenceId { get; set; }
 
-        public DentalTeamViewModel DentalTeam { get; set; }
-
         public TreatmentViewModel Treatment { get; set; }
 
         public string TreatmentName => Treatment.Name;
