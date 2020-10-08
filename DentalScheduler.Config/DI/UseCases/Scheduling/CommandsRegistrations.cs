@@ -1,5 +1,5 @@
-using DentalScheduler.Interfaces.UseCases.Scheduling;
-using DentalScheduler.UseCases.Scheduling;
+using DentalScheduler.Interfaces.UseCases.Scheduling.Commands;
+using DentalScheduler.UseCases.Scheduling.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI.UseCases.Scheduling
