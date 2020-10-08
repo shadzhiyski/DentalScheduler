@@ -3,10 +3,10 @@ using DentalScheduler.UseCases.Identity.Dto.Output;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
-using DentalScheduler.Interfaces.UseCases.Identity;
+using DentalScheduler.Interfaces.UseCases.Identity.Queries;
 using Mapster;
 
-namespace DentalScheduler.UseCases.Identity
+namespace DentalScheduler.UseCases.Identity.Queries
 {
     public class GetUserProfileQuery : IGetUserProfileQuery
     {

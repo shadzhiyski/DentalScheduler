@@ -5,10 +5,10 @@ using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
-using DentalScheduler.Interfaces.UseCases.Identity;
+using DentalScheduler.Interfaces.UseCases.Identity.Commands;
 using Mapster;
 
-namespace DentalScheduler.UseCases.Identity
+namespace DentalScheduler.UseCases.Identity.Commands
 {
     public class UpdateProfileCommand : IUpdateProfileCommand
     {

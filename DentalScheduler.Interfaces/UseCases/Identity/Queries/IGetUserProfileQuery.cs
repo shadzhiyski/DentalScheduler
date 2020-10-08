@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 
-namespace DentalScheduler.Interfaces.UseCases.Identity
+namespace DentalScheduler.Interfaces.UseCases.Identity.Queries
 {
     public interface IGetUserProfileQuery
     {

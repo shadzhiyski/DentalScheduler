@@ -1,5 +1,5 @@
-using DentalScheduler.Interfaces.UseCases.Identity;
-using DentalScheduler.UseCases.Identity;
+using DentalScheduler.Interfaces.UseCases.Identity.Queries;
+using DentalScheduler.UseCases.Identity.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI.UseCases.Identity

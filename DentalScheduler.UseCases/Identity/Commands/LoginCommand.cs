@@ -8,13 +8,13 @@ using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
-using DentalScheduler.Interfaces.UseCases.Identity;
+using DentalScheduler.Interfaces.UseCases.Identity.Commands;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
-namespace DentalScheduler.UseCases.Identity
+namespace DentalScheduler.UseCases.Identity.Commands
 {
     public class LoginCommand : ILoginCommand
     {
