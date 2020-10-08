@@ -8,7 +8,6 @@ using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Scheduling;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
-using DentalScheduler.UseCases.Common.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalScheduler.UseCases.Scheduling
@@ -46,26 +45,10 @@ namespace DentalScheduler.UseCases.Scheduling
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
 
-            if (!Enum.TryParse<TreatmentSessionStatus>(
-                    value: input.Status, 
-                    ignoreCase: false, 
-                    out TreatmentSessionStatus treatmentSessionStatus))
-            {
-                validationResult.Errors.Add(new ValidationError()
-                {
-                    PropertyName = nameof(TreatmentSession.Status),
-                    Errors = new List<string>
-                    {
-                        "Invalid treatment session status type."
-                    }
-                });
-
-                return new Result<IMessageOutput>(validationResult.Errors);
-            }
-
             var treatmentSession = await TreatmentSessionRepository.Where(
                     ts => ts.ReferenceId == input.ReferenceId
-                ).Include(ts => ts.Treatment)
+                )
+                .Include(ts => ts.Treatment)
                 .Include(ts => ts.DentalTeam)
                 .SingleOrDefaultAsync();
 
@@ -103,7 +86,7 @@ namespace DentalScheduler.UseCases.Scheduling
 
             treatmentSession.Start = input.Start.Value;
             treatmentSession.End = input.End.Value;
-            treatmentSession.Status = treatmentSessionStatus;
+            treatmentSession.Status = Enum.Parse<TreatmentSessionStatus>(input.Status);
 
             await UoW.SaveAsync();
 

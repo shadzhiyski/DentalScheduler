@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 
@@ -35,6 +36,9 @@ namespace DentalScheduler.UseCases.Scheduling.Validation
                 .NotNull()
                 .NotEmpty();
             
+            RuleFor(model => model.Status)
+                .IsEnumName(typeof(TreatmentSessionStatus));
+
             RuleFor(model => model.End)
                 .GreaterThan(model => model.Start);
             
