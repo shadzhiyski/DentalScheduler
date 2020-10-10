@@ -12,6 +12,8 @@ namespace DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Output
 
         ITreatmentOutput Treatment { get; }
 
+        IPatientOutput Patient { get; }
+
         DateTimeOffset Start { get; set; }
 
         DateTimeOffset End { get; set; }

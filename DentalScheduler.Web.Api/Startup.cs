@@ -181,6 +181,9 @@ namespace DentalScheduler.Web.Api
             odataBuilder.EntitySet<TreatmentOutput>("Treatment")
                 .EntityType.HasKey(e => e.ReferenceId);
 
+            odataBuilder.EntitySet<PatientOutput>("Patient")
+                .EntityType.HasKey(e => e.ReferenceId);
+
             return odataBuilder.GetEdmModel();
         }
     }
