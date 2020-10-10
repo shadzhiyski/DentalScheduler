@@ -52,6 +52,7 @@ namespace DentalScheduler.Web.UI.Services
                 .For<TreatmentSessionOutput>("TreatmentSession")
                 .Expand(m => m.DentalTeam)
                 .Expand(m => m.Treatment)
+                .Expand(m => m.Patient)
                 .Filter(
                     m => m.ReferenceId == referenceId
                         && m.PatientReferenceId == patientReferenceId

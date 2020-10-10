@@ -6,7 +6,6 @@
 @inject DialogService DialogService
 @inject ITreatmentSessionService TreatmentSessionService
 @inject ILocalStorageService LocalStorage
-@inject IUserService UserService
 
 <RadzenCard Style="margin-bottom: 20px;">
     <div class="row">
@@ -16,7 +15,7 @@
             <div style="margin-top:20px">Dental Team:</div>
             <b>@Model?.DentalTeam?.Name</b>
             <div style="margin-top:20px">Patient:</div>
-            <b>@($"{ProfileInfo?.FirstName} {ProfileInfo?.LastName}")</b>
+            <b>@($"{Model?.Patient?.FirstName} {Model?.Patient?.LastName}")</b>
             <br />
             <div class="image-cropper">
                 <img src="@(ImageBase64 ?? "//placehold.it/100")" class="rounded-circle z-depth-0"
@@ -42,8 +41,6 @@
 
     public ITreatmentSessionOutput Model { get; set; }
 
-    public IUserProfileOutput ProfileInfo { get; set; }
-
     public string ImageBase64 { get; set; }
 
     protected async override Task OnInitializedAsync()
@@ -51,13 +48,12 @@
         var patientReferenceId = await LocalStorage.GetItemAsync<Guid>("PatientReferenceId");
         Model = await TreatmentSessionService.GetAppointment(ReferenceId, patientReferenceId);
 
-        ProfileInfo = await UserService.GetProfile();
-
-        SetImageView(Convert.ToBase64String(ProfileInfo.Avatar));
+        SetImageView(Model.Patient.Avatar);
     }
 
-    private void SetImageView(string imageBase64Data)
+    private void SetImageView(byte[] imageContent)
     {
+        var imageBase64Data = Convert.ToBase64String(imageContent);
         ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
     }
 }

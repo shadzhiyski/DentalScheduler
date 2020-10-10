@@ -10,6 +10,7 @@ using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 using DentalScheduler.Web.UI.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using DentalScheduler.UseCases.Scheduling.Dto.Input;
+using Mapster;
 
 namespace DentalScheduler.Web.UI.Components
 {
@@ -53,6 +54,10 @@ namespace DentalScheduler.Web.UI.Components
 
         public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
 
+        public PatientViewModel PatientInfo { get; set; } = new PatientViewModel();
+
+        public string ImageBase64 { get; set; }
+
         protected async override Task OnInitializedAsync()
         {
             EditContext = new EditContext(Model);
@@ -79,7 +84,17 @@ namespace DentalScheduler.Web.UI.Components
                 Model.TreatmentReferenceId = result.Treatment.ReferenceId;
                 Model.Start = result.Start;
                 Model.End = result.End;
+
+                result.Patient.Adapt(PatientInfo);
+
+                SetImageView(PatientInfo.Avatar);
             }
+        }
+
+        private void SetImageView(byte[] imageContent)
+        {
+            var imageBase64Data = Convert.ToBase64String(imageContent);
+            ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
         }
 
         async Task LoadDentalTeams()

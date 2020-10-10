@@ -5,6 +5,24 @@
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />
 
+    <AuthorizeView Roles="Dentist">
+        <Authorized Context="Auth">
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div style="margin-top:20px">Patient:</div>
+                </div>
+                <div class="col">
+                    <div class="image-cropper">
+                        <img src="@(ImageBase64 ?? "//placehold.it/100")" class="rounded-circle z-depth-0"
+                        alt="avatar image">
+                    </div>
+                    <br />
+                    <b>@($"{PatientInfo?.FirstName} {PatientInfo?.LastName}")</b>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+
     <div class="form-group row">
         <div class="col-md-3">
             <label for="@nameof(Model.DentalTeamReferenceId)">Dental Team</label>
