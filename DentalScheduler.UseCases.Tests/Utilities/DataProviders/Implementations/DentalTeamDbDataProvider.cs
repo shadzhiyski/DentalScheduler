@@ -47,14 +47,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
             foreach (var dentistUserName in dentistsUserNames)
             {
-                var (dentistUser, _) = UserDbDataProvider.ProvideDentist(dentistUserName, $"{dentistUserName}#123");
-                var dentist = new DentalWorker
-                {
-                    IdentityUserId = dentistUser.Id.ToString()
-                };
-
-                DentistRepository.Add(dentist);
-                UoW.Save();
+                var (dentistUser, dentist) = UserDbDataProvider.ProvideDentist(dentistUserName, $"{dentistUserName}#123");
 
                 var dentalTeamParticipant = new DentalTeamParticipant
                 {
