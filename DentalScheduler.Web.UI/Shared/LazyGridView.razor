@@ -20,18 +20,41 @@
 
 <br />
 <div>
-    <button class="btn btn-secondary" @onclick="@(e => NavigateTo("first"))">@("<<")</button>
-    <button class="btn btn-secondary" @onclick="@(e => NavigateTo("prev"))">Prev</button>
-    @for (int i = 0; i < TotalLoadedPages; i++)
-    {
-        var pageNumber = i;
-        <button class="btn @(CurrentPage == pageNumber ? "btn-dark" : "btn-info")"
-                @onclick="@(e => UpdateList(pageNumber))">
-            @(i + 1)
-        </button>
-    }
-    <button class="btn btn-secondary" @onclick="@(e => NavigateTo("next"))">Next</button>
-    <button class="btn btn-secondary" @onclick="@(e => NavigateTo("last"))">@(">>")</button>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center pagination-lg">
+            <li class="page-item">
+                <button class="page-link" @onclick="@(e => NavigateTo("first"))" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">First</span>
+                </button>
+            </li>
+            <li class="page-item">
+                <button class="page-link" @onclick="@(e => NavigateTo("prev"))" aria-label="Previous">
+                    <span aria-hidden="true">Prev</span>
+                    <span class="sr-only">Previous</span>
+                </button>
+            </li>
+            @for (int i = 0; i < TotalLoadedPages; i++)
+            {
+                var pageNumber = i;
+                <li class="page-item @(CurrentPage == pageNumber ? "active" : "")">
+                    <button class="page-link" @onclick="@(e => UpdateList(pageNumber))">@(pageNumber + 1)</button>
+                </li>
+            }
+            <li class="page-item">
+                <button class="page-link" @onclick="@(e => NavigateTo("next"))" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </li>
+            <li class="page-item @(EndReached ? "" : "disabled")">
+                <button class="page-link" @onclick="@(e => NavigateTo("last"))" aria-label="Last">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Last</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 @code {
@@ -60,6 +83,8 @@
 
     public int CurrentPage { get; set; }
 
+    public bool EndReached { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         await UpdateList();
@@ -81,7 +106,7 @@
 
     private async Task UpdateList(int pageNumber = 0)
     {
-        if (TotalLoadedPages <= pageNumber)
+        if (TotalLoadedPages <= pageNumber && !EndReached)
         {
             if (Items == null)
             {
@@ -89,7 +114,14 @@
             }
 
             var loadedPageItems = await OnPageLoad.Invoke(new PageLoadEventArgs(pageNumber));
-            Items.AddRange(loadedPageItems);
+            if (loadedPageItems.Count == 0)
+            {
+                EndReached = true;
+            }
+            else
+            {
+                Items.AddRange(loadedPageItems);
+            }
         }
 
         PageItems = Items.Skip(pageNumber * PageSize).Take(PageSize).ToList();
