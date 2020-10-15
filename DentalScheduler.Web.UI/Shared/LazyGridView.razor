@@ -52,7 +52,7 @@
     public int PageSize { get; set; } = 5;
 
     [Parameter]
-    public bool IsDataUpdated { get; set; }
+    public bool Refresh { get; set; }
 
     public List<TItem> PageItems { get; set; } = new List<TItem>();
 
@@ -63,17 +63,17 @@
     protected override async Task OnInitializedAsync()
     {
         await UpdateList();
-        IsDataUpdated = false;
+        Refresh = false;
 
         base.OnInitialized();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender && IsDataUpdated)
+        if (!firstRender && Refresh)
         {
             await UpdateList();
-            IsDataUpdated = false;
+            Refresh = false;
         }
 
         base.OnAfterRender(firstRender);
