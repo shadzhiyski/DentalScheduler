@@ -103,3 +103,14 @@
     </div>
 </EditForm>
 
+<AuthorizeView Roles="Dentist">
+    <Authorized Context="Auth">
+        @if (Model?.PatientReferenceId.HasValue ?? false)
+        {
+            <PatientHistoryGridView
+                PatientReferenceId="@(Model.PatientReferenceId.Value)"
+                PageSize="2"
+                SearchEnabled="false" />
+        }
+    </Authorized>
+</AuthorizeView>
