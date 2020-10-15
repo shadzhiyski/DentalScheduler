@@ -26,7 +26,7 @@ namespace DentalScheduler.Web.UI
         }
 
         public async Task MarkUserAsLoggedInAsync(
-            IUserCredentialsInput credentials, 
+            IUserCredentialsInput credentials,
             string accessToken)
         {
             var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(accessToken);
@@ -59,14 +59,14 @@ namespace DentalScheduler.Web.UI
             await LocalStorage.RemoveItemAsync("PatientReferenceId");
 
             var claimsPrincipal = await GetClaimsPrincipalAsync();
-            
+
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
         }
 
         private async Task<ClaimsPrincipal> GetClaimsPrincipalAsync()
         {
             var claims = new List<Claim>();
-            
+
             if (await LocalStorage.ContainKeyAsync("UserName"))
             {
                 var userName = await LocalStorage.GetItemAsync<string>("UserName");
@@ -79,7 +79,7 @@ namespace DentalScheduler.Web.UI
                 claims.Add(new Claim(ClaimTypes.Role, roleName));
             }
 
-            var identity =  claims.Count > 0 
+            var identity =  claims.Count > 0
                 ? new ClaimsIdentity(claims, "apiauth_type")
                 : new ClaimsIdentity();
             var claimsPrincipal = new ClaimsPrincipal(identity);

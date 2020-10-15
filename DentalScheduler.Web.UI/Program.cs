@@ -39,17 +39,17 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<AuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
             builder.Services.AddScoped<ApplicationAuthenticationStateProvider, ApplicationAuthenticationStateProvider>();
-            
+
             var seriveProvider = builder.Services.BuildServiceProvider();
-            builder.Services.AddHttpClient("AuthClient", client => 
+            builder.Services.AddHttpClient("AuthClient", client =>
                 {
                     var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
                     client.BaseAddress = new Uri($"{appSettings.Value.ApiBaseAddress}/");
                 })
                 .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
                 .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
-            
-            builder.Services.AddHttpClient("UserClient", client => 
+
+            builder.Services.AddHttpClient("UserClient", client =>
                 {
                     var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
                     client.BaseAddress = new Uri($"{appSettings.Value.ApiBaseAddress}/");
@@ -58,7 +58,7 @@ namespace DentalScheduler.Web.UI
                 .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
                 .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
 
-            builder.Services.AddHttpClient("DataClient", client => 
+            builder.Services.AddHttpClient("DataClient", client =>
                 {
                     var appSettings = seriveProvider.GetRequiredService<IOptions<AppSettings>>();
                     client.BaseAddress = new Uri($"{appSettings.Value.ApiBaseAddress}/odata/");
@@ -66,12 +66,12 @@ namespace DentalScheduler.Web.UI
                 .AddHttpMessageHandler<AuthorizationHeaderHttpHandler>()
                 .AddHttpMessageHandler<BlazorDisplaySpinnerAutomaticallyHttpMessageHandler>()
                 .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler());
-            builder.Services.AddScoped<ODataClient>(sp => 
+            builder.Services.AddScoped<ODataClient>(sp =>
                 {
                     var httpClient = sp.GetRequiredService<IHttpClientFactory>()
                         .CreateClient("DataClient");
                     var clientSettings = new ODataClientSettings(httpClient);
-                    
+
                     return new ODataClient(clientSettings);
                 });
 
@@ -81,7 +81,7 @@ namespace DentalScheduler.Web.UI
             builder.Services.AddFileReaderService(
                 options => options.UseWasmSharedBuffer = true
             );
-            
+
             builder.RootComponents.Add<App>("app");
 
             await builder.Build().RunAsync();
@@ -98,7 +98,7 @@ namespace DentalScheduler.Web.UI
             services.AddHttpClient<IAuthService, AuthService>("AuthClient");
             services.AddHttpClient<IUserService, UserService>("UserClient");
             services.AddHttpClient<ITreatmentSessionService, TreatmentSessionService>("DataClient");
-            
+
             services.AddSingleton<ISpinnerService, SpinnerService>();
         }
 

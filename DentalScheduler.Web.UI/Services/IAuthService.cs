@@ -8,7 +8,7 @@ namespace DentalScheduler.Web.UI.Services
     public interface IAuthService
     {
         Task<IResult<IAccessTokenOutput>> LoginAsync(IUserCredentialsInput input);
-        
+
         Task<IResult<IAccessTokenOutput>> RegisterUserAsync(IUserCredentialsInput input);
 
         Task<IResult<IAccessTokenOutput>> RefreshTokenAsync(IUserCredentialsInput input);

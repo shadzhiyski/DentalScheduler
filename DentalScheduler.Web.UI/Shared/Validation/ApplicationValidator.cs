@@ -28,7 +28,7 @@ namespace DentalScheduler.Web.UI.Shared.Validation
             {
                 throw new NullReferenceException($"{nameof(Validator)} must be placed within an {nameof(EditForm)}");
             }
-            
+
             SetupEditContext();
         }
 
@@ -60,7 +60,7 @@ namespace DentalScheduler.Web.UI.Shared.Validation
         {
             FieldIdentifier fieldIdentifier = args.FieldIdentifier;
             ValidationMessageStore.Clear(fieldIdentifier);
-            
+
             var model = fieldIdentifier.Model as TModel;
             if (model != null)
             {
@@ -76,7 +76,7 @@ namespace DentalScheduler.Web.UI.Shared.Validation
                 var fieldIdentifier = new FieldIdentifier(model, error.PropertyName);
                 ValidationMessageStore.Add(fieldIdentifier, error.Errors);
             }
-            
+
             EditContext.NotifyValidationStateChanged();
         }
     }

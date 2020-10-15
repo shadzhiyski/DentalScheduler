@@ -14,9 +14,9 @@ namespace DentalScheduler.Web.UI.Services
 
         Task<List<TreatmentSessionOutput>> GetAppointmentsHistoryAsync(
             Guid patientReferenceId,
-            int pageIndex, 
+            int pageIndex,
             int pageSize);
-        
+
         Task<TreatmentSessionOutput> GetAppointment(Guid referenceId, Guid patientReferenceId);
 
         Task AddAppointmentsAsync(ITreatmentSessionInput input);

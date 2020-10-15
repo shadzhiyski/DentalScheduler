@@ -20,7 +20,7 @@ namespace DentalScheduler.Web.UI.Services
             ODataClient = oDataClient;
             HttpClient = httpClient;
         }
-        
+
         public ODataClient ODataClient { get; }
 
         public HttpClient HttpClient { get; }
@@ -30,7 +30,7 @@ namespace DentalScheduler.Web.UI.Services
             => (await ODataClient
                     .For<TreatmentSessionViewModel>("TreatmentSession")
                     .Expand(m => m.Treatment)
-                    .Select(m => new 
+                    .Select(m => new
                     {
                         m.ReferenceId,
                         m.PatientReferenceId,
@@ -49,7 +49,7 @@ namespace DentalScheduler.Web.UI.Services
 
         public async Task<List<TreatmentSessionOutput>> GetAppointmentsHistoryAsync(
             Guid patientReferenceId,
-            int pageIndex, 
+            int pageIndex,
             int pageSize)
             => (await ODataClient
                     .For<TreatmentSessionOutput>("TreatmentSession")
@@ -79,7 +79,7 @@ namespace DentalScheduler.Web.UI.Services
         public async Task AddAppointmentsAsync(ITreatmentSessionInput input)
             => await HttpClient.PostAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
 
-        public async Task EditAppointmentsAsync(ITreatmentSessionInput input) 
+        public async Task EditAppointmentsAsync(ITreatmentSessionInput input)
             => await HttpClient.PutAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
     }
 }

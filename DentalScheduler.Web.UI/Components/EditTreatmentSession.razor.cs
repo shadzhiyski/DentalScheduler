@@ -17,7 +17,7 @@ namespace DentalScheduler.Web.UI.Components
     public partial class EditTreatmentSession
     {
         public const int DefaultDurationInMinutes = 30;
-        
+
         [Parameter]
         public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
 
@@ -26,10 +26,10 @@ namespace DentalScheduler.Web.UI.Components
 
         [Inject]
         DialogService DialogService { get; set; }
-        
+
         [Inject]
         IDentalTeamService DentalTeamService { get; set; }
-        
+
         [Inject]
         ITreatmentService TreatmentService { get; set; }
 
@@ -45,7 +45,7 @@ namespace DentalScheduler.Web.UI.Components
         public int? StandardDurationInMinutes => Treatments?.SingleOrDefault(
                 t => Model.TreatmentReferenceId?.Equals(t.ReferenceId) ?? false
             )?.DurationInMinutes;
-        
+
         public int DurationInMinutes { get; set; }
 
         public IEnumerable<DentalTeamDropDownViewModel> DentalTeams { get; set; }
@@ -74,7 +74,7 @@ namespace DentalScheduler.Web.UI.Components
             if (Model.ReferenceId != Guid.Empty)
             {
                 var result = await TreatmentSessionService.GetAppointment(
-                    Model.ReferenceId, 
+                    Model.ReferenceId,
                     Model.PatientReferenceId.Value
                 );
 
@@ -114,13 +114,13 @@ namespace DentalScheduler.Web.UI.Components
             SetPeriod();
         }
 
-        void OnPeriodChange() 
+        void OnPeriodChange()
             => SetPeriod();
-        
-        void SetDurationInMinutes() 
+
+        void SetDurationInMinutes()
             => DurationInMinutes = StandardDurationInMinutes ?? DefaultDurationInMinutes;
 
-        void SetPeriod() 
+        void SetPeriod()
             => Model.End = Model.Start.Value.AddMinutes(DurationInMinutes);
 
         void Approve()
@@ -128,8 +128,8 @@ namespace DentalScheduler.Web.UI.Components
 
         void Reject()
             => Model.Status = "Rejected";
-        
-        private void OnSubmit() 
+
+        private void OnSubmit()
             => DialogService.Close(Model);
     }
 }

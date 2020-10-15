@@ -4,11 +4,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 
-namespace DentalScheduler.Web.UI.Handlers 
+namespace DentalScheduler.Web.UI.Handlers
 {
-    public class AuthorizationHeaderHttpHandler : DelegatingHandler 
+    public class AuthorizationHeaderHttpHandler : DelegatingHandler
     {
-        public AuthorizationHeaderHttpHandler(ILocalStorageService localStorage) 
+        public AuthorizationHeaderHttpHandler(ILocalStorageService localStorage)
         {
             LocalStorage = localStorage;
         }
@@ -17,7 +17,7 @@ namespace DentalScheduler.Web.UI.Handlers
 
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
-            CancellationToken cancellationToken) 
+            CancellationToken cancellationToken)
         {
             if (request.Headers.Authorization == default)
             {

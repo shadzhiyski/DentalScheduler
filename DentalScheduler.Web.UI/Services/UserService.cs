@@ -40,8 +40,8 @@ namespace DentalScheduler.Web.UI.Services
             var content = new MultipartFormDataContent();
 
             content.Add(
-                content: new ByteArrayContent(input.Avatar, 0, input.Avatar.Length), 
-                name: nameof(input.Avatar), 
+                content: new ByteArrayContent(input.Avatar, 0, input.Avatar.Length),
+                name: nameof(input.Avatar),
                 fileName: nameof(input.Avatar)
             );
 

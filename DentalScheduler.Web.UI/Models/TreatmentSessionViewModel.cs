@@ -5,7 +5,7 @@ namespace DentalScheduler.Web.UI.Models
     public class TreatmentSessionViewModel
     {
         public Guid ReferenceId { get; set; }
-        
+
         public Guid PatientReferenceId { get; set; }
 
         public TreatmentViewModel Treatment { get; set; }
@@ -15,7 +15,7 @@ namespace DentalScheduler.Web.UI.Models
         public DateTime Start { get; set; }
 
         public DateTime End { get; set; }
-        
+
         public string Status { get; set; }
     }
 }

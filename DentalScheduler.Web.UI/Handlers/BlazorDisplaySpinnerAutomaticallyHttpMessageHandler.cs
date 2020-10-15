@@ -16,16 +16,16 @@ namespace DentalScheduler.Web.UI.Handlers
         public ISpinnerService SpinnerService { get; }
 
         protected override async Task<HttpResponseMessage> SendAsync(
-            HttpRequestMessage request, 
+            HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
             SpinnerService.Show();
-            
+
             var response = await base.SendAsync(request, cancellationToken);
 
             SpinnerService.Hide();
-            
-            return response; 
+
+            return response;
         }
     }
 }
