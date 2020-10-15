@@ -160,7 +160,7 @@ namespace DentalScheduler.Web.Api
             {
                 endpoints.EnableDependencyInjection();
                 endpoints.MapControllers();
-                endpoints.Select().Filter().Expand().OrderBy().Count();
+                endpoints.Select().Filter().Expand().OrderBy().Count().MaxTop(1000).SkipToken();
                 endpoints.MapODataRoute(routeName: "odata", routePrefix: "odata", model: GetEdmModel());
             });
         }

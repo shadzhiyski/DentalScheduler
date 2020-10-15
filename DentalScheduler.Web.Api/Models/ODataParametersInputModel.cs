@@ -20,7 +20,13 @@ namespace DentalScheduler.Web.Api.Models
         [FromQuery(Name = "$apply")]
         public string Apply { get; set; }
 
+        [FromQuery(Name = "$skip")]
+        public int Skip { get; set; }
+
+        [FromQuery(Name = "$top")]
+        public int Top { get; set; }
+
         [FromQuery(Name = "$count")]
-        public string Count { get; set; }
+        public bool Count { get; set; }
     }
 }
