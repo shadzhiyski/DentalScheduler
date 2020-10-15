@@ -4,7 +4,8 @@
         Items="TreatmentSessions"
         Refresh="@IsDataLoaded"
         PageSize="@PageSize"
-        OnPageLoad="@(async (args) => await LoadTreatmentSessionsAsync(args))">
+        OnPageLoad="@(async (args) => await LoadTreatmentSessionsAsync(args))"
+        LargePaginationButtons="@LargePaginationButtons">
     <GridColumns>
         <GridColumn ColumnTitle="Name"
             SearchEnabled="@SearchEnabled"
@@ -48,6 +49,9 @@
 
     [Parameter]
     public Action<ChangeEventArgs, string> SearchTextChanged { get; set; }
+
+    [Parameter]
+    public bool LargePaginationButtons { get; set; } = false;
 
     public int PageNumber { get; set; }
 

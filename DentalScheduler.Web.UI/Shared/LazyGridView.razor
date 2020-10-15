@@ -21,7 +21,7 @@
 <br />
 <div>
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center pagination-lg">
+        <ul class="pagination justify-content-center @(LargePaginationButtons ? "pagination-lg" : "")">
             <li class="page-item">
                 <button class="page-link" @onclick="@(e => NavigateTo("first"))" aria-label="First">
                     <span aria-hidden="true">&laquo;</span>
@@ -76,6 +76,9 @@
 
     [Parameter]
     public bool Refresh { get; set; }
+
+    [Parameter]
+    public bool LargePaginationButtons { get; set; } = false;
 
     public List<TItem> PageItems { get; set; } = new List<TItem>();
 
