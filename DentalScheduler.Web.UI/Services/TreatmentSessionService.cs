@@ -47,6 +47,23 @@ namespace DentalScheduler.Web.UI.Services
                 )
                 .ToList();
 
+        public async Task<List<TreatmentSessionOutput>> GetAppointmentsHistoryAsync(
+            Guid patientReferenceId,
+            int pageIndex, 
+            int pageSize)
+            => (await ODataClient
+                    .For<TreatmentSessionOutput>("TreatmentSession")
+                    .Expand(m => m.Treatment)
+                    .Expand(m => m.DentalTeam)
+                    .Expand(m => m.Patient)
+                    .Filter(m => m.PatientReferenceId == patientReferenceId)
+                    .OrderByDescending(m => m.Start)
+                    .Skip(pageIndex * pageSize)
+                    .Top(pageSize)
+                    .FindEntriesAsync()
+                )
+                .ToList();
+
         public async Task<TreatmentSessionOutput> GetAppointment(Guid referenceId, Guid patientReferenceId)
             => await ODataClient
                 .For<TreatmentSessionOutput>("TreatmentSession")
