@@ -76,7 +76,7 @@
             Refresh = false;
         }
 
-        base.OnAfterRender(firstRender);
+        await base.OnAfterRenderAsync(firstRender);
     }
 
     private async Task UpdateList(int pageNumber = 0)
