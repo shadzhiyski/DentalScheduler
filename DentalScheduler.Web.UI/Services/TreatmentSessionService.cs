@@ -56,6 +56,27 @@ namespace DentalScheduler.Web.UI.Services
                     .Expand(m => m.Treatment)
                     .Expand(m => m.DentalTeam)
                     .Expand(m => m.Patient)
+                    .Select(m => new
+                    {
+                        m.ReferenceId,
+                        m.PatientReferenceId,
+                        m.Status,
+                        m.Start,
+                        m.End,
+                        Treatment = new
+                        {
+                            m.Treatment.Name
+                        },
+                        DentalTeam = new
+                        {
+                            m.DentalTeam.Name
+                        },
+                        Patient = new
+                        {
+                            FirstName = m.Patient.FirstName,
+                            LastName = m.Patient.LastName
+                        }
+                    })
                     .Filter(m => m.PatientReferenceId == patientReferenceId)
                     .OrderByDescending(m => m.Start)
                     .Skip(pageIndex * pageSize)
