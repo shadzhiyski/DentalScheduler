@@ -1,0 +1,30 @@
+@page "/History"
+@attribute [Authorize(Roles = "Patient")]
+
+@if (PatientReferenceId != Guid.Empty)
+{
+    <PatientHistoryGridView
+        PatientReferenceId="@PatientReferenceId"
+        PageSize="12"
+        SearchEnabled="false" />
+}
+
+@code {
+
+    [Inject]
+    public ILocalStorageService LocalStorage { get; set; }
+
+    public Guid PatientReferenceId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        PatientReferenceId = await LocalStorage.GetItemAsync<Guid>("PatientReferenceId");
+
+        StateHasChanged();
+    }
+
+    protected override bool ShouldRender()
+    {
+        return PatientReferenceId != Guid.Empty;
+    }
+}

@@ -20,6 +20,15 @@
                     </li>
                 </Authorized>
             </AuthorizeView>
+            <AuthorizeView Roles="Patient">
+                <Authorized>
+                    <li class="nav-item @(ActivePage == "history" ? "active" : "")">
+                        <NavLink class="nav-link font-weight-bold" href="history" @onclick="@(() => NavigationClicked("history"))">
+                            <span class="oi oi-list-rich" aria-hidden="true"> </span> History
+                        </NavLink>
+                    </li>
+                </Authorized>
+            </AuthorizeView>
             <li class="nav-item @(ActivePage == "about" ? "active " : "")">
                 <a href="http://blazor.net" target="_blank" class="nav-link font-weight-bold"><span class="oi oi-list-rich" aria-hidden="true"></span> About</a>
             </li>
