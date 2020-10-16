@@ -24,9 +24,9 @@ namespace DentalScheduler.Web.UI.Services
 
         public async Task<byte[]> GetAvatar()
             => await (
-                    await HttpClient.GetAsync("api/User/avatar")
-                )
-                .Content.ReadAsByteArrayAsync();
+                await HttpClient.GetAsync("api/User/avatar")
+            )
+            .Content.ReadAsByteArrayAsync();
 
         public async Task<IUserProfileOutput> GetProfile()
             => await (
