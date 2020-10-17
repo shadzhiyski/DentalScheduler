@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalScheduler.Entities;
 using DentalScheduler.Entities.Identity;
@@ -12,5 +13,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         Task<(User, DentalWorker)> ProvideDentist(string userName, string password);
 
         Task<(User, Patient)> ProvidePatient(string userName, string password);
+
+        Task<IEnumerable<IdentityRole>> ProvideRoles(params string[] roles);
     }
 }

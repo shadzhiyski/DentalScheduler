@@ -4,6 +4,8 @@ using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {
@@ -11,17 +13,21 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
     {
         public UserDbDataProvider(
             IUserService<User> userService,
+            IRoleService<IdentityRole> roleService,
             IGenericRepository<Patient> patientRepository,
             IGenericRepository<DentalWorker> dentistRepository,
             IUnitOfWork uoW)
         {
             UserService = userService;
+            RoleService = roleService;
             PatientRepository = patientRepository;
             DentistRepository = dentistRepository;
             UoW = uoW;
         }
 
         public IUserService<User> UserService { get; }
+
+        public IRoleService<IdentityRole> RoleService { get; }
 
         public IGenericRepository<Patient> PatientRepository { get; }
 
@@ -91,6 +97,23 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             await UoW.SaveAsync();
 
             return (user, patient);
+        }
+
+        public async Task<IEnumerable<IdentityRole>> ProvideRoles(params string[] roles)
+        {
+            var identityRoles = new List<IdentityRole>();
+            foreach (var role in roles)
+            {
+                var identityRole = new IdentityRole()
+                {
+                    Name = role
+                };
+
+                await RoleService.CreateAsync(identityRole);
+                identityRoles.Add(identityRole);
+            }
+
+            return identityRoles;
         }
     }
 }

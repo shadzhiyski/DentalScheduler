@@ -71,6 +71,12 @@ namespace DentalScheduler.UseCases.Tests.Utilities
                 .GetAwaiter()
                 .GetResult()
                 .ToList();
+
+            var userDbDataProvider = ServiceProvider.GetRequiredService<IUserDbDataProvider>();
+
+            userDbDataProvider.ProvideRoles("Admin", "Dentist", "Patient")
+                .GetAwaiter()
+                .GetResult();
         }
 
         public void Dispose()
