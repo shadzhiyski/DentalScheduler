@@ -18,13 +18,13 @@ namespace DentalScheduler.UseCases.Tests.Scheduling
             Sut = ServiceProvider.GetRequiredService<IAddTreatmentSessionCommand>();
             
             var (_, patient) = ServiceProvider.GetRequiredService<IUserDbDataProvider>()
-                .ProvidePatient("patient", "patient#123")
+                .ProvidePatientAsync("patient", "patient#123")
                 .GetAwaiter()
                 .GetResult();
             Patient = patient;
 
             DentalTeam = ServiceProvider.GetRequiredService<IDentalTeamDbDataProvider>()
-                .ProvideDentalTeam("Dental Team 1", "Room 1", "dentist")
+                .ProvideDentalTeamAsync("Dental Team 1", "Room 1", "dentist")
                 .GetAwaiter()
                 .GetResult();
         }

@@ -8,12 +8,12 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {
     public interface IUserDbDataProvider
     {
-        Task<User> ProvideAdmin(string userName, string password);
+        Task<User> ProvideAdminAsync(string userName, string password);
 
-        Task<(User, DentalWorker)> ProvideDentist(string userName, string password);
+        Task<(User, DentalWorker)> ProvideDentistAsync(string userName, string password);
 
-        Task<(User, Patient)> ProvidePatient(string userName, string password);
+        Task<(User, Patient)> ProvidePatientAsync(string userName, string password);
 
-        Task<IEnumerable<IdentityRole>> ProvideRoles(params string[] roles);
+        Task<IEnumerable<IdentityRole>> ProvideRolesAsync(params string[] roles);
     }
 }

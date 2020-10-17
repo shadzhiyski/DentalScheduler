@@ -35,7 +35,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
 
-        public async Task<User> ProvideAdmin(string userName, string password)
+        public async Task<User> ProvideAdminAsync(string userName, string password)
         {
             var user = new User
             {
@@ -50,7 +50,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             return user;
         }
 
-        public async Task<(User, DentalWorker)> ProvideDentist(string userName, string password)
+        public async Task<(User, DentalWorker)> ProvideDentistAsync(string userName, string password)
         {
             var user = new User
             {
@@ -75,7 +75,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             return (user, dentist);
         }
 
-        public async Task<(User, Patient)> ProvidePatient(string userName, string password)
+        public async Task<(User, Patient)> ProvidePatientAsync(string userName, string password)
         {
             var user = new User
             {
@@ -99,7 +99,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
             return (user, patient);
         }
 
-        public async Task<IEnumerable<IdentityRole>> ProvideRoles(params string[] roles)
+        public async Task<IEnumerable<IdentityRole>> ProvideRolesAsync(params string[] roles)
         {
             var identityRoles = new List<IdentityRole>();
             foreach (var role in roles)

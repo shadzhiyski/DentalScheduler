@@ -19,7 +19,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         
         public IUnitOfWork UoW { get; }
 
-        public async Task<IEnumerable<Treatment>> ProvideMainTreatments()
+        public async Task<IEnumerable<Treatment>> ProvideMainTreatmentsAsync()
         {
             var treatments = new List<Treatment>()
             {

@@ -67,14 +67,14 @@ namespace DentalScheduler.UseCases.Tests.Utilities
         {
             var treatmentDataProvider = ServiceProvider.GetRequiredService<ITreatmentDbDataProvider>();
 
-            Treatments = treatmentDataProvider.ProvideMainTreatments()
+            Treatments = treatmentDataProvider.ProvideMainTreatmentsAsync()
                 .GetAwaiter()
                 .GetResult()
                 .ToList();
 
             var userDbDataProvider = ServiceProvider.GetRequiredService<IUserDbDataProvider>();
 
-            userDbDataProvider.ProvideRoles("Admin", "Dentist", "Patient")
+            userDbDataProvider.ProvideRolesAsync("Admin", "Dentist", "Patient")
                 .GetAwaiter()
                 .GetResult();
         }

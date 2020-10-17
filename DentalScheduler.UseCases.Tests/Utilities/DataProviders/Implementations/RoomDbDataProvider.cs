@@ -18,7 +18,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
         
-        public async Task<Room> ProvideRoom(string name)
+        public async Task<Room> ProvideRoomAsync(string name)
         {
             var room = new Room()
             {

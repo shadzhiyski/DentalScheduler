@@ -6,6 +6,6 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {
     public interface ITreatmentDbDataProvider
     {
-        Task<IEnumerable<Treatment>> ProvideMainTreatments();
+        Task<IEnumerable<Treatment>> ProvideMainTreatmentsAsync();
     }
 }

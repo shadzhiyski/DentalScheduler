@@ -34,9 +34,9 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
         
-        public async Task<DentalTeam> ProvideDentalTeam(string teamName, string roomName, params string[] dentistsUserNames)
+        public async Task<DentalTeam> ProvideDentalTeamAsync(string teamName, string roomName, params string[] dentistsUserNames)
         {
-            var room = await RoomDbDataProvider.ProvideRoom(roomName);
+            var room = await RoomDbDataProvider.ProvideRoomAsync(roomName);
             var dentalTeam = new DentalTeam()
             {
                 Name = teamName,
@@ -48,7 +48,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
             foreach (var dentistUserName in dentistsUserNames)
             {
-                var (dentistUser, dentist) = await UserDbDataProvider.ProvideDentist(dentistUserName, $"{dentistUserName}#123");
+                var (dentistUser, dentist) = await UserDbDataProvider.ProvideDentistAsync(dentistUserName, $"{dentistUserName}#123");
 
                 var dentalTeamParticipant = new DentalTeamParticipant
                 {
