@@ -4,20 +4,20 @@ using System.Threading.Tasks;
 using DentalScheduler.Web.UI.Models;
 using Simple.OData.Client;
 
-namespace DentalScheduler.Web.UI.Services
+namespace DentalScheduler.Web.UI.Scheduling.Services
 {
-    public class TreatmentService : ITreatmentService
+    public class DentalTeamService : IDentalTeamService
     {
-        public TreatmentService(ODataClient oDataClient)
+        public DentalTeamService(ODataClient oDataClient)
         {
             ODataClient = oDataClient;
         }
 
         public ODataClient ODataClient { get; }
 
-        public async Task<IList<TreatmentDropDownViewModel>> GetTreatmentsAsync()
+        public async Task<IList<DentalTeamDropDownViewModel>> GetDentalTeamsDropDownListAsync()
             => (await ODataClient
-                    .For<TreatmentDropDownViewModel>("Treatment")
+                    .For<DentalTeamDropDownViewModel>("DentalTeam")
                     .FindEntriesAsync()
                 )
                 .ToList();

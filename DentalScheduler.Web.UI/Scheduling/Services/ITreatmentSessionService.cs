@@ -5,7 +5,7 @@ using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 using DentalScheduler.Web.UI.Models;
 
-namespace DentalScheduler.Web.UI.Services
+namespace DentalScheduler.Web.UI.Scheduling.Services
 {
     public interface ITreatmentSessionService
     {

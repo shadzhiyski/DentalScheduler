@@ -6,7 +6,7 @@ using DentalScheduler.UseCases.Identity.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 
-namespace DentalScheduler.Web.UI.Services
+namespace DentalScheduler.Web.UI.Identity.Services
 {
     public class UserService : IUserService
     {

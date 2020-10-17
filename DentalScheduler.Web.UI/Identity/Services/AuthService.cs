@@ -11,7 +11,7 @@ using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using DentalScheduler.UseCases.Common.Validation;
 
-namespace DentalScheduler.Web.UI.Services
+namespace DentalScheduler.Web.UI.Identity.Services
 {
     public class AuthService : IAuthService
     {

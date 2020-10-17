@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalScheduler.Web.UI.Services
+namespace DentalScheduler.Web.UI.Shared.Services
 {
     public class SpinnerService : ISpinnerService
     {

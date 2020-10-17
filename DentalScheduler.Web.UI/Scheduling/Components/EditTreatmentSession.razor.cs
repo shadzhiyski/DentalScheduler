@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Components.Forms;
 using DentalScheduler.Web.UI.Models;
 using Radzen;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
-using DentalScheduler.Web.UI.Services;
+using DentalScheduler.Web.UI.Scheduling.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using DentalScheduler.UseCases.Scheduling.Dto.Input;
 using Mapster;
 
-namespace DentalScheduler.Web.UI.Components
+namespace DentalScheduler.Web.UI.Scheduling.Components
 {
     public partial class EditTreatmentSession
     {

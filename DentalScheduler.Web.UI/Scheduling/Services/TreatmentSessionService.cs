@@ -9,7 +9,7 @@ using DentalScheduler.Web.UI.Models;
 using Simple.OData.Client;
 using DentalScheduler.UseCases.Scheduling.Dto.Output;
 
-namespace DentalScheduler.Web.UI.Services
+namespace DentalScheduler.Web.UI.Scheduling.Services
 {
     public class TreatmentSessionService : ITreatmentSessionService
     {
