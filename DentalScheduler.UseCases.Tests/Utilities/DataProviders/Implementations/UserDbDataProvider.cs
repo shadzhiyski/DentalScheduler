@@ -3,6 +3,7 @@ using DentalScheduler.Entities;
 using DentalScheduler.Entities.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
+using System.Threading.Tasks;
 
 namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {
@@ -28,7 +29,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
 
-        public User ProvideAdmin(string userName, string password)
+        public async Task<User> ProvideAdmin(string userName, string password)
         {
             var user = new User
             {
@@ -37,13 +38,13 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            UserService.CreateAsync(user, password);
-            UserService.AddToRoleAsync(user, "Admin");
+            await UserService.CreateAsync(user, password);
+            await UserService.AddToRoleAsync(user, "Admin");
 
             return user;
         }
 
-        public (User, DentalWorker) ProvideDentist(string userName, string password)
+        public async Task<(User, DentalWorker)> ProvideDentist(string userName, string password)
         {
             var user = new User
             {
@@ -52,8 +53,8 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            UserService.CreateAsync(user, password);
-            UserService.AddToRoleAsync(user, "Dentist");
+            await UserService.CreateAsync(user, password);
+            await UserService.AddToRoleAsync(user, "Dentist");
 
             var dentist = new DentalWorker
             {
@@ -61,14 +62,14 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
                 JobType = JobType.Dentist
             };
 
-            DentistRepository.Add(dentist);
+            await DentistRepository.AddAsync(dentist);
 
-            UoW.Save();
+            await UoW.SaveAsync();
 
             return (user, dentist);
         }
 
-        public (User, Patient) ProvidePatient(string userName, string password)
+        public async Task<(User, Patient)> ProvidePatient(string userName, string password)
         {
             var user = new User
             {
@@ -77,17 +78,17 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            UserService.CreateAsync(user, password);
-            UserService.AddToRoleAsync(user, "Patient");
+            await UserService.CreateAsync(user, password);
+            await UserService.AddToRoleAsync(user, "Patient");
 
             var patient = new Patient
             {
                 IdentityUserId = user.Id
             };
 
-            PatientRepository.Add(patient);
+            await PatientRepository.AddAsync(patient);
 
-            UoW.Save();
+            await UoW.SaveAsync();
 
             return (user, patient);
         }

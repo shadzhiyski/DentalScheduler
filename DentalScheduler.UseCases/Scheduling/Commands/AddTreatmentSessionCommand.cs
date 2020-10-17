@@ -47,9 +47,9 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
 
-            var patient = PatientRepository.SingleOrDefault(p => p.ReferenceId == input.PatientReferenceId);
-            var dentalTeam = DentalTeamRepository.SingleOrDefault(dt => dt.ReferenceId == input.DentalTeamReferenceId);
-            var treatment = TreatmentRepository.SingleOrDefault(t => t.ReferenceId == input.TreatmentReferenceId);
+            var patient = await PatientRepository.SingleOrDefaultAsync(p => p.ReferenceId == input.PatientReferenceId);
+            var dentalTeam = await DentalTeamRepository.SingleOrDefaultAsync(dt => dt.ReferenceId == input.DentalTeamReferenceId);
+            var treatment = await TreatmentRepository.SingleOrDefaultAsync(t => t.ReferenceId == input.TreatmentReferenceId);
             var treatmentSession = new TreatmentSession()
             {
                 PatientId = patient.Id,
@@ -59,7 +59,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
                 End = input.End.Value
             };
 
-            TreatmentSessionRepository.Add(treatmentSession);
+            await TreatmentSessionRepository.AddAsync(treatmentSession);
 
             await UoW.SaveAsync();
 

@@ -12,15 +12,15 @@ namespace DentalScheduler.Infrastructure.Common.Persistence.Repositories
         where TEntity : class
     {
         public DbContext DbContext { get; }
-        
+
         public GenericRepository(DbContext dbContext)
         {
             DbContext = dbContext;
         }
 
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            DbContext.Add(entity);
+            await DbContext.AddAsync(entity);
         }
 
         public IQueryable<TEntity> AsQueryable()
@@ -38,14 +38,14 @@ namespace DentalScheduler.Infrastructure.Common.Persistence.Repositories
             DbContext.RemoveRange(entities);
         }
 
-        public TEntity Single(Expression<Func<TEntity, bool>> where)
+        public async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> where)
         {
-            return DbContext.Set<TEntity>().Single(where);
+            return await DbContext.Set<TEntity>().SingleAsync(where);
         }
 
-        public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> where)
+        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> where)
         {
-            return DbContext.Set<TEntity>().SingleOrDefault(where);
+            return await DbContext.Set<TEntity>().SingleOrDefaultAsync(where);
         }
 
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> where)

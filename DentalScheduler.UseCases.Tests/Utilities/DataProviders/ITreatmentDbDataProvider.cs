@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DentalScheduler.Entities;
 
 namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 {
     public interface ITreatmentDbDataProvider
     {
-        IEnumerable<Treatment> ProvideMainTreatments();
+        Task<IEnumerable<Treatment>> ProvideMainTreatments();
     }
 }

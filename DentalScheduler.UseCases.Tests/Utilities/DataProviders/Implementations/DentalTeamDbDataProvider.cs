@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 
@@ -33,21 +34,21 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
         
-        public DentalTeam ProvideDentalTeam(string teamName, string roomName, params string[] dentistsUserNames)
+        public async Task<DentalTeam> ProvideDentalTeam(string teamName, string roomName, params string[] dentistsUserNames)
         {
-            var room = RoomDbDataProvider.ProvideRoom(roomName);
+            var room = await RoomDbDataProvider.ProvideRoom(roomName);
             var dentalTeam = new DentalTeam()
             {
                 Name = teamName,
                 RoomId = room.Id
             };
 
-            DentalTeamRepository.Add(dentalTeam);
-            UoW.Save();
+            await DentalTeamRepository.AddAsync(dentalTeam);
+            await UoW.SaveAsync();
 
             foreach (var dentistUserName in dentistsUserNames)
             {
-                var (dentistUser, dentist) = UserDbDataProvider.ProvideDentist(dentistUserName, $"{dentistUserName}#123");
+                var (dentistUser, dentist) = await UserDbDataProvider.ProvideDentist(dentistUserName, $"{dentistUserName}#123");
 
                 var dentalTeamParticipant = new DentalTeamParticipant
                 {
@@ -55,8 +56,8 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
                     TeamId = dentalTeam.Id
                 };
 
-                DentalTeamParticipantRepository.Add(dentalTeamParticipant);
-                UoW.Save();
+                await DentalTeamParticipantRepository.AddAsync(dentalTeamParticipant);
+                await UoW.SaveAsync();
             }
 
             return dentalTeam;

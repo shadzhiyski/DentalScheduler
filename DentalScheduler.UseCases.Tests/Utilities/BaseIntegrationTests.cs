@@ -67,7 +67,10 @@ namespace DentalScheduler.UseCases.Tests.Utilities
         {
             var treatmentDataProvider = ServiceProvider.GetRequiredService<ITreatmentDbDataProvider>();
 
-            Treatments = treatmentDataProvider.ProvideMainTreatments().ToList();
+            Treatments = treatmentDataProvider.ProvideMainTreatments()
+                .GetAwaiter()
+                .GetResult()
+                .ToList();
         }
 
         public void Dispose()

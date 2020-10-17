@@ -26,7 +26,7 @@ namespace DentalScheduler.Infrastructure.Identity.Services
             PatientRepository = patientRepository;
         }
         
-        public string GenerateJwt(IUserCredentialsInput userInfo, string roleName)
+        public async Task<string> GenerateJwtAsync(IUserCredentialsInput userInfo, string roleName)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -41,7 +41,7 @@ namespace DentalScheduler.Infrastructure.Identity.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
-            var patient = PatientRepository.SingleOrDefault(p => p.IdentityUser.UserName == userInfo.UserName);
+            var patient = await PatientRepository.SingleOrDefaultAsync(p => p.IdentityUser.UserName == userInfo.UserName);
             if (patient != null)
             {
                 var patientClaims = new Claim("PatientReferenceId", patient.ReferenceId.ToString());

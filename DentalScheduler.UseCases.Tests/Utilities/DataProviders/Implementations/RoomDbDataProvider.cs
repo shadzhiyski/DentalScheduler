@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 
@@ -17,16 +18,16 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
         public IUnitOfWork UoW { get; }
         
-        public Room ProvideRoom(string name)
+        public async Task<Room> ProvideRoom(string name)
         {
             var room = new Room()
             {
                 Name = name
             };
 
-            Repository.Add(room);
+            await Repository.AddAsync(room);
 
-            UoW.Save();
+            await UoW.SaveAsync();
 
             return room;
         }

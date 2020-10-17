@@ -68,7 +68,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
             
             if (treatmentSession.Treatment.ReferenceId != input.TreatmentReferenceId)
             {
-                var treatment = TreatmentRepository.SingleOrDefault(
+                var treatment = await TreatmentRepository.SingleOrDefaultAsync(
                     t => t.ReferenceId == input.TreatmentReferenceId
                 );
 
@@ -77,7 +77,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
 
             if (treatmentSession.DentalTeam.ReferenceId != input.DentalTeamReferenceId)
             {
-                var dentalTeam = DentalTeamRepository.SingleOrDefault(
+                var dentalTeam = await DentalTeamRepository.SingleOrDefaultAsync(
                     dt => dt.ReferenceId == input.DentalTeamReferenceId
                 );
 

@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 
 namespace DentalScheduler.Interfaces.Infrastructure.Identity
 {
     public interface IJwtAuthManager
     {
-         string GenerateJwt(IUserCredentialsInput userInfo, string roleName);
+        Task<string> GenerateJwtAsync(IUserCredentialsInput userInfo, string roleName);
     }
 }

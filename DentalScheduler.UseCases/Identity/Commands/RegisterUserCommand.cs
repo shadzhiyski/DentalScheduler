@@ -95,7 +95,7 @@ namespace DentalScheduler.UseCases.Identity.Commands
 
             if (userInput.RoleType.Equals(RoleType.Patient))
             {
-                PatientRepo.Add(new Patient
+                await PatientRepo.AddAsync(new Patient
                 {
                     IdentityUserId = user.Id,
 
@@ -109,10 +109,10 @@ namespace DentalScheduler.UseCases.Identity.Commands
                     JobType = JobType.Dentist
                 };
 
-                DentalWorkerRepo.Add(dentalWorker);
+                await DentalWorkerRepo.AddAsync(dentalWorker);
             }
 
-            UoW.Save();
+            await UoW.SaveAsync();
 
             // Auto login after registrаtion (successful user registration should return access_token)
             return await LoginCommand.LoginAsync(new UserCredentialsInput()

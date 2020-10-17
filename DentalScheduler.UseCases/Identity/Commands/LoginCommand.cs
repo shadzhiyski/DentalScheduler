@@ -75,7 +75,7 @@ namespace DentalScheduler.UseCases.Identity.Commands
             }
 
             var roleName = (await UserService.GetRolesAsync(user)).FirstOrDefault();
-            var tokenString = JwtAuthManager.GenerateJwt(userInput, roleName);
+            var tokenString = await JwtAuthManager.GenerateJwtAsync(userInput, roleName);
 
             return new Result<IAccessTokenOutput>(new AccessTokenOutput(tokenString));
         }

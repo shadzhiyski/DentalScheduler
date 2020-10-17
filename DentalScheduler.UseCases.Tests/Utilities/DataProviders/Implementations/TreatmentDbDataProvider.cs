@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 
@@ -18,7 +19,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         
         public IUnitOfWork UoW { get; }
 
-        public IEnumerable<Treatment> ProvideMainTreatments()
+        public async Task<IEnumerable<Treatment>> ProvideMainTreatments()
         {
             var treatments = new List<Treatment>()
             {
@@ -46,10 +47,10 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
 
             foreach (var treatment in treatments)
             {
-                Repository.Add(treatment);
+                await Repository.AddAsync(treatment);
             }
 
-            UoW.Save();
+            await UoW.SaveAsync();
 
             return treatments;
         }
