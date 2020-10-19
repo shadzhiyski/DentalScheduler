@@ -19,7 +19,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        PatientReferenceId = await LocalStorage.GetItemAsync<Guid>("PatientReferenceId");
+        PatientReferenceId = await LocalStorage
+            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId);
 
         StateHasChanged();
     }

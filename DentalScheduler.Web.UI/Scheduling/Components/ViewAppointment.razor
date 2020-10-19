@@ -45,7 +45,8 @@
 
     protected async override Task OnInitializedAsync()
     {
-        var patientReferenceId = await LocalStorage.GetItemAsync<Guid>("PatientReferenceId");
+        var patientReferenceId = await LocalStorage
+            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId);
         Model = await TreatmentSessionService.GetAppointment(ReferenceId, patientReferenceId);
 
         SetImageView(Model.Patient.Avatar);

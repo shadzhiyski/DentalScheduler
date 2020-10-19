@@ -71,7 +71,8 @@
         var user = (await AuthenticationStateTask).User;
         if (user.Identity.IsAuthenticated)
         {
-            UserName = await LocalStorage.GetItemAsync<string>("UserName");
+            UserName = await LocalStorage
+                .GetItemAsync<string>(Identity.LocalStorageKeys.User.UserName);
 
             var avatar = await UserService.GetAvatar();
             if (avatar.LongLength > 0)

@@ -21,7 +21,9 @@ namespace DentalScheduler.Web.UI.Shared.Handlers
         {
             if (request.Headers.Authorization == default)
             {
-                var accessToken = await LocalStorage.GetItemAsync<string>("AccessToken");
+                var accessToken = await LocalStorage
+                    .GetItemAsync<string>(Identity.LocalStorageKeys.Auth.AccessToken);
+
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             }
 

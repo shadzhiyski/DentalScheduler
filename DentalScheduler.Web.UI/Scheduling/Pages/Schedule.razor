@@ -97,7 +97,8 @@
                     {
                         Status = "Requested",
                         DentalTeamReferenceId = default,
-                        PatientReferenceId = await LocalStorage.GetItemAsync<Guid>("PatientReferenceId"),
+                        PatientReferenceId = await LocalStorage
+                            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId),
                         TreatmentReferenceId = default,
                         Start = args.Start,
                         End = args.End

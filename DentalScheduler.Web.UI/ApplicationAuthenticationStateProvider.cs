@@ -34,17 +34,17 @@ namespace DentalScheduler.Web.UI
                 .FirstOrDefault(c => c.Type.Equals(ClaimTypes.Role))
                 ?.Value;
 
-            await LocalStorage.SetItemAsync("UserName", credentials.UserName);
-            await LocalStorage.SetItemAsync("Role", roleName);
-            await LocalStorage.SetItemAsync("AccessToken", accessToken);
+            await LocalStorage.SetItemAsync(Identity.LocalStorageKeys.User.UserName, credentials.UserName);
+            await LocalStorage.SetItemAsync(Identity.LocalStorageKeys.User.RoleName, roleName);
+            await LocalStorage.SetItemAsync(Identity.LocalStorageKeys.Auth.AccessToken, accessToken);
 
             var patienReferenceIdAsString = jwtSecurityToken.Claims
-                .FirstOrDefault(c => c.Type.Equals("PatientReferenceId"))
+                .FirstOrDefault(c => c.Type.Equals(Scheduling.LocalStorageKeys.Patient.ReferenceId))
                 ?.Value;
             var patienReferenceId = patienReferenceIdAsString != null
                 ? new Guid(patienReferenceIdAsString)
                 : Guid.Empty;
-            await LocalStorage.SetItemAsync("PatientReferenceId", patienReferenceId);
+            await LocalStorage.SetItemAsync(Scheduling.LocalStorageKeys.Patient.ReferenceId, patienReferenceId);
 
             var claimsPrincipal = await GetClaimsPrincipalAsync();
 
@@ -53,10 +53,10 @@ namespace DentalScheduler.Web.UI
 
         public async Task MarkUserAsLoggedOutAsync()
         {
-            await LocalStorage.RemoveItemAsync("UserName");
-            await LocalStorage.RemoveItemAsync("Role");
-            await LocalStorage.RemoveItemAsync("AccessToken");
-            await LocalStorage.RemoveItemAsync("PatientReferenceId");
+            await LocalStorage.RemoveItemAsync(Identity.LocalStorageKeys.User.UserName);
+            await LocalStorage.RemoveItemAsync(Identity.LocalStorageKeys.User.RoleName);
+            await LocalStorage.RemoveItemAsync(Identity.LocalStorageKeys.Auth.AccessToken);
+            await LocalStorage.RemoveItemAsync(Scheduling.LocalStorageKeys.Patient.ReferenceId);
 
             var claimsPrincipal = await GetClaimsPrincipalAsync();
 
@@ -67,15 +67,17 @@ namespace DentalScheduler.Web.UI
         {
             var claims = new List<Claim>();
 
-            if (await LocalStorage.ContainKeyAsync("UserName"))
+            if (await LocalStorage.ContainKeyAsync(Identity.LocalStorageKeys.User.UserName))
             {
-                var userName = await LocalStorage.GetItemAsync<string>("UserName");
+                var userName = await LocalStorage
+                    .GetItemAsync<string>(Identity.LocalStorageKeys.User.UserName);
                 claims.Add(new Claim(ClaimTypes.Name, userName));
             }
 
-            if (await LocalStorage.ContainKeyAsync("Role"))
+            if (await LocalStorage.ContainKeyAsync(Identity.LocalStorageKeys.User.RoleName))
             {
-                var roleName = await LocalStorage.GetItemAsync<string>("Role");
+                var roleName = await LocalStorage
+                    .GetItemAsync<string>(Identity.LocalStorageKeys.User.RoleName);
                 claims.Add(new Claim(ClaimTypes.Role, roleName));
             }
 
