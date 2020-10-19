@@ -34,17 +34,13 @@ namespace DentalScheduler.UseCases.Scheduling.Validation
             RuleFor(model => model.End)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .NotEmpty();
-            
-            RuleFor(model => model.Status)
-                .IsEnumName(typeof(TreatmentSessionStatus));
-
-            RuleFor(model => model.End)
-                .GreaterThan(model => model.Start);
-            
-            RuleFor(model => model.End)
+                .NotEmpty()
+                .GreaterThan(model => model.Start)
                 .LessThanOrEqualTo(model => model.Start.Value.AddHours(2))
                 .WithMessage("The duration of the treatment session must not be longer than 2 hours.");
+
+            RuleFor(model => model.Status)
+                .IsEnumName(typeof(TreatmentSessionStatus));
         }
     }
 }
