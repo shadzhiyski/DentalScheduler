@@ -39,7 +39,7 @@ namespace DentalScheduler.Web.UI
             await LocalStorage.SetItemAsync(Identity.LocalStorageKeys.Auth.AccessToken, accessToken);
 
             var patienReferenceIdAsString = jwtSecurityToken.Claims
-                .FirstOrDefault(c => c.Type.Equals(Scheduling.LocalStorageKeys.Patient.ReferenceId))
+                .FirstOrDefault(c => c.Type.Equals("PatientReferenceId"))
                 ?.Value;
             var patienReferenceId = patienReferenceIdAsString != null
                 ? new Guid(patienReferenceIdAsString)
