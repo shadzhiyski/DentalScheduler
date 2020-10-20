@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI.UseCases.Common
 {
-    public static class AllRegistrations
+    internal static class AllRegistrations
     {
         public static IServiceCollection AddCommon(this IServiceCollection services)
         {
