@@ -1,3 +1,5 @@
+using DentalScheduler.Config.DI.Infrastructure.Common;
+using DentalScheduler.Config.DI.Infrastructure.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI.Infrastructure
@@ -6,7 +8,7 @@ namespace DentalScheduler.Config.DI.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
             => services
-                .AddIdentity()
-                .AddPersistence();
+                .AddCommon()
+                .AddIdentity();
     }
 }

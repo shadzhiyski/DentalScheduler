@@ -4,11 +4,11 @@ using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalScheduler.Config.DI.Infrastructure
+namespace DentalScheduler.Config.DI.Infrastructure.Common
 {
-    static class PersistenceRegistrations
+    internal static class AllRegistrations
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services)
+        public static IServiceCollection AddCommon(this IServiceCollection services)
             => services
                 .AddScoped<DbContext, DentalSchedulerDbContext>()
                 .AddScoped<DentalSchedulerDbContext>()
