@@ -8,7 +8,7 @@ namespace DentalScheduler.Config.DI.Infrastructure
 {
     static class PersistenceRegistrations
     {
-        public static IServiceCollection RegisterPersistence(this IServiceCollection services)
+        public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
             services.AddScoped<DbContext, DentalSchedulerDbContext>();
             services.AddScoped<DentalSchedulerDbContext>();

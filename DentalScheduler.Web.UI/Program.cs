@@ -34,7 +34,7 @@ namespace DentalScheduler.Web.UI
 
             RegisterHandlers(builder.Services);
 
-            builder.Services.RegisterDependencies();
+            builder.Services.AddDependencies();
 
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();

@@ -8,7 +8,7 @@ namespace DentalScheduler.Config.DI.Infrastructure
 {
     static class IdentityRegistrations
     {
-        public static IServiceCollection RegisterIdentity(this IServiceCollection services)
+        public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services.AddTransient<IJwtAuthManager, JwtAuthManager>();
             services.AddTransient<IUserService<User>, UserService>();

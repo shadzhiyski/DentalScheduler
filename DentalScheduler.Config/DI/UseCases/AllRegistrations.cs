@@ -7,10 +7,10 @@ namespace DentalScheduler.Config.DI.UseCases
 {
     public static class AllRegistrations
     {
-        public static IServiceCollection RegisterUseCases(this IServiceCollection services)
+        public static IServiceCollection AddUseCases(this IServiceCollection services)
             => services
-                .RegisterCommon()
-                .RegisterIdentity()
-                .RegisterScheduling();
+                .AddCommon()
+                .AddIdentity()
+                .AddScheduling();
     }
 }

@@ -4,9 +4,9 @@ namespace DentalScheduler.Config.DI.Infrastructure
 {
     public static class AllRegistrations
     {
-        public static IServiceCollection RegisterInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
             => services
-                .RegisterIdentity()
-                .RegisterPersistence();
+                .AddIdentity()
+                .AddPersistence();
     }
 }

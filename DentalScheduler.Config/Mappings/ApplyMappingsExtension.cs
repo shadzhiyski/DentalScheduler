@@ -5,7 +5,7 @@ namespace DentalScheduler.Config.Mappings
 {
     public static class ApplyMappingsExtension
     {
-        public static IServiceCollection RegisterMappings(this IServiceCollection services)
+        public static IServiceCollection AddMappings(this IServiceCollection services)
         {
             var config = new TypeAdapterConfig();
             services.AddSingleton<TypeAdapterConfig>(config);
