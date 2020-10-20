@@ -7,11 +7,8 @@ namespace DentalScheduler.Config.DI.UseCases.Scheduling
     static class CommandsRegistrations
     {
         public static IServiceCollection AddCommands(this IServiceCollection services)
-        {
-            services.AddTransient<IAddTreatmentSessionCommand, AddTreatmentSessionCommand>();
-            services.AddTransient<IUpdateTreatmentSessionCommand, UpdateTreatmentSessionCommand>();
-            
-            return services;
-        }
+            => services
+                .AddTransient<IAddTreatmentSessionCommand, AddTreatmentSessionCommand>()
+                .AddTransient<IUpdateTreatmentSessionCommand, UpdateTreatmentSessionCommand>();
     }
 }

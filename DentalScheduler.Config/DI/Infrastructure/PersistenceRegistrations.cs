@@ -9,13 +9,10 @@ namespace DentalScheduler.Config.DI.Infrastructure
     static class PersistenceRegistrations
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services)
-        {
-            services.AddScoped<DbContext, DentalSchedulerDbContext>();
-            services.AddScoped<DentalSchedulerDbContext>();
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            return services;
-        }
+            => services
+                .AddScoped<DbContext, DentalSchedulerDbContext>()
+                .AddScoped<DentalSchedulerDbContext>()
+                .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
+                .AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

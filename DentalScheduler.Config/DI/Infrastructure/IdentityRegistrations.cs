@@ -9,12 +9,9 @@ namespace DentalScheduler.Config.DI.Infrastructure
     static class IdentityRegistrations
     {
         public static IServiceCollection AddIdentity(this IServiceCollection services)
-        {
-            services.AddTransient<IJwtAuthManager, JwtAuthManager>();
-            services.AddTransient<IUserService<User>, UserService>();
-            services.AddTransient<IRoleService<IdentityRole>, RoleService>();
-
-            return services;
-        }
+            => services
+                .AddTransient<IJwtAuthManager, JwtAuthManager>()
+                .AddTransient<IUserService<User>, UserService>()
+                .AddTransient<IRoleService<IdentityRole>, RoleService>();
     }
 }

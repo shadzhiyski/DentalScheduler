@@ -7,12 +7,8 @@ namespace DentalScheduler.Config.DI.UseCases.Common
     internal static class AllRegistrations
     {
         public static IServiceCollection AddCommon(this IServiceCollection services)
-        {
-            services.AddTransient<ImageValidator>();
-            
-            services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
-            
-            return services;
-        }
+            => services
+                .AddTransient<ImageValidator>()
+                .AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
     }
 }

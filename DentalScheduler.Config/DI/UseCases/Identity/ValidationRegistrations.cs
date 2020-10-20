@@ -8,16 +8,14 @@ namespace DentalScheduler.Config.DI.UseCases.Identity
     static class ValidationRegistrations
     {
         public static IServiceCollection AddValidation(this IServiceCollection services)
-            => services.AddBasicValidation();
+            => services
+                .AddBasicValidation();
 
         public static IServiceCollection AddBasicValidation(this IServiceCollection services)
-        {
-            services.AddTransient<AbstractValidator<ILinkUserAndRoleInput>, LinkUserAndRoleValidator>();
-            services.AddTransient<AbstractValidator<ICreateRoleInput>, CreateRoleValidator>();
-            services.AddTransient<AbstractValidator<IUserCredentialsInput>, UserCredentialsValidator>();
-            services.AddTransient<AbstractValidator<IUserProfileInput>, UserProfileValidator>();
-
-            return services;
-        }
+            => services
+                .AddTransient<AbstractValidator<ILinkUserAndRoleInput>, LinkUserAndRoleValidator>()
+                .AddTransient<AbstractValidator<ICreateRoleInput>, CreateRoleValidator>()
+                .AddTransient<AbstractValidator<IUserCredentialsInput>, UserCredentialsValidator>()
+                .AddTransient<AbstractValidator<IUserProfileInput>, UserProfileValidator>();
     }
 }
