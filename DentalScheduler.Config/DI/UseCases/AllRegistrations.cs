@@ -12,5 +12,11 @@ namespace DentalScheduler.Config.DI.UseCases
                 .AddCommon()
                 .AddIdentity()
                 .AddScheduling();
+
+        public static IServiceCollection AddLightUseCases(this IServiceCollection services)
+            => services
+                .AddCommon()
+                .AddLightIdentity()
+                .AddLightScheduling();
     }
 }

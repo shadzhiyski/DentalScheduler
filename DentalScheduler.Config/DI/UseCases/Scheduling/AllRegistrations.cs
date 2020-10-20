@@ -8,5 +8,9 @@ namespace DentalScheduler.Config.DI.UseCases.Scheduling
             => services
                 .AddCommands()
                 .AddValidation();
+
+        public static IServiceCollection AddLightScheduling(this IServiceCollection services)
+            => services
+                .AddBasicValidation();
     }
 }

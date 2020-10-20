@@ -12,5 +12,10 @@ namespace DentalScheduler.Config.DI
                 .AddInfrastructure()
                 .AddUseCases()
                 .AddMappings();
+
+        public static IServiceCollection AddLightDependencies(this IServiceCollection services)
+            => services
+                .AddLightUseCases()
+                .AddMappings();
     }
 }
