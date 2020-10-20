@@ -7,7 +7,7 @@ namespace DentalScheduler.Config.DI.UseCases.Scheduling
 {
     static class ValidationRegistrations
     {
-        public static IServiceCollection RegisterValidation(this IServiceCollection services)
+        public static IServiceCollection AddValidation(this IServiceCollection services)
             => services.AddBasicValidation();
 
         public static IServiceCollection AddBasicValidation(this IServiceCollection services)

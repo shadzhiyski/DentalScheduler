@@ -6,8 +6,8 @@ namespace DentalScheduler.Config.DI.UseCases.Identity
     {
         public static IServiceCollection AddIdentity(this IServiceCollection services)
             => services
-                .RegisterCommands()
-                .RegisterQueries()
-                .RegisterValidation();
+                .AddCommands()
+                .AddQueries()
+                .AddValidation();
     }
 }

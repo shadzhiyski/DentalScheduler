@@ -6,7 +6,7 @@ namespace DentalScheduler.Config.DI.UseCases.Identity
 {
     static class CommandsRegistrations
     {
-        public static IServiceCollection RegisterCommands(this IServiceCollection services)
+        public static IServiceCollection AddCommands(this IServiceCollection services)
         {
             services.AddTransient<ILoginCommand, LoginCommand>();
             services.AddTransient<IRegisterUserCommand, RegisterUserCommand>();

@@ -6,7 +6,7 @@ namespace DentalScheduler.Config.DI.UseCases.Scheduling
     {
         public static IServiceCollection AddScheduling(this IServiceCollection services)
             => services
-                .RegisterCommands()
-                .RegisterValidation();
+                .AddCommands()
+                .AddValidation();
     }
 }

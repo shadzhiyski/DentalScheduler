@@ -6,7 +6,7 @@ namespace DentalScheduler.Config.DI.UseCases.Identity
 {
     static class QueriesRegistrations
     {
-        public static IServiceCollection RegisterQueries(this IServiceCollection services)
+        public static IServiceCollection AddQueries(this IServiceCollection services)
         {
             services.AddTransient<IGetUserProfileQuery, GetUserProfileQuery>();
             
