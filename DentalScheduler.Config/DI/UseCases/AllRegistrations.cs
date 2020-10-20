@@ -11,6 +11,6 @@ namespace DentalScheduler.Config.DI.UseCases
             => services
                 .RegisterCommon()
                 .RegisterIdentity()
-                .RegisterTreatmentSessions();
+                .RegisterScheduling();
     }
 }
