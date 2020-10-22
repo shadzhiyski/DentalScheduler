@@ -6,6 +6,7 @@ using DentalScheduler.Config.DI;
 using DentalScheduler.Infrastructure.Common.Persistence;
 using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities.Identity;
+using DentalScheduler.Web.Api.Filters;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
@@ -62,6 +63,8 @@ namespace DentalScheduler.Web.Api
 
             services.AddSwaggerGen(c =>
             {
+                c.OperationFilter<ODataCommonParametersFilter>(); 
+
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
                 {
                     Description = "JWT Authorization header using the Bearer scheme.",

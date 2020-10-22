@@ -29,7 +29,7 @@ namespace DentalScheduler.Web.Api.Controllers
 
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<TreatmentOutput> Get([FromQuery] ODataParametersInputModel filter)
+        public IQueryable<TreatmentOutput> Get()
         {
             return Repository.AsQueryable()
                 .ProjectToType<TreatmentOutput>(MappingConfig);
