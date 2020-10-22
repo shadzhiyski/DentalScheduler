@@ -6,7 +6,6 @@ using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.Infrastructure.Persistence;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Commands;
-using DentalScheduler.Web.Api.Models;
 using Mapster;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
