@@ -36,50 +36,12 @@ namespace DentalScheduler.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDependencies();
+            services.AddDependencies(Configuration);
 
             services.AddTransient(typeof(Lazy<>), typeof(Lazy<>));
             
             services.AddControllers();
 
-            services.AddDbContext<DentalSchedulerDbContext>(opt => 
-                    opt.UseNpgsql(Configuration.GetConnectionString("DentalSchedulerDbConnection"),
-                            x => x.MigrationsAssembly("DentalScheduler.Infrastructure"))
-                );
-
-            // Add Identity
-            services.AddIdentity<User, IdentityRole>(options =>
-                {
-                    options.SignIn.RequireConfirmedAccount = true;
-
-                    options.Password.RequireDigit = false;
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
-                })
-                .AddEntityFrameworkStores<DentalSchedulerDbContext>()
-                .AddSignInManager()
-                .AddDefaultTokenProviders();
-
-            // Add JWT Authentication
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.RequireHttpsMetadata = false;
-                    options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
-                        ClockSkew = TimeSpan.Zero
-                    };
-                });
             services.AddAuthorization();
 
             services.AddOData();

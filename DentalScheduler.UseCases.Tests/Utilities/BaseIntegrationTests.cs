@@ -26,7 +26,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities
 
             ServiceCollection = serviceCollection;
 
-            ServiceCollection.AddDependencies();
+            ServiceCollection.AddDependencies(Configuration);
 
             ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
 
