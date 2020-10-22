@@ -12,6 +12,6 @@ namespace DentalScheduler.Config.DI.Infrastructure
             IConfiguration configuration)
             => services
                 .AddCommon(configuration)
-                .AddIdentity();
+                .AddIdentity(configuration);
     }
 }
