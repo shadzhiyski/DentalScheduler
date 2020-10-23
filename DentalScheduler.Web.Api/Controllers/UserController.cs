@@ -1,13 +1,10 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using DentalScheduler.UseCases.Identity.Dto.Input;
-using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
 using DentalScheduler.Interfaces.UseCases.Identity.Commands;
 using DentalScheduler.Interfaces.UseCases.Identity.Queries;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalScheduler.Web.Api.Controllers

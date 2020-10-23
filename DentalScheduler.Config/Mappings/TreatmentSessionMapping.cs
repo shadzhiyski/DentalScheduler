@@ -1,7 +1,6 @@
 using DentalScheduler.UseCases.Scheduling.Dto.Input;
 using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Output;
 using Mapster;
 
