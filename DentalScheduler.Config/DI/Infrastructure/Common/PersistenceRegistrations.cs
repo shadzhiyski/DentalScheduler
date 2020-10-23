@@ -18,8 +18,7 @@ namespace DentalScheduler.Config.DI.Infrastructure.Common
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddDbContext<DentalSchedulerDbContext>(opt =>
-                    opt.UseNpgsql(configuration.GetConnectionString("DentalSchedulerDbConnection"),
-                            x => x.MigrationsAssembly("DentalScheduler.Infrastructure"))
+                    opt.UseNpgsql(configuration.GetConnectionString("DentalSchedulerDbConnection"))
                 );
     }
 }
