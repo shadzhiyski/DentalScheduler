@@ -36,6 +36,8 @@ namespace DentalScheduler.Web.UI
 
             builder.Services.AddLightDependencies();
 
+            builder.Services.AddLocalization();
+
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
             builder.Services.AddBlazoredLocalStorage();
@@ -86,7 +88,12 @@ namespace DentalScheduler.Web.UI
 
             builder.RootComponents.Add<App>("app");
 
-            await builder.Build().RunAsync();
+            var host = builder.Build();
+
+            var localizationService = host.Services.GetRequiredService<ILocalizationService>();
+            await localizationService.SetDefaultCultureAsync();
+
+            await host.RunAsync();
         }
 
         private static void RegisterServices(IServiceCollection services)
@@ -102,6 +109,7 @@ namespace DentalScheduler.Web.UI
             services.AddHttpClient<ITreatmentSessionService, TreatmentSessionService>("DataClient");
 
             services.AddSingleton<ISpinnerService, SpinnerService>();
+            services.AddSingleton<ILocalizationService, LocalizationService>();
         }
 
         private static void RegisterHandlers(IServiceCollection services)
