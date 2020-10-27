@@ -12,6 +12,7 @@
 @inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
 @inject IAuthService AuthService
 @inject NotificationService NotificationService
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Login> Loc
 
 @* <div class="row mb-4 px-3">
     <h6 class="mb-0 mr-4 mt-2">Sign in with</h6>
@@ -26,20 +27,20 @@
 <EditForm class="form-signin" EditContext="@EditContext" OnValidSubmit="LoginClick">
     <ApplicationValidator TModel="@IUserCredentialsInput" />
     <div class="form-group">
-        <label for="@nameof(Model.UserName)">@nameof(Model.UserName)</label>
-        <InputText id="@nameof(Model.UserName)" @bind-Value="Model.UserName" class="form-control" placeholder="User Name" />
+        <label for="@nameof(Model.UserName)">@Loc["UserName"]</label>
+        <InputText id="@nameof(Model.UserName)" @bind-Value="Model.UserName" class="form-control" placeholder="@Loc["UserNamePlaceholder"]" />
         <ValidationMessage For="@(() => Model.UserName)" />
     </div>
     <br />
     <div class="form-group">
-        <label for="@nameof(Model.Password)">@nameof(Model.Password)</label>
-        <InputText id="@nameof(Model.Password)" @bind-Value="Model.Password" class="form-control" type="password" placeholder="Password" />
+        <label for="@nameof(Model.Password)">@Loc["Password"]</label>
+        <InputText id="@nameof(Model.Password)" @bind-Value="Model.Password" class="form-control" type="password" placeholder="@Loc["PasswordPlaceholder"]" />
         <ValidationMessage For="@(() => Model.Password)" />
     </div>
     <hr class="my-4">
-    <button type="submit" class="form-control btn btn-primary btn-lg">Login</button>
+    <button type="submit" class="form-control btn btn-primary btn-lg">@Loc["LoginButton"]</button>
     <span>&nbsp;</span>
-    <button class="form-control btn btn-primary btn-lg" @onclick="@(e => NavigationManager.NavigateTo("/auth/register/"))">Register</button>
+    <button class="form-control btn btn-primary btn-lg" @onclick="@(e => NavigationManager.NavigateTo("/auth/register/"))">@Loc["RegisterButton"]</button>
 </EditForm>
 
 <style>
