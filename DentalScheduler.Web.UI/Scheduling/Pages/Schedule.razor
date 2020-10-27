@@ -74,9 +74,12 @@
                 queryPeriodEnd
             );
 
-            TreatmentSessions.AddRange(loadedAppointments);
-            
-            await scheduler.Reload();
+            if (loadedAppointments.Count > 0)
+            {
+                TreatmentSessions.AddRange(loadedAppointments);
+                
+                await scheduler.Reload();
+            }
         }
     }
 
