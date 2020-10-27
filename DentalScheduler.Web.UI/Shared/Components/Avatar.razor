@@ -4,13 +4,14 @@
 @inject NavigationManager NavigationManager
 @inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
 @inject ILocalStorageService LocalStorage
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Avatar> Loc
 
 <AuthorizeView>
     <NotAuthorized>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
                 <NavLink class="nav-link" href="auth/login">
-                    <span class="oi oi-account-login" aria-hidden="true"></span> Login
+                    <span class="oi oi-account-login" aria-hidden="true"></span> @Loc["LoginButton"]
                 </NavLink>
             </li>
         </ul>
@@ -18,7 +19,7 @@
     <Authorized>
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item nav-link">
-                <a class="nav-link active">Hello, @UserName</a>
+                <a class="nav-link active">@Loc["UserGreeting"], @UserName</a>
             </li>
             <li class="nav-item avatar dropdown @AvatarCssClass">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
@@ -29,10 +30,10 @@
                 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary bg-primary @AvatarCssClass"
                     aria-labelledby="navbarDropdownMenuLink-55">
                     <NavLink class="nav-link dropdown-item bg-primary" href="/user/profile" @onclick="ToggleAvatarMenu">
-                        <span class="oi oi-person" aria-hidden="true"></span> Profile
+                        <span class="oi oi-person" aria-hidden="true"></span> @Loc["DropdownMenu.Profile"]
                     </NavLink>
                     <NavLink class="nav-link dropdown-item bg-primary" href="/" @onclick="(() => Logout())">
-                        <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
+                        <span class="oi oi-account-logout" aria-hidden="true"></span> @Loc["DropdownMenu.Logout"]
                     </NavLink>
                 </div>
             </li>
