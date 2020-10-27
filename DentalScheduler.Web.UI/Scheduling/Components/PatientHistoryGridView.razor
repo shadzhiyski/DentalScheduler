@@ -1,5 +1,7 @@
 @using UseCases.Scheduling.Dto.Output
 
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PatientHistoryGridView> Loc
+
 <LazyGridView 
         Items="TreatmentSessions"
         Refresh="@IsDataLoaded"
@@ -7,26 +9,26 @@
         OnPageLoad="@(async (args) => await LoadTreatmentSessionsAsync(args))"
         LargePaginationButtons="@LargePaginationButtons">
     <GridColumns>
-        <GridColumn ColumnTitle="Name"
+        <GridColumn ColumnTitle="@Loc["Column.Name"]"
             SearchEnabled="@SearchEnabled"
             OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Name"))"></GridColumn>
-        <GridColumn ColumnTitle="Date"
+        <GridColumn ColumnTitle="@Loc["Column.Date"]"
             SearchEnabled="@SearchEnabled"
             OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Date"))"></GridColumn>
-        <GridColumn ColumnTitle="Duration"
+        <GridColumn ColumnTitle="@Loc["Column.Duration"]"
             SearchEnabled="@SearchEnabled"
             OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Duration"))"></GridColumn>
-        <GridColumn ColumnTitle="DentalTeam"
+        <GridColumn ColumnTitle="@Loc["Column.DentalTeam"]"
             SearchEnabled="@SearchEnabled"
             OnSearchTextChanged="@(e => OnSearchTextChanged(e, "DentalTeam"))"></GridColumn>
-        <GridColumn ColumnTitle="Treatment"
+        <GridColumn ColumnTitle="@Loc["Column.Treatment"]"
             SearchEnabled="@SearchEnabled"
             OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Treatment"))"></GridColumn>
     </GridColumns>
     <GridRow Context="TreatmentSession">
         <td scope="row">@TreatmentSession?.Patient?.FirstName @TreatmentSession?.Patient?.LastName</td>
         <td>@TreatmentSession?.Start</td>
-        <td>@(((TreatmentSession?.End - TreatmentSession?.Start) ?? TimeSpan.MinValue).TotalMinutes) min.</td>
+        <td>@(((TreatmentSession?.End - TreatmentSession?.Start) ?? TimeSpan.MinValue).TotalMinutes) @Loc["MinutesShortSuffix"]</td>
         <td>@TreatmentSession?.DentalTeam?.Name</td>
         <td>@TreatmentSession?.Treatment?.Name</td>
     </GridRow>
