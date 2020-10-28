@@ -4,7 +4,7 @@ using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace DentalScheduler.Web.UI.Shared.Validation
+namespace DentalScheduler.Web.UI.Common.Validation
 {
     public class ApplicationValidator<TModel> : ComponentBase
         where TModel : class

@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using DentalScheduler.Web.UI.Shared.Services;
+using DentalScheduler.Web.UI.Common.Services;
 
-namespace DentalScheduler.Web.UI.Shared.Handlers
+namespace DentalScheduler.Web.UI.Common.Handlers
 {
     public class BlazorDisplaySpinnerAutomaticallyHttpMessageHandler : DelegatingHandler
     {

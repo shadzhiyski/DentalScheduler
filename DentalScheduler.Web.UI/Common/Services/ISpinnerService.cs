@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalScheduler.Web.UI.Shared.Services
+namespace DentalScheduler.Web.UI.Common.Services
 {
     public interface ISpinnerService
     {

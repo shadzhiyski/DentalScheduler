@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
-namespace DentalScheduler.Web.UI.Shared.Services
+namespace DentalScheduler.Web.UI.Common.Services
 {
     public class LocalizationService : ILocalizationService
     {

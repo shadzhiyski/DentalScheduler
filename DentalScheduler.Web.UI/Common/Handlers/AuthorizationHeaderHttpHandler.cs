@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 
-namespace DentalScheduler.Web.UI.Shared.Handlers
+namespace DentalScheduler.Web.UI.Common.Handlers
 {
     public class AuthorizationHeaderHttpHandler : DelegatingHandler
     {
