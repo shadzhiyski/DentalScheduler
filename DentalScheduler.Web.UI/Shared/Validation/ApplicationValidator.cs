@@ -59,7 +59,7 @@ namespace DentalScheduler.Web.UI.Shared.Validation
         void FieldChanged(object sender, FieldChangedEventArgs args)
         {
             FieldIdentifier fieldIdentifier = args.FieldIdentifier;
-            ValidationMessageStore.Clear(fieldIdentifier);
+            ValidationMessageStore.Clear();
 
             var model = fieldIdentifier.Model as TModel;
             if (model != null)
