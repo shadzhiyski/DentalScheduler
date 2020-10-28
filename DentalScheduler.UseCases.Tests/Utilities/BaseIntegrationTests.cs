@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using DentalScheduler.Config.DI;
 using DentalScheduler.Entities;
 using DentalScheduler.UseCases.Tests.Utilities.DataProviders;
 using DentalScheduler.UseCases.Tests.DI;
@@ -29,10 +28,6 @@ namespace DentalScheduler.UseCases.Tests.Utilities
             ServiceCollection.AddDependencies(Configuration);
 
             ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
-
-            ServiceCollection.AddIdentity();
-
-            ServiceCollection.ConfigureDatabase(Configuration);
 
             ServiceCollection.RegisterTestDbDataProviders();
 
