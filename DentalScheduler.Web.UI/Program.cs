@@ -109,7 +109,7 @@ namespace DentalScheduler.Web.UI
             services.AddHttpClient<ITreatmentSessionService, TreatmentSessionService>("DataClient");
 
             services.AddSingleton<ISpinnerService, SpinnerService>();
-            services.AddSingleton<ILocalizationService, LocalizationService>();
+            services.AddTransient<ILocalizationService, LocalizationService>();
         }
 
         private static void RegisterHandlers(IServiceCollection services)

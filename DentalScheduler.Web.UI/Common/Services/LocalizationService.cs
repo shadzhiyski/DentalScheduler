@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using Microsoft.JSInterop;
+using Blazored.LocalStorage;
 
 namespace DentalScheduler.Web.UI.Common.Services
 {
     public class LocalizationService : ILocalizationService
     {
-        private const string BlazorCulturePropertyName = "blazorCulture";
+        private const string BlazorCulturePropertyName = "Localization.CurrentCulture";
 
-        public LocalizationService(IJSRuntime jsRuntime)
+        public LocalizationService(ILocalStorageService localStorage)
         {
-            JsRuntime = jsRuntime;
+            LocalStorage = localStorage;
         }
 
-        public IJSRuntime JsRuntime { get; }
+        public ILocalStorageService LocalStorage { get; }
 
         public IReadOnlyCollection<CultureInfo> GetAvaliableCultures()
             => new List<CultureInfo>
@@ -25,9 +25,11 @@ namespace DentalScheduler.Web.UI.Common.Services
 
         public async Task SetDefaultCultureAsync()
         {
-            var result = await JsRuntime.InvokeAsync<string>($"{BlazorCulturePropertyName}.get");
-            if (result != null)
+            if (await LocalStorage.ContainKeyAsync(BlazorCulturePropertyName))
             {
+                System.Console.WriteLine("SetDefaultCultureAsync");
+                var result = await LocalStorage.GetItemAsync<string>(BlazorCulturePropertyName);
+
                 var culture = new CultureInfo(result);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
@@ -39,8 +41,7 @@ namespace DentalScheduler.Web.UI.Common.Services
             var isChanged = false;
             if (CultureInfo.CurrentCulture != culture)
             {
-                var jsProcessRuntime = (IJSInProcessRuntime)JsRuntime;
-                jsProcessRuntime.InvokeVoid($"{BlazorCulturePropertyName}.set", culture.Name);
+                LocalStorage.SetItemAsync(BlazorCulturePropertyName, culture.Name);
 
                 isChanged = true;
             }
