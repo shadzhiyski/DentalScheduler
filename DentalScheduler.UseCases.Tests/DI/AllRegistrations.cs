@@ -22,7 +22,7 @@ namespace DentalScheduler.UseCases.Tests.DI
             IConfiguration configuration)
             => services
                 .AddServices()
-                .ConfigureDatabase(configuration)
+                .AddTestDbContext(configuration)
                 .AddIdentity(configuration);
     }
 }

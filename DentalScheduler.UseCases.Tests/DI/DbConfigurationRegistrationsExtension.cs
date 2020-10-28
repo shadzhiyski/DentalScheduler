@@ -8,7 +8,7 @@ namespace DentalScheduler.UseCases.Tests.DI
 {
     public static class DbConfigurationRegistrationsExtension
     {
-        public static IServiceCollection ConfigureDatabase(
+        public static IServiceCollection AddTestDbContext(
             this IServiceCollection services, 
             IConfiguration configuration)
             => services
