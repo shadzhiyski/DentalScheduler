@@ -7,8 +7,6 @@ namespace DentalScheduler.Web.UI.Common.Services
 {
     public class LocalizationService : ILocalizationService
     {
-        private const string BlazorCulturePropertyName = "Localization.CurrentCulture";
-
         public LocalizationService(ILocalStorageService localStorage)
         {
             LocalStorage = localStorage;
@@ -25,10 +23,10 @@ namespace DentalScheduler.Web.UI.Common.Services
 
         public async Task SetDefaultCultureAsync()
         {
-            if (await LocalStorage.ContainKeyAsync(BlazorCulturePropertyName))
+            if (await LocalStorage.ContainKeyAsync(LocalStorageKeys.Localization.CurrentCulture))
             {
-                System.Console.WriteLine("SetDefaultCultureAsync");
-                var result = await LocalStorage.GetItemAsync<string>(BlazorCulturePropertyName);
+                var result = await LocalStorage
+                    .GetItemAsync<string>(LocalStorageKeys.Localization.CurrentCulture);
 
                 var culture = new CultureInfo(result);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -41,7 +39,10 @@ namespace DentalScheduler.Web.UI.Common.Services
             var isChanged = false;
             if (CultureInfo.CurrentCulture != culture)
             {
-                LocalStorage.SetItemAsync(BlazorCulturePropertyName, culture.Name);
+                LocalStorage.SetItemAsync(
+                    key: LocalStorageKeys.Localization.CurrentCulture,
+                    data: culture.Name
+                );
 
                 isChanged = true;
             }
