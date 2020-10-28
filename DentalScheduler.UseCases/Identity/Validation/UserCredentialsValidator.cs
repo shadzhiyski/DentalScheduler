@@ -12,13 +12,13 @@ namespace DentalScheduler.UseCases.Identity.Validation
         public UserCredentialsValidator(IStringLocalizer<UserCredentialsValidator> localizer)
         {
             RuleFor(userInput => userInput.UserName)
-                .Cascade(CascadeMode.StopOnFirstFailure)
+                .Cascade(CascadeMode.Stop)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage(localizer["MissingUserName"]);
 
             RuleFor(userInput => userInput.Password)
-                .Cascade(CascadeMode.StopOnFirstFailure)
+                .Cascade(CascadeMode.Stop)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage(localizer["MissingPassword"]);

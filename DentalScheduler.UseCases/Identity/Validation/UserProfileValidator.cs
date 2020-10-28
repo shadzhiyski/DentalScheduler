@@ -10,12 +10,12 @@ namespace DentalScheduler.UseCases.Identity.Validation
         public UserProfileValidator(ImageValidator imageValidator)
         {
             RuleFor(model => model.FirstName)
-                .Cascade(CascadeMode.StopOnFirstFailure)
+                .Cascade(CascadeMode.Stop)
                 .NotNull()
                 .NotEmpty();
 
             RuleFor(model => model.LastName)
-                .Cascade(CascadeMode.StopOnFirstFailure)
+                .Cascade(CascadeMode.Stop)
                 .NotNull()
                 .NotEmpty();
             
