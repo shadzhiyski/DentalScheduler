@@ -10,6 +10,6 @@ namespace DentalScheduler.Web.UI.Common.Services
 
         Task SetDefaultCultureAsync();
 
-        bool SetCulture(CultureInfo culture);
+        Task<bool> SetCultureAsync(CultureInfo culture);
     }
 }

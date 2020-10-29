@@ -4,10 +4,10 @@
 @inject NavigationManager NavigationManager
 
 <div class="form-group navbar-nav ml-auto nav-flex-icons">
-    <select class="form-control bg-primary navbar-text font-weight-bold" @bind="Culture" name="@nameof(Culture)">
+    <select class="form-control bg-primary navbar-text font-weight-bold" @onchange="@(async (args) => await OnSelectedAsync(args))" name="CultureInfo">
         @foreach (var culture in SupportedCultures)
         {
-            <option class="option-item" value="@culture">@culture.DisplayName</option>
+            <option class="option-item" selected="@IsCurrentCulture(culture)" value="@culture">@culture.DisplayName</option>
         }
     </select>
 </div>
@@ -21,17 +21,20 @@
         SupportedCultures = LocalizationService.GetAvaliableCultures();
     }
 
-    CultureInfo Culture
-    {
-        get => CultureInfo.CurrentCulture;
-        set
-        {
-            var isChanged = LocalizationService.SetCulture(value);
+    bool IsCurrentCulture(CultureInfo culture)
+        => culture.Name.Equals(CultureInfo.CurrentCulture.Name);
 
-            if (isChanged)
-            {
-                NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
-            }
+    async Task OnSelectedAsync(ChangeEventArgs args)
+    {
+        var cultureName = args.Value as string;
+        var culture = new CultureInfo(cultureName);
+        
+        System.Console.WriteLine(culture.Name);
+        var isChanged = await LocalizationService.SetCultureAsync(culture);
+
+        if (isChanged)
+        {
+            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
         }
     }
 }

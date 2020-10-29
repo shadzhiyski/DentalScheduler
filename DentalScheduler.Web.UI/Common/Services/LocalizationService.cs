@@ -34,12 +34,12 @@ namespace DentalScheduler.Web.UI.Common.Services
             }
         }
 
-        public bool SetCulture(CultureInfo culture)
+        public async Task<bool> SetCultureAsync(CultureInfo culture)
         {
             var isChanged = false;
             if (CultureInfo.CurrentCulture != culture)
             {
-                LocalStorage.SetItemAsync(
+                await LocalStorage.SetItemAsync(
                     key: LocalStorageKeys.Localization.CurrentCulture,
                     data: culture.Name
                 );
