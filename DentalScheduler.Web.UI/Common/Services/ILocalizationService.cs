@@ -6,7 +6,7 @@ namespace DentalScheduler.Web.UI.Common.Services
 {
     public interface ILocalizationService
     {
-        IReadOnlyCollection<CultureInfo> GetAvaliableCultures();
+        Task<IReadOnlyCollection<CultureInfo>> GetAvaliableCulturesAsync();
 
         Task SetDefaultCultureAsync();
 

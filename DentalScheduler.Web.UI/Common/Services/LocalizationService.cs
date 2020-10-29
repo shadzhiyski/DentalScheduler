@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 
@@ -14,12 +15,13 @@ namespace DentalScheduler.Web.UI.Common.Services
 
         public ILocalStorageService LocalStorage { get; }
 
-        public IReadOnlyCollection<CultureInfo> GetAvaliableCultures()
-            => new List<CultureInfo>
-            {
-                new CultureInfo("en-US"),
-                new CultureInfo("bg-BG"),
-            }.AsReadOnly();
+        public Task<IReadOnlyCollection<CultureInfo>> GetAvaliableCulturesAsync()
+            => Task.FromResult(new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("bg-BG"),
+                }.AsReadOnly() as IReadOnlyCollection<CultureInfo>
+            );
 
         public async Task SetDefaultCultureAsync()
         {

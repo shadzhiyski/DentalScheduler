@@ -16,9 +16,9 @@
 {
     public IReadOnlyCollection<CultureInfo> SupportedCultures { get; set; } = new List<CultureInfo>().AsReadOnly();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        SupportedCultures = LocalizationService.GetAvaliableCultures();
+        SupportedCultures = await LocalizationService.GetAvaliableCulturesAsync();
     }
 
     bool IsCurrentCulture(CultureInfo culture)
