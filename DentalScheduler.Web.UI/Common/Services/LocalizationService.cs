@@ -1,20 +1,18 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using Microsoft.JSInterop;
+using Blazored.LocalStorage;
 
 namespace DentalScheduler.Web.UI.Common.Services
 {
     public class LocalizationService : ILocalizationService
     {
-        private const string BlazorCulturePropertyName = "blazorCulture";
-
-        public LocalizationService(IJSRuntime jsRuntime)
+        public LocalizationService(ILocalStorageService localStorage)
         {
-            JsRuntime = jsRuntime;
+            LocalStorage = localStorage;
         }
 
-        public IJSRuntime JsRuntime { get; }
+        public ILocalStorageService LocalStorage { get; }
 
         public IReadOnlyCollection<CultureInfo> GetAvaliableCultures()
             => new List<CultureInfo>
@@ -25,9 +23,11 @@ namespace DentalScheduler.Web.UI.Common.Services
 
         public async Task SetDefaultCultureAsync()
         {
-            var result = await JsRuntime.InvokeAsync<string>($"{BlazorCulturePropertyName}.get");
-            if (result != null)
+            if (await LocalStorage.ContainKeyAsync(LocalStorageKeys.Localization.CurrentCulture))
             {
+                var result = await LocalStorage
+                    .GetItemAsync<string>(LocalStorageKeys.Localization.CurrentCulture);
+
                 var culture = new CultureInfo(result);
                 CultureInfo.DefaultThreadCurrentCulture = culture;
                 CultureInfo.DefaultThreadCurrentUICulture = culture;
@@ -39,8 +39,10 @@ namespace DentalScheduler.Web.UI.Common.Services
             var isChanged = false;
             if (CultureInfo.CurrentCulture != culture)
             {
-                var jsProcessRuntime = (IJSInProcessRuntime)JsRuntime;
-                jsProcessRuntime.InvokeVoid($"{BlazorCulturePropertyName}.set", culture.Name);
+                LocalStorage.SetItemAsync(
+                    key: LocalStorageKeys.Localization.CurrentCulture,
+                    data: culture.Name
+                );
 
                 isChanged = true;
             }
