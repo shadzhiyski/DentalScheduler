@@ -1,4 +1,6 @@
-﻿<nav class="mb-1 navbar navbar-expand-lg navbar-dark fixed-top shadow bg-primary">
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<NavMenu> Loc
+
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark fixed-top shadow bg-primary">
     <a class="navbar-brand" href="#">DentalScheduler.Web.UI</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
     aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
@@ -10,12 +12,12 @@
                 <Authorized>
                     <li class="nav-item @(ActivePage == "home" ? "active" : "")">
                         <NavLink class="nav-link font-weight-bold" href="" Match="NavLinkMatch.All" @onclick="@(() => NavigationClicked("home"))">
-                            <span class="oi oi-home" aria-hidden="true"></span> Home
+                            <span class="oi oi-home" aria-hidden="true"></span> @Loc["Home"]
                         </NavLink>
                     </li>
                     <li class="nav-item @(ActivePage == "schedule" ? "active" : "")">
                         <NavLink class="nav-link font-weight-bold" href="schedule" @onclick="@(() => NavigationClicked("schedule"))">
-                            <span class="oi oi-calendar" aria-hidden="true"> </span> Schedule
+                            <span class="oi oi-calendar" aria-hidden="true"> </span> @Loc["Schedule"]
                         </NavLink>
                     </li>
                 </Authorized>
@@ -24,13 +26,13 @@
                 <Authorized>
                     <li class="nav-item @(ActivePage == "history" ? "active" : "")">
                         <NavLink class="nav-link font-weight-bold" href="history" @onclick="@(() => NavigationClicked("history"))">
-                            <span class="oi oi-list-rich" aria-hidden="true"> </span> History
+                            <span class="oi oi-list-rich" aria-hidden="true"> </span> @Loc["History"]
                         </NavLink>
                     </li>
                 </Authorized>
             </AuthorizeView>
             <li class="nav-item @(ActivePage == "about" ? "active " : "")">
-                <a href="http://blazor.net" target="_blank" class="nav-link font-weight-bold"><span class="oi oi-list-rich" aria-hidden="true"></span> About</a>
+                <a href="http://blazor.net" target="_blank" class="nav-link font-weight-bold"><span class="oi oi-list-rich" aria-hidden="true"></span> @Loc["About"]</a>
             </li>
         </ul>
         <CultureSelector />
