@@ -2,6 +2,8 @@
 
 @using Interfaces.UseCases.Scheduling.Dto.Input
 
+@inject Microsoft.Extensions.Localization.IStringLocalizer<EditTreatmentSession> Loc
+
 <EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
     <ApplicationValidator TModel="@ITreatmentSessionInput" />
 
@@ -9,7 +11,7 @@
         <Authorized Context="Auth">
             <div class="form-group row">
                 <div class="col-md-3">
-                    <div style="margin-top:20px">Patient:</div>
+                    <div style="margin-top:20px">@Loc["Patient"]:</div>
                 </div>
                 <div class="col">
                     <div class="image-cropper">
@@ -25,7 +27,7 @@
 
     <div class="form-group row">
         <div class="col-md-3">
-            <label for="@nameof(Model.DentalTeamReferenceId)">Dental Team</label>
+            <label for="@nameof(Model.DentalTeamReferenceId)">@Loc["DentalTeam"]</label>
         </div>
         <div class="col">
             <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="Guid?" LoadData="@LoadDentalTeams" 
@@ -37,7 +39,7 @@
     </div>
     <div class="form-group row">
         <div class="col-md-3">
-            <label for="@nameof(Model.TreatmentReferenceId)">Treatment</label>
+            <label for="@nameof(Model.TreatmentReferenceId)">@Loc["Treatment"]</label>
         </div>
         <div class="col">
             <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="Guid?" LoadData="@LoadTreatments" 
@@ -49,7 +51,7 @@
     </div>
     <div class="form-group row">
         <div class="col-md-3">
-            <label for="@nameof(Model.Start)">@nameof(Model.Start)</label>
+            <label for="@nameof(Model.Start)">@Loc["Start"]</label>
         </div>
         <div class="col">
             <RadzenDatePicker @bind-Value="@PeriodWrapperModel.Start" Name="Model.Start" ShowTime="true" Change="@(args => OnPeriodChange())" />
@@ -60,7 +62,7 @@
         <Authorized Context="Auth">
     <div class="form-group row">
         <div class="col-md-3">
-            <label for="Duration In Minutes">Duration In Minutes</label>
+            <label for="Duration In Minutes">@Loc["DurationInMinutes"]</label>
         </div>
         <div class="col">
             <RadzenNumeric TValue="int" @bind-Value="DurationInMinutes" Step="15" Min="15" Change="@(args => OnPeriodChange())" />
@@ -70,7 +72,7 @@
     </AuthorizeView>
     <div class="form-group row">
         <div class="col-md-3">
-            <label for="@nameof(Model.End)">@nameof(Model.End)</label>
+            <label for="@nameof(Model.End)">@Loc["End"]</label>
         </div>
         <div class="col">
             <RadzenDatePicker @bind-Value="@PeriodWrapperModel.End" Disabled="true" Name="Model.End" ShowTime="true" />

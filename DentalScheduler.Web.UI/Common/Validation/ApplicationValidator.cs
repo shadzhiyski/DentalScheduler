@@ -4,7 +4,7 @@ using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace DentalScheduler.Web.UI.Shared.Validation
+namespace DentalScheduler.Web.UI.Common.Validation
 {
     public class ApplicationValidator<TModel> : ComponentBase
         where TModel : class
@@ -59,7 +59,7 @@ namespace DentalScheduler.Web.UI.Shared.Validation
         void FieldChanged(object sender, FieldChangedEventArgs args)
         {
             FieldIdentifier fieldIdentifier = args.FieldIdentifier;
-            ValidationMessageStore.Clear(fieldIdentifier);
+            ValidationMessageStore.Clear();
 
             var model = fieldIdentifier.Model as TModel;
             if (model != null)

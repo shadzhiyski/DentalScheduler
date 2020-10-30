@@ -1,6 +1,6 @@
 @page "/auth/login"
 
-@layout Shared.Layouts.LoginLayout
+@layout Common.Layouts.LoginLayout
 
 @using DentalScheduler.Interfaces.UseCases.Common.Validation
 @using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input
@@ -26,6 +26,9 @@
 
 <EditForm class="form-signin" EditContext="@EditContext" OnValidSubmit="LoginClick">
     <ApplicationValidator TModel="@IUserCredentialsInput" />
+    <div class="form-group">
+        <CultureSelector />
+    </div>
     <div class="form-group">
         <label for="@nameof(Model.UserName)">@Loc["UserName"]</label>
         <InputText id="@nameof(Model.UserName)" @bind-Value="Model.UserName" class="form-control" placeholder="@Loc["UserNamePlaceholder"]" />

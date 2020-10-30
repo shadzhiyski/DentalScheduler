@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using DentalScheduler.Config.DI;
 using DentalScheduler.UseCases.Scheduling.Dto.Output;
@@ -9,10 +10,12 @@ using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OData.Edm;
 using Microsoft.OpenApi.Models;
@@ -32,6 +35,22 @@ namespace DentalScheduler.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencies(Configuration);
+
+            services.AddLocalization();
+            services.Configure<RequestLocalizationOptions>(opts =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("bg-BG"),
+                        new CultureInfo("en-US")
+                    };
+
+                    opts.DefaultRequestCulture = new RequestCulture("en-GB");
+                    // Formatting numbers, dates, etc.
+                    opts.SupportedCultures = supportedCultures;
+                    // UI strings that we have localized.
+                    opts.SupportedUICultures = supportedCultures;
+                });
 
             services.AddTransient(typeof(Lazy<>), typeof(Lazy<>));
             
@@ -96,6 +115,9 @@ namespace DentalScheduler.Web.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.UseHttpsRedirection();
 

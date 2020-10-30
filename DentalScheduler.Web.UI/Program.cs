@@ -7,9 +7,9 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using DentalScheduler.Web.UI.Identity.Services;
 using DentalScheduler.Web.UI.Scheduling.Services;
-using DentalScheduler.Web.UI.Shared.Services;
+using DentalScheduler.Web.UI.Common.Services;
 using Radzen;
-using DentalScheduler.Web.UI.Shared.Handlers;
+using DentalScheduler.Web.UI.Common.Handlers;
 using System;
 using Microsoft.Extensions.Options;
 using Simple.OData.Client;
@@ -109,7 +109,7 @@ namespace DentalScheduler.Web.UI
             services.AddHttpClient<ITreatmentSessionService, TreatmentSessionService>("DataClient");
 
             services.AddSingleton<ISpinnerService, SpinnerService>();
-            services.AddSingleton<ILocalizationService, LocalizationService>();
+            services.AddTransient<ILocalizationService, LocalizationService>();
         }
 
         private static void RegisterHandlers(IServiceCollection services)

@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 
-namespace DentalScheduler.Web.UI.Shared.Services
+namespace DentalScheduler.Web.UI.Common.Services
 {
     public interface ILocalizationService
     {
-        IReadOnlyCollection<CultureInfo> GetAvaliableCultures();
+        Task<IReadOnlyCollection<CultureInfo>> GetAvaliableCulturesAsync();
 
         Task SetDefaultCultureAsync();
 
-        bool SetCulture(CultureInfo culture);
+        Task<bool> SetCultureAsync(CultureInfo culture);
     }
 }

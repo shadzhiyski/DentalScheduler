@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Config.DI.Infrastructure.Identity
 {
-    internal static class AllRegistrations
+    public static class AllRegistrations
     {
         public static IServiceCollection AddIdentity(
             this IServiceCollection services,

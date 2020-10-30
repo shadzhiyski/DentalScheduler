@@ -1,0 +1,40 @@
+@using System.Globalization
+
+@inject ILocalizationService LocalizationService
+@inject NavigationManager NavigationManager
+
+<div class="form-group navbar-nav ml-auto nav-flex-icons">
+    <select class="form-control bg-primary navbar-text font-weight-bold" @onchange="@(async (args) => await OnSelectedAsync(args))" name="CultureInfo">
+        @foreach (var culture in SupportedCultures)
+        {
+            <option class="option-item" selected="@IsCurrentCulture(culture)" value="@culture">@culture.DisplayName</option>
+        }
+    </select>
+</div>
+
+@code
+{
+    public IReadOnlyCollection<CultureInfo> SupportedCultures { get; set; } = new List<CultureInfo>().AsReadOnly();
+
+    protected override async Task OnInitializedAsync()
+    {
+        SupportedCultures = await LocalizationService.GetAvaliableCulturesAsync();
+    }
+
+    bool IsCurrentCulture(CultureInfo culture)
+        => culture.Name.Equals(CultureInfo.CurrentCulture.Name);
+
+    async Task OnSelectedAsync(ChangeEventArgs args)
+    {
+        var cultureName = args.Value as string;
+        var culture = new CultureInfo(cultureName);
+        
+        System.Console.WriteLine(culture.Name);
+        var isChanged = await LocalizationService.SetCultureAsync(culture);
+
+        if (isChanged)
+        {
+            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+        }
+    }
+}
