@@ -141,4 +141,12 @@
     <value>Last Name</value>
     <comment/>
   </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
+    <comment/>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+    <comment/>
+  </data>
 </root>

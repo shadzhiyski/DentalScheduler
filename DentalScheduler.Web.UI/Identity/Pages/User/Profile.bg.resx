@@ -141,4 +141,12 @@
     <value>Фамилия</value>
     <comment/>
   </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Редакция на профил</value>
+    <comment/>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Запази</value>
+    <comment/>
+  </data>
 </root>
