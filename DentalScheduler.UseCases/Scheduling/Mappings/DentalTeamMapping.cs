@@ -3,7 +3,7 @@ using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Output;
 using Mapster;
 
-namespace DentalScheduler.UseCases.Scheduling.Config.Mappings
+namespace DentalScheduler.UseCases.Scheduling.Mappings
 {
     public class DentalTeamMapping : IRegister
     {

@@ -2,9 +2,9 @@ using System.Linq;
 using System.Reflection;
 using DentalScheduler.Common.Helpers.Extensions;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
-using DentalScheduler.UseCases.Common.Config.Mappings;
+using DentalScheduler.UseCases.Common.Mappings;
 using DentalScheduler.UseCases.Common.Validation;
-using DentalScheduler.UseCases.Scheduling.Config.Mappings;
+using DentalScheduler.UseCases.Scheduling.Mappings;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
