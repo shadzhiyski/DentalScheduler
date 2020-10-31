@@ -1,7 +1,5 @@
-using DentalScheduler.Config.DI.Infrastructure.Common;
-using DentalScheduler.Config.DI.Infrastructure.Identity;
-using DentalScheduler.Config.DI.UseCases;
-using DentalScheduler.Config.Mappings;
+using DentalScheduler.Infrastructure.Common.Config.DI;
+using DentalScheduler.Infrastructure.Identity.Config.DI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,8 +12,7 @@ namespace DentalScheduler.UseCases.Tests.DI
             IConfiguration configuration)
             => services
                 .AddTestInfrastructure(configuration)
-                .AddUseCases()
-                .AddMappings();
+                .AddUseCases();
 
         private static IServiceCollection AddTestInfrastructure(
             this IServiceCollection services,

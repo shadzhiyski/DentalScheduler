@@ -2,7 +2,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using DentalScheduler.Config.DI;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using DentalScheduler.Web.UI.Identity.Services;
@@ -14,6 +13,7 @@ using System;
 using Microsoft.Extensions.Options;
 using Simple.OData.Client;
 using Tewr.Blazor.FileReader;
+using DentalScheduler.UseCases;
 
 namespace DentalScheduler.Web.UI
 {
@@ -34,7 +34,8 @@ namespace DentalScheduler.Web.UI
 
             RegisterHandlers(builder.Services);
 
-            builder.Services.AddLightDependencies();
+            builder.Services
+                .AddLightUseCases();
 
             builder.Services.AddLocalization();
 
