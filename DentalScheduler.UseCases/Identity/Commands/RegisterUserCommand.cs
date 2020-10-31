@@ -6,7 +6,7 @@ using DentalScheduler.UseCases.Identity.Dto.Output;
 using DentalScheduler.UseCases.Common.Dto.Output;
 using DentalScheduler.Entities;
 using DentalScheduler.Entities.Identity;
-using DentalScheduler.Interfaces.Infrastructure.Persistence;
+using DentalScheduler.Interfaces.Infrastructure.Common.Persistence;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Output;
