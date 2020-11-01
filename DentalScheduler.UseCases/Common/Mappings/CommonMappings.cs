@@ -3,7 +3,7 @@ using DentalScheduler.Common.Helpers.Extensions;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 
-namespace DentalScheduler.Config.Mappings
+namespace DentalScheduler.UseCases.Common.Mappings
 {
     public class CommonMappings : IRegister
     {

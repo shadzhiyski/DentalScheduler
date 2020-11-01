@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.Infrastructure.Persistence;
+using DentalScheduler.Interfaces.Infrastructure.Common.Persistence;
 using DentalScheduler.Interfaces.Infrastructure.Identity;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using Microsoft.AspNetCore.Identity;

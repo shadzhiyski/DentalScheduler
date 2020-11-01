@@ -1,11 +1,11 @@
 using DentalScheduler.Infrastructure.Common.Persistence;
 using DentalScheduler.Infrastructure.Common.Persistence.Repositories;
-using DentalScheduler.Interfaces.Infrastructure.Persistence;
+using DentalScheduler.Interfaces.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalScheduler.Config.DI.Infrastructure.Common
+namespace DentalScheduler.Infrastructure.Common.Config.DI
 {
     public static class PersistenceRegistrations
     {

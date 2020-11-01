@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using DentalScheduler.Config.DI;
+using DentalScheduler.Config.DI.Infrastructure;
+using DentalScheduler.UseCases;
 using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Web.Api.Filters;
 using Microsoft.AspNet.OData.Builder;
@@ -34,7 +35,9 @@ namespace DentalScheduler.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDependencies(Configuration);
+            services
+                .AddInfrastructure(Configuration)
+                .AddUseCases();
 
             services.AddLocalization();
             services.Configure<RequestLocalizationOptions>(opts =>

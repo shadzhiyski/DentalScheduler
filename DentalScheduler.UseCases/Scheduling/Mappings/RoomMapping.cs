@@ -3,19 +3,17 @@ using DentalScheduler.Entities;
 using DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Output;
 using Mapster;
 
-namespace DentalScheduler.Config.Mappings
+namespace DentalScheduler.UseCases.Scheduling.Mappings
 {
-    public class DentalTeamMapping : IRegister
+    public class RoomMapping : IRegister
     {
         public void Register(TypeAdapterConfig config)
         {
-            config.NewConfig<DentalTeam, IDentalTeamOutput>()
-                .MapWith((src) => 
-                new DentalTeamOutput
+            config.NewConfig<Room, IRoomOutput>()
+                .MapWith((src) => new RoomOutput()
                 {
-                    Name = src.Name,
                     ReferenceId = src.ReferenceId,
-                    Room = src.Room.Adapt<RoomOutput>(config)
+                    Name = src.Name
                 });
         }
     }

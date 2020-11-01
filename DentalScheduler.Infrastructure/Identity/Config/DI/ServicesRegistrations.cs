@@ -4,7 +4,7 @@ using DentalScheduler.Interfaces.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalScheduler.Config.DI.Infrastructure.Identity
+namespace DentalScheduler.Infrastructure.Identity.Config.DI
 {
     static class ServicesRegistrations
     {

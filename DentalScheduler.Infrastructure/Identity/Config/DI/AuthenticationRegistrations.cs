@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DentalScheduler.Config.DI.Infrastructure.Identity
+namespace DentalScheduler.Infrastructure.Identity.Config.DI
 {
     static class AuthenticationRegistrations
     {

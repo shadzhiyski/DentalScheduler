@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace DentalScheduler.Interfaces.Infrastructure.Persistence
+namespace DentalScheduler.Interfaces.Infrastructure.Common.Persistence
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

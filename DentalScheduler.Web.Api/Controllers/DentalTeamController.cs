@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DentalScheduler.UseCases.Scheduling.Dto.Output;
 using DentalScheduler.Entities;
-using DentalScheduler.Interfaces.Infrastructure.Persistence;
+using DentalScheduler.Interfaces.Infrastructure.Common.Persistence;
 using Mapster;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;

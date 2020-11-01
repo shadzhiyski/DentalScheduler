@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace DentalScheduler.Interfaces.Infrastructure.Persistence
+namespace DentalScheduler.Interfaces.Infrastructure.Common.Persistence
 {
     public interface IUnitOfWork
     {
