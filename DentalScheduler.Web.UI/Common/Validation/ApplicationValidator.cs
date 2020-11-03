@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 

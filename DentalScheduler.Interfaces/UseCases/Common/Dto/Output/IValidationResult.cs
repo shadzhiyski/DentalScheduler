@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DentalScheduler.Interfaces.UseCases.Common.Validation
+namespace DentalScheduler.Interfaces.UseCases.Common.Dto.Output
 {
     public interface IValidationResult
     {

@@ -1,5 +1,6 @@
 using System.Linq;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using FluentValidation;
 using Mapster;
 

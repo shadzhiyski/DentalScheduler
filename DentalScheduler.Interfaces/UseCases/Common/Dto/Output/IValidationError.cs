@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 
-namespace DentalScheduler.Interfaces.UseCases.Common.Validation
+namespace DentalScheduler.Interfaces.UseCases.Common.Dto.Output
 {
     public interface IValidationError : IError
     {
