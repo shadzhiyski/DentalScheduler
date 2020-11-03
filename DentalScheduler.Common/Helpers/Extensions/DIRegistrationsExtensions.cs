@@ -8,25 +8,29 @@ namespace DentalScheduler.Common.Helpers.Extensions
     {
         public static IServiceCollection AddTypes(
             this IServiceCollection services,
-            Assembly assembly,
-            string typeSuffix)
+            Assembly abstractionsAssembly,
+            Assembly implementationsAssembly)
         {
-            var types = assembly
+            var abstractionsByName = abstractionsAssembly
                 .GetExportedTypes()
-                .Where(t => t.Name.EndsWith(typeSuffix))
-                .Where(t => t.IsClass && !t.IsAbstract)
-                .Select(t => new
-                {
-                    Interface = t.GetInterface($"I{t.Name}"),
-                    Implementation = t
-                })
-                .Where(t => t.Interface != null)
-                .ToList();
+                .Where(t => t.IsAbstract)
+                .Where(t => !t.Namespace.Contains("Dto"))
+                .ToDictionary(t => t.Name, t => t);
 
-            types.ForEach(
-                    t => services.AddTransient(t.Interface, t.Implementation)
-                );
-            
+            var implementationsByName = implementationsAssembly
+                .GetExportedTypes()
+                .Where(t => abstractionsByName.ContainsKey($"I{t.Name}"))
+                .ToDictionary(t => t.Name, t => t);
+
+            implementationsByName
+                .Select(type => 
+                (
+                    Abstraction: abstractionsByName[$"I{type.Key}"],
+                    Implementation: type.Value
+                ))
+                .ToList()
+                .ForEach(dependencyPair => services.AddTransient(dependencyPair.Abstraction, dependencyPair.Implementation));
+
             return services;
         }
     }

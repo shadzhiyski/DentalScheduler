@@ -1,5 +1,9 @@
+using System.Reflection;
+using DentalScheduler.Common.Helpers.Extensions;
 using DentalScheduler.Infrastructure.Common.Config.DI;
+using DentalScheduler.Infrastructure.Common.Persistence;
 using DentalScheduler.Infrastructure.Identity.Config.DI;
+using DentalScheduler.Interfaces.Infrastructure.Common.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +22,10 @@ namespace DentalScheduler.UseCases.Tests.DI
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddServices()
+                .AddTypes(
+                    abstractionsAssembly: Assembly.GetAssembly(typeof(IUnitOfWork)),
+                    implementationsAssembly: Assembly.GetAssembly(typeof(UnitOfWork))
+                )
                 .AddTestDbContext(configuration)
                 .AddIdentity(configuration);
     }

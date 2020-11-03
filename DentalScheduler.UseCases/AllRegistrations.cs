@@ -3,7 +3,6 @@ using System.Reflection;
 using DentalScheduler.Common.Helpers.Extensions;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Common.Mappings;
-using DentalScheduler.UseCases.Common.Validation;
 using DentalScheduler.UseCases.Scheduling.Mappings;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +16,10 @@ namespace DentalScheduler.UseCases
         
         public static IServiceCollection AddUseCases(this IServiceCollection services)
             => services
-                .AddTypes(CurrentAssembly, "Command")
-                .AddTypes(CurrentAssembly, "Query")
+                .AddTypes(
+                    abstractionsAssembly: Assembly.GetAssembly(typeof(IApplicationValidator<>)),
+                    implementationsAssembly: CurrentAssembly
+                )
                 .AddValidation(CurrentAssembly)
                 .AddMappings();
 
@@ -31,23 +32,25 @@ namespace DentalScheduler.UseCases
             this IServiceCollection services,
             Assembly assembly)
         {
-            var types = assembly
+            var validatorsTypes = assembly
                 .GetExportedTypes()
                 .Where(t => t.Name.EndsWith("Validator"))
-                .Where(t => t != typeof(ImageValidator))
                 .Where(t => t.IsClass && !t.IsAbstract)
+                .Where(t => t.BaseType != null)
                 .Select(t => new
                 {
+                    IsCommon = t.Namespace.Contains("Common"),
                     AbstractClass = t.BaseType,
                     Implementation = t
                 })
-                .Where(t => t.AbstractClass != null)
                 .ToList();
 
-            types.ForEach(t => services.AddTransient(t.AbstractClass, t.Implementation));
-
-            services.AddTransient<ImageValidator>();
-            services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
+            validatorsTypes
+                .Where(t => !t.IsCommon)
+                .ToList()
+                .ForEach(t => services.AddTransient(t.AbstractClass, t.Implementation));
+            validatorsTypes
+                .ForEach(t => services.AddTransient(t.Implementation));
 
             return services;
         }

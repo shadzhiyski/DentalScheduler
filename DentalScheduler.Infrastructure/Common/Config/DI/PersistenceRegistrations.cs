@@ -13,20 +13,13 @@ namespace DentalScheduler.Infrastructure.Common.Config.DI
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddServices()
                 .AddDbContext(configuration);
-
-        public static IServiceCollection AddServices(this IServiceCollection services)
-            => services
-                .AddScoped<DbContext, DentalSchedulerDbContext>()
-                .AddScoped<DentalSchedulerDbContext>()
-                .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
-                .AddScoped<IUnitOfWork, UnitOfWork>();
 
         public static IServiceCollection AddDbContext(
             this IServiceCollection services,
             IConfiguration configuration)
             => services
+                .AddScoped<DbContext, DentalSchedulerDbContext>()
                 .AddDbContext<DentalSchedulerDbContext>(opt =>
                     opt.UseNpgsql(configuration.GetConnectionString("DentalSchedulerDbConnection"))
                 );
