@@ -8,9 +8,9 @@ using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace DentalScheduler.Infrastructure.Identity.Config.DI
+namespace DentalScheduler.Infrastructure.Identity
 {
-    public static class AllRegistrations
+    public static class IdentityRegistrations
     {
         public static IServiceCollection AddIdentity(
             this IServiceCollection services,

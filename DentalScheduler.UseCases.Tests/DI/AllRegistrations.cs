@@ -1,8 +1,7 @@
 using System.Reflection;
 using DentalScheduler.Common.Helpers.Extensions;
-using DentalScheduler.Infrastructure.Common.Config.DI;
 using DentalScheduler.Infrastructure.Common.Persistence;
-using DentalScheduler.Infrastructure.Identity.Config.DI;
+using DentalScheduler.Infrastructure.Identity;
 using DentalScheduler.Interfaces.Infrastructure.Common.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

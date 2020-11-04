@@ -1,7 +1,7 @@
 using DentalScheduler.Common.Helpers.Extensions;
-using DentalScheduler.Infrastructure.Common.Config.DI;
-using DentalScheduler.Infrastructure.Identity.Config.DI;
-using DentalScheduler.Config.Mappings;
+using DentalScheduler.Infrastructure.Common;
+using DentalScheduler.Infrastructure.Identity;
+using DentalScheduler.Infrastructure.Identity.Mappings;
 using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

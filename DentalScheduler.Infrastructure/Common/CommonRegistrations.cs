@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalScheduler.Infrastructure.Common.Config.DI
+namespace DentalScheduler.Infrastructure.Common
 {
-    internal static class AllRegistrations
+    internal static class CommonRegistrations
     {
         public static IServiceCollection AddCommon(
             this IServiceCollection services,
