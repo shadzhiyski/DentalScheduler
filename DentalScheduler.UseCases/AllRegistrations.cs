@@ -2,9 +2,6 @@ using System.Linq;
 using System.Reflection;
 using DentalScheduler.Common.Helpers.Extensions;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
-using DentalScheduler.UseCases.Common.Mappings;
-using DentalScheduler.UseCases.Scheduling.Mappings;
-using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.UseCases
@@ -21,12 +18,12 @@ namespace DentalScheduler.UseCases
                     implementationsAssembly: CurrentAssembly
                 )
                 .AddValidation(CurrentAssembly)
-                .AddMappings();
+                .AddMappings(assembly: CurrentAssembly);
 
         public static IServiceCollection AddLightUseCases(this IServiceCollection services)
             => services
                 .AddBasicValidation(CurrentAssembly)
-                .AddMappings();
+                .AddMappings(assembly: CurrentAssembly);
 
         public static IServiceCollection AddBasicValidation(
             this IServiceCollection services,
@@ -51,24 +48,6 @@ namespace DentalScheduler.UseCases
                 .ForEach(t => services.AddTransient(t.AbstractClass, t.Implementation));
             validatorsTypes
                 .ForEach(t => services.AddTransient(t.Implementation));
-
-            return services;
-        }
-
-        private static IServiceCollection AddMappings(this IServiceCollection services)
-        {
-            var config = new TypeAdapterConfig();
-            services.AddSingleton<TypeAdapterConfig>(config);
-
-            config.Apply(
-                new ErrorMapping(),
-                new RoomMapping(),
-                new DentalTeamMapping(),
-                new TreatmentSessionMapping(),
-                new CommonMappings(),
-                new TreatmentMapping(),
-                new PatientMapping()
-            );
 
             return services;
         }

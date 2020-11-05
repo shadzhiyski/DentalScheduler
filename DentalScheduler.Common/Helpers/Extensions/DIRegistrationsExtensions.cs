@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.Common.Helpers.Extensions
@@ -49,6 +52,27 @@ namespace DentalScheduler.Common.Helpers.Extensions
                 ))
                 .ToList()
                 .ForEach(dependencyPair => services.AddTransient(dependencyPair.Abstraction, dependencyPair.Implementation));
+
+            return services;
+        }
+
+        public static IServiceCollection AddMappings(
+            this IServiceCollection services,
+            Assembly assembly)
+        {
+            var config = new TypeAdapterConfig();
+            services.AddSingleton<TypeAdapterConfig>(config);
+
+            assembly
+                .GetExportedTypes()
+                .Where(t => t.Namespace.Contains("Mappings"))
+                .Where(t => t.GetInterface(nameof(IRegister)) != null)
+                .ToList()
+                .ForEach(
+                    t => config.Apply(
+                        Activator.CreateInstance(t, false) as IRegister
+                    )
+                );
 
             return services;
         }

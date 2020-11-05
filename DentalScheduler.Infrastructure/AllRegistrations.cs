@@ -1,8 +1,6 @@
 using DentalScheduler.Common.Helpers.Extensions;
 using DentalScheduler.Infrastructure.Common;
 using DentalScheduler.Infrastructure.Identity;
-using DentalScheduler.Infrastructure.Identity.Mappings;
-using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -25,16 +23,6 @@ namespace DentalScheduler.Config.DI.Infrastructure
                 )
                 .AddCommon(configuration)
                 .AddIdentity(configuration)
-                .AddMappings();
-
-        public static IServiceCollection AddMappings(this IServiceCollection services)
-        {
-            var config = new TypeAdapterConfig();
-            services.AddSingleton<TypeAdapterConfig>(config);
-
-            config.Apply(new AuthResultMapping());
-
-            return services;
-        }
+                .AddMappings(assembly: CurrentAssembly);
     }
 }
