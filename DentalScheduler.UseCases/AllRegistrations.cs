@@ -2,6 +2,7 @@ using System.Linq;
 using System.Reflection;
 using DentalScheduler.Common.Helpers.Extensions;
 using DentalScheduler.Interfaces.UseCases.Common.Validation;
+using DentalScheduler.UseCases.Common.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DentalScheduler.UseCases
@@ -48,6 +49,8 @@ namespace DentalScheduler.UseCases
                 .ForEach(t => services.AddTransient(t.AbstractClass, t.Implementation));
             validatorsTypes
                 .ForEach(t => services.AddTransient(t.Implementation));
+
+            services.AddTransient(typeof(IApplicationValidator<>), typeof(ApplicationValidator<>));
 
             return services;
         }
