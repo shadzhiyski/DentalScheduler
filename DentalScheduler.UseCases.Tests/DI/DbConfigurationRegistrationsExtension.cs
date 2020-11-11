@@ -12,6 +12,7 @@ namespace DentalScheduler.UseCases.Tests.DI
             this IServiceCollection services, 
             IConfiguration configuration)
             => services
+                .AddScoped<DbContext, DentalSchedulerDbContext>()
                 .AddDbContext<DentalSchedulerDbContext>((sp, opt) => 
                     opt.UseSqlite(sp.GetRequiredService<SqliteConnection>())
                 )

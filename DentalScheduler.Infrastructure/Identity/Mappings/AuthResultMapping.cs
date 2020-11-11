@@ -5,7 +5,7 @@ using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalScheduler.Config.Mappings
+namespace DentalScheduler.Infrastructure.Identity.Mappings
 {
     public class AuthResultMapping : IRegister
     {

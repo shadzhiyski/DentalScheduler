@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DentalScheduler.Interfaces.UseCases.Common.Validation;
+using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 
 namespace DentalScheduler.UseCases.Common.Validation
 {
