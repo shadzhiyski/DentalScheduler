@@ -1,14 +1,13 @@
 @page "/user/profile"
 
 @using System.IO
-@using Tewr.Blazor.FileReader
 @using System.Threading
 @using Interfaces.UseCases.Identity.Dto.Input
 @using UseCases.Identity.Dto.Input
 @using Mapster
 @using Microsoft.AspNetCore.Http.Internal
+@using DentalScheduler.Common.Helpers.Extensions
 
-@inject IFileReaderService FileReaderService
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> Loc
 
 <h1>@Loc["EditProfile"]</h1>
@@ -22,7 +21,7 @@
                 <img src="@(ImageBase64 ?? "//placehold.it/100")" height="100" class="avatar rounded-circle" alt="avatar">
                 <h6>@Loc["UploadPhotoPlaceholder"]</h6>
 
-                <input type="file" class="form-control" @ref="FileUpload" id="@(nameof(Model.Avatar))" @onchange="OnImagePicked">
+                <InputFile OnChange="OnImageUpload" />
                 <ValidationMessage For="@(() => Model.Avatar)" />
             </div>
         </div>
@@ -97,24 +96,17 @@
         }
     }
 
-    async Task OnImagePicked()
+    async Task OnImageUpload(InputFileChangeEventArgs args)
     {
-        var files = await FileReaderService.CreateReference(FileUpload).EnumerateFilesAsync();
+        var fileStream = await args.File
+            .OpenReadStream()
+            .ToMemoryStreamAsync();
 
-        if (files == null || files.Count() == 0)
-            return;
+        Model.Avatar = new FormFile(fileStream, 0, fileStream.Length, "", "");
 
-        var base64Stream = await files.First().OpenReadBase64Async();
-        var imageBase64Data = await base64Stream.ReadAsync(
-            0,
-            (int)base64Stream.Length,
-            new CancellationTokenSource().Token
-        );
-
+        var binaryData = await fileStream.ToArrayAsync();
+        var imageBase64Data = Convert.ToBase64String(binaryData);
         SetImageView(imageBase64Data);
-
-        var stream = await files.First().CreateMemoryStreamAsync();
-        Model.Avatar = new FormFile(stream, 0, stream.Length, "", "");
     }
 
     private void SetImageView(string imageBase64Data)
