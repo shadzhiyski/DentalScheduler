@@ -2,29 +2,38 @@ using System.Linq;
 using DentalScheduler.Interfaces.UseCases.Identity.Dto.Input;
 using DentalScheduler.UseCases.Common.Validation;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace DentalScheduler.UseCases.Identity.Validation
 {
     public class UserProfileValidator : AbstractValidator<IUserProfileInput>
     {
-        public UserProfileValidator(ImageValidator imageValidator)
+        public const double AvatarMaxAllowedSizeInMb
+            = (double)Constants.UserProfileInput.AvatarMaxAllowedSizeInBytes / (1024 * 1024);
+        public UserProfileValidator(
+            IStringLocalizer<UserProfileValidator> localizer,
+            ImageValidator imageValidator)
         {
             RuleFor(model => model.FirstName)
                 .Cascade(CascadeMode.Stop)
                 .NotNull()
-                .NotEmpty();
+                .WithMessage(localizer["MissingFirstName"])
+                .NotEmpty()
+                .WithMessage(localizer["MissingFirstName"]);
 
             RuleFor(model => model.LastName)
                 .Cascade(CascadeMode.Stop)
                 .NotNull()
-                .NotEmpty();
+                .WithMessage(localizer["MissingLastName"])
+                .NotEmpty()
+                .WithMessage(localizer["MissingLastName"]);
 
             RuleFor(model => model.Avatar)
                 .SetValidator(imageValidator);
 
             RuleFor(model => model.Avatar)
                 .Must(avatar => avatar.LongLength <= Constants.UserProfileInput.AvatarMaxAllowedSizeInBytes)
-                .WithMessage($"File size too large. Maximum allowed size: {(double)Constants.UserProfileInput.AvatarMaxAllowedSizeInBytes / (1024 * 1024):0.0} MB.");
+                .WithMessage(string.Format(localizer["AvatarFileSizeTooLarge"], AvatarMaxAllowedSizeInMb));
         }
     }
 }
