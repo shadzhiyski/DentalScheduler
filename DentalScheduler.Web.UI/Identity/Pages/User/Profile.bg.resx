@@ -149,4 +149,12 @@
     <value>Запази</value>
     <comment/>
   </data>
+  <data name="FileSizeTooLargeSummary" xml:space="preserve">
+    <value>Размерът на файла е твърде голям</value>
+    <comment/>
+  </data>
+  <data name="FileSizeTooLargeMessage" xml:space="preserve">
+    <value>Максимално разрешеният размер на файл за прикачване е {0:0.0} MB.</value>
+    <comment/>
+  </data>
 </root>

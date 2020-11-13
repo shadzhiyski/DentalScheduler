@@ -7,6 +7,7 @@
 @using Mapster
 @using Microsoft.AspNetCore.Http.Internal
 @using DentalScheduler.Common.Helpers.Extensions
+@using IdentityValidationConstants = DentalScheduler.UseCases.Identity.Validation.Constants
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> Loc
 
@@ -58,6 +59,9 @@
 
 @code {
     [Inject]
+    public NotificationService NotificationService { get; set; }
+
+    [Inject]
     public Mapster.TypeAdapterConfig MappingConfig { get; set; }
 
     [Inject]
@@ -98,8 +102,25 @@
 
     async Task OnImageUpload(InputFileChangeEventArgs args)
     {
+        if (args.File.Size > IdentityValidationConstants.UserProfileInput.AvatarMaxAllowedSizeInBytes)
+        {
+            NotificationService.Notify(new NotificationMessage()
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = Loc["FileSizeTooLargeSummary"],
+                Detail = string.Format(
+                    Loc["FileSizeTooLargeMessage"],
+                    (double)IdentityValidationConstants.UserProfileInput.AvatarMaxAllowedSizeInBytes / (1024 * 1024)),
+                Duration = 8000
+            });
+
+            return;
+        }
+
         var fileStream = await args.File
-            .OpenReadStream()
+            .OpenReadStream(
+                maxAllowedSize: IdentityValidationConstants.UserProfileInput.AvatarMaxAllowedSizeInBytes
+            )
             .ToMemoryStreamAsync();
 
         Model.Avatar = new FormFile(fileStream, 0, fileStream.Length, "", "");

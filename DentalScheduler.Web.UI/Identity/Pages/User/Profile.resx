@@ -149,4 +149,12 @@
     <value>Save</value>
     <comment/>
   </data>
+  <data name="FileSizeTooLargeSummary" xml:space="preserve">
+    <value>File size too large</value>
+    <comment/>
+  </data>
+  <data name="FileSizeTooLargeMessage" xml:space="preserve">
+    <value>Maximum allowed file size for upload is {0:0.0} MB.</value>
+    <comment/>
+  </data>
 </root>
