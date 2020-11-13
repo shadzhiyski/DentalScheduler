@@ -18,9 +18,13 @@ namespace DentalScheduler.UseCases.Identity.Validation
                 .Cascade(CascadeMode.Stop)
                 .NotNull()
                 .NotEmpty();
-            
+
             RuleFor(model => model.Avatar)
                 .SetValidator(imageValidator);
+
+            RuleFor(model => model.Avatar)
+                .Must(avatar => avatar.LongLength <= Constants.UserProfileInput.AvatarMaxAllowedSizeInBytes)
+                .WithMessage($"File size too large. Maximum allowed size: {(double)Constants.UserProfileInput.AvatarMaxAllowedSizeInBytes / (1024 * 1024):0.0} MB.");
         }
     }
 }
