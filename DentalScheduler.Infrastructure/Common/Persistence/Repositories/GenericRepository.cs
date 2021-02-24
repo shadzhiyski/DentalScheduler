@@ -28,6 +28,11 @@ namespace DentalScheduler.Infrastructure.Common.Persistence.Repositories
             return DbContext.Set<TEntity>();
         }
 
+        public IQueryable<TEntity> AsNoTracking()
+        {
+            return DbContext.Set<TEntity>().AsNoTracking();
+        }
+
         public void Remove(TEntity entity)
         {
             DbContext.Remove(entity);

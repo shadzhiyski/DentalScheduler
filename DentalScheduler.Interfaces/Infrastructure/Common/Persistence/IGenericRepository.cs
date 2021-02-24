@@ -14,6 +14,8 @@ namespace DentalScheduler.Interfaces.Infrastructure.Common.Persistence
 
         IQueryable<TEntity> AsQueryable();
 
+        IQueryable<TEntity> AsNoTracking();
+
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> where);
 
         Task AddAsync(TEntity entity);

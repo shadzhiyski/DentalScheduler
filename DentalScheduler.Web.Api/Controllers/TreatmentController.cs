@@ -30,7 +30,7 @@ namespace DentalScheduler.Web.Api.Controllers
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
         public IQueryable<TreatmentOutput> Get()
         {
-            return Repository.AsQueryable()
+            return Repository.AsNoTracking()
                 .ProjectToType<TreatmentOutput>(MappingConfig);
         }
     }
