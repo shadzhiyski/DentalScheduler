@@ -3,7 +3,7 @@ using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 
 namespace DentalScheduler.UseCases.Common.Dto.Output
 {
-    public class Result<TValue> : IResult<TValue> where TValue : class
+    public record Result<TValue> : IResult<TValue> where TValue : class
     {
         public Result(
             TValue value,
@@ -27,10 +27,10 @@ namespace DentalScheduler.UseCases.Common.Dto.Output
             Type = type;
         }
 
-        public TValue Value { get; }
+        public TValue Value { get; init; }
 
-        public IEnumerable<IError> Errors { get; }
+        public IEnumerable<IError> Errors { get; init; }
 
-        public ResultType Type { get; }
+        public ResultType Type { get; init; }
     }
 }

@@ -2,7 +2,7 @@ using DentalScheduler.Interfaces.UseCases.Common.Dto.Output;
 
 namespace DentalScheduler.UseCases.Common.Dto.Output
 {
-    public class Error : IError, IMessageOutput
+    public record Error : IError, IMessageOutput
     {
         public Error(ErrorType type, string message)
         {
@@ -10,8 +10,8 @@ namespace DentalScheduler.UseCases.Common.Dto.Output
             Type = type;
         }
 
-        public ErrorType Type { get; }
+        public ErrorType Type { get; init; }
 
-        public string Message { get; set; }
+        public string Message { get; init; }
     }
 }
