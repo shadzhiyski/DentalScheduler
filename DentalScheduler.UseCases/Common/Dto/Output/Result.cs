@@ -7,30 +7,30 @@ namespace DentalScheduler.UseCases.Common.Dto.Output
     {
         public Result(
             TValue value,
-            ResultStatus status = ResultStatus.Success)
-            : this(value, new List<IError>(), status)
+            ResultType type = ResultType.Succeeded)
+            : this(value, new List<IError>(), type)
         { }
 
         public Result(
             IEnumerable<IError> errors,
-            ResultStatus status = ResultStatus.Invalid)
-            : this(default(TValue), errors, status)
+            ResultType type = ResultType.Failed)
+            : this(default(TValue), errors, type)
         { }
 
         private Result(
             TValue value,
             IEnumerable<IError> errors,
-            ResultStatus status)
+            ResultType type)
         {
             Value = value;
             Errors = errors;
-            Status = status;
+            Type = type;
         }
 
         public TValue Value { get; }
 
         public IEnumerable<IError> Errors { get; }
 
-        public ResultStatus Status { get; }
+        public ResultType Type { get; }
     }
 }

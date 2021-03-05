@@ -8,6 +8,6 @@ namespace DentalScheduler.Interfaces.UseCases.Common.Dto.Output
 
         IEnumerable<IError> Errors { get; }
 
-        ResultStatus Status { get; }
+        ResultType Type { get; }
     }
 }

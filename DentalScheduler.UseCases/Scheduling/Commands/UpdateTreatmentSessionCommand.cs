@@ -62,7 +62,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
                             $"Treatment session for the given Patient, Dental Team and period cannot be found."
                         )
                     },
-                    ResultStatus.NotFound
+                    ResultType.NotFound
                 );
             }
             
@@ -92,7 +92,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
 
             return new Result<IMessageOutput>(
                 value: new MessageOutput("Treatment Session successfully updated."),
-                status: ResultStatus.Updated
+                type: ResultType.Updated
             );
         }
     }

@@ -1,12 +1,12 @@
 namespace DentalScheduler.Interfaces.UseCases.Common.Dto.Output
 {
-    public enum ResultStatus
+    public enum ResultType
     {
-        Success = 1,
+        Succeeded = 1,
         Created = 2,
         Updated = 3,
         Deleted = 4,
-        Invalid = 5,
+        Failed = 5,
         NotFound = 6
     }
 }

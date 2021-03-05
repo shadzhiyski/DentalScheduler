@@ -65,7 +65,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
 
             return new Result<IMessageOutput>(
                 value: new MessageOutput("Treatment Session successfully created."),
-                status: ResultStatus.Created
+                type: ResultType.Created
             );
         }
     }
