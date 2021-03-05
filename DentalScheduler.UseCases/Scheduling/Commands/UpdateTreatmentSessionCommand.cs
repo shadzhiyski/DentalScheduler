@@ -90,7 +90,10 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
 
             await UoW.SaveAsync();
 
-            return new Result<IMessageOutput>(new MessageOutput("Treatment Session successfully updated."));
+            return new Result<IMessageOutput>(
+                value: new MessageOutput("Treatment Session successfully updated."),
+                status: ResultStatus.Updated
+            );
         }
     }
 }

@@ -5,8 +5,10 @@ namespace DentalScheduler.UseCases.Common.Dto.Output
 {
     public class Result<TValue> : IResult<TValue> where TValue : class
     {
-        public Result(TValue value)
-            : this(value, new List<IError>(), ResultStatus.Success)
+        public Result(
+            TValue value,
+            ResultStatus status = ResultStatus.Success)
+            : this(value, new List<IError>(), status)
         { }
 
         public Result(
@@ -18,7 +20,7 @@ namespace DentalScheduler.UseCases.Common.Dto.Output
         private Result(
             TValue value,
             IEnumerable<IError> errors,
-            ResultStatus status) 
+            ResultStatus status)
         {
             Value = value;
             Errors = errors;

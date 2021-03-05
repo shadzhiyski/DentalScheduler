@@ -10,6 +10,9 @@ namespace DentalScheduler.Web.Api.Controllers
             => result.Status switch
             {
                 ResultStatus.Success => Ok(result.Value),
+                ResultStatus.Created => Created(string.Empty, result.Value),
+                ResultStatus.Updated => NoContent(),
+                ResultStatus.Deleted => NoContent(),
                 ResultStatus.Invalid => BadRequest(result.Errors),
                 ResultStatus.NotFound => NotFound(result.Errors)
             };

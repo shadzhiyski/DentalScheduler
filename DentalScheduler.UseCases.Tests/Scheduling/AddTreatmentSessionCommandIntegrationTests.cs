@@ -52,7 +52,7 @@ namespace DentalScheduler.UseCases.Tests.Scheduling
             var messageOutput = result.Value;
 
             // Assert
-            messageOutput.Message.Should().BeEquivalentTo("Treatment Session successfully added.");
+            messageOutput.Message.Should().BeEquivalentTo("Treatment Session successfully created.");
         }
     }
 }
