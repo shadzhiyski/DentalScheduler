@@ -12,11 +12,11 @@ namespace DentalScheduler.Web.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class UserController : BaseApiController 
+    public class UserController : BaseApiController
     {
         public UserController(
             Lazy<IGetUserProfileQuery> getUserProfileQuery,
-            Lazy<IUpdateProfileCommand> updateProfileCommand) 
+            Lazy<IUpdateProfileCommand> updateProfileCommand)
         {
             GetUserProfileQuery = getUserProfileQuery;
             UpdateProfileCommand = updateProfileCommand;
@@ -28,7 +28,7 @@ namespace DentalScheduler.Web.Api.Controllers
 
         [HttpGet]
         [Route("avatar")]
-        public async Task<IActionResult> GetAvatar() 
+        public async Task<IActionResult> GetAvatar()
         {
             var result = await GetUserProfileQuery.Value.ExecuteAsync();
 
@@ -37,19 +37,19 @@ namespace DentalScheduler.Web.Api.Controllers
 
         [HttpGet]
         [Route("profile")]
-        public async Task<IUserProfileOutput> GetProfile() 
+        public async Task<IUserProfileOutput> GetProfile()
         {
             var result = await GetUserProfileQuery.Value.ExecuteAsync();
-            
+
             return result;
         }
 
         [HttpPost]
         [Route("profile")]
-        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input) 
+        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input)
         {
             var result = await UpdateProfileCommand.Value.ExecuteAsync(input);
-            
+
             return PresentResult(result);
         }
     }

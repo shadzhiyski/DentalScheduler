@@ -18,9 +18,9 @@ namespace DentalScheduler.Common.Helpers.Extensions
                 .GetExportedTypes()
                 .Where(t => t.IsAbstract)
                 .Where(t => !t.Namespace.Contains("Dto"))
-                .Select(t => 
+                .Select(t =>
                 (
-                    Name: t.IsGenericType 
+                    Name: t.IsGenericType
                         ? t.Name.Substring(0, t.Name.IndexOf('`'))
                         : t.Name,
                     Type: t
@@ -29,9 +29,9 @@ namespace DentalScheduler.Common.Helpers.Extensions
 
             var implementationsByName = implementationsAssembly
                 .GetExportedTypes()
-                .Select(t => 
+                .Select(t =>
                 (
-                    Name: t.IsGenericType 
+                    Name: t.IsGenericType
                         ? t.Name.Substring(0, t.Name.IndexOf('`'))
                         : t.Name,
                     Type: t
@@ -40,7 +40,7 @@ namespace DentalScheduler.Common.Helpers.Extensions
                 .ToDictionary(t => t.Name, t => t.Type);
 
             implementationsByName
-                .Select(type => 
+                .Select(type =>
                 (
                     Abstraction: type.Value.IsGenericType
                         ? abstractionsByName[$"I{type.Key}"]

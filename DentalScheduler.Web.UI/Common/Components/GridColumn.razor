@@ -3,17 +3,17 @@
     <div class="col-10 row">
         @ColumnTitle
         @if (SearchEnabled)
-        { 
+        {
             <input class="form-control" placeholder="search" @oninput="OnSearchTextChanged" />
-        }        
-    </div>    
+        }
+    </div>
 </th>
 
 @code {
 
     [Parameter]
     public string ColumnTitle { get; set; }
-    
+
     [Parameter]
     public bool SearchEnabled { get; set; } = true;
 

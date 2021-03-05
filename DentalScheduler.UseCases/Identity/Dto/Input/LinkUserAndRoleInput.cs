@@ -6,6 +6,6 @@ namespace DentalScheduler.UseCases.Identity.Dto.Input
     {
         public string UserName { get; set; }
 
-        public string RoleName { get; set; }        
+        public string RoleName { get; set; }
     }
 }

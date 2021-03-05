@@ -9,14 +9,14 @@ namespace DentalScheduler.UseCases.Tests.DI
     public static class DbConfigurationRegistrationsExtension
     {
         public static IServiceCollection AddTestDbContext(
-            this IServiceCollection services, 
+            this IServiceCollection services,
             IConfiguration configuration)
             => services
                 .AddScoped<DbContext, DentalSchedulerDbContext>()
-                .AddDbContext<DentalSchedulerDbContext>((sp, opt) => 
+                .AddDbContext<DentalSchedulerDbContext>((sp, opt) =>
                     opt.UseSqlite(sp.GetRequiredService<SqliteConnection>())
                 )
-                .AddScoped<SqliteConnection>(sp => 
+                .AddScoped<SqliteConnection>(sp =>
                     new SqliteConnection(configuration.GetConnectionString("DentalSchedulerDbConnection"))
                 );
     }

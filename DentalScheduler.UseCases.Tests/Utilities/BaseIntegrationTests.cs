@@ -36,7 +36,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities
             DbConnection = ServiceProvider.GetRequiredService<SqliteConnection>();
 
             InitDatabase();
-            
+
             InitMainData();
         }
 
@@ -47,7 +47,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities
         public ServiceProvider ServiceProvider { get; }
 
         public SqliteConnection DbConnection { get; }
-        
+
         public IReadOnlyCollection<Treatment> Treatments { get; private set; }
 
         public void InitDatabase()

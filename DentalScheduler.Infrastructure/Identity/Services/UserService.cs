@@ -13,7 +13,7 @@ namespace DentalScheduler.Infrastructure.Identity.Services
     public class UserService : IUserService<User>
     {
         public UserService(
-            TypeAdapterConfig mappingConfig, 
+            TypeAdapterConfig mappingConfig,
             UserManager<User> userManager,
             IHttpContextAccessor accessor)
         {
@@ -23,12 +23,12 @@ namespace DentalScheduler.Infrastructure.Identity.Services
         }
 
         public TypeAdapterConfig MappingConfig { get; }
-        
+
         public UserManager<User> UserManager { get; }
 
         public IHttpContextAccessor Accessor { get; }
 
-        public User CurrentUser 
+        public User CurrentUser
             => FindByNameAsync(Accessor?.HttpContext?.User?.Identity?.Name)
                 .GetAwaiter()
                 .GetResult();

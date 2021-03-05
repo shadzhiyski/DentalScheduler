@@ -25,7 +25,7 @@ namespace DentalScheduler.UseCases.Identity.Commands
         public IUserService<User> UserService { get; }
 
         public IRoleService<IdentityRole> RoleService { get; }
-        
+
         public IApplicationValidator<ICreateRoleInput> Validator { get; }
 
         public async Task<IResult<IMessageOutput>> CreateAsync(ICreateRoleInput roleInput)

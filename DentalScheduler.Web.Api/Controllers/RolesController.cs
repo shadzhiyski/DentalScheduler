@@ -17,7 +17,7 @@ namespace DentalScheduler.Web.Api.Controllers
         public Lazy<ILinkUserAndRoleCommand> LinkUserAndRoleCommand { get; }
 
         public RolesController(
-            Lazy<ICreateRoleCommand> createRoleCommand, 
+            Lazy<ICreateRoleCommand> createRoleCommand,
             Lazy<ILinkUserAndRoleCommand> linkUserAndRoleCommand)
         {
             CreateRoleCommand = createRoleCommand;

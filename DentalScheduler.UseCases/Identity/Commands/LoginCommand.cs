@@ -28,7 +28,7 @@ namespace DentalScheduler.UseCases.Identity.Commands
 
         public LoginCommand(
             IConfiguration config,
-            IUserService<User> userService, 
+            IUserService<User> userService,
             IApplicationValidator<IUserCredentialsInput> validator,
             IJwtAuthManager jwtAuthManager)
         {

@@ -15,7 +15,7 @@ namespace DentalScheduler.Web.Api.Controllers
     public class TreatmentController : BaseApiController
     {
         public TreatmentController(
-            TypeAdapterConfig mappingConfig, 
+            TypeAdapterConfig mappingConfig,
             IGenericRepository<Treatment> repository)
         {
             MappingConfig = mappingConfig;

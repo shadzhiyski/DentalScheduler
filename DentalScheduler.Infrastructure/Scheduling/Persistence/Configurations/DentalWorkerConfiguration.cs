@@ -9,7 +9,7 @@ namespace DentalScheduler.Infrastructure.Scheduling.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Entities.DentalWorker> builder)
         {
             builder.HasKey(e => e.Id);
-            
+
             builder.HasOne(e => e.IdentityUser);
 
             builder.Property(e => e.IdentityUserId).IsRequired();

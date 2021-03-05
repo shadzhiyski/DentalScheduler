@@ -11,7 +11,7 @@ namespace DentalScheduler.UseCases.Scheduling.Mappings
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<TreatmentSession, ITreatmentSessionOutput>()
-                .MapWith((src) => 
+                .MapWith((src) =>
                 new TreatmentSessionOutput
                 {
                     ReferenceId = src.ReferenceId,
@@ -24,7 +24,7 @@ namespace DentalScheduler.UseCases.Scheduling.Mappings
                 });
 
             config.NewConfig<ITreatmentSessionOutput, TreatmentSessionInput>()
-                .MapWith((src) => 
+                .MapWith((src) =>
                 new TreatmentSessionInput
                 {
                     ReferenceId = src.ReferenceId,

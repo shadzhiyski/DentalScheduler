@@ -20,7 +20,7 @@ namespace DentalScheduler.UseCases.Common.Validation
         private static string GetImageType(byte[] content)
         {
             string headerCode = GetHeaderInfo(content).ToUpper();
-            
+
             if (headerCode.StartsWith("FFD8FFE0"))
             {
                 return "JPG";

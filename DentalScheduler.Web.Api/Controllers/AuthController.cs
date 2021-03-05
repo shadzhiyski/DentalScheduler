@@ -10,15 +10,15 @@ namespace DentalScheduler.Web.Api.Controllers
     [ApiController]
     [Route ("api/[controller]")]
     [Authorize (AuthenticationSchemes = "Bearer")]
-    public class AuthController : BaseApiController 
+    public class AuthController : BaseApiController
     {
         public Lazy<ILoginCommand> LoginCommand { get; }
 
         public Lazy<IRegisterUserCommand> RegisterUserCommand { get; }
 
         public AuthController(
-            Lazy<ILoginCommand> loginCommand, 
-            Lazy<IRegisterUserCommand> registerUserCommand) 
+            Lazy<ILoginCommand> loginCommand,
+            Lazy<IRegisterUserCommand> registerUserCommand)
         {
             RegisterUserCommand = registerUserCommand;
             LoginCommand = loginCommand;
@@ -27,7 +27,7 @@ namespace DentalScheduler.Web.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route ("register")]
-        public async Task<IActionResult> Register(RegisterUserInput model) 
+        public async Task<IActionResult> Register(RegisterUserInput model)
         {
             var result =  await RegisterUserCommand.Value.RegisterAsync(model);
             return PresentResult(result);
@@ -36,7 +36,7 @@ namespace DentalScheduler.Web.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route ("login")]
-        public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials) 
+        public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials)
         {
             var result =  await LoginCommand.Value.LoginAsync(loginCredentials);
             return PresentResult(result);

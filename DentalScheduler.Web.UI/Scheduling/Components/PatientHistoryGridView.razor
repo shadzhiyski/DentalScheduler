@@ -2,7 +2,7 @@
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<PatientHistoryGridView> Loc
 
-<LazyGridView 
+<LazyGridView
         Items="TreatmentSessions"
         Refresh="@IsDataLoaded"
         PageSize="@PageSize"
@@ -66,7 +66,7 @@
     public bool IsDataLoaded { get; set; }
 
     private async Task<List<TreatmentSessionOutput>> LoadTreatmentSessionsAsync(PageLoadEventArgs args)
-    { 
+    {
         var treatmentSessions = await TreatmentSessionService.GetAppointmentsHistoryAsync(
             PatientReferenceId,
             args.SelectedPage,

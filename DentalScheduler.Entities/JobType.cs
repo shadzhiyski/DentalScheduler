@@ -5,7 +5,7 @@ namespace DentalScheduler.Entities
         Dentist = 1,
 
         SeniorDentist = 2,
-        
+
         LeadDentist = 3,
 
         Orthodontist = 4,
@@ -13,7 +13,7 @@ namespace DentalScheduler.Entities
         SeniorOrthodontist = 5,
 
         LeadOrthodontist = 6,
-        
+
         Assistant = 7,
 
         SeniorAssistant = 8,

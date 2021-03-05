@@ -29,7 +29,7 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
         }
 
         public IApplicationValidator<ITreatmentSessionInput> Validator { get; }
-        
+
         public IGenericRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
         public IGenericRepository<Treatment> TreatmentRepository { get; }
@@ -55,17 +55,17 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
             if (treatmentSession == null)
             {
                 return new Result<IMessageOutput>(
-                    new List<IError> 
-                    { 
+                    new List<IError>
+                    {
                         new Error(
-                            ErrorType.NotFound, 
+                            ErrorType.NotFound,
                             $"Treatment session for the given Patient, Dental Team and period cannot be found."
                         )
                     },
                     ResultType.NotFound
                 );
             }
-            
+
             if (treatmentSession.Treatment.ReferenceId != input.TreatmentReferenceId)
             {
                 var treatment = await TreatmentRepository.SingleOrDefaultAsync(

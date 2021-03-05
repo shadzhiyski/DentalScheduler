@@ -16,7 +16,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         }
 
         public IGenericRepository<Treatment> Repository { get; }
-        
+
         public IUnitOfWork UoW { get; }
 
         public async Task<IEnumerable<Treatment>> ProvideMainTreatmentsAsync()

@@ -30,7 +30,7 @@
             <label for="@nameof(Model.DentalTeamReferenceId)">@Loc["DentalTeam"]</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="Guid?" LoadData="@LoadDentalTeams" 
+            <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="Guid?" LoadData="@LoadDentalTeams"
                 Data="@DentalTeams"
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="Model.DentalTeamReferenceId" >
             </RadzenDropDown>
@@ -42,7 +42,7 @@
             <label for="@nameof(Model.TreatmentReferenceId)">@Loc["Treatment"]</label>
         </div>
         <div class="col">
-            <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="Guid?" LoadData="@LoadTreatments" 
+            <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="Guid?" LoadData="@LoadTreatments"
                 Data="@Treatments"
                 TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="Model.TreatmentReferenceId" Change="@(args => OnTreatmentChange())" >
             </RadzenDropDown>

@@ -10,7 +10,7 @@ namespace DentalScheduler.UseCases.Scheduling.Mappings
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<DentalTeam, IDentalTeamOutput>()
-                .MapWith((src) => 
+                .MapWith((src) =>
                 new DentalTeamOutput
                 {
                     Name = src.Name,

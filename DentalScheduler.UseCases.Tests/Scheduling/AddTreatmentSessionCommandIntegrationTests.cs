@@ -16,7 +16,7 @@ namespace DentalScheduler.UseCases.Tests.Scheduling
         public AddTreatmentSessionCommandIntegrationTests() : base(new ServiceCollection())
         {
             Sut = ServiceProvider.GetRequiredService<IAddTreatmentSessionCommand>();
-            
+
             var (_, patient) = ServiceProvider.GetRequiredService<IUserDbDataProvider>()
                 .ProvidePatientAsync("patient", "patient#123")
                 .GetAwaiter()

@@ -40,7 +40,7 @@ namespace DentalScheduler.UseCases.Identity.Commands
 
         public RegisterUserCommand(
             IConfiguration config,
-            IUserService<User> userService, 
+            IUserService<User> userService,
             IApplicationValidator<IUserCredentialsInput> validator,
             IJwtAuthManager jwtAuthManager,
             ILoginCommand loginCommand,
@@ -82,11 +82,11 @@ namespace DentalScheduler.UseCases.Identity.Commands
                 return new Result<IAccessTokenOutput>(identityResult.Errors);
             }
 
-            var linkUserWithRoleResult = await LinkUserAndRoleCommand.ExecuteAsync(new LinkUserAndRoleInput 
-            { 
+            var linkUserWithRoleResult = await LinkUserAndRoleCommand.ExecuteAsync(new LinkUserAndRoleInput
+            {
                 UserName = userInput.UserName,
                 RoleName = userInput.RoleType.ToString()
-            });     
+            });
 
             if (linkUserWithRoleResult.Errors.Count() > 0)
             {

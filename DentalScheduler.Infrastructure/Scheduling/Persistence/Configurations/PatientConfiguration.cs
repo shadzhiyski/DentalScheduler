@@ -12,7 +12,7 @@ namespace DentalScheduler.Infrastructure.Scheduling.Persistence.Configurations
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.ReferenceId).HasValueGenerator<ReferenceIdGenerator>();
-            
+
             builder.HasOne(e => e.IdentityUser);
 
             builder.Property(e => e.IdentityUserId).IsRequired();

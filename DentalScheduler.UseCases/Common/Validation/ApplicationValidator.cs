@@ -11,7 +11,7 @@ namespace DentalScheduler.UseCases.Common.Validation
         public TypeAdapterConfig MappingConfig { get; }
 
         public IValidator<TModel> FluentValidator { get; }
-        
+
         public ApplicationValidator(TypeAdapterConfig mappingConfig, AbstractValidator<TModel> fluentValidator)
         {
             MappingConfig = mappingConfig;

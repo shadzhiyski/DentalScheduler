@@ -11,7 +11,7 @@ namespace DentalScheduler.UseCases.Common.Mappings
         {
             config.NewConfig<DateTimeOffset, DateTime>()
                 .MapWith(src => src.DateTime);
-            
+
             config.NewConfig<DateTimeOffset?, DateTime?>()
                 .MapWith(src => src != null ? src.Value.DateTime : default(DateTime?));
 

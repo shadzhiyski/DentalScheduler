@@ -17,7 +17,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         public IGenericRepository<Room> Repository { get; }
 
         public IUnitOfWork UoW { get; }
-        
+
         public async Task<Room> ProvideRoomAsync(string name)
         {
             var room = new Room()

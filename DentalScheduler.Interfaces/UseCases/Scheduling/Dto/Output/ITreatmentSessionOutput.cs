@@ -5,7 +5,7 @@ namespace DentalScheduler.Interfaces.UseCases.Scheduling.Dto.Output
     public interface ITreatmentSessionOutput
     {
         Guid ReferenceId { get; set; }
-        
+
         Guid PatientReferenceId { get; set; }
 
         IDentalTeamOutput DentalTeam { get; }

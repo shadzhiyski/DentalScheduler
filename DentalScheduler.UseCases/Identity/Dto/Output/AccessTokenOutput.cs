@@ -11,7 +11,7 @@ namespace DentalScheduler.UseCases.Identity.Dto.Output
         {
             AccessToken = accessToken;
         }
-        
+
         public string AccessToken { get; set; }
     }
 }

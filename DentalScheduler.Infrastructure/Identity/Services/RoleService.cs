@@ -9,7 +9,7 @@ namespace DentalScheduler.Infrastructure.Identity.Services
     public class RoleService : IRoleService<IdentityRole>
     {
         public TypeAdapterConfig MappingConfig { get; }
-        
+
         public RoleManager<IdentityRole> RoleManager { get; }
 
         public RoleService(TypeAdapterConfig mappingConfig, RoleManager<IdentityRole> roleManager)

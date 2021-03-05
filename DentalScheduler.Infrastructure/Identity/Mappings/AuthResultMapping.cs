@@ -12,9 +12,9 @@ namespace DentalScheduler.Infrastructure.Identity.Mappings
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<IdentityResult, IAuthResult>()
-                .MapWith((src) => 
+                .MapWith((src) =>
                     new AuthResult(
-                        src.Succeeded, 
+                        src.Succeeded,
                         src.Errors.Select(e => e.Adapt<IError>(config))
                     )
                 );

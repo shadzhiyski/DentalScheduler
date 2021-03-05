@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-md-12">
-    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@TreatmentSessions" StartProperty="Start" EndProperty="End" 
+    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@TreatmentSessions" StartProperty="Start" EndProperty="End"
         TextProperty="TreatmentName" SelectedIndex="2" LoadData="@LoadAppointments"
         SlotSelect="@OnSlotSelect" AppointmentSelect="@OnAppointmentSelect" AppointmentRender="@OnAppointmentRender">
         <RadzenDayView />
@@ -36,7 +36,7 @@
     {
         var currentDate = DateTimeOffset.UtcNow;
         var currentMonthStart = new DateTimeOffset(
-            currentDate.Year, currentDate.Month, 01, 00, 00, 00, 
+            currentDate.Year, currentDate.Month, 01, 00, 00, 00,
             currentDate.Offset
         );
 
@@ -55,7 +55,7 @@
         {
             queryPeriodStart = args.Start;
             queryPeriodEnd = SchedulePeriodStart.AddMinutes(-1);
-            
+
             SchedulePeriodStart = queryPeriodStart;
         }
         else if (isPeriodExtendedAhead)
@@ -90,10 +90,10 @@
         {
             return;
         }
-        
+
         TreatmentSessionInput data = await DialogService.OpenAsync<EditTreatmentSession>(
             "Add Treatment Session",
-            new Dictionary<string, object> 
+            new Dictionary<string, object>
             {
                 {
                     "Model", new TreatmentSessionInput()
@@ -133,7 +133,7 @@
         var user = (await AuthenticationStateTask).User;
         if (args.Data.Status.Equals("Accepted") && user.IsInRole("Patient"))
         {
-            await DialogService.OpenAsync<ViewAppointment>("Edit Appointment", 
+            await DialogService.OpenAsync<ViewAppointment>("Edit Appointment",
                 new Dictionary<string, object> { { "ReferenceId", args.Data.ReferenceId } });
 
             return;
@@ -147,7 +147,7 @@
 
         TreatmentSessionInput resultData = null;
 
-        resultData = await DialogService.OpenAsync<EditTreatmentSession>("Edit Treatment Session", 
+        resultData = await DialogService.OpenAsync<EditTreatmentSession>("Edit Treatment Session",
             new Dictionary<string, object> { { "Model", dataToSet } });
 
         if (resultData == null)
@@ -182,7 +182,7 @@
         {
             args.Attributes["style"] = "background: blue";
         }
-        else 
+        else
         {
             args.Attributes["style"] = "background: red";
         }

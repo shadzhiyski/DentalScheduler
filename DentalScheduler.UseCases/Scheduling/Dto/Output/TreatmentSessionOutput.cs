@@ -20,7 +20,7 @@ namespace DentalScheduler.UseCases.Scheduling.Dto.Output
         IPatientOutput ITreatmentSessionOutput.Patient => Patient;
 
         public PatientOutput Patient { get; set; }
-        
+
         public DateTimeOffset Start { get; set; }
 
         public DateTimeOffset End { get; set; }

@@ -11,7 +11,7 @@ namespace DentalScheduler.UseCases.Identity.Validation
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .NotNull();
-            
+
             RuleFor(model => model.RoleName)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()

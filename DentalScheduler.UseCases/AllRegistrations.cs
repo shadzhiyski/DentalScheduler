@@ -9,9 +9,9 @@ namespace DentalScheduler.UseCases
 {
     public static class AllRegistrations
     {
-        public static readonly Assembly CurrentAssembly = 
+        public static readonly Assembly CurrentAssembly =
             Assembly.GetAssembly(typeof(AllRegistrations));
-        
+
         public static IServiceCollection AddUseCases(this IServiceCollection services)
             => services
                 .AddTypes(

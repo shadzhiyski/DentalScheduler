@@ -25,7 +25,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         public IUserDbDataProvider UserDbDataProvider { get; }
 
         public IRoomDbDataProvider RoomDbDataProvider { get; }
-        
+
         public IGenericRepository<DentalTeam> DentalTeamRepository { get; }
 
         public IGenericRepository<DentalWorker> DentistRepository { get; }
@@ -33,7 +33,7 @@ namespace DentalScheduler.UseCases.Tests.Utilities.DataProviders
         public IGenericRepository<DentalTeamParticipant> DentalTeamParticipantRepository { get; }
 
         public IUnitOfWork UoW { get; }
-        
+
         public async Task<DentalTeam> ProvideDentalTeamAsync(string teamName, string roomName, params string[] dentistsUserNames)
         {
             var room = await RoomDbDataProvider.ProvideRoomAsync(roomName);

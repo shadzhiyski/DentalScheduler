@@ -8,11 +8,11 @@ namespace DentalScheduler.Interfaces.Infrastructure.Identity
     public interface IUserService<TUser>
     {
         TUser CurrentUser { get; }
-        
+
         Task<TUser> FindByNameAsync(string name);
 
         Task<bool> CheckPasswordAsync(TUser user, string password);
-        
+
         Task<IAuthResult> CreateAsync(TUser user, string password);
 
         Task<IAuthResult> AddToRoleAsync(TUser user, string roleName);

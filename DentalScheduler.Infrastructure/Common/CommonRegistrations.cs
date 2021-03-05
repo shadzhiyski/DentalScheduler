@@ -12,7 +12,7 @@ namespace DentalScheduler.Infrastructure.Common
             IConfiguration configuration)
             => services
                 .AddPersistence(configuration);
-        
+
         private static IServiceCollection AddPersistence(
             this IServiceCollection services,
             IConfiguration configuration)

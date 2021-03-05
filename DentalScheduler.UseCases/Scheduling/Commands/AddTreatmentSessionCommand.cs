@@ -28,11 +28,11 @@ namespace DentalScheduler.UseCases.Scheduling.Commands
         }
 
         public IApplicationValidator<ITreatmentSessionInput> Validator { get; }
-        
+
         public IGenericRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
         public IGenericRepository<Patient> PatientRepository { get; }
-        
+
         public IGenericRepository<DentalTeam> DentalTeamRepository { get; }
 
         public IGenericRepository<Treatment> TreatmentRepository { get; }

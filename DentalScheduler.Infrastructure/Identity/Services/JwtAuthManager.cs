@@ -25,7 +25,7 @@ namespace DentalScheduler.Infrastructure.Identity.Services
             Config = config;
             PatientRepository = patientRepository;
         }
-        
+
         public async Task<string> GenerateJwtAsync(IUserCredentialsInput userInfo, string roleName)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Jwt:SecretKey"]));

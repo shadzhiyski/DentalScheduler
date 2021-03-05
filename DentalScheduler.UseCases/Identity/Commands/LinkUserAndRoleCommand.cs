@@ -17,9 +17,9 @@ namespace DentalScheduler.UseCases.Identity.Commands
         public IUserService<User> UserService { get; }
 
         public IRoleService<IdentityRole> RoleService { get; }
-        
+
         public IApplicationValidator<ILinkUserAndRoleInput> Validator { get; }
-        
+
         public LinkUserAndRoleCommand(
             IUserService<User> userService,
             IRoleService<IdentityRole> roleService,
@@ -70,7 +70,7 @@ namespace DentalScheduler.UseCases.Identity.Commands
             {
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
-            
+
             await UserService.AddToRoleAsync(user, role.Name);
 
             return new Result<IMessageOutput>(

@@ -6,7 +6,7 @@ namespace DentalScheduler.UseCases.Scheduling.Dto.Output
     public class DentalTeamOutput : IDentalTeamOutput
     {
         public Guid ReferenceId { get; set; }
-        
+
         public string Name { get; set; }
 
         IRoomOutput IDentalTeamOutput.Room { get; }

@@ -6,7 +6,7 @@ namespace DentalScheduler.UseCases.Scheduling.Dto.Input
     public class TreatmentSessionInput : ITreatmentSessionInput
     {
         public Guid ReferenceId { get; set; }
-        
+
         public Guid? DentalTeamReferenceId { get; set; }
 
         public Guid? PatientReferenceId { get; set; }
