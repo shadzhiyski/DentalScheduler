@@ -1,6 +1,6 @@
 using Mapster;
 using DentalSystem.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 
 namespace DentalSystem.UseCases.Scheduling.Mappings
 {

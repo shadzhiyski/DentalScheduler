@@ -1,15 +1,13 @@
 using System;
 
-namespace DentalSystem.Entities
+namespace DentalSystem.Entities.Scheduling
 {
-    public class Treatment
+    public class Room
     {
         public Guid Id { get; set; }
 
         public Guid ReferenceId { get; set; }
 
         public string Name { get; set; }
-
-        public int DurationInMinutes { get; set; }
     }
 }

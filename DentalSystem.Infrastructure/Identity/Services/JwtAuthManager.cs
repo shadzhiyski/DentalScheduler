@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using DentalSystem.Interfaces.Infrastructure.Identity;
 using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;

@@ -2,16 +2,16 @@ using System;
 using DentalSystem.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalSystem.Entities
+namespace DentalSystem.Entities.Scheduling
 {
-    public class DentalWorker
+    public class Patient
     {
         public Guid Id { get; set; }
+
+        public Guid ReferenceId { get; set; }
 
         public string IdentityUserId { get; set; }
 
         public virtual User IdentityUser { get; set; }
-
-        public JobType JobType { get; set; }
     }
 }

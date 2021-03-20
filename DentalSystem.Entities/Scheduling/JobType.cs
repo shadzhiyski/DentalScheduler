@@ -1,4 +1,4 @@
-namespace DentalSystem.Entities
+namespace DentalSystem.Entities.Scheduling
 {
     public enum JobType
     {

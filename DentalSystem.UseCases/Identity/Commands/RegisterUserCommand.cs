@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DentalSystem.UseCases.Identity.Dto.Input;
 using DentalSystem.UseCases.Identity.Dto.Output;
 using DentalSystem.UseCases.Common.Dto.Output;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using DentalSystem.Interfaces.Infrastructure.Identity;

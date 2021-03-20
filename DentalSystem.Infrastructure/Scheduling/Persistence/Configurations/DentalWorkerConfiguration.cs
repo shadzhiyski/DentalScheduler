@@ -1,12 +1,12 @@
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DentalSystem.Infrastructure.Scheduling.Persistence.Configurations
 {
-    public class DentalWorkerConfiguration : IEntityTypeConfiguration<Entities.DentalWorker>
+    public class DentalWorkerConfiguration : IEntityTypeConfiguration<DentalWorker>
     {
-        public void Configure(EntityTypeBuilder<Entities.DentalWorker> builder)
+        public void Configure(EntityTypeBuilder<DentalWorker> builder)
         {
             builder.HasKey(e => e.Id);
 
