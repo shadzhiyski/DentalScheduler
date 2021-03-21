@@ -1,6 +1,5 @@
 ﻿using DentalSystem.Infrastructure.Identity.Persistence.Configurations;
 using DentalSystem.Infrastructure.Scheduling.Persistence.Configurations;
-using DentalSystem.Entities.Scheduling;
 using DentalSystem.Entities.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
