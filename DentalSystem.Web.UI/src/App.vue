@@ -3,14 +3,14 @@
     <Appbar />
 
     <v-main>
-      <HelloWorld/>
+      <HelloWorld />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Appbar from './components/Appbar';
-import HelloWorld from './components/HelloWorld';
+import Appbar from './common/components/Appbar';
+import HelloWorld from './common/components/HelloWorld';
 
 export default {
   name: 'App',
