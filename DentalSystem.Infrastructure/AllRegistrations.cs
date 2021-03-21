@@ -21,6 +21,10 @@ namespace DentalSystem.Config.DI.Infrastructure
                     abstractionsAssembly: Assembly.GetAssembly(typeof(IUnitOfWork)),
                     implementationsAssembly: CurrentAssembly
                 )
+                .AddTypes(
+                    abstractionType: typeof(IInitialData),
+                    implementationsAssembly: CurrentAssembly
+                )
                 .AddCommon(configuration)
                 .AddIdentity(configuration)
                 .AddMappings(assembly: CurrentAssembly);

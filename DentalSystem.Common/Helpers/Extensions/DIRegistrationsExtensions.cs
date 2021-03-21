@@ -56,6 +56,23 @@ namespace DentalSystem.Common.Helpers.Extensions
             return services;
         }
 
+        public static IServiceCollection AddTypes(
+            this IServiceCollection services,
+            Type abstractionType,
+            Assembly implementationsAssembly)
+        {
+            var allTypes = implementationsAssembly
+                .GetExportedTypes();
+            var typesFromAssembly = allTypes
+                .Where(type => type.IsAssignableTo(abstractionType))
+                .ToList();
+
+            typesFromAssembly
+                .ForEach(type => services.AddTransient(abstractionType, type));
+
+            return services;
+        }
+
         public static IServiceCollection AddMappings(
             this IServiceCollection services,
             Assembly assembly)

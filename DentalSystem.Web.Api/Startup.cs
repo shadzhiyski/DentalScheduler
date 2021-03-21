@@ -117,6 +117,8 @@ namespace DentalSystem.Web.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Initialize();
+
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
 
