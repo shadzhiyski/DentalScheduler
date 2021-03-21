@@ -1,28 +1,12 @@
 <template>
+  <div>
     <v-app-bar
       app
       color="primary"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-app-bar-nav-icon @click="toggleNavigation"></v-app-bar-nav-icon>
+      <v-toolbar-title>Dental Scheduler UI</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -34,11 +18,51 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="../assets/logo.svg"
+          transition="scale-transition"
+          width="40"
+        />
+      </div>
+
     </v-app-bar>
+    <v-navigation-drawer v-model="showDrawer" absolute temporary>
+      <v-list nav dense>
+        <v-list-item-group
+          active-class="primary--text text--accent-4"
+        >
+          <v-list-item v-for="action in navigationItems" v-bind:key="action.path">
+            <v-list-item-icon>
+              <v-icon>{{action.icon}}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title><router-link :to="action.path">{{action.name}}</router-link></v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'Appbar',
+  methods: {
+    toggleNavigation() {
+      this.showDrawer = !this.showDrawer;
+    },
+  },
+  props: {
+    navigationItems: {
+      type: Array,
+      required: true,
+    }
+  },
+  data: () => ({
+    showDrawer: false,
+  })
 };
 </script>

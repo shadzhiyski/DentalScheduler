@@ -1,23 +1,25 @@
 <template>
   <v-app>
-    <Appbar />
+    <Appbar :navigationItems="navigationItems"/>
 
     <v-main>
-      <HelloWorld />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import Appbar from './common/components/Appbar';
-import HelloWorld from './common/components/HelloWorld';
 
 export default {
   name: 'App',
-
+  computed: {
+    navigationItems() {
+      return this.$router.options.routes;
+    }
+  },
   components: {
-    Appbar,
-    HelloWorld
+    Appbar
   },
 
   data: () => ({
