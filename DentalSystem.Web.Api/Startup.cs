@@ -135,7 +135,7 @@ namespace DentalSystem.Web.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseCors(policy => policy.WithOrigins(new string[] { "https://localhost:5001" })
+            app.UseCors(policy => policy.WithOrigins(new string[] { "http://localhost:8080" })
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials());
