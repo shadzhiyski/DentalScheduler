@@ -6,24 +6,24 @@
     >
       <form @submit.prevent="submit">
         <v-text-field
-          v-model="formData.username"
+          v-model="userCredentialsData.username"
           :error-messages="usernameErrors"
           label="User Name"
           required
-          @input="$v.formData.username.$touch()"
-          @blur="$v.formData.username.$touch()"
+          @input="$v.userCredentialsData.username.$touch()"
+          @blur="$v.userCredentialsData.username.$touch()"
         ></v-text-field>
 
         <v-text-field
-          v-model="formData.password"
+          v-model="userCredentialsData.password"
           :error-messages="passwordErrors"
           :type="showPassword ? 'text' : 'password'"
           @click:append="showPassword = !showPassword"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           label="Password"
           required
-          @input="$v.formData.password.$touch()"
-          @blur="$v.formData.password.$touch()"
+          @input="$v.userCredentialsData.password.$touch()"
+          @blur="$v.userCredentialsData.password.$touch()"
         ></v-text-field>
 
         <v-btn
@@ -47,61 +47,20 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { validationMixin } from 'vuelidate'
-import { required, email, minLength } from "vuelidate/lib/validators";
+import userCredentialsMixin from '../mixins/userCredentialsMixin'
 
 export default {
   name: "Login",
-  mixins: [validationMixin],
-  data: () => ({
-    formData: {
-      username: '',
-      password: '',
-    },
-    showPassword: false,
-    errorMessage: null
-  }),
-  validations: {
-    formData: {
-      username: {
-        required,
-        email
-      },
-      password: {
-        required,
-        minLength: minLength(6),
-      }
-    },
-  },
-  computed: {
-    ...mapGetters([
-      'username',
-      'authToken',
-      'authTokenData'
-    ]),
-    usernameErrors () {
-      const errors = []
-      if (!this.$v.formData.username.$dirty) return errors
-      !this.$v.formData.username.email && errors.push('Must be valid e-mail')
-      !this.$v.formData.username.required && errors.push('User name is required')
-      return errors
-    },
-    passwordErrors () {
-      const errors = []
-      if (!this.$v.formData.password.$dirty) return errors
-      !this.$v.formData.password.required && errors.push('Password is required')
-      !this.$v.formData.password.minLength && errors.push('Password must be at least 6 characters')
-      return errors
-    },
-  },
+  mixins: [validationMixin, userCredentialsMixin],
   methods: {
     ...mapActions(["logIn"]),
     async submit () {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         try {
-          await this.logIn(this.formData);
+          await this.logIn(this.userCredentialsData);
           this.$router.push("/");
         } catch (error) {
           var propertiesErrors = error
@@ -114,10 +73,7 @@ export default {
     },
     clear () {
       this.$v.$reset();
-      this.formData.username = ''
-      this.formData.password = ''
-      this.showPassword = false
-      this.errorMessage = null
+      this.clearUserCredentials();
     },
   },
 }
