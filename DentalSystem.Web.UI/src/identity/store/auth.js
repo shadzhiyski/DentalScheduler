@@ -23,6 +23,13 @@ const actions = {
     await commit("setAuthToken", response.data.accessToken);
   },
 
+  async register({commit}, userInputData) {
+    var response = await axios.post("api/Auth/register", userInputData);
+    console.log(response);
+    await commit("setUser", userInputData.username);
+    await commit("setAuthToken", response.data.accessToken);
+  },
+
   async logOut({ commit }) {
     commit("logout");
   },
