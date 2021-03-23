@@ -4,6 +4,9 @@ import router from './common/router'
 import vuetify from './common/plugins/vuetify';
 import store from './common/store'
 import './common/plugins/axios'
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false
 
