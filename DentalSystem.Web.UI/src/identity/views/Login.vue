@@ -7,17 +7,23 @@
       <form @submit.prevent="submit">
         <v-text-field
           v-model="formData.username"
+          :error-messages="usernameErrors"
           label="User Name"
           required
+          @input="$v.formData.username.$touch()"
+          @blur="$v.formData.username.$touch()"
         ></v-text-field>
 
         <v-text-field
           v-model="formData.password"
+          :error-messages="passwordErrors"
           :type="showPassword ? 'text' : 'password'"
           @click:append="showPassword = !showPassword"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           label="Password"
           required
+          @input="$v.formData.password.$touch()"
+          @blur="$v.formData.password.$touch()"
         ></v-text-field>
 
         <v-btn
@@ -42,9 +48,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { validationMixin } from 'vuelidate'
+import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "Login",
+  mixins: [validationMixin],
   data: () => ({
     formData: {
       username: '',
@@ -53,29 +62,62 @@ export default {
     showPassword: false,
     errorMessage: null
   }),
+  validations: {
+    formData: {
+      username: {
+        required,
+        email
+      },
+      password: {
+        required,
+        minLength: minLength(6),
+      }
+    },
+  },
   computed: {
     ...mapGetters([
       'username',
       'authToken',
       'authTokenData'
-    ])
+    ]),
+    usernameErrors () {
+      const errors = []
+      if (!this.$v.formData.username.$dirty) return errors
+      !this.$v.formData.username.email && errors.push('Must be valid e-mail')
+      !this.$v.formData.username.required && errors.push('User name is required')
+      return errors
+    },
+    passwordErrors () {
+      const errors = []
+      if (!this.$v.formData.password.$dirty) return errors
+      !this.$v.formData.password.required && errors.push('Password is required')
+      !this.$v.formData.password.minLength && errors.push('Password must be at least 6 characters')
+      return errors
+    },
   },
   methods: {
     ...mapActions(["logIn"]),
     async submit () {
-      try {
-        await this.logIn(this.formData);
-        this.$router.push("/");
-        this.showError = false
-      } catch (error) {
-        this.showError = true
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        try {
+          await this.logIn(this.formData);
+          this.$router.push("/");
+        } catch (error) {
+          var propertiesErrors = error
+            .response
+            .data
+            .map(propertyErrors => `${propertyErrors.propertyName}: ${propertyErrors.errors.join(' ')}`);
+          this.errorMessage = propertiesErrors.join(' ');
+        }
       }
     },
     clear () {
+      this.$v.$reset();
       this.formData.username = ''
       this.formData.password = ''
       this.showPassword = false
-      this.showError = false
+      this.errorMessage = null
     },
   },
 }
