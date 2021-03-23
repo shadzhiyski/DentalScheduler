@@ -72,6 +72,8 @@ namespace DentalSystem.UseCases.Identity.Commands
             {
                 Email = userInput.UserName,
                 UserName = userInput.UserName,
+                FirstName = userInput.FirstName,
+                LastName = userInput.LastName,
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
@@ -85,7 +87,7 @@ namespace DentalSystem.UseCases.Identity.Commands
             var linkUserWithRoleResult = await LinkUserAndRoleCommand.ExecuteAsync(new LinkUserAndRoleInput
             {
                 UserName = userInput.UserName,
-                RoleName = userInput.RoleType.ToString()
+                RoleName = RoleType.Patient.ToString()
             });
 
             if (linkUserWithRoleResult.Errors.Count() > 0)
@@ -93,24 +95,10 @@ namespace DentalSystem.UseCases.Identity.Commands
                 return new Result<IAccessTokenOutput>(linkUserWithRoleResult.Errors);
             }
 
-            if (userInput.RoleType.Equals(RoleType.Patient))
+            await PatientRepo.AddAsync(new Patient
             {
-                await PatientRepo.AddAsync(new Patient
-                {
-                    IdentityUserId = user.Id,
-
-                });
-            }
-            else
-            {
-                var dentalWorker = new DentalWorker
-                {
-                    IdentityUserId = user.Id,
-                    JobType = JobType.Dentist
-                };
-
-                await DentalWorkerRepo.AddAsync(dentalWorker);
-            }
+                IdentityUserId = user.Id,
+            });
 
             await UoW.SaveAsync();
 
