@@ -9,9 +9,25 @@ const getters = {
   isAuthenticated: (state) => !!state.username,
   username: (state) => state.username,
   authToken: (state) => state.authToken,
-  authTokenData: (state) => state.authToken
+  authTokenData: (state) => {
+    var rawData = state.authToken
     ? JSON.parse(atob(state.authToken.split('.')[1]))
-    : {}
+    : {};
+
+    var resultData = {
+      username: rawData['unique_name'],
+      role: rawData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+
+    };
+
+    if (resultData.role == 'Patient') {
+      resultData.patientReferenceId = rawData['PatientReferenceId']
+    } else {
+      resultData.dentalTeamReferenceId = rawData['DentalTeamReferenceId']
+    }
+
+    return resultData;
+  }
 };
 
 const actions = {
@@ -43,6 +59,7 @@ const mutations = {
 
   setAuthToken(state, authToken) {
     localStorage.setItem('authToken', authToken);
+    console.log(JSON.parse(atob(state.authToken.split('.')[1])));
     state.authToken = authToken;
   },
 
