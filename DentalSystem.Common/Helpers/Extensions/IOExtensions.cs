@@ -28,7 +28,7 @@ namespace DentalSystem.Common.Helpers.Extensions
         }
 
         public static byte[] ToArray(this IFormFile formFile)
-            => formFile.OpenReadStream().ToArray();
+            => formFile?.OpenReadStream()?.ToArray() ?? new byte[0];
 
         public static string ToBase64String(this byte[] content)
             => Convert.ToBase64String(content);
