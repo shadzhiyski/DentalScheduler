@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../common/plugins/axios";
 
 const state = {
   username: localStorage.getItem('username') || null,
