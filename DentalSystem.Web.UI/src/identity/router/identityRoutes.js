@@ -8,6 +8,11 @@ const identityRoutes = [
         path: "/auth/register",
         name: "Register",
         component: () => import("../views/Register.vue"),
+    },
+    {
+        path: "/user/profile",
+        name: "User Profile",
+        component: () => import("../views/UserProfile.vue"),
     }
 ];
 
