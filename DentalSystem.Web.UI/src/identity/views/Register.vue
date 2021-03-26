@@ -27,19 +27,19 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="formData.firstName"
+          v-model="userProfileData.firstName"
           :error-messages="firstNameErrors"
           label="First Name"
-          @input="$v.formData.firstName.$touch()"
-          @blur="$v.formData.firstName.$touch()"
+          @input="$v.userProfileData.firstName.$touch()"
+          @blur="$v.userProfileData.firstName.$touch()"
         ></v-text-field>
 
         <v-text-field
-          v-model="formData.lastName"
+          v-model="userProfileData.lastName"
           :error-messages="lastNameErrors"
           label="Last Name"
-          @input="$v.formData.lastName.$touch()"
-          @blur="$v.formData.lastName.$touch()"
+          @input="$v.userProfileData.lastName.$touch()"
+          @blur="$v.userProfileData.lastName.$touch()"
         ></v-text-field>
 
         <v-btn
@@ -65,41 +65,19 @@
 <script>
 import { mapActions } from "vuex";
 import { validationMixin } from 'vuelidate'
-import { maxLength } from "vuelidate/lib/validators";
 import userCredentialsMixin from '../mixins/userCredentialsMixin';
+import userProfileMixin from '../mixins/userProfileMixin';
 
 export default {
-  name: "Login",
-  mixins: [validationMixin, userCredentialsMixin],
-  data: () => ({
-    formData: {
-      firstName: '',
-      lastName: ''
-    }
-  }),
+  name: "Register",
+  mixins: [
+    userCredentialsMixin,
+    userProfileMixin,
+    validationMixin,
+  ],
   validations: {
-    formData: {
-      firstName: {
-        maxLength: maxLength(32),
-      },
-      lastName: {
-        maxLength: maxLength(32),
-      }
-    },
-  },
-  computed: {
-    firstNameErrors () {
-      const errors = []
-      if (!this.$v.formData.firstName.$dirty) return errors
-      !this.$v.formData.firstName.maxLength && errors.push('Last name must less than 32 characters')
-      return errors
-    },
-    lastNameErrors () {
-      const errors = []
-      if (!this.$v.formData.lastName.$dirty) return errors
-      !this.$v.formData.lastName.maxLength && errors.push('Last name must less than 32 characters')
-      return errors
-    },
+    ...userCredentialsMixin.validations,
+    ...userProfileMixin.validations,
   },
   methods: {
     ...mapActions(["register"]),
@@ -107,7 +85,11 @@ export default {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         try {
-          await this.register(this.formData);
+          await this.register({
+            ...this.userCredentialsData,
+            ...this.userProfileData
+          });
+
           this.$router.push("/");
         } catch (error) {
           var propertiesErrors = error
@@ -121,8 +103,7 @@ export default {
     clear () {
       this.$v.$reset();
       this.clearUserCredentials();
-      this.formData.firstName = ''
-      this.formData.lastName = ''
+      this.clearUserProfile();
     },
   },
 }

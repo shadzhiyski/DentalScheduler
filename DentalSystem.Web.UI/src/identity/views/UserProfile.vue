@@ -6,19 +6,19 @@
     >
       <form @submit.prevent="submit">
         <v-text-field
-          v-model="formData.firstName"
+          v-model="userProfileData.firstName"
           :error-messages="firstNameErrors"
           label="First Name"
-          @input="$v.formData.firstName.$touch()"
-          @blur="$v.formData.firstName.$touch()"
+          @input="$v.userProfileData.firstName.$touch()"
+          @blur="$v.userProfileData.firstName.$touch()"
         ></v-text-field>
 
         <v-text-field
-          v-model="formData.lastName"
+          v-model="userProfileData.lastName"
           :error-messages="lastNameErrors"
           label="Last Name"
-          @input="$v.formData.lastName.$touch()"
-          @blur="$v.formData.lastName.$touch()"
+          @input="$v.userProfileData.lastName.$touch()"
+          @blur="$v.userProfileData.lastName.$touch()"
         ></v-text-field>
 
         <v-btn
@@ -44,42 +44,14 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { validationMixin } from 'vuelidate'
-import { maxLength } from "vuelidate/lib/validators";
+import userProfileMixin from '../mixins/userProfileMixin'
 
 export default {
   name: "UserProfile",
-  mixins: [validationMixin],
+  mixins: [validationMixin, userProfileMixin],
   data: () => ({
-    formData: {
-      firstName: '',
-      lastName: ''
-    },
     errorMessage: null,
   }),
-  validations: {
-    formData: {
-      firstName: {
-        maxLength: maxLength(32),
-      },
-      lastName: {
-        maxLength: maxLength(32),
-      }
-    },
-  },
-  computed: {
-    firstNameErrors () {
-      const errors = []
-      if (!this.$v.formData.firstName.$dirty) return errors
-      !this.$v.formData.firstName.maxLength && errors.push('Last name must less than 32 characters')
-      return errors
-    },
-    lastNameErrors () {
-      const errors = []
-      if (!this.$v.formData.lastName.$dirty) return errors
-      !this.$v.formData.lastName.maxLength && errors.push('Last name must less than 32 characters')
-      return errors
-    },
-  },
   methods: {
     ...mapGetters([
       "userProfile"
@@ -92,8 +64,8 @@ export default {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         try {
-          console.log(this.formData);
-          await this.updateUserProfile(this.formData);
+          console.log(this.userProfileData);
+          await this.updateUserProfile(this.userProfileData);
           this.$router.push("/");
         } catch (error) {
           console.log(error);
@@ -107,15 +79,14 @@ export default {
     },
     clear () {
       this.$v.$reset();
-      this.formData.firstName = ''
-      this.formData.lastName = ''
+      this.clearUserProfile();
       this.errorMessage = null;
     },
   },
   async created() {
     await this.getUserProfile();
-    this.formData = await this.userProfile();
-    console.log(this.formData);
+    this.userProfileData = await this.userProfile();
+    console.log(this.userProfileData);
   }
 }
 </script>
