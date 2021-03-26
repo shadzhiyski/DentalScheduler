@@ -58,14 +58,24 @@
         :event-overlap-mode="mode"
         :event-overlap-threshold="30"
         :event-color="getEventColor"
+        @click:event="showEvent"
         @change="getEvents"
       ></v-calendar>
+      <v-menu
+          v-model="selectedOpen"
+          :close-on-content-click="false"
+          :activator="selectedElement"
+          offset-x
+        >
+          <EditTreatmentSession @toggleEditForm="toggleEditForm" :selectedEvent="selectedEvent" />
+        </v-menu>
     </v-sheet>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import EditTreatmentSession from '../components/EditTreatmentSession'
 
 export default {
   data: () => ({
@@ -87,7 +97,13 @@ export default {
         Accepted: 'green',
         Rejected: 'red'
     },
+    selectedEvent: {},
+    selectedElement: null,
+    selectedOpen: false,
   }),
+  components: {
+    EditTreatmentSession
+  },
   methods: {
     ...mapGetters([
         "authTokenData",
@@ -106,12 +122,39 @@ export default {
             await this.getDentalTeamTreatmentSessions(tokenData.dentalTeamReferenceId);
         }
     },
+    async toggleEditForm(hasChanges) {
+      this.selectedOpen = !this.selectedOpen;
+      if (hasChanges) {
+        await this.loadTreatmentSessions();
+        this.getFilteredEvents();
+      }
+    },
+    showEvent ({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event
+        this.selectedElement = nativeEvent.target
+        setTimeout(() => {
+          this.selectedOpen = true
+        }, 10)
+      }
+
+      if (this.selectedOpen) {
+        this.selectedOpen = false
+        setTimeout(open, 10)
+      } else {
+        open()
+      }
+
+      nativeEvent.stopPropagation()
+    },
     getFilteredEvents(filter = (ts) => ts) {
       const treatmentSessions = this.allTreatmentSessions();
       this.events = treatmentSessions
         .filter(filter)
         .map(ts => {
             return {
+            referenceId: ts.ReferenceId,
+            patientReferenceId: ts.PatientReferenceId,
             name: ts.Treatment.Name,
             start: new Date(ts.Start),
             end: new Date(ts.End),
