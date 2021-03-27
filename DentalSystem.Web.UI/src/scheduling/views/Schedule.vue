@@ -41,6 +41,7 @@
       ></v-select>
       <v-spacer></v-spacer>
       <v-btn
+        v-if="isPatientRole()"
         :disabled="false"
         color="primary"
         class="ma-2 white--text"
@@ -64,12 +65,13 @@
     </v-sheet>
     <v-sheet height="600">
       <v-menu
+          v-if="isPatientRole()"
           v-model="selectedAddOpen"
           :close-on-content-click="false"
-          :activator="selectedElement"
+          :activator="selectedAddElement"
           offset-x
         >
-          <AddTreatmentSession @toggleEditForm="toggleAddForm" />
+          <AddTreatmentSession @toggleAddForm="toggleAddForm" />
       </v-menu>
       <v-calendar
         ref="calendar"
@@ -84,12 +86,22 @@
         @change="getEvents"
       ></v-calendar>
       <v-menu
+          v-if="isPatientRole()"
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
           offset-x
         >
           <EditTreatmentSession @toggleEditForm="toggleEditForm" :selectedEvent="selectedEvent" />
+      </v-menu>
+      <v-menu
+          v-else
+          v-model="selectedResolveOpen"
+          :close-on-content-click="false"
+          :activator="selectedResolveElement"
+          offset-x
+        >
+          <ResolveTreatmentSession @toggleEditForm="toggleResolveForm" :selectedEvent="selectedEvent" />
       </v-menu>
     </v-sheet>
   </div>
@@ -99,6 +111,7 @@
 import { mapGetters, mapActions } from "vuex";
 import AddTreatmentSession from '../components/AddTreatmentSession'
 import EditTreatmentSession from '../components/EditTreatmentSession'
+import ResolveTreatmentSession from '../components/ResolveTreatmentSession'
 
 export default {
   data: () => ({
@@ -122,13 +135,17 @@ export default {
     },
     selectedEvent: {},
     selectedElement: null,
+    selectedAddElement: null,
+    selectedResolveElement: null,
     selectedOpen: false,
     selectedAddOpen: false,
+    selectedResolveOpen: false,
     tokenData: {}
   }),
   components: {
     AddTreatmentSession,
-    EditTreatmentSession
+    EditTreatmentSession,
+    ResolveTreatmentSession
   },
   methods: {
     ...mapGetters([
@@ -139,6 +156,10 @@ export default {
         "getPatientTreatmentSessions",
         "getDentalTeamTreatmentSessions"
     ]),
+    isPatientRole() {
+      console.log(this.tokenData.role);
+      return this.tokenData.role == 'Patient';
+    },
     async loadTokenData() {
       this.tokenData = await this.authTokenData();
     },
@@ -148,6 +169,13 @@ export default {
         } else {
             await this.getDentalTeamTreatmentSessions(this.tokenData.dentalTeamReferenceId);
         }
+    },
+    async toggleResolveForm(hasChanges) {
+      this.selectedResolveOpen = !this.selectedResolveOpen;
+      if (hasChanges) {
+        await this.loadTreatmentSessions();
+        this.getFilteredEvents();
+      }
     },
     async toggleAddForm(hasChanges) {
       this.selectedAddOpen = !this.selectedAddOpen;
@@ -164,6 +192,13 @@ export default {
       }
     },
     showEvent ({ nativeEvent, event }) {
+      if (this.tokenData.role == 'Patient') {
+        this.showEditEvent({ nativeEvent, event });
+      } else {
+        this.showResolveEvent({ nativeEvent, event });
+      }
+    },
+    showEditEvent ({ nativeEvent, event }) {
       const open = () => {
         this.selectedEvent = event
         this.selectedElement = nativeEvent.target
@@ -174,6 +209,24 @@ export default {
 
       if (this.selectedOpen) {
         this.selectedOpen = false
+        setTimeout(open, 10)
+      } else {
+        open()
+      }
+
+      nativeEvent.stopPropagation()
+    },
+    showResolveEvent ({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event
+        this.selectedResolveElement = nativeEvent.target
+        setTimeout(() => {
+          this.selectedResolveOpen = true
+        }, 10)
+      }
+
+      if (this.selectedResolveOpen) {
+        this.selectedResolveOpen = false
         setTimeout(open, 10)
       } else {
         open()

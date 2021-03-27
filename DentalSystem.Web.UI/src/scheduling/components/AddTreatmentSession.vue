@@ -57,7 +57,7 @@
       <v-btn
       text
       color="secondary"
-      @click="() => toggleEditForm(false)"
+      @click="() => toggleAddForm(false)"
       >
       Cancel
       </v-btn>
@@ -111,8 +111,8 @@ export default {
     updateStartTime(startTime) {
       this.treatmentSessionData.startTime = startTime;
     },
-    toggleEditForm(hasChanges) {
-      this.$emit('toggleEditForm', hasChanges);
+    toggleAddForm(hasChanges) {
+      this.$emit('toggleAddForm', hasChanges);
     },
     async submit() {
       console.log(this.selectedTreatment);
@@ -123,7 +123,7 @@ export default {
       endDate.setMinutes(endDate.getMinutes() + this.duration);
       this.treatmentSessionData.end = endDate.toISOString();
       await this.createTreatmentSession(this.treatmentSessionData);
-      this.toggleEditForm(true);
+      this.toggleAddForm(true);
     }
   },
   async created() {
@@ -134,8 +134,8 @@ export default {
     this.treatments = await this.allTreatments();
     this.dentalTeams = await this.allDentalTeams();
 
-    this.selectedTreatmentReferenceId = this.treatments[0];
-    this.selectedDentalTeamReferenceId = this.dentalTeams[0];
+    this.selectedTreatmentReferenceId = this.treatments[0].ReferenceId;
+    this.selectedDentalTeamReferenceId = this.dentalTeams[0].ReferenceId;
   }
 }
 </script>
