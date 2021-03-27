@@ -10,13 +10,13 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn v-if="isAuthenticated"
+          text
+          @click="logOutClicked">
+        <v-icon>
+          mdi-logout
+        </v-icon>
+        <span class="mr-2">Logout</span>
       </v-btn>
       <div class="d-flex align-center">
         <v-img
@@ -48,12 +48,23 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: 'Appbar',
   methods: {
     toggleNavigation() {
       this.showDrawer = !this.showDrawer;
     },
+    ...mapActions(["logOut"]),
+    logOutClicked() {
+      this.logOut();
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'isAuthenticated',
+    ]),
   },
   props: {
     navigationItems: {
