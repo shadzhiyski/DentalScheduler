@@ -8,12 +8,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    showOn: 'Always',
     path: '/',
     name: 'Home',
     icon: 'mdi-home',
     component: Home
   },
   {
+    showOn: 'Always',
     path: '/about',
     name: 'About',
     icon: 'mdi-text',
