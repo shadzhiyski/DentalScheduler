@@ -142,6 +142,9 @@ export default {
 
     this.treatments = await this.allTreatments();
     this.dentalTeams = await this.allDentalTeams();
+
+    this.selectedTreatmentReferenceId = this.treatments[0];
+    this.selectedDentalTeamReferenceId = this.dentalTeams[0];
   }
 }
 </script>
