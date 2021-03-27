@@ -41,6 +41,20 @@
       ></v-select>
       <v-spacer></v-spacer>
       <v-btn
+        :disabled="false"
+        color="primary"
+        class="ma-2 white--text"
+        @click="() => toggleAddForm(false)"
+      >
+        Add
+        <v-icon
+          right
+          dark
+        >
+          mdi-plus
+        </v-icon>
+      </v-btn>
+      <v-btn
         icon
         class="ma-2"
         @click="$refs.calendar.next()"
@@ -49,6 +63,14 @@
       </v-btn>
     </v-sheet>
     <v-sheet height="600">
+      <v-menu
+          v-model="selectedAddOpen"
+          :close-on-content-click="false"
+          :activator="selectedElement"
+          offset-x
+        >
+          <AddTreatmentSession @toggleEditForm="toggleAddForm" />
+      </v-menu>
       <v-calendar
         ref="calendar"
         v-model="value"
@@ -68,13 +90,14 @@
           offset-x
         >
           <EditTreatmentSession @toggleEditForm="toggleEditForm" :selectedEvent="selectedEvent" />
-        </v-menu>
+      </v-menu>
     </v-sheet>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import AddTreatmentSession from '../components/AddTreatmentSession'
 import EditTreatmentSession from '../components/EditTreatmentSession'
 
 export default {
@@ -100,8 +123,11 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
+    selectedAddOpen: false,
+    tokenData: {}
   }),
   components: {
+    AddTreatmentSession,
     EditTreatmentSession
   },
   methods: {
@@ -113,14 +139,22 @@ export default {
         "getPatientTreatmentSessions",
         "getDentalTeamTreatmentSessions"
     ]),
+    async loadTokenData() {
+      this.tokenData = await this.authTokenData();
+    },
     async loadTreatmentSessions() {
-        var tokenData = await this.authTokenData();
-
-        if (tokenData.role == 'Patient') {
-            await this.getPatientTreatmentSessions(tokenData.patientReferenceId);
+        if (this.tokenData.role == 'Patient') {
+            await this.getPatientTreatmentSessions(this.tokenData.patientReferenceId);
         } else {
-            await this.getDentalTeamTreatmentSessions(tokenData.dentalTeamReferenceId);
+            await this.getDentalTeamTreatmentSessions(this.tokenData.dentalTeamReferenceId);
         }
+    },
+    async toggleAddForm(hasChanges) {
+      this.selectedAddOpen = !this.selectedAddOpen;
+      if (hasChanges) {
+        await this.loadTreatmentSessions();
+        this.getFilteredEvents();
+      }
     },
     async toggleEditForm(hasChanges) {
       this.selectedOpen = !this.selectedOpen;
@@ -173,6 +207,7 @@ export default {
     },
   },
   async created() {
+      await this.loadTokenData();
       await this.loadTreatmentSessions();
       this.getFilteredEvents();
   }

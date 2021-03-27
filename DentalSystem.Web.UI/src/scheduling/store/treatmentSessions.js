@@ -41,6 +41,10 @@ const actions = {
     await axios.put('odata/TreatmentSession',treatmentSessionData);
     await commit("setTreatmentSession", treatmentSessionData);
   },
+  async createTreatmentSession({commit}, treatmentSessionData) {
+    await axios.post('odata/TreatmentSession',treatmentSessionData);
+    await commit("setTreatmentSession", treatmentSessionData);
+  },
   async getPatientTreatmentSessions({commit}, patientReferenceId) {
     let response = await axios.get(
       'odata/TreatmentSession',
