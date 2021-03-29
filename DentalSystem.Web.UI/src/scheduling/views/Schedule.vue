@@ -157,7 +157,6 @@ export default {
         "getDentalTeamTreatmentSessions"
     ]),
     isPatientRole() {
-      console.log(this.tokenData.role);
       return this.tokenData.role == 'Patient';
     },
     async loadTokenData() {

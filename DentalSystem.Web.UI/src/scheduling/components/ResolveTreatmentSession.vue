@@ -67,13 +67,11 @@ export default {
       this.$emit('toggleEditForm', hasChanges);
     },
     async accept() {
-    //   console.log('accept');
       this.treatmentSessionData.status = 'Accepted';
       await this.updateTreatmentSession(this.treatmentSessionData);
       this.toggleEditForm(true);
     },
     async reject() {
-    //   console.log('reject');
       this.treatmentSessionData.status = 'Rejected';
       await this.updateTreatmentSession(this.treatmentSessionData);
       this.toggleEditForm(true);

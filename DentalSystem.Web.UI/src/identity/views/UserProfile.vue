@@ -64,11 +64,9 @@ export default {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         try {
-          console.log(this.userProfileData);
           await this.updateUserProfile(this.userProfileData);
           this.$router.push("/");
         } catch (error) {
-          console.log(error);
           var propertiesErrors = error
             .response
             ?.data
@@ -86,7 +84,6 @@ export default {
   async created() {
     await this.getUserProfile();
     this.userProfileData = await this.userProfile();
-    console.log(this.userProfileData);
   }
 }
 </script>

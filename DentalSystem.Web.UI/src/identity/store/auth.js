@@ -34,14 +34,14 @@ const actions = {
 
   async logIn({commit}, userCredentials) {
     var response = await axios.post("api/Auth/login", userCredentials);
-    console.log(response);
+
     await commit("setUser", userCredentials.username);
     await commit("setAuthToken", response.data.accessToken);
   },
 
   async register({commit}, userInputData) {
     var response = await axios.post("api/Auth/register", userInputData);
-    console.log(response);
+
     await commit("setUser", userInputData.username);
     await commit("setAuthToken", response.data.accessToken);
   },
@@ -59,7 +59,6 @@ const mutations = {
 
   setAuthToken(state, authToken) {
     localStorage.setItem('authToken', authToken);
-    console.log(JSON.parse(atob(state.authToken.split('.')[1])));
     state.authToken = authToken;
   },
 

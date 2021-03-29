@@ -21,7 +21,6 @@ _axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
     var authToken = store.getters.authToken;
-    console.log(authToken);
     if (authToken) {
       config.headers = { ...config.headers, Authorization: `Bearer ${authToken}` };
     }

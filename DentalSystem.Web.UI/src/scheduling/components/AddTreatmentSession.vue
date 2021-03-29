@@ -115,7 +115,6 @@ export default {
       this.$emit('toggleAddForm', hasChanges);
     },
     async submit() {
-      console.log(this.selectedTreatment);
       this.treatmentSessionData.treatmentReferenceId = this.selectedTreatmentReferenceId;
       this.treatmentSessionData.dentalTeamReferenceId = this.selectedDentalTeamReferenceId;
       this.treatmentSessionData.start = `${this.treatmentSessionData.startDate}T${this.treatmentSessionData.startTime}:00Z`;
