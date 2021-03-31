@@ -13,6 +13,10 @@ namespace DentalScheduler.Infrastructure.Common.Persistence
             : base(options)
         { }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder
+                .EnableDetailedErrors();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
