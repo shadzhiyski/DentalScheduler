@@ -1,0 +1,146 @@
+@page "/user/profile"
+
+@using System.IO
+@using System.Threading
+@using Interfaces.UseCases.Identity.Dto.Input
+@using UseCases.Identity.Dto.Input
+@using Mapster
+@using Microsoft.AspNetCore.Http.Internal
+@using DentalSystem.Common.Helpers.Extensions
+@using IdentityValidationConstants = DentalSystem.UseCases.Identity.Validation.Constants
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> Loc
+
+<h1>@Loc["EditProfile"]</h1>
+<hr>
+<EditForm EditContext="@EditContext">
+    <ApplicationValidator TModel="@IUserProfileInput" />
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="@(ImageBase64 ?? "//placehold.it/100")" height="100" class="avatar rounded-circle" alt="avatar">
+                <h6>@Loc["UploadPhotoPlaceholder"]</h6>
+
+                <InputFile OnChange="OnImageUpload" />
+                <ValidationMessage For="@(() => Model.Avatar)" />
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+            <h3>@Loc["PersonalInfoHeader"]</h3>
+
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="@nameof(Model.FirstName)" class="col-lg-3 control-label">@Loc["FirstName"]</label>
+                    <div class="col-lg-8">
+                        <InputText id="@nameof(Model.FirstName)" @bind-Value="Model.FirstName" class="form-control" placeholder="@Loc["FirstNamePlaceholder"]" />
+                        <ValidationMessage For="@(() => Model.FirstName)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@nameof(Model.LastName)" class="col-lg-3 control-label">@Loc["LastName"]</label>
+                    <div class="col-lg-8">
+                        <InputText id="@nameof(Model.LastName)" @bind-Value="Model.LastName" class="form-control" placeholder="@Loc["LastNamePlaceholder"]" />
+                        <ValidationMessage For="@(() => Model.LastName)" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <input type="button" class="btn btn-primary" @onclick="OnSubmit" value="@Loc["SaveButton"]">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Inject]
+    public NotificationService NotificationService { get; set; }
+
+    [Inject]
+    public Mapster.TypeAdapterConfig MappingConfig { get; set; }
+
+    [Inject]
+    public IUserService UserService { get; set; }
+
+    public EditContext EditContext { get; set; }
+
+    public UserProfileInput Model { get; set; } = new UserProfileInput();
+
+    public ElementReference FileUpload { get; set; }
+
+    public string ImageBase64 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        EditContext = new EditContext(Model);
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        var result = await UserService.GetProfile();
+        result.Adapt(Model, MappingConfig);
+
+        Model.Avatar = new FormFile(
+            new MemoryStream(result.Avatar),
+            0,
+            result.Avatar.LongLength,
+            nameof(result.Avatar),
+            nameof(result.Avatar)
+        );
+
+        if (result.Avatar.LongLength > 0)
+        {
+            var imageBase64Data = Convert.ToBase64String(result.Avatar);
+            SetImageView(imageBase64Data);
+        }
+    }
+
+    async Task OnImageUpload(InputFileChangeEventArgs args)
+    {
+        if (args.File.Size > IdentityValidationConstants.UserProfileInput.AvatarMaxAllowedSizeInBytes)
+        {
+            NotificationService.Notify(new NotificationMessage()
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = Loc["FileSizeTooLargeSummary"],
+                Detail = string.Format(
+                    Loc["FileSizeTooLargeMessage"],
+                    (double)IdentityValidationConstants.UserProfileInput.AvatarMaxAllowedSizeInBytes / (1024 * 1024)),
+                Duration = 8000
+            });
+
+            return;
+        }
+
+        var fileStream = await args.File
+            .OpenReadStream(
+                maxAllowedSize: IdentityValidationConstants.UserProfileInput.AvatarMaxAllowedSizeInBytes
+            )
+            .ToMemoryStreamAsync();
+
+        Model.Avatar = new FormFile(fileStream, 0, fileStream.Length, "", "");
+
+        var binaryData = await fileStream.ToArrayAsync();
+        var imageBase64Data = Convert.ToBase64String(binaryData);
+        SetImageView(imageBase64Data);
+    }
+
+    private void SetImageView(string imageBase64Data)
+    {
+        ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
+    }
+
+    protected async Task OnSubmit()
+    {
+        if (EditContext.Validate())
+        {
+            System.Console.WriteLine("Valid Submit send");
+            await UserService.SetProfile(Model);
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "ConnectionStrings": {
+    "DentalSystemDbConnection" : "Data Source=DentalSystem_test;Mode=Memory;Cache=Shared"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "Jwt": {
+    "Issuer": "http://www.security.org",
+    "Audience": "http://www.security.org",
+    "SecretKey": "DentalSystemApplication",
+    "ExpiryInMinutes": "60"
+  },
+  "AllowedHosts": "*"
+}
