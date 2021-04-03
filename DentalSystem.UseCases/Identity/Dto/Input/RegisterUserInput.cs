@@ -8,6 +8,8 @@ namespace DentalSystem.UseCases.Identity.Dto.Input
 
         public string Password { get; set; }
 
-        public RoleType RoleType { get; set; } = RoleType.Patient;
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
     }
 }

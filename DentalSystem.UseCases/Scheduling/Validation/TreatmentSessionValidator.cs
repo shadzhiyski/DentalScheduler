@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using DentalSystem.Interfaces.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 

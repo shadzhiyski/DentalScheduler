@@ -1,4 +1,6 @@
+using System.Linq;
 using DentalSystem.Infrastructure.Common.Persistence;
+using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -12,7 +12,6 @@ using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -56,14 +55,11 @@ namespace DentalSystem.Web.Api
                 });
 
             services.AddTransient(typeof(Lazy<>), typeof(Lazy<>));
-            
             services.AddControllers();
 
             services.AddAuthorization();
 
             services.AddOData();
-            
-            // services.AddMvc();
             services.AddMvcCore(options =>
             {
                 foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
@@ -79,9 +75,9 @@ namespace DentalSystem.Web.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.OperationFilter<ODataCommonParametersFilter>(); 
+                c.OperationFilter<ODataCommonParametersFilter>();
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme.",
                     Name = "Authorization",
@@ -101,12 +97,12 @@ namespace DentalSystem.Web.Api
                         new List<string>()
                     }
                 });
-                
-                c.SwaggerDoc("v1", 
-                    new OpenApiInfo 
-                    { 
-                        Title = "Dental Scheduler",
-                        Version = "v1" 
+
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Dental System",
+                        Version = "v1"
                     });
             });
         }
@@ -118,6 +114,8 @@ namespace DentalSystem.Web.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.Initialize();
 
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);

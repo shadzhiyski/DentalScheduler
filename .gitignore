@@ -5,3 +5,5 @@
 */.vscode/*
 */*/*/Migrations/*
 */TestResults/*
+Assets/*
+DentalSystem.Web.Api/DentalSystem_dev.db

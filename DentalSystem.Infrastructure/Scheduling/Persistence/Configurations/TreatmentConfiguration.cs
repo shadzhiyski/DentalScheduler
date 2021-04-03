@@ -1,5 +1,5 @@
 using DentalSystem.Infrastructure.Common.Persistence.Helpers;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

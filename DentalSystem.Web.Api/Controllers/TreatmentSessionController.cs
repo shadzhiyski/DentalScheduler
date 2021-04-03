@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using DentalSystem.Interfaces.UseCases.Scheduling.Commands;
 using Mapster;
