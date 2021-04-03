@@ -22,6 +22,14 @@ namespace DentalSystem.Infrastructure.Common
                 .AddScoped<DbContext, DentalSystemDbContext>()
                 .AddDbContext<DentalSystemDbContext>(opt =>
                     opt.UseNpgsql(configuration.GetConnectionString("DentalSystemDbConnection"))
+                )
+                .AddScoped<IInitializer, DatabaseInitializer>(
+                    (sp) => new DatabaseInitializer(
+                        db: sp.GetService<DentalSystemDbContext>(),
+                        initialDataProviders: sp
+                            .GetServices<IInitialData>()
+                            .OrderBy(id => id.Priority)
+                    )
                 );
     }
 }
