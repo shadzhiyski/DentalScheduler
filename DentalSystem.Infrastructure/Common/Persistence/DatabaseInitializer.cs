@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DentalSystem.Entities.Identity;
 using DentalSystem.Infrastructure.Migrations;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -23,22 +24,24 @@ namespace DentalSystem.Infrastructure.Common.Persistence
         public async Task Initialize()
         {
             var appliedMigrations = this.db.Database.GetAppliedMigrations();
-            if (!appliedMigrations.Any(m => m.EndsWith(nameof(Initial_Migration))))
+            if (appliedMigrations.Any(m => m.EndsWith(nameof(Initial_Migration))))
             {
-                this.db.Database.Migrate();
-
-                foreach (var initialDataProvider in this.initialDataProviders)
+                var usersCount = await this.db.Set<User>().CountAsync();
+                if (usersCount == 0)
                 {
-                    var applyData = await initialDataProvider.InitData();
-
-                    if (applyData)
+                    foreach (var initialDataProvider in this.initialDataProviders)
                     {
-                        var data = initialDataProvider.GetData();
-                        this.db.AddRange(data);
-                    }
-                }
+                        var applyData = await initialDataProvider.InitData();
 
-                this.db.SaveChanges();
+                        if (applyData)
+                        {
+                            var data = initialDataProvider.GetData();
+                            this.db.AddRange(data);
+                        }
+                    }
+
+                    this.db.SaveChanges();
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 namespace DentalSystem.Web.Api
 {
+    using System.Threading.Tasks;
     using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +15,9 @@ namespace DentalSystem.Web.Api
 
             foreach (var initializer in initializers)
             {
-                initializer.Initialize();
+                initializer.Initialize()
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             return app;
