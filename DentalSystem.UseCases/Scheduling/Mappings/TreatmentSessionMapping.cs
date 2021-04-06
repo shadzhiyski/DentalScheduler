@@ -20,6 +20,7 @@ namespace DentalSystem.UseCases.Scheduling.Mappings
                     Treatment = src.Treatment.Adapt<TreatmentOutput>(config),
                     Start = src.Start,
                     End = src.End,
+                    Patient = src.Patient.Adapt<PatientOutput>(config),
                     Status = src.Status.ToString()
                 });
 

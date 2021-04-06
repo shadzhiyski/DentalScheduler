@@ -9,7 +9,7 @@ namespace DentalSystem.UseCases.Scheduling.Dto.Output
 
         public string Name { get; set; }
 
-        IRoomOutput IDentalTeamOutput.Room { get; }
+        IRoomOutput IDentalTeamOutput.Room => Room;
 
         public RoomOutput Room { get; set; }
     }
