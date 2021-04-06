@@ -6,18 +6,18 @@ using DentalSystem.Config.DI.Infrastructure;
 using DentalSystem.UseCases;
 using DentalSystem.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Web.Api.Filters;
-using Microsoft.AspNet.OData.Builder;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 
 namespace DentalSystem.Web.Api
@@ -59,7 +59,11 @@ namespace DentalSystem.Web.Api
 
             services.AddAuthorization();
 
-            services.AddOData();
+            services.AddOData(
+                opt => opt.AddModel(prefix: "odata", model: GetEdmModel())
+                    .Select().Filter().Expand().OrderBy().Count().SetMaxTop(1000).SkipToken()
+            );
+
             services.AddMvcCore(options =>
             {
                 foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
@@ -140,10 +144,7 @@ namespace DentalSystem.Web.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.EnableDependencyInjection();
                 endpoints.MapControllers();
-                endpoints.Select().Filter().Expand().OrderBy().Count().MaxTop(1000).SkipToken();
-                endpoints.MapODataRoute(routeName: "odata", routePrefix: "odata", model: GetEdmModel());
             });
         }
 

@@ -4,9 +4,8 @@ using DentalSystem.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using Mapster;
-using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace DentalSystem.Web.Api.Controllers
 {
