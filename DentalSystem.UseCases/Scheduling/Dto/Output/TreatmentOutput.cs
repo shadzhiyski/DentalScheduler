@@ -5,7 +5,7 @@ namespace DentalSystem.UseCases.Scheduling.Dto.Output
 {
     public class TreatmentOutput : ITreatmentOutput
     {
-        public Guid ReferenceId { get; set; }
+        public Guid? ReferenceId { get; set; }
 
         public string Name { get; set; }
 
