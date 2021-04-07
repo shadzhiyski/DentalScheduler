@@ -17,10 +17,10 @@ namespace DentalSystem.UseCases.Scheduling.Validation
             RuleFor(m => m).SetValidator(simpleValidator);
 
             RuleFor(m => m)
-                .CustomAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct));
+                .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct));
 
             RuleFor(m => m)
-                .CustomAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct));
+                .MustAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct));
 
             TreatmentSessionRepository = treatmentSessionRepository;
         }
