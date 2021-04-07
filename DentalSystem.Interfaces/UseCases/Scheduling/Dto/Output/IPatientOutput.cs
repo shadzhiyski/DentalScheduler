@@ -4,7 +4,7 @@ namespace DentalSystem.Interfaces.UseCases.Scheduling.Dto.Output
 {
     public interface IPatientOutput
     {
-        Guid ReferenceId { get; set; }
+        Guid? ReferenceId { get; set; }
 
         byte[] Avatar { get; set; }
 
