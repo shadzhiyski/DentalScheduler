@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DentalSystem.Common.Helpers.Extensions;
@@ -30,18 +32,10 @@ namespace DentalSystem.UseCases
             this IServiceCollection services,
             Assembly assembly)
         {
-            var validatorsTypes = assembly
-                .GetExportedTypes()
-                .Where(t => t.Name.EndsWith("Validator"))
-                .Where(t => t.IsClass && !t.IsAbstract)
-                .Where(t => t.BaseType != null)
-                .Select(t => new
-                {
-                    IsCommon = t.Namespace.Contains("Common"),
-                    AbstractClass = t.BaseType,
-                    Implementation = t
-                })
-                .ToList();
+            var validatorsTypes = GetValidators(
+                assembly: assembly,
+                predicate: t => t.Namespace.Contains("Validation") && !t.Name.Contains("Business")
+            );
 
             validatorsTypes
                 .Where(t => !t.IsCommon)
@@ -58,6 +52,35 @@ namespace DentalSystem.UseCases
         private static IServiceCollection AddValidation(
             this IServiceCollection services,
             Assembly assembly)
-            => services.AddBasicValidation(assembly);
+        {
+            services.AddBasicValidation(assembly);
+
+            var businessValidatorsTypes = GetValidators(
+                assembly: assembly,
+                predicate: t => t.Namespace.Contains("Validation") && t.Name.Contains("Business")
+            );
+
+            businessValidatorsTypes
+                .Where(t => !t.IsCommon)
+                .ToList()
+                .ForEach(t => services.AddTransient(t.AbstractClass, t.Implementation));
+
+            return services;
+        }
+
+        private static List<(bool IsCommon, Type AbstractClass, Type Implementation)> GetValidators(
+            Assembly assembly, Func<Type, bool> predicate)
+            => assembly
+                .GetExportedTypes()
+                .Where(predicate)
+                .Where(t => t.IsClass && !t.IsAbstract)
+                .Where(t => t.BaseType != null)
+                .Select(t =>
+                (
+                    IsCommon: t.Namespace.Contains("Common"),
+                    AbstractClass: t.BaseType,
+                    Implementation: t
+                ))
+                .ToList();
     }
 }
