@@ -10,6 +10,7 @@ using System;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.Data.Sqlite;
+using DentalSystem.Entities.Scheduling;
 
 namespace DentalSystem.UseCases.Tests.Utilities
 {

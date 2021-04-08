@@ -1,11 +1,11 @@
 using System;
-using DentalSystem.Entities;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 using DentalSystem.Interfaces.Infrastructure.Identity;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using DentalSystem.Entities.Scheduling;
 
 namespace DentalSystem.UseCases.Tests.Utilities.DataProviders
 {

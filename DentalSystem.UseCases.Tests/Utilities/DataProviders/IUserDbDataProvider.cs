@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DentalSystem.Entities;
 using DentalSystem.Entities.Identity;
+using DentalSystem.Entities.Scheduling;
 using Microsoft.AspNetCore.Identity;
 
 namespace DentalSystem.UseCases.Tests.Utilities.DataProviders

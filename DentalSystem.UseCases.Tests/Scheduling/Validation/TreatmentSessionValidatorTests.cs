@@ -1,5 +1,6 @@
 using System;
 using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.UseCases.Scheduling.Validation;
 using FluentAssertions;

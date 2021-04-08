@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 
 namespace DentalSystem.UseCases.Tests.Utilities.DataProviders

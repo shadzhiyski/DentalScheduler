@@ -1,13 +1,13 @@
 using System;
 using System.Linq;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
-using DentalSystem.Entities;
 using DentalSystem.Interfaces.UseCases.Scheduling.Commands;
 using DentalSystem.UseCases.Tests.Utilities;
 using DentalSystem.UseCases.Tests.Utilities.DataProviders;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using DentalSystem.Entities.Scheduling;
 
 namespace DentalSystem.UseCases.Tests.Scheduling
 {

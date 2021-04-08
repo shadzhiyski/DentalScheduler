@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DentalSystem.Entities;
+using DentalSystem.Entities.Scheduling;
 
 namespace DentalSystem.UseCases.Tests.Utilities.DataProviders
 {
