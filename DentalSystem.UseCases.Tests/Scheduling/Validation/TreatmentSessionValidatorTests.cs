@@ -180,6 +180,27 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         }
 
         [Fact]
+        public void MaxDurationExceeded_ShouldReturnInvalidResult()
+        {
+            // Arrange
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
+
+            var invalidInput = ValidInput;
+            invalidInput.End = invalidInput.Start.Value.AddHours(3);
+
+            // Act
+            var validationResult = validator.Validate(invalidInput);
+
+            // Assert
+            AssertInvalidResult(
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.End),
+                message: localizer[TreatmentSessionValidator.MaxDurationMessageName]
+            );
+        }
+
+        [Fact]
         public void UnsupportedStatus_ShouldReturnInvalidResult()
         {
             // Arrange
