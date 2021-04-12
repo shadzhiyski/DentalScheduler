@@ -5,12 +5,31 @@ using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.UseCases.Scheduling.Validation;
 using FluentAssertions;
 using FluentValidation.Results;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 {
     public class TreatmentSessionValidatorTests
     {
+        public TreatmentSessionValidatorTests()
+        {
+            ServiceCollection = new ServiceCollection();
+
+            ServiceCollection.AddLocalization();
+
+            ServiceCollection.AddSingleton<ILoggerFactory, LoggerFactory>();
+            ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
+
+            ServiceProvider = ServiceCollection.BuildServiceProvider();
+        }
+
+        public IServiceCollection ServiceCollection { get; }
+
+        public ServiceProvider ServiceProvider { get; }
+
         public TreatmentSessionInput ValidInput => new TreatmentSessionInput()
             {
                 TreatmentReferenceId = Guid.NewGuid(),
@@ -25,7 +44,7 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void ValidInput_ShouldReturnValidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var validator = new TreatmentSessionValidator(ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>());
 
             // Act
             var validationResult = validator.Validate(ValidInput);
@@ -38,7 +57,8 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void MissingTreatmentReferenceId_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.TreatmentReferenceId = default;
@@ -48,8 +68,9 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.TreatmentReferenceId)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.TreatmentReferenceId),
+                message: localizer[TreatmentSessionValidator.RequiredTreatmentMessageName]
             );
         }
 
@@ -57,7 +78,8 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void MissingPatientReferenceId_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.PatientReferenceId = default;
@@ -67,8 +89,9 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.PatientReferenceId)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.PatientReferenceId),
+                message: localizer[TreatmentSessionValidator.RequiredPatientMessageName]
             );
         }
 
@@ -76,7 +99,8 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void MissingDentalTeamReferenceId_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.DentalTeamReferenceId = default;
@@ -86,8 +110,9 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.DentalTeamReferenceId)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.DentalTeamReferenceId),
+                message: localizer[TreatmentSessionValidator.RequiredDentalTeamMessageName]
             );
         }
 
@@ -95,7 +120,8 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void MissingStart_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.Start = default;
@@ -105,8 +131,9 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.Start)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.Start),
+                message: localizer[TreatmentSessionValidator.RequiredStartMessageName]
             );
         }
 
@@ -114,7 +141,8 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void MissingEnd_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.End = default;
@@ -124,8 +152,9 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.End)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.End),
+                message: localizer[TreatmentSessionValidator.RequiredEndMessageName]
             );
         }
 
@@ -133,7 +162,8 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
         public void InvalidPeriod_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.End = invalidInput.Start.Value.AddHours(-1);
@@ -143,16 +173,18 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.End)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.End),
+                message: localizer[TreatmentSessionValidator.InvalidPeriodMessageName]
             );
         }
 
         [Fact]
-        public void InvalidStatus_ShouldReturnInvalidResult()
+        public void UnsupportedStatus_ShouldReturnInvalidResult()
         {
             // Arrange
-            var validator = new TreatmentSessionValidator();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
+            var validator = new TreatmentSessionValidator(localizer);
 
             var invalidInput = ValidInput;
             invalidInput.Status = "Invalid Status";
@@ -162,20 +194,23 @@ namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 
             // Assert
             AssertInvalidResult(
-                validationResult,
-                nameof(TreatmentSessionInput.Status)
+                validationResult: validationResult,
+                propertyName: nameof(TreatmentSessionInput.Status),
+                message: localizer[TreatmentSessionValidator.UnsupportedStatusMessageName]
             );
         }
 
         private void AssertInvalidResult(
             ValidationResult validationResult,
-            string propertyName)
+            string propertyName,
+            string message = null)
         {
             validationResult.IsValid.Should().BeFalse();
             validationResult.Errors
                 .Should()
                 .ContainSingle(
                     error => error.PropertyName.Equals(propertyName)
+                        && error.ErrorMessage.Equals(message)
                 );
         }
     }
