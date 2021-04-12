@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using DentalSystem.Entities;
 using DentalSystem.UseCases.Tests.Utilities.DataProviders;
 using DentalSystem.UseCases.Tests.DI;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,17 +13,16 @@ using DentalSystem.Entities.Scheduling;
 
 namespace DentalSystem.UseCases.Tests.Utilities
 {
-    public abstract class BaseIntegrationTests : IDisposable
+    public abstract class BaseIntegrationTests : BaseTests, IDisposable
     {
         public BaseIntegrationTests(IServiceCollection serviceCollection)
+            : base()
         {
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("testsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
-
-            ServiceCollection = serviceCollection;
 
             ServiceCollection.AddDependencies(Configuration);
 
@@ -42,10 +40,6 @@ namespace DentalSystem.UseCases.Tests.Utilities
         }
 
         public IConfiguration Configuration { get; }
-
-        public IServiceCollection ServiceCollection { get; }
-
-        public ServiceProvider ServiceProvider { get; }
 
         public SqliteConnection DbConnection { get; }
 

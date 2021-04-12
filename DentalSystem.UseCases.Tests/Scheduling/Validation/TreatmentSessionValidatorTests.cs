@@ -1,35 +1,18 @@
 using System;
-using DentalSystem.Entities;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.UseCases.Scheduling.Validation;
+using DentalSystem.UseCases.Tests.Utilities;
 using FluentAssertions;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace DentalSystem.UseCases.Tests.Scheduling.Validation
 {
-    public class TreatmentSessionValidatorTests
+    public class TreatmentSessionValidatorTests : BaseTests
     {
-        public TreatmentSessionValidatorTests()
-        {
-            ServiceCollection = new ServiceCollection();
-
-            ServiceCollection.AddLocalization();
-
-            ServiceCollection.AddSingleton<ILoggerFactory, LoggerFactory>();
-            ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
-
-            ServiceProvider = ServiceCollection.BuildServiceProvider();
-        }
-
-        public IServiceCollection ServiceCollection { get; }
-
-        public ServiceProvider ServiceProvider { get; }
-
         public TreatmentSessionInput ValidInput => new TreatmentSessionInput()
             {
                 TreatmentReferenceId = Guid.NewGuid(),
