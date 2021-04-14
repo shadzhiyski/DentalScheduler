@@ -4,11 +4,10 @@ using DentalSystem.Common.Helpers.Extensions;
 using DentalSystem.Infrastructure.Common.Persistence;
 using DentalSystem.Infrastructure.Identity;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
-using DentalSystem.UseCases.Tests.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalSystem.UseCases.Tests.DI
+namespace DentalSystem.UseCases.Tests.Common
 {
     public static class AllRegistrations
     {

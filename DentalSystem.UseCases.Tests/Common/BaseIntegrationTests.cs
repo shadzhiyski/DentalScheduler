@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using DentalSystem.UseCases.Tests.DI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DentalSystem.Infrastructure.Common.Persistence;
@@ -11,7 +10,7 @@ using Microsoft.Data.Sqlite;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 
-namespace DentalSystem.UseCases.Tests.Utilities
+namespace DentalSystem.UseCases.Tests.Common
 {
     public abstract class BaseIntegrationTests : BaseTests, IDisposable
     {

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DentalSystem.Infrastructure.Common.Persistence;
 using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 
-namespace DentalSystem.UseCases.Tests.Utilities
+namespace DentalSystem.UseCases.Tests.Common
 {
     internal class TestDatabaseInitializer : IInitializer
     {

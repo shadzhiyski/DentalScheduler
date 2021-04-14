@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace DentalSystem.UseCases.Tests.Fakes
+namespace DentalSystem.UseCases.Tests.Common.Fakes
 {
     public class FakeLogger<T> : ILogger<T>
     {

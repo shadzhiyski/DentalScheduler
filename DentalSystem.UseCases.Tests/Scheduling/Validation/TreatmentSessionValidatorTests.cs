@@ -2,7 +2,7 @@ using System;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.UseCases.Scheduling.Validation;
-using DentalSystem.UseCases.Tests.Utilities;
+using DentalSystem.UseCases.Tests.Common;
 using FluentAssertions;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Interfaces.UseCases.Scheduling.Commands;
-using DentalSystem.UseCases.Tests.Utilities;
+using DentalSystem.UseCases.Tests.Common;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;

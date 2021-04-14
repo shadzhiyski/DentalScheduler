@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace DentalSystem.UseCases.Tests.Utilities
+namespace DentalSystem.UseCases.Tests.Common
 {
     public class BaseTests
     {
