@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using DentalSystem.UseCases.Tests.Utilities.DataProviders;
 using DentalSystem.UseCases.Tests.DI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.Data.Sqlite;
 using DentalSystem.Entities.Scheduling;
+using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
 
 namespace DentalSystem.UseCases.Tests.Utilities
 {
@@ -27,8 +27,6 @@ namespace DentalSystem.UseCases.Tests.Utilities
             ServiceCollection.AddDependencies(Configuration);
 
             ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
-
-            ServiceCollection.RegisterTestDbDataProviders();
 
             ServiceProvider = ServiceCollection.BuildServiceProvider();
 
@@ -55,18 +53,12 @@ namespace DentalSystem.UseCases.Tests.Utilities
 
         private void InitMainData()
         {
-            var treatmentDataProvider = ServiceProvider.GetRequiredService<ITreatmentDbDataProvider>();
+            var treatmentDataProvider = ServiceProvider.GetRequiredService<IInitializer>();
+            treatmentDataProvider.Initialize().GetAwaiter().GetResult();
 
-            Treatments = treatmentDataProvider.ProvideMainTreatmentsAsync()
-                .GetAwaiter()
-                .GetResult()
+            Treatments = ServiceProvider.GetRequiredService<IGenericRepository<Treatment>>()
+                .AsNoTracking()
                 .ToList();
-
-            var userDbDataProvider = ServiceProvider.GetRequiredService<IUserDbDataProvider>();
-
-            userDbDataProvider.ProvideRolesAsync("Admin", "Dentist", "Patient")
-                .GetAwaiter()
-                .GetResult();
         }
 
         public void Dispose()

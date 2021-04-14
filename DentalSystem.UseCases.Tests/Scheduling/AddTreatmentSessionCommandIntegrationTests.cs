@@ -3,11 +3,13 @@ using System.Linq;
 using DentalSystem.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Interfaces.UseCases.Scheduling.Commands;
 using DentalSystem.UseCases.Tests.Utilities;
-using DentalSystem.UseCases.Tests.Utilities.DataProviders;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using DentalSystem.Entities.Scheduling;
+using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
+using DentalSystem.Entities.Identity;
+using DentalSystem.Interfaces.Infrastructure.Identity;
 
 namespace DentalSystem.UseCases.Tests.Scheduling
 {
@@ -17,16 +19,11 @@ namespace DentalSystem.UseCases.Tests.Scheduling
         {
             Sut = ServiceProvider.GetRequiredService<IAddTreatmentSessionCommand>();
 
-            var (_, patient) = ServiceProvider.GetRequiredService<IUserDbDataProvider>()
-                .ProvidePatientAsync("patient", "patient#123")
-                .GetAwaiter()
-                .GetResult();
-            Patient = patient;
+            Patient = CreatePatientUser();
 
-            DentalTeam = ServiceProvider.GetRequiredService<IDentalTeamDbDataProvider>()
-                .ProvideDentalTeamAsync("Dental Team 1", "Room 1", "dentist")
-                .GetAwaiter()
-                .GetResult();
+            DentalTeam = ServiceProvider.GetRequiredService<IGenericRepository<DentalTeam>>()
+                .AsNoTracking()
+                .SingleOrDefault(dt => dt.Name == "DentalTeam 01");
         }
 
         public Patient Patient { get; }
@@ -53,6 +50,40 @@ namespace DentalSystem.UseCases.Tests.Scheduling
 
             // Assert
             messageOutput.Message.Should().BeEquivalentTo("Treatment Session successfully created.");
+        }
+
+        private Patient CreatePatientUser()
+        {
+            var patientUser = new User
+            {
+                Id = "19d65812-c648-419a-a5db-4c1c4b5d8a8e",
+                Email = "patient@mail.com",
+                UserName = "patient@mail.com",
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Patient",
+                LastName = "Test"
+            };
+
+            var userService = ServiceProvider.GetRequiredService<IUserService<User>>();
+            userService.CreateAsync(patientUser, "patient#123")
+                .GetAwaiter()
+                .GetResult();
+            userService.AddToRoleAsync(patientUser, "Patient")
+                .GetAwaiter()
+                .GetResult();
+
+            var patient = new Patient
+            {
+                IdentityUserId = patientUser.Id
+            };
+
+            ServiceProvider.GetRequiredService<IGenericRepository<Patient>>()
+                .AddAsync(patient)
+                .GetAwaiter()
+                .GetResult();
+            ServiceProvider.GetRequiredService<IUnitOfWork>().Save();
+
+            return patient;
         }
     }
 }
