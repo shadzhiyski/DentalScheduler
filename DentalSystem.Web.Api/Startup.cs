@@ -8,6 +8,7 @@ using DentalSystem.Config.DI.Infrastructure;
 using DentalSystem.UseCases;
 using DentalSystem.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Web.Api.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -82,14 +83,19 @@ namespace DentalSystem.Web.Api
             {
                 c.OperationFilter<ODataCommonParametersFilter>();
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme.",
-                    Name = "Authorization",
+                    Name = "JWT Authorization",
                     In = ParameterLocation.Header,
                     Scheme = "bearer",
                     Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT"
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
                 });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -97,7 +103,11 @@ namespace DentalSystem.Web.Api
                     {
                         new OpenApiSecurityScheme
                         {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = JwtBearerDefaults.AuthenticationScheme
+                            }
                         },
                         new List<string>()
                     }
