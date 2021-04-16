@@ -9,10 +9,18 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace DentalSystem.Web.Api.Controllers
 {
+    /// <summary>
+    /// Treatment.
+    /// </summary>
     [ApiController]
     [Route("odata/[controller]")]
     public class TreatmentController : BaseApiController
     {
+        /// <summary>
+        /// Creates Treatment Controller.
+        /// </summary>
+        /// <param name="mappingConfig"></param>
+        /// <param name="repository"></param>
         public TreatmentController(
             TypeAdapterConfig mappingConfig,
             IGenericRepository<Treatment> repository)
@@ -21,10 +29,15 @@ namespace DentalSystem.Web.Api.Controllers
             Repository = repository;
         }
 
-        public TypeAdapterConfig MappingConfig { get; }
+        private TypeAdapterConfig MappingConfig { get; }
 
-        public IGenericRepository<Treatment> Repository { get; }
+        private IGenericRepository<Treatment> Repository { get; }
 
+        /// <summary>
+        /// Gets Treatments.
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Returns treatments</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
         public IQueryable<TreatmentOutput> Get()

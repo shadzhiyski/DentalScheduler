@@ -12,11 +12,19 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace DentalSystem.Web.Api.Controllers
 {
+    /// <summary>
+    /// Dental Team.
+    /// </summary>
     [ApiController]
     [Route("odata/[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class DentalTeamController : BaseApiController
     {
+        /// <summary>
+        /// Creates Dental Team Controller.
+        /// </summary>
+        /// <param name="mappingConfig"></param>
+        /// <param name="repository"></param>
         public DentalTeamController(
             TypeAdapterConfig mappingConfig,
             IGenericRepository<DentalTeam> repository)
@@ -25,10 +33,15 @@ namespace DentalSystem.Web.Api.Controllers
             Repository = repository;
         }
 
-        public TypeAdapterConfig MappingConfig { get; }
+        private TypeAdapterConfig MappingConfig { get; }
 
-        public IGenericRepository<DentalTeam> Repository { get; }
+        private IGenericRepository<DentalTeam> Repository { get; }
 
+        /// <summary>
+        /// Gets Dental Teams.
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Returns dental teams</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
         public IQueryable<DentalTeamOutput> Get()

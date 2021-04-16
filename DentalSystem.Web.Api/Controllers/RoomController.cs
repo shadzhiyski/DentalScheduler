@@ -10,11 +10,19 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace DentalSystem.Web.Api.Controllers
 {
+    /// <summary>
+    /// Room.
+    /// </summary>
     [ApiController]
     [Route("odata/[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class RoomController : BaseApiController
     {
+        /// <summary>
+        /// Creates Room Controller.
+        /// </summary>
+        /// <param name="mappingConfig"></param>
+        /// <param name="repository"></param>
         public RoomController(
             TypeAdapterConfig mappingConfig,
             IGenericRepository<Room> repository)
@@ -23,10 +31,15 @@ namespace DentalSystem.Web.Api.Controllers
             Repository = repository;
         }
 
-        public TypeAdapterConfig MappingConfig { get; }
+        private TypeAdapterConfig MappingConfig { get; }
 
-        public IGenericRepository<Room> Repository { get; }
+        private IGenericRepository<Room> Repository { get; }
 
+        /// <summary>
+        /// Gets Rooms.
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Returns rooms</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
         public IQueryable<RoomOutput> Get()
