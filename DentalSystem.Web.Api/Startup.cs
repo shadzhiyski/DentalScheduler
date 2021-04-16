@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using DentalSystem.Config.DI.Infrastructure;
 using DentalSystem.UseCases;
 using DentalSystem.UseCases.Scheduling.Dto.Output;
@@ -117,11 +119,16 @@ namespace DentalSystem.Web.Api
                 });
 
                 c.SwaggerDoc("v1",
-                    new OpenApiInfo
-                    {
-                        Title = "Dental System",
-                        Version = "v1"
-                    });
+                new OpenApiInfo
+                {
+                    Title = "Dental System",
+                    Version = "v1"
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -144,21 +151,22 @@ namespace DentalSystem.Web.Api
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
             });
 
             app.UseCors(policy => policy.WithOrigins(new string[] { "https://localhost:5001" })
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials());
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
