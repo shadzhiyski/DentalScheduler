@@ -7,16 +7,8 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace DentalSystem.Web.Api.Filters
 {
-    /// <summary>
-    /// OData Common Parameters Filter.
-    /// </summary>
     public class ODataCommonParametersFilter : IOperationFilter
     {
-        /// <summary>
-        /// Applies OData Common Parameters to OData end points.
-        /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="context"></param>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             if (operation.Parameters == null)
