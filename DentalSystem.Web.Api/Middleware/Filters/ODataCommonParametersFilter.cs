@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.OData.Query;
 
-namespace DentalSystem.Web.Api.Filters
+namespace DentalSystem.Web.Api.Middleware.Filters
 {
     public class ODataCommonParametersFilter : IOperationFilter
     {

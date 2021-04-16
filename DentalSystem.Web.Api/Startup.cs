@@ -1,27 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using DentalSystem.Config.DI.Infrastructure;
 using DentalSystem.UseCases;
 using DentalSystem.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Web.Api.Filters;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using DentalSystem.Web.Api.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
-using Microsoft.OpenApi.Models;
 
 namespace DentalSystem.Web.Api
 {
@@ -40,91 +28,16 @@ namespace DentalSystem.Web.Api
                 .AddInfrastructure(Configuration)
                 .AddUseCases();
 
-            services.AddLocalization();
-            services.Configure<RequestLocalizationOptions>(opts =>
-                {
-                    var supportedCultures = new List<CultureInfo>
-                    {
-                        new CultureInfo("bg-BG"),
-                        new CultureInfo("en-US")
-                    };
-
-                    opts.DefaultRequestCulture = new RequestCulture("en-GB");
-                    // Formatting numbers, dates, etc.
-                    opts.SupportedCultures = supportedCultures;
-                    // UI strings that we have localized.
-                    opts.SupportedUICultures = supportedCultures;
-                });
+            services.AddLocalizationMiddleware();
 
             services.AddTransient(typeof(Lazy<>), typeof(Lazy<>));
             services.AddControllers();
 
             services.AddAuthorization();
 
-            services.AddOData(
-                opt => opt.AddModel(prefix: "odata", model: GetEdmModel())
-                    .Select().Filter().Expand().OrderBy().Count().SetMaxTop(1000).SkipToken()
-            );
+            services.AddODataMiddleware();
 
-            services.AddMvcCore(options =>
-            {
-                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
-                {
-                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-                }
-
-                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(x => x.SupportedMediaTypes.Count == 0))
-                {
-                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-                }
-            });
-
-            services.AddSwaggerGen(c =>
-            {
-                c.OperationFilter<ODataCommonParametersFilter>();
-
-                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme.",
-                    Name = "JWT Authorization",
-                    In = ParameterLocation.Header,
-                    Scheme = "bearer",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Reference = new OpenApiReference
-                    {
-                        Id = JwtBearerDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
-                    }
-                });
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = JwtBearerDefaults.AuthenticationScheme
-                            }
-                        },
-                        new List<string>()
-                    }
-                });
-
-                c.SwaggerDoc("v1",
-                new OpenApiInfo
-                {
-                    Title = "Dental System",
-                    Version = "v1"
-                });
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
+            services.AddSwaggerMiddleware();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -136,22 +49,13 @@ namespace DentalSystem.Web.Api
 
             app.Initialize();
 
-            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(options.Value);
+            app.UseLocalizationMiddleware();
 
             app.UseHttpsRedirection();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = string.Empty;
-            });
+            app.UseSwaggerMiddleware();
 
-            app.UseCors(policy => policy.WithOrigins(new string[] { "https://localhost:5001" })
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials());
+            app.UseCorsMiddleware();
 
             app.UseRouting();
 
