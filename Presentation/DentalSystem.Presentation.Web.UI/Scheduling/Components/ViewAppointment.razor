@@ -1,0 +1,60 @@
+@attribute [Authorize(Roles = "Patient")]
+
+@using Application.Boundaries.UseCases.Scheduling.Dto.Output
+@using Application.Boundaries.UseCases.Identity.Dto.Output
+
+@inject DialogService DialogService
+@inject ITreatmentSessionService TreatmentSessionService
+@inject ILocalStorageService LocalStorage
+
+<RadzenCard Style="margin-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-6">
+            <div>Requested Treatment:</div>
+            <b>@Model?.Treatment?.Name</b>
+            <div style="margin-top:20px">Dental Team:</div>
+            <b>@Model?.DentalTeam?.Name</b>
+            <div style="margin-top:20px">Patient:</div>
+            <b>@($"{Model?.Patient?.FirstName} {Model?.Patient?.LastName}")</b>
+            <br />
+            <div class="image-cropper">
+                <img src="@(ImageBase64 ?? "//placehold.it/100")" class="rounded-circle z-depth-0"
+                alt="avatar image">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>@nameof(Model.Status):</div>
+            <b>@Model?.Status</b>
+            <div style="margin-top:20px">@nameof(Model.Start):</div>
+            <b>@Model?.Start</b>
+            <div style="margin-top:20px">@nameof(Model.End):</div>
+            <b>@Model?.End</b>
+            <div style="margin-top:20px">Duration:</div>
+            <b>@((Model?.End - Model?.Start)?.TotalMinutes)</b>
+        </div>
+    </div>
+</RadzenCard>
+
+@code {
+    [Parameter]
+    public Guid ReferenceId { get; set; }
+
+    public ITreatmentSessionOutput Model { get; set; }
+
+    public string ImageBase64 { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var patientReferenceId = await LocalStorage
+            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId);
+        Model = await TreatmentSessionService.GetAppointment(ReferenceId, patientReferenceId);
+
+        SetImageView(Model.Patient.Avatar);
+    }
+
+    private void SetImageView(byte[] imageContent)
+    {
+        var imageBase64Data = Convert.ToBase64String(imageContent);
+        ImageBase64 = $"data:image/jpg;base64,{imageBase64Data}";
+    }
+}

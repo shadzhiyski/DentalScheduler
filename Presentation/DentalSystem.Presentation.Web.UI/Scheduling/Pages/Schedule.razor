@@ -1,0 +1,190 @@
+@page "/schedule"
+@attribute [Authorize(Roles = "Patient, Dentist")]
+
+@using DentalSystem.Application.UseCases.Scheduling.Dto.Input
+
+@inject DialogService DialogService
+@inject NotificationService NotificationService
+@inject ITreatmentSessionService TreatmentSessionService
+@inject ILocalStorageService LocalStorage
+
+<div class="row">
+    <div class="col-md-12">
+    <RadzenScheduler @ref="scheduler" style="height: 768px;" TItem="TreatmentSessionViewModel" Data="@TreatmentSessions" StartProperty="Start" EndProperty="End"
+        TextProperty="TreatmentName" SelectedIndex="2" LoadData="@LoadAppointments"
+        SlotSelect="@OnSlotSelect" AppointmentSelect="@OnAppointmentSelect" AppointmentRender="@OnAppointmentRender">
+        <RadzenDayView />
+        <RadzenWeekView />
+        <RadzenMonthView />
+    </RadzenScheduler>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+    public DateTimeOffset SchedulePeriodStart { get; set; }
+
+    public DateTimeOffset SchedulePeriodEnd { get; set; }
+
+    RadzenScheduler<TreatmentSessionViewModel> scheduler;
+
+    List<TreatmentSessionViewModel> TreatmentSessions { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var currentDate = DateTimeOffset.UtcNow;
+        var currentMonthStart = new DateTimeOffset(
+            currentDate.Year, currentDate.Month, 01, 00, 00, 00,
+            currentDate.Offset
+        );
+
+        SchedulePeriodStart = currentMonthStart.AddMonths(-1);
+        SchedulePeriodEnd = currentMonthStart.AddMonths(2).AddMinutes(-1);
+        TreatmentSessions = new List<TreatmentSessionViewModel>();
+    }
+
+    async Task LoadAppointments(SchedulerLoadDataEventArgs args)
+    {
+        var queryPeriodStart = SchedulePeriodStart;
+        var queryPeriodEnd = SchedulePeriodEnd;
+        var isPeriodExtendedBack = args.Start < SchedulePeriodStart;
+        var isPeriodExtendedAhead = SchedulePeriodEnd < args.End;
+        if (isPeriodExtendedBack)
+        {
+            queryPeriodStart = args.Start;
+            queryPeriodEnd = SchedulePeriodStart.AddMinutes(-1);
+
+            SchedulePeriodStart = queryPeriodStart;
+        }
+        else if (isPeriodExtendedAhead)
+        {
+            queryPeriodStart = SchedulePeriodEnd.AddMinutes(1);
+            queryPeriodEnd = args.End;
+
+            SchedulePeriodEnd = queryPeriodEnd;
+        }
+
+        var hasNoData = TreatmentSessions.Count == 0;
+        if (hasNoData || isPeriodExtendedBack || isPeriodExtendedAhead)
+        {
+            var loadedAppointments = await TreatmentSessionService.GetAppointmentsAsync(
+                queryPeriodStart,
+                queryPeriodEnd
+            );
+
+            if (loadedAppointments.Count > 0)
+            {
+                TreatmentSessions.AddRange(loadedAppointments);
+
+                await scheduler.Reload();
+            }
+        }
+    }
+
+    async Task OnSlotSelect(SchedulerSlotSelectEventArgs args)
+    {
+        var user = (await AuthenticationStateTask).User;
+        if (user.IsInRole("Dentist"))
+        {
+            return;
+        }
+
+        TreatmentSessionInput data = await DialogService.OpenAsync<EditTreatmentSession>(
+            "Add Treatment Session",
+            new Dictionary<string, object>
+            {
+                {
+                    "Model", new TreatmentSessionInput()
+                    {
+                        Status = "Requested",
+                        DentalTeamReferenceId = default,
+                        PatientReferenceId = await LocalStorage
+                            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId),
+                        TreatmentReferenceId = default,
+                        Start = args.Start,
+                        End = args.End
+                    }
+                }
+            });
+
+        if (data != null)
+        {
+            await TreatmentSessionService.AddAppointmentsAsync(data);
+
+            NotificationService.Notify(new NotificationMessage()
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Treatment session",
+                Detail = "Treatment session successfully created.",
+                Duration = 4000
+            });
+
+            TreatmentSessions = await TreatmentSessionService.GetAppointmentsAsync(
+                SchedulePeriodStart,
+                SchedulePeriodEnd
+            );
+        }
+    }
+
+    async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<TreatmentSessionViewModel> args)
+    {
+        var user = (await AuthenticationStateTask).User;
+        if (args.Data.Status.Equals("Accepted") && user.IsInRole("Patient"))
+        {
+            await DialogService.OpenAsync<ViewAppointment>("Edit Appointment",
+                new Dictionary<string, object> { { "ReferenceId", args.Data.ReferenceId } });
+
+            return;
+        }
+
+        TreatmentSessionInput dataToSet = new TreatmentSessionInput()
+        {
+            ReferenceId = args.Data.ReferenceId,
+            PatientReferenceId = args.Data.PatientReferenceId
+        };
+
+        TreatmentSessionInput resultData = null;
+
+        resultData = await DialogService.OpenAsync<EditTreatmentSession>("Edit Treatment Session",
+            new Dictionary<string, object> { { "Model", dataToSet } });
+
+        if (resultData == null)
+        {
+            return;
+        }
+
+        await TreatmentSessionService.EditAppointmentsAsync(resultData);
+
+        NotificationService.Notify(new NotificationMessage()
+        {
+            Severity = NotificationSeverity.Success,
+            Summary = "Treatment session",
+            Detail = "Treatment session successfully edited.",
+            Duration = 4000
+        });
+
+        TreatmentSessions = await TreatmentSessionService.GetAppointmentsAsync(
+            SchedulePeriodStart,
+            SchedulePeriodEnd
+        );
+    }
+
+    void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<TreatmentSessionViewModel> args)
+    {
+        // Never call StateHasChanged in AppointmentRender - would lead to infinite loop
+        if (args.Data.Status == "Requested")
+        {
+            args.Attributes["style"] = "background: orange";
+        }
+        else if (args.Data.Status == "Accepted")
+        {
+            args.Attributes["style"] = "background: blue";
+        }
+        else
+        {
+            args.Attributes["style"] = "background: red";
+        }
+    }
+}

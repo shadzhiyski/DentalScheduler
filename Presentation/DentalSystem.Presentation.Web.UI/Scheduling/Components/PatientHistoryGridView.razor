@@ -1,0 +1,92 @@
+@using Application.UseCases.Scheduling.Dto.Output
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PatientHistoryGridView> Loc
+
+<LazyGridView
+        Items="TreatmentSessions"
+        Refresh="@IsDataLoaded"
+        PageSize="@PageSize"
+        OnPageLoad="@(async (args) => await LoadTreatmentSessionsAsync(args))"
+        LargePaginationButtons="@LargePaginationButtons">
+    <GridColumns>
+        <GridColumn ColumnTitle="@Loc["Column.Name"]"
+            SearchEnabled="@SearchEnabled"
+            OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Name"))"></GridColumn>
+        <GridColumn ColumnTitle="@Loc["Column.Date"]"
+            SearchEnabled="@SearchEnabled"
+            OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Date"))"></GridColumn>
+        <GridColumn ColumnTitle="@Loc["Column.Duration"]"
+            SearchEnabled="@SearchEnabled"
+            OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Duration"))"></GridColumn>
+        <GridColumn ColumnTitle="@Loc["Column.DentalTeam"]"
+            SearchEnabled="@SearchEnabled"
+            OnSearchTextChanged="@(e => OnSearchTextChanged(e, "DentalTeam"))"></GridColumn>
+        <GridColumn ColumnTitle="@Loc["Column.Treatment"]"
+            SearchEnabled="@SearchEnabled"
+            OnSearchTextChanged="@(e => OnSearchTextChanged(e, "Treatment"))"></GridColumn>
+    </GridColumns>
+    <GridRow Context="TreatmentSession">
+        <td scope="row">@TreatmentSession?.Patient?.FirstName @TreatmentSession?.Patient?.LastName</td>
+        <td>@TreatmentSession?.Start</td>
+        <td>@(((TreatmentSession?.End - TreatmentSession?.Start) ?? TimeSpan.MinValue).TotalMinutes) @Loc["MinutesShortSuffix"]</td>
+        <td>@TreatmentSession?.DentalTeam?.Name</td>
+        <td>@TreatmentSession?.Treatment?.Name</td>
+    </GridRow>
+
+</LazyGridView>
+
+@code {
+
+    [Inject]
+    public ITreatmentSessionService TreatmentSessionService { get; set; }
+
+    [Parameter]
+    public Guid PatientReferenceId { get; set; }
+
+    [Parameter]
+    public int PageSize { get; set; } = 12;
+
+    [Parameter]
+    public bool SearchEnabled { get; set; } = true;
+
+    [Parameter]
+    public Action<ChangeEventArgs, string> SearchTextChanged { get; set; }
+
+    [Parameter]
+    public bool LargePaginationButtons { get; set; } = false;
+
+    public int PageNumber { get; set; }
+
+    public int CurrentPageIndex { get; set; }
+
+    public TreatmentSessionOutput TreatmentSession { get; set; }
+
+    public List<TreatmentSessionOutput> TreatmentSessions { get; set; } = new List<TreatmentSessionOutput>();
+
+    public bool IsDataLoaded { get; set; }
+
+    private async Task<List<TreatmentSessionOutput>> LoadTreatmentSessionsAsync(PageLoadEventArgs args)
+    {
+        var treatmentSessions = await TreatmentSessionService.GetAppointmentsHistoryAsync(
+            PatientReferenceId,
+            args.SelectedPage,
+            PageSize
+        );
+
+        IsDataLoaded = true;
+
+        return treatmentSessions;
+    }
+
+    private void OnSearchTextChanged(ChangeEventArgs args, string propertyName)
+    {
+        SearchTextChanged.Invoke(args, propertyName);
+    }
+
+    protected override bool ShouldRender()
+    {
+        base.ShouldRender();
+
+        return IsDataLoaded;
+    }
+}

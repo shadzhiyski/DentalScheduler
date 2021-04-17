@@ -1,0 +1,118 @@
+@attribute [Authorize(Roles = "Patient, Dentist")]
+
+@using Application.Boundaries.UseCases.Scheduling.Dto.Input
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<EditTreatmentSession> Loc
+
+<EditForm EditContext="@EditContext" OnValidSubmit="OnSubmit">
+    <ApplicationValidator TModel="@ITreatmentSessionInput" />
+
+    <AuthorizeView Roles="Dentist">
+        <Authorized Context="Auth">
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <div style="margin-top:20px">@Loc["Patient"]:</div>
+                </div>
+                <div class="col">
+                    <div class="image-cropper">
+                        <img src="@(ImageBase64 ?? "//placehold.it/100")" class="rounded-circle z-depth-0"
+                        alt="avatar image">
+                    </div>
+                    <br />
+                    <b>@($"{PatientInfo?.FirstName} {PatientInfo?.LastName}")</b>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.DentalTeamReferenceId)">@Loc["DentalTeam"]</label>
+        </div>
+        <div class="col">
+            <RadzenDropDown AllowClear="true" Disabled="@IsDentalTeamDropDownDisabled" TValue="Guid?" LoadData="@LoadDentalTeams"
+                Data="@DentalTeams"
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="Model.DentalTeamReferenceId" >
+            </RadzenDropDown>
+            <ValidationMessage For="@(() => Model.DentalTeamReferenceId)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.TreatmentReferenceId)">@Loc["Treatment"]</label>
+        </div>
+        <div class="col">
+            <RadzenDropDown AllowClear="true" Disabled="@IsTreatmentDropDownDisabled" TValue="Guid?" LoadData="@LoadTreatments"
+                Data="@Treatments"
+                TextProperty="Name" ValueProperty="ReferenceId" @bind-Value="Model.TreatmentReferenceId" Change="@(args => OnTreatmentChange())" >
+            </RadzenDropDown>
+            <ValidationMessage For="@(() => Model.TreatmentReferenceId)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.Start)">@Loc["Start"]</label>
+        </div>
+        <div class="col">
+            <RadzenDatePicker @bind-Value="@PeriodWrapperModel.Start" Name="Model.Start" ShowTime="true" Change="@(args => OnPeriodChange())" />
+            <ValidationMessage For="@(() => Model.Start)" />
+        </div>
+    </div>
+    <AuthorizeView Roles="Dentist">
+        <Authorized Context="Auth">
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="Duration In Minutes">@Loc["DurationInMinutes"]</label>
+        </div>
+        <div class="col">
+            <RadzenNumeric TValue="int" @bind-Value="DurationInMinutes" Step="15" Min="15" Change="@(args => OnPeriodChange())" />
+        </div>
+    </div>
+        </Authorized>
+    </AuthorizeView>
+    <div class="form-group row">
+        <div class="col-md-3">
+            <label for="@nameof(Model.End)">@Loc["End"]</label>
+        </div>
+        <div class="col">
+            <RadzenDatePicker @bind-Value="@PeriodWrapperModel.End" Disabled="true" Name="Model.End" ShowTime="true" />
+            <ValidationMessage For="@(() => Model.End)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3"></div>
+        <div class="col">
+            <ValidationSummary />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3"></div>
+        <div class="col">
+            <AuthorizeView Roles="Patient">
+                <Authorized Context="Auth">
+                    <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+                </Authorized>
+            </AuthorizeView>
+            <AuthorizeView Roles="Dentist">
+                <Authorized Context="Auth">
+                    <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Info" Icon="done" Text="Accept" Click="@(args => Approve())" />
+                    <RadzenButton ButtonType="ButtonType.Submit" ButtonStyle="ButtonStyle.Danger" Icon="cancel" Text="Reject" Click="@(args => Reject())" />
+                </Authorized>
+            </AuthorizeView>
+        </div>
+    </div>
+</EditForm>
+
+<AuthorizeView Roles="Dentist">
+    <Authorized Context="Auth">
+        @if (Model?.PatientReferenceId.HasValue ?? false)
+        {
+            <PatientHistoryGridView
+                PatientReferenceId="@(Model.PatientReferenceId.Value)"
+                PageSize="2"
+                SearchEnabled="false" />
+        }
+    </Authorized>
+</AuthorizeView>
