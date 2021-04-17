@@ -12,15 +12,12 @@ namespace DentalSystem.Web.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-            => services
+        public void ConfigureServices(IServiceCollection services) =>
+            services
                 .AddInfrastructure(Configuration)
                 .AddUseCases()
                 .AddTransient(typeof(Lazy<>), typeof(Lazy<>))
@@ -30,14 +27,12 @@ namespace DentalSystem.Web.Api
                 .AddSwaggerMiddleware()
                 .AddControllers();
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.Initialize()
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) =>
+            (env.IsDevelopment()
+                    ? app.UseDeveloperExceptionPage()
+                    : app
+                )
+                .Initialize()
                 .UseHttpsRedirection()
                 .UseRouting()
                 .UseAuthentication()
@@ -49,6 +44,5 @@ namespace DentalSystem.Web.Api
                 {
                     endpoints.MapControllers();
                 });
-        }
     }
 }
