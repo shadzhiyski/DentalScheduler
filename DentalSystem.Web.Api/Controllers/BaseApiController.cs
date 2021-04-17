@@ -21,7 +21,8 @@ namespace DentalSystem.Web.Api.Controllers
                 ResultType.Updated => NoContent(),
                 ResultType.Deleted => NoContent(),
                 ResultType.Failed => BadRequest(result.Errors),
-                ResultType.NotFound => NotFound(result.Errors)
+                ResultType.NotFound => NotFound(result.Errors),
+                _ => BadRequest()
             };
     }
 }
