@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using DentalSystem.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Boundaries.UseCases.Scheduling.Commands;
-using DentalSystem.UseCases.Tests.Common;
+using DentalSystem.Application.UseCases.Tests.Common;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -11,7 +11,7 @@ using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Boundaries.Infrastructure.Identity;
 
-namespace DentalSystem.UseCases.Tests.Scheduling
+namespace DentalSystem.Application.UseCases.Tests.Scheduling
 {
     public class AddTreatmentSessionCommandIntegrationTests : BaseIntegrationTests
     {

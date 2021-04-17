@@ -7,7 +7,7 @@ using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DentalSystem.UseCases.Tests.Common
+namespace DentalSystem.Application.UseCases.Tests.Common
 {
     public static class AllRegistrations
     {

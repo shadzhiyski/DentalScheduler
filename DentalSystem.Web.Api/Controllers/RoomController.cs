@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using DentalSystem.UseCases.Scheduling.Dto.Output;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 using Mapster;

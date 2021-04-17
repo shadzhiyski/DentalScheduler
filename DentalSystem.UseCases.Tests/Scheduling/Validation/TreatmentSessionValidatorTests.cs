@@ -1,15 +1,15 @@
 using System;
 using DentalSystem.Entities.Scheduling;
-using DentalSystem.UseCases.Scheduling.Dto.Input;
-using DentalSystem.UseCases.Scheduling.Validation;
-using DentalSystem.UseCases.Tests.Common;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.UseCases.Scheduling.Validation;
+using DentalSystem.Application.UseCases.Tests.Common;
 using FluentAssertions;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Xunit;
 
-namespace DentalSystem.UseCases.Tests.Scheduling.Validation
+namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
 {
     public class TreatmentSessionValidatorTests : BaseTests
     {

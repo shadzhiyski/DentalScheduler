@@ -9,7 +9,7 @@ using Radzen;
 using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Web.UI.Scheduling.Services;
 using Microsoft.AspNetCore.Components.Authorization;
-using DentalSystem.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using Mapster;
 
 namespace DentalSystem.Web.UI.Scheduling.Components

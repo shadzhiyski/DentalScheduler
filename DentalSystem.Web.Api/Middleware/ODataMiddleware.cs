@@ -1,5 +1,5 @@
 using System.Linq;
-using DentalSystem.UseCases.Scheduling.Dto.Output;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.OData.Formatter;

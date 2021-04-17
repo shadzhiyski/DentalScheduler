@@ -12,7 +12,7 @@ using DentalSystem.Web.UI.Common.Handlers;
 using System;
 using Microsoft.Extensions.Options;
 using Simple.OData.Client;
-using DentalSystem.UseCases;
+using DentalSystem.Application.UseCases;
 
 namespace DentalSystem.Web.UI
 {

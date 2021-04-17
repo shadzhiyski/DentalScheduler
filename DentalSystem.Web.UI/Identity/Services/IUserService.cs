@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DentalSystem.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
 

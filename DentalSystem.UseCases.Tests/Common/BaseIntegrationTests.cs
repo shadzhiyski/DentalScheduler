@@ -10,7 +10,7 @@ using Microsoft.Data.Sqlite;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 
-namespace DentalSystem.UseCases.Tests.Common
+namespace DentalSystem.Application.UseCases.Tests.Common
 {
     public abstract class BaseIntegrationTests : BaseTests, IDisposable
     {

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DentalSystem.Infrastructure.Common.Persistence;
 
-namespace DentalSystem.UseCases.Tests.Common
+namespace DentalSystem.Application.UseCases.Tests.Common
 {
     public static class DbConfigurationRegistrationsExtension
     {

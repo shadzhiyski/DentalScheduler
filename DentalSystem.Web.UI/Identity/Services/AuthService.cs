@@ -4,12 +4,12 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using DentalSystem.UseCases.Common.Dto.Output;
-using DentalSystem.UseCases.Identity.Dto.Output;
+using DentalSystem.Application.UseCases.Common.Dto.Output;
+using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
 using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.UseCases.Common.Validation;
+using DentalSystem.Application.UseCases.Common.Validation;
 
 namespace DentalSystem.Web.UI.Identity.Services
 {

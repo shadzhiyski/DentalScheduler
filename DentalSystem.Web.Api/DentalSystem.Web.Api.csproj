@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj" />
-    <ProjectReference Include="..\DentalSystem.UseCases\DentalSystem.UseCases.csproj" />
+    <ProjectReference Include="..\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

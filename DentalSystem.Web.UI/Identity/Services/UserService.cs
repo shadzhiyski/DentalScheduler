@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
-using DentalSystem.UseCases.Identity.Dto.Output;
+using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
 
