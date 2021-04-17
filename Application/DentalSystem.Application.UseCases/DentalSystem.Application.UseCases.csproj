@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj" />
-    <ProjectReference Include="..\DentalSystem.Common\DentalSystem.Common.csproj" />
-    <ProjectReference Include="..\DentalSystem.Entities\DentalSystem.Entities.csproj" />
+    <ProjectReference Include="..\..\Common\DentalSystem.Common\DentalSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Entities\DentalSystem.Entities\DentalSystem.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj" />
+    <ProjectReference Include="..\..\Application\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.Api", "DentalSystem.Presentation.Web.Api\DentalSystem.Presentation.Web.Api.csproj", "{2AECA935-07C8-4117-B14A-79244383BB16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.Api", "Presentation\DentalSystem.Presentation.Web.Api\DentalSystem.Presentation.Web.Api.csproj", "{2AECA935-07C8-4117-B14A-79244383BB16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.UI", "DentalSystem.Presentation.Web.UI\DentalSystem.Presentation.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.UI", "Presentation\DentalSystem.Presentation.Web.UI\DentalSystem.Presentation.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Infrastructure", "DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Infrastructure", "Infrastructure\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Entities", "DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Entities", "Entities\DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.Boundaries", "DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.Boundaries", "Application\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases", "DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj", "{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases", "Application\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj", "{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases.Tests", "DentalSystem.Application.UseCases.Tests\DentalSystem.Application.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases.Tests", "Application\DentalSystem.Application.UseCases.Tests\DentalSystem.Application.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Common", "DentalSystem.Common\DentalSystem.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Common", "Common\DentalSystem.Common\DentalSystem.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

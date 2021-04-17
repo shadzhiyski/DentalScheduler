@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj" />
   </ItemGroup>
 
