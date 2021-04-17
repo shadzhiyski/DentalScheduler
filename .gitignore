@@ -6,4 +6,4 @@
 */*/*/Migrations/*
 */TestResults/*
 Assets/*
-DentalSystem.Web.Api/DentalSystem_dev.db
+DentalSystem.Presentation.Web.Api/DentalSystem_dev.db

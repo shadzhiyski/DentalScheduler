@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Web.Api", "DentalSystem.Web.Api\DentalSystem.Web.Api.csproj", "{2AECA935-07C8-4117-B14A-79244383BB16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.Api", "DentalSystem.Presentation.Web.Api\DentalSystem.Presentation.Web.Api.csproj", "{2AECA935-07C8-4117-B14A-79244383BB16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Web.UI", "DentalSystem.Web.UI\DentalSystem.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.UI", "DentalSystem.Presentation.Web.UI\DentalSystem.Presentation.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Infrastructure", "DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
