@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Boundaries", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases", "DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj", "{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.UseCases.Tests", "DentalSystem.UseCases.Tests\DentalSystem.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases.Tests", "DentalSystem.Application.UseCases.Tests\DentalSystem.Application.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Common", "DentalSystem.Common\DentalSystem.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
 EndProject
