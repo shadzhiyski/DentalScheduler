@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Infrastructure.Common.Persistence.Repositories

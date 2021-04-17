@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Entities.Scheduling;
-using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 
 namespace DentalSystem.Infrastructure.Scheduling.Persistence.InitialData
 {

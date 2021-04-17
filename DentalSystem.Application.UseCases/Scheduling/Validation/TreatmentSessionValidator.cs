@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using DentalSystem.Entities.Scheduling;
-using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 

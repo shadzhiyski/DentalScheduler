@@ -1,7 +1,7 @@
 namespace DentalSystem.Web.Api
 {
     using System.Threading.Tasks;
-    using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+    using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
 

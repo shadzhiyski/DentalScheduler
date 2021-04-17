@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using Newtonsoft.Json;
 
 namespace DentalSystem.Application.UseCases.Common.Validation

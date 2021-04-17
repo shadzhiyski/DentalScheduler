@@ -4,7 +4,7 @@ using DentalSystem.Infrastructure.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 
 namespace DentalSystem.Config.DI.Infrastructure
 {

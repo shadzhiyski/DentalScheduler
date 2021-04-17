@@ -1,4 +1,4 @@
-using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using FluentValidation;
 
 namespace DentalSystem.Application.UseCases.Identity.Validation

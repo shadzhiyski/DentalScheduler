@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\DentalSystem.Boundaries\DentalSystem.Boundaries.csproj" />
+    <ProjectReference Include="..\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj" />
     <ProjectReference Include="..\DentalSystem.Common\DentalSystem.Common.csproj" />
     <ProjectReference Include="..\DentalSystem.Entities\DentalSystem.Entities.csproj" />
   </ItemGroup>

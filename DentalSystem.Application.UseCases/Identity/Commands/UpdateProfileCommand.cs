@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Common.Dto.Output;
 using DentalSystem.Entities.Identity;
-using DentalSystem.Boundaries.Infrastructure.Identity;
-using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.Boundaries.UseCases.Common.Validation;
-using DentalSystem.Boundaries.UseCases.Identity.Commands;
+using DentalSystem.Application.Boundaries.Infrastructure.Identity;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using Mapster;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands

@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
-using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
-using DentalSystem.Boundaries.UseCases.Identity.Commands;
-using DentalSystem.Boundaries.UseCases.Identity.Queries;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;

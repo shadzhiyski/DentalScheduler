@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using DentalSystem.Boundaries.Infrastructure.Identity.Dto.Output;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.Infrastructure.Identity.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 
 namespace DentalSystem.Infrastructure.Identity.Dto.Output
 {

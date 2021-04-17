@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using DentalSystem.Boundaries.UseCases.Common.Validation;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 

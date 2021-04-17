@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 

@@ -1,7 +1,7 @@
 using System.Linq;
 using DentalSystem.Infrastructure.Identity.Dto.Output;
-using DentalSystem.Boundaries.Infrastructure.Identity.Dto.Output;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.Infrastructure.Identity.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 

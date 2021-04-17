@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using DentalSystem.Boundaries.Infrastructure.Identity;
-using DentalSystem.Boundaries.Infrastructure.Identity.Dto.Output;
+using DentalSystem.Application.Boundaries.Infrastructure.Identity;
+using DentalSystem.Application.Boundaries.Infrastructure.Identity.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 

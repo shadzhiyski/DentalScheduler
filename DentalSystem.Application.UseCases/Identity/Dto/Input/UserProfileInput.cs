@@ -1,5 +1,5 @@
 using DentalSystem.Common.Helpers.Extensions;
-using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using Microsoft.AspNetCore.Http;
 
 namespace DentalSystem.Application.UseCases.Identity.Dto.Input

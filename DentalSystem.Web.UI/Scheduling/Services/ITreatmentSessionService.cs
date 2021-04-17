@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Web.UI.Models;
 
 namespace DentalSystem.Web.UI.Scheduling.Services

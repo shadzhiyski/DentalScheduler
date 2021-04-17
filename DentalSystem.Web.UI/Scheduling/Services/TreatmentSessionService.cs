@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
-using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Web.UI.Models;
 using Simple.OData.Client;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;

@@ -1,6 +1,6 @@
 using System.Linq;
-using DentalSystem.Boundaries.UseCases.Common.Validation;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using FluentValidation;
 using Mapster;
 

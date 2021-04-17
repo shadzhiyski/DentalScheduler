@@ -1,4 +1,4 @@
-using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
 
 namespace DentalSystem.Application.UseCases.Identity.Dto.Output
 {

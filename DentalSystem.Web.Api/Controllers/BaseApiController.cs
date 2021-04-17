@@ -1,5 +1,5 @@
 using System.Linq;
-using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalSystem.Web.Api.Controllers

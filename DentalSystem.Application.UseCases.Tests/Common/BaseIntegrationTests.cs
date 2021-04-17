@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.Data.Sqlite;
 using DentalSystem.Entities.Scheduling;
-using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 
 namespace DentalSystem.Application.UseCases.Tests.Common
 {
