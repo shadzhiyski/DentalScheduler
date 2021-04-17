@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Infrastructure.Migrations;
-using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
+using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Infrastructure.Common.Persistence

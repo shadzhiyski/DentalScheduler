@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using DentalSystem.UseCases.Identity.Dto.Output;
 using DentalSystem.Entities.Identity;
-using DentalSystem.Interfaces.Infrastructure.Identity;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Output;
-using DentalSystem.Interfaces.UseCases.Identity.Queries;
+using DentalSystem.Boundaries.Infrastructure.Identity;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Identity.Queries;
 using Mapster;
 
 namespace DentalSystem.UseCases.Identity.Queries

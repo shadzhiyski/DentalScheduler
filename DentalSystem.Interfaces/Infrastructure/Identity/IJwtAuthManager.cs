@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
 
-namespace DentalSystem.Interfaces.Infrastructure.Identity
+namespace DentalSystem.Boundaries.Infrastructure.Identity
 {
     public interface IJwtAuthManager
     {

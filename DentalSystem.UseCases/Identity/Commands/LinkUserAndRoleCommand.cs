@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.UseCases.Common.Dto.Output;
 using DentalSystem.Entities.Identity;
-using DentalSystem.Interfaces.Infrastructure.Identity;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
-using DentalSystem.Interfaces.UseCases.Identity.Commands;
-using DentalSystem.Interfaces.UseCases.Common.Validation;
+using DentalSystem.Boundaries.Infrastructure.Identity;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Identity.Commands;
+using DentalSystem.Boundaries.UseCases.Common.Validation;
 using DentalSystem.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 

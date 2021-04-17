@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Infrastructure.Common.Persistence;
-using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
+using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 
 namespace DentalSystem.UseCases.Tests.Common
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DentalSystem.Interfaces.UseCases.Common.Dto.Output
+namespace DentalSystem.Boundaries.UseCases.Common.Dto.Output
 {
     public interface IValidationResult
     {

@@ -1,5 +1,5 @@
 using System;
-using DentalSystem.Interfaces.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
 
 namespace DentalSystem.UseCases.Scheduling.Dto.Input
 {

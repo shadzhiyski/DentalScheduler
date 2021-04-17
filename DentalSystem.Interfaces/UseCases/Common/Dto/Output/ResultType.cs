@@ -1,4 +1,4 @@
-namespace DentalSystem.Interfaces.UseCases.Common.Dto.Output
+namespace DentalSystem.Boundaries.UseCases.Common.Dto.Output
 {
     public enum ResultType
     {

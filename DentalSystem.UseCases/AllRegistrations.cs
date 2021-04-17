@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DentalSystem.Common.Helpers.Extensions;
-using DentalSystem.Interfaces.UseCases.Common.Validation;
+using DentalSystem.Boundaries.UseCases.Common.Validation;
 using DentalSystem.UseCases.Common.Validation;
 using Microsoft.Extensions.DependencyInjection;
 

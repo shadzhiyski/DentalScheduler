@@ -1,4 +1,4 @@
-namespace DentalSystem.Interfaces.UseCases.Identity.Dto.Input
+namespace DentalSystem.Boundaries.UseCases.Identity.Dto.Input
 {
     public interface IUserCredentialsInput
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.UseCases.Common.Dto.Output;
 using DentalSystem.Entities.Scheduling;
-using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
-using DentalSystem.Interfaces.UseCases.Scheduling.Dto.Input;
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
-using DentalSystem.Interfaces.UseCases.Scheduling.Commands;
-using DentalSystem.Interfaces.UseCases.Common.Validation;
+using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Scheduling.Commands;
+using DentalSystem.Boundaries.UseCases.Common.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.UseCases.Scheduling.Commands

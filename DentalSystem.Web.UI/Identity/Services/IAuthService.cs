@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Output;
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
 
 namespace DentalSystem.Web.UI.Identity.Services
 {

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
 
-namespace DentalSystem.Interfaces.UseCases.Identity.Commands
+namespace DentalSystem.Boundaries.UseCases.Identity.Commands
 {
     public interface ILinkUserAndRoleCommand
     {

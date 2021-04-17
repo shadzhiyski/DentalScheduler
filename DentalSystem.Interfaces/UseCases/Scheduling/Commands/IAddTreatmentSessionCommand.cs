@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using DentalSystem.Interfaces.UseCases.Scheduling.Dto.Input;
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
 
-namespace DentalSystem.Interfaces.UseCases.Scheduling.Commands
+namespace DentalSystem.Boundaries.UseCases.Scheduling.Commands
 {
     public interface IAddTreatmentSessionCommand
     {

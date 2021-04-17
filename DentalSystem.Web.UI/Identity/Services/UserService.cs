@@ -3,8 +3,8 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using DentalSystem.UseCases.Identity.Dto.Output;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Output;
 
 namespace DentalSystem.Web.UI.Identity.Services
 {

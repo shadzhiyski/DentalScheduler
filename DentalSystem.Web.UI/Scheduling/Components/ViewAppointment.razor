@@ -1,7 +1,7 @@
 @attribute [Authorize(Roles = "Patient")]
 
-@using Interfaces.UseCases.Scheduling.Dto.Output
-@using Interfaces.UseCases.Identity.Dto.Output
+@using Boundaries.UseCases.Scheduling.Dto.Output
+@using Boundaries.UseCases.Identity.Dto.Output
 
 @inject DialogService DialogService
 @inject ITreatmentSessionService TreatmentSessionService

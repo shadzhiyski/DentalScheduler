@@ -1,4 +1,4 @@
-namespace DentalSystem.Interfaces.UseCases.Common.Validation
+namespace DentalSystem.Boundaries.UseCases.Common.Validation
 {
     public enum Severity
     {

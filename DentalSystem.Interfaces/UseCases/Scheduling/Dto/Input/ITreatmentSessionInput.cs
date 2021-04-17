@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalSystem.Interfaces.UseCases.Scheduling.Dto.Input
+namespace DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input
 {
     public interface ITreatmentSessionInput
     {

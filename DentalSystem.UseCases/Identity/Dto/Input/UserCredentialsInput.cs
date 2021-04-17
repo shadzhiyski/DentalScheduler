@@ -1,4 +1,4 @@
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
 
 namespace DentalSystem.UseCases.Identity.Dto.Input
 {

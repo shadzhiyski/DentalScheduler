@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
 
-namespace DentalSystem.Interfaces.UseCases.Common.Dto.Output
+namespace DentalSystem.Boundaries.UseCases.Common.Dto.Output
 {
     public interface IValidationError : IError
     {

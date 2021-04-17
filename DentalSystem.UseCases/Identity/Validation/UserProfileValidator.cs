@@ -1,5 +1,5 @@
 using System.Linq;
-using DentalSystem.Interfaces.UseCases.Identity.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.UseCases.Common.Validation;
 using FluentValidation;
 using Microsoft.Extensions.Localization;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Entities.Identity;
-using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
-using DentalSystem.Interfaces.Infrastructure.Identity;
+using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Boundaries.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace DentalSystem.Infrastructure.Identity.Persistence.InitialData

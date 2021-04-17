@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DentalSystem.Interfaces.Infrastructure.Common.Persistence;
+using DentalSystem.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Infrastructure.Common.Persistence

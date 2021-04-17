@@ -1,4 +1,4 @@
-namespace DentalSystem.Interfaces.UseCases.Identity.Dto.Output
+namespace DentalSystem.Boundaries.UseCases.Identity.Dto.Output
 {
     public interface IAccessTokenOutput
     {

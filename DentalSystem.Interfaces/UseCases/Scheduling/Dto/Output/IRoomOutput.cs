@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalSystem.Interfaces.UseCases.Scheduling.Dto.Output
+namespace DentalSystem.Boundaries.UseCases.Scheduling.Dto.Output
 {
     public interface IRoomOutput
     {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using DentalSystem.Web.UI.Models;
 using Radzen;
-using DentalSystem.Interfaces.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Web.UI.Scheduling.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using DentalSystem.UseCases.Scheduling.Dto.Input;

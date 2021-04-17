@@ -1,4 +1,4 @@
-using DentalSystem.Interfaces.UseCases.Common.Dto.Output;
+using DentalSystem.Boundaries.UseCases.Common.Dto.Output;
 
 namespace DentalSystem.UseCases.Common.Dto.Output
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DentalSystem.Interfaces.Infrastructure.Common.Persistence
+namespace DentalSystem.Boundaries.Infrastructure.Common.Persistence
 {
     public interface IInitialData
     {

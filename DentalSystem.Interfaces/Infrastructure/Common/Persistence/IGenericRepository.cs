@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace DentalSystem.Interfaces.Infrastructure.Common.Persistence
+namespace DentalSystem.Boundaries.Infrastructure.Common.Persistence
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

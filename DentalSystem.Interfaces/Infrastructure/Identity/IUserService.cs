@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DentalSystem.Interfaces.Infrastructure.Identity.Dto.Output;
+using DentalSystem.Boundaries.Infrastructure.Identity.Dto.Output;
 
-namespace DentalSystem.Interfaces.Infrastructure.Identity
+namespace DentalSystem.Boundaries.Infrastructure.Identity
 {
     public interface IUserService<TUser>
     {
