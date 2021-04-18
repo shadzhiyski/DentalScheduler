@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\DentalSystem.Common\DentalSystem.Common.csproj" />
-    <ProjectReference Include="..\..\Domain\DentalSystem.Entities\DentalSystem.Entities.csproj" />
+    <ProjectReference Include="..\..\Entities\DentalSystem.Entities\DentalSystem.Entities.csproj" />
     <ProjectReference Include="..\..\Application\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj" />
   </ItemGroup>
 

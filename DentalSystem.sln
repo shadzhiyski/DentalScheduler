@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Infrastructure", "Infrastructure\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Entities", "Domain\DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Entities", "Entities\DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.Boundaries", "Application\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
 EndProject
