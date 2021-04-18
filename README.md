@@ -24,7 +24,7 @@ Supports main identity features - user registration (only for clients of the den
 
 This architecture follows a **use case driven approach**. See more about [screaming architecture](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html).
 
-![Dental Scheduler Architecture](/Assets/dental-scheduler-archtecture-v4.svg)
+![Dental Scheduler Architecture](/Assets/dental-scheduler-archtecture.svg)
 
 ### Entities
 
