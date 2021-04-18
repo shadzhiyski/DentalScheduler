@@ -1,0 +1,62 @@
+<svg width="728" height="728" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+<!-- https://github.com/fkhoda/checkout-shoppinglist-api -->
+ <g>
+  <title>background</title>
+  <g display="none" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_3"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path d="m209,360a14,14 0 0 1 310,0" fill="transparent" id="interfaces"/>
+  <path d="m264,360a14,14 0 0 1 200,0" fill="transparent" id="useCases"/>
+  <path d="m154,360a14,14 0 0 1 420,0" fill="transparent" id="web"/>
+
+  <path d="m104,360a14,14 0 0 0 510,0" fill="transparent" id="infrastructure"/>
+  <path d="m206,360a14,14 0 0 0 316,0" fill="transparent" id="application"/>
+  <path d="m134,360a14,14 0 0 1 460,0" fill="transparent" id="presentation"/>
+
+  <ellipse ry="190" rx="190" id="svg_6" cy="364" cx="364" stroke-width="1.5" stroke="#000" fill="#bbbbbb"/>
+  <!--#a7d7fd #eb7c30 #faf6b9 #C69650-->
+  <ellipse ry="150" rx="150" id="svg_7" cy="364" cx="364" stroke-width="1.5" stroke="#000" fill="#bbbbbb"/>
+  <ellipse ry="90" rx="90" id="svg_8" cy="364" cx="364" stroke-width="1.5" stroke="#000" fill="#bbbbbb"/>
+  <path d="M 94 364 A 64 64 0 0 1 634 364 L 554 364 A 50 50 0 0 0 174 364 L 94 364 Z" fill="#70469a" stroke-width="8px" stroke="black" />
+  <path d="M 94 364 A 64 64 0 0 1 634 364 L 554 364 A 64 64 0 0 0 174 364 L 94 364 Z" fill="#bbbbbb" stroke="black" transform="rotate(180 364 364)" stroke-width="8px" />
+
+  <circle cx="364" cy="364" r="90" stroke="black" stroke-width="8px" fill="transparent" />
+
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="21" id="svg_10" y="225.4375" x="245" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="black">
+   <textPath startOffset="32%" xlink:href="#useCases">Use Cases</textPath>
+  </text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="21" id="svg_11" y="162.4375" x="252" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="black">
+   <textPath startOffset="38%" xlink:href="#interfaces">Boundaries</textPath>
+  </text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="21" id="svg_12" y="162.4375" x="109" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff">
+   <textPath startOffset="14%" xlink:href="#web">Web API</textPath>
+  </text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="21" id="svg_13" y="156.4375" x="408" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff">
+   <textPath startOffset="74%" xlink:href="#web">Web UI</textPath>
+  </text>
+
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_9" y="374" x="304" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="black">Entities</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_13" y="156.4375" x="408" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff">
+   <textPath startOffset="36%" xlink:href="#presentation">Presentation</textPath>
+  </text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_14" y="514.4375" x="234" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="black">
+   <textPath startOffset="32%" xlink:href="#application">Application</textPath>
+  </text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_14" y="514.4375" x="234" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="black">
+   <textPath startOffset="37%" xlink:href="#infrastructure">Infrastructure</textPath>
+  </text>
+
+  <path stroke="null" d="m513.02708,254.97665l-7.34251,-9.48727c-0.20401,-0.23489 -0.42703,-0.28008 -0.66928,-0.13548c-0.24198,0.14478 -0.36348,0.40662 -0.36348,0.78629l0,6.0718l-23.86357,0c-0.17854,0 -0.32522,0.08118 -0.43982,0.24381c-0.11453,0.16254 -0.17206,0.37046 -0.17206,0.62338l0,5.20424c0,0.25282 0.05726,0.46074 0.17199,0.62309c0.11486,0.16254 0.26154,0.24371 0.43982,0.24371l23.86377,0l0,6.07171c0,0.36191 0.12168,0.62376 0.36353,0.78591c0.24245,0.14517 0.46547,0.09029 0.66948,-0.16215l7.34251,-9.59627c0.12746,-0.18058 0.19101,-0.39704 0.19101,-0.65025c0,-0.23431 -0.06396,-0.44185 -0.19141,-0.62252z" id="svg_28" transform="rotate(142 506.6974182128906,255.67910766601565) "/>
+  <path stroke="null" d="m613.02708,254.97665l-7.34251,-9.48727c-0.20401,-0.23489 -0.42703,-0.28008 -0.66928,-0.13548c-0.24198,0.14478 -0.36348,0.40662 -0.36348,0.78629l0,6.0718l-23.86357,0c-0.17854,0 -0.32522,0.08118 -0.43982,0.24381c-0.11453,0.16254 -0.17206,0.37046 -0.17206,0.62338l0,5.20424c0,0.25282 0.05726,0.46074 0.17199,0.62309c0.11486,0.16254 0.26154,0.24371 0.43982,0.24371l23.86377,0l0,6.07171c0,0.36191 0.12168,0.62376 0.36353,0.78591c0.24245,0.14517 0.46547,0.09029 0.66948,-0.16215l7.34251,-9.59627c0.12746,-0.18058 0.19101,-0.39704 0.19101,-0.65025c0,-0.23431 -0.06396,-0.44185 -0.19141,-0.62252z" id="svg_28" transform="rotate(142 506.6974182128906,255.67910766601565) "/>
+
+  <path stroke="null" d="m224.02708,256.97665l-7.34251,-9.48727c-0.204,-0.23489 -0.42703,-0.28008 -0.66927,-0.13548c-0.24198,0.14478 -0.36348,0.40662 -0.36348,0.78629l0,6.0718l-23.86356,0c-0.17855,0 -0.32522,0.08118 -0.43982,0.24381c-0.11453,0.16254 -0.17206,0.37046 -0.17206,0.62338l0,5.20424c0,0.25282 0.05726,0.46074 0.17199,0.62309c0.11487,0.16254 0.26154,0.24371 0.43982,0.24371l23.86378,0l0,6.07171c0,0.36191 0.12168,0.62376 0.36353,0.78591c0.24245,0.14517 0.46547,0.09029 0.66947,-0.16215l7.34251,-9.59627c0.12746,-0.18058 0.19101,-0.39704 0.19101,-0.65025c0,-0.23431 -0.06396,-0.44185 -0.19141,-0.62252z" id="svg_36" transform="rotate(38 217.69743347167972,257.67913818359375) "/>
+  <path stroke="null" d="m324.02708,256.97665l-7.34251,-9.48727c-0.204,-0.23489 -0.42703,-0.28008 -0.66927,-0.13548c-0.24198,0.14478 -0.36348,0.40662 -0.36348,0.78629l0,6.0718l-23.86356,0c-0.17855,0 -0.32522,0.08118 -0.43982,0.24381c-0.11453,0.16254 -0.17206,0.37046 -0.17206,0.62338l0,5.20424c0,0.25282 0.05726,0.46074 0.17199,0.62309c0.11487,0.16254 0.26154,0.24371 0.43982,0.24371l23.86378,0l0,6.07171c0,0.36191 0.12168,0.62376 0.36353,0.78591c0.24245,0.14517 0.46547,0.09029 0.66947,-0.16215l7.34251,-9.59627c0.12746,-0.18058 0.19101,-0.39704 0.19101,-0.65025c0,-0.23431 -0.06396,-0.44185 -0.19141,-0.62252z" id="svg_36" transform="rotate(38 217.69743347167972,257.67913818359375) "/>
+
+  <path stroke="null" d="m366.02708,541.97665l-7.34251,-9.48727c-0.204,-0.23489 -0.42703,-0.28008 -0.66927,-0.13548c-0.24198,0.14478 -0.36348,0.40662 -0.36348,0.78629l0,6.0718l-23.86356,0c-0.17855,0 -0.32522,0.08118 -0.43982,0.24381c-0.11453,0.16254 -0.17206,0.37046 -0.17206,0.62338l0,5.20424c0,0.25282 0.05726,0.46074 0.17199,0.62309c0.11487,0.16254 0.26154,0.24371 0.43982,0.24371l23.86378,0l0,6.07171c0,0.36191 0.12168,0.62376 0.36353,0.78591c0.24245,0.14517 0.46547,0.09029 0.66947,-0.16215l7.34251,-9.59627c0.12746,-0.18058 0.19101,-0.39704 0.19101,-0.65025c0,-0.23431 -0.06396,-0.44185 -0.19141,-0.62252z" id="svg_39" transform="rotate(-90 359.6974487304689,542.6790771484376) "/>
+  <path stroke="null" d="m466.02708,541.97665l-7.34251,-9.48727c-0.204,-0.23489 -0.42703,-0.28008 -0.66927,-0.13548c-0.24198,0.14478 -0.36348,0.40662 -0.36348,0.78629l0,6.0718l-23.86356,0c-0.17855,0 -0.32522,0.08118 -0.43982,0.24381c-0.11453,0.16254 -0.17206,0.37046 -0.17206,0.62338l0,5.20424c0,0.25282 0.05726,0.46074 0.17199,0.62309c0.11487,0.16254 0.26154,0.24371 0.43982,0.24371l23.86378,0l0,6.07171c0,0.36191 0.12168,0.62376 0.36353,0.78591c0.24245,0.14517 0.46547,0.09029 0.66947,-0.16215l7.34251,-9.59627c0.12746,-0.18058 0.19101,-0.39704 0.19101,-0.65025c0,-0.23431 -0.06396,-0.44185 -0.19141,-0.62252z" id="svg_39" transform="rotate(-90 359.6974487304689,542.6790771484376) "/>
+ </g>
+</svg>
