@@ -5,24 +5,31 @@ using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
     public class TreatmentSessionBusinessValidator : AbstractValidator<ITreatmentSessionInput>
     {
+        public const string OverlappingTreatmentSessionForPatientMessageName
+            = "OverlappingTreatmentSessionForPatient";
+        public const string OverlappingTreatmentSessionForDentalTeamMessageName
+            = "OverlappingTreatmentSessionForDentalTeam";
+
         public TreatmentSessionBusinessValidator(
+            IStringLocalizer<TreatmentSessionBusinessValidator> localizer,
             TreatmentSessionValidator simpleValidator,
             IGenericRepository<TreatmentSession> treatmentSessionRepository)
         {
             RuleFor(m => m).SetValidator(simpleValidator);
 
-            RuleFor(m => m)
+            RuleFor(m => m.PatientReferenceId)
                 .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct))
-                .WithMessage("There is overlapping treatment session for patient.");
+                .WithMessage(localizer[OverlappingTreatmentSessionForPatientMessageName]);
 
-            RuleFor(m => m)
+            RuleFor(m => m.DentalTeamReferenceId)
                 .MustAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct))
-                .WithMessage("There is overlapping treatment session for dental team.");
+                .WithMessage(localizer[OverlappingTreatmentSessionForDentalTeamMessageName]);
 
             TreatmentSessionRepository = treatmentSessionRepository;
         }
