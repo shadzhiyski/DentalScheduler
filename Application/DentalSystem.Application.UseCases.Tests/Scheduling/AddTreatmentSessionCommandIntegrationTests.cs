@@ -10,6 +10,10 @@ using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
+using Microsoft.Extensions.Localization;
+using DentalSystem.Application.UseCases.Scheduling.Validation;
+using System.Collections.Generic;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 
 namespace DentalSystem.Application.UseCases.Tests.Scheduling
 {
@@ -50,6 +54,55 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
 
             // Assert
             messageOutput.Message.Should().BeEquivalentTo("Treatment Session successfully created.");
+        }
+
+        [Fact]
+        public async void AddTreatmentSession_InvalidInput_ShouldReturnErrorResult()
+        {
+            // Arrange
+            var input = new TreatmentSessionInput();
+
+            // Act
+            var result = await Sut.ExecuteAsync(input);
+
+            // Assert
+            var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>()
+                .GetAllStrings()
+                .Select(ls => ls.Value);
+            var allUniqueValidationMessages = new HashSet<string>(allValidationMessages);
+            result.Errors
+                .Cast<IValidationError>()
+                .SelectMany(ve => ve.Errors)
+                .Should()
+                .OnlyContain(errMsg => allUniqueValidationMessages.Contains(errMsg));
+        }
+
+        [Fact]
+        public async void AddTreatmentSession_ValidInputViolatingBusinessRules_ShouldReturnErrorResult()
+        {
+            // Arrange
+            var input = new TreatmentSessionInput();
+            input.TreatmentReferenceId = Treatments.First().ReferenceId;
+            input.PatientReferenceId = Patient.ReferenceId;
+            input.DentalTeamReferenceId = DentalTeam.ReferenceId;
+            input.Start = DateTimeOffset.UtcNow;
+            input.End = input.Start.Value.AddHours(1);
+            input.Status = "Requested";
+
+            // Act
+            await Sut.ExecuteAsync(input);
+            var result = await Sut.ExecuteAsync(input);
+
+            // Assert
+            var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>()
+                .GetAllStrings()
+                .Select(ls => ls.Value);
+            var allUniqueValidationMessages = new HashSet<string>(allValidationMessages);
+            result.Errors
+                .Cast<IValidationError>()
+                .SelectMany(ve => ve.Errors)
+                .Should()
+                .OnlyContain(errMsg => allUniqueValidationMessages.Contains(errMsg));
         }
 
         private Patient CreatePatientUser()
