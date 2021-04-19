@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Common.Helpers.Extensions
 {
@@ -17,12 +16,12 @@ namespace DentalSystem.Common.Helpers.Extensions
             => source.Any(predicate);
 
         public static async Task<bool> NoneAsync<TSource>(this IQueryable<TSource> source)
-            => !(await source.AnyAsync());
+            => await Task.Run(() => !(source.Any()));
 
         public static async Task<bool> NoneAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
             CancellationToken cancellationToken)
-            => !(await source.AnyAsync(predicate, cancellationToken));
+            => await Task.Run(() => !(source.Any(predicate)));
     }
 }
