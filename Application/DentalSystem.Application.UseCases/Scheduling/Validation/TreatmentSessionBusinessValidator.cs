@@ -21,15 +21,18 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             TreatmentSessionValidator simpleValidator,
             IGenericRepository<TreatmentSession> treatmentSessionRepository)
         {
-            RuleFor(m => m).SetValidator(simpleValidator);
+            RuleFor(m => m)
+                .SetValidator(simpleValidator)
+                .DependentRules(() =>
+                {
+                    RuleFor(m => m.PatientReferenceId)
+                        .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct))
+                        .WithMessage(localizer[OverlappingTreatmentSessionForPatientMessageName]);
 
-            RuleFor(m => m.PatientReferenceId)
-                .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct))
-                .WithMessage(localizer[OverlappingTreatmentSessionForPatientMessageName]);
-
-            RuleFor(m => m.DentalTeamReferenceId)
-                .MustAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct))
-                .WithMessage(localizer[OverlappingTreatmentSessionForDentalTeamMessageName]);
+                    RuleFor(m => m.DentalTeamReferenceId)
+                        .MustAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct))
+                        .WithMessage(localizer[OverlappingTreatmentSessionForDentalTeamMessageName]);
+                });
 
             TreatmentSessionRepository = treatmentSessionRepository;
         }
