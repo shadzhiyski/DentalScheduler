@@ -6,6 +6,7 @@ using DentalSystem.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DentalSystem.Infrastructure.Common.Persistence.Repositories;
 
 namespace DentalSystem.Application.UseCases.Tests.Common
 {
@@ -30,6 +31,8 @@ namespace DentalSystem.Application.UseCases.Tests.Common
                     abstractionType: typeof(IInitialData),
                     implementationsAssembly: Assembly.GetAssembly(typeof(DentalSystemDbContext))
                 )
+                .AddScoped(typeof(IReadRepository<>), typeof(GenericRepository<>))
+                .AddScoped(typeof(IWriteRepository<>), typeof(GenericRepository<>))
                 .AddScoped<IInitializer, TestDatabaseInitializer>(
                     (sp) => new TestDatabaseInitializer(
                         db: sp.GetService<DentalSystemDbContext>(),
