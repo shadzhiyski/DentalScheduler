@@ -25,7 +25,7 @@ namespace DentalSystem.Infrastructure.Common.Persistence
         public async Task Initialize(CancellationToken cancellationToken)
         {
             var appliedMigrations = this.db.Database.GetAppliedMigrations();
-            if (appliedMigrations.Any(m => m.EndsWith(nameof(Initial_Migration))))
+            if (appliedMigrations.Any(m => m.EndsWith("Initial_Migration")))
             {
                 var usersCount = await this.db.Set<User>().CountAsync();
                 if (usersCount == 0)
