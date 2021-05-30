@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Infrastructure.Common.Persistence.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity>
+    public class GenericRepository<TEntity> : IReadRepository<TEntity>, IWriteRepository<TEntity>
         where TEntity : class
     {
         public DbContext DbContext { get; }
