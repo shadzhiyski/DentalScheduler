@@ -27,7 +27,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <param name="repository"></param>
         public DentalTeamController(
             TypeAdapterConfig mappingConfig,
-            IGenericRepository<DentalTeam> repository)
+            IReadRepository<DentalTeam> repository)
         {
             MappingConfig = mappingConfig;
             Repository = repository;
@@ -35,7 +35,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
 
         private TypeAdapterConfig MappingConfig { get; }
 
-        private IGenericRepository<DentalTeam> Repository { get; }
+        private IReadRepository<DentalTeam> Repository { get; }
 
         /// <summary>
         /// Gets Dental Teams.

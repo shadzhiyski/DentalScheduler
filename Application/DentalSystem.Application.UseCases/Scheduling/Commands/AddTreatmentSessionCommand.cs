@@ -14,10 +14,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
     {
         public AddTreatmentSessionCommand(
             IApplicationValidator<ITreatmentSessionInput> validator,
-            IGenericRepository<TreatmentSession> treatmentSessionRepository,
-            IGenericRepository<Patient> patientRepository,
-            IGenericRepository<DentalTeam> dentalTeamRepository,
-            IGenericRepository<Treatment> treatmentRepository,
+            IWriteRepository<TreatmentSession> treatmentSessionRepository,
+            IReadRepository<Patient> patientRepository,
+            IReadRepository<DentalTeam> dentalTeamRepository,
+            IReadRepository<Treatment> treatmentRepository,
             IUnitOfWork uoW)
         {
             Validator = validator;
@@ -30,13 +30,13 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
 
         public IApplicationValidator<ITreatmentSessionInput> Validator { get; }
 
-        public IGenericRepository<TreatmentSession> TreatmentSessionRepository { get; }
+        public IWriteRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
-        public IGenericRepository<Patient> PatientRepository { get; }
+        public IReadRepository<Patient> PatientRepository { get; }
 
-        public IGenericRepository<DentalTeam> DentalTeamRepository { get; }
+        public IReadRepository<DentalTeam> DentalTeamRepository { get; }
 
-        public IGenericRepository<Treatment> TreatmentRepository { get; }
+        public IReadRepository<Treatment> TreatmentRepository { get; }
 
         public IUnitOfWork UoW { get; }
 

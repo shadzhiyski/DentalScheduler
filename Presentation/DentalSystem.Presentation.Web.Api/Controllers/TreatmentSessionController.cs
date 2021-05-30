@@ -32,7 +32,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <param name="updateTreatmentSessionCommand"></param>
         public TreatmentSessionController(
             Lazy<TypeAdapterConfig> mappingConfig,
-            Lazy<IGenericRepository<TreatmentSession>> repository,
+            Lazy<IReadRepository<TreatmentSession>> repository,
             Lazy<IAddTreatmentSessionCommand> addTreatmentSessionCommand,
             Lazy<IUpdateTreatmentSessionCommand> updateTreatmentSessionCommand)
         {
@@ -44,7 +44,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
 
         private Lazy<TypeAdapterConfig> MappingConfig { get; }
 
-        private Lazy<IGenericRepository<TreatmentSession>> Repository { get; }
+        private Lazy<IReadRepository<TreatmentSession>> Repository { get; }
 
         private Lazy<IAddTreatmentSessionCommand> AddTreatmentSessionCommand { get; }
 

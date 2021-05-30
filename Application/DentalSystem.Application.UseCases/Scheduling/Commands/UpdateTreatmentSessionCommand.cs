@@ -17,9 +17,9 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
     {
         public UpdateTreatmentSessionCommand(
             IApplicationValidator<ITreatmentSessionInput> validator,
-            IGenericRepository<TreatmentSession> treatmentSessionRepository,
-            IGenericRepository<Treatment> treatmentRepository,
-            IGenericRepository<DentalTeam> dentalTeamRepository,
+            IReadRepository<TreatmentSession> treatmentSessionRepository,
+            IReadRepository<Treatment> treatmentRepository,
+            IReadRepository<DentalTeam> dentalTeamRepository,
             IUnitOfWork uoW)
         {
             Validator = validator;
@@ -31,11 +31,11 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
 
         public IApplicationValidator<ITreatmentSessionInput> Validator { get; }
 
-        public IGenericRepository<TreatmentSession> TreatmentSessionRepository { get; }
+        public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
-        public IGenericRepository<Treatment> TreatmentRepository { get; }
+        public IReadRepository<Treatment> TreatmentRepository { get; }
 
-        public IGenericRepository<DentalTeam> DentalTeamRepository { get; }
+        public IReadRepository<DentalTeam> DentalTeamRepository { get; }
         public IUnitOfWork UoW { get; }
 
         public async Task<IResult<IMessageOutput>> ExecuteAsync(ITreatmentSessionInput input, CancellationToken cancellationToken)

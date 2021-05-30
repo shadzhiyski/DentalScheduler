@@ -19,7 +19,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
         public TreatmentSessionBusinessValidator(
             IStringLocalizer<TreatmentSessionBusinessValidator> localizer,
             TreatmentSessionValidator simpleValidator,
-            IGenericRepository<TreatmentSession> treatmentSessionRepository)
+            IReadRepository<TreatmentSession> treatmentSessionRepository)
         {
             RuleFor(m => m)
                 .SetValidator(simpleValidator)
@@ -37,7 +37,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             TreatmentSessionRepository = treatmentSessionRepository;
         }
 
-        public IGenericRepository<TreatmentSession> TreatmentSessionRepository { get; }
+        public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
         private async Task<bool> HasNoOverlappingsForPatient(
             ITreatmentSessionInput model,
