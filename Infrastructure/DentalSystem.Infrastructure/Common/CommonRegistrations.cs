@@ -4,6 +4,7 @@ using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DentalSystem.Infrastructure.Common.Persistence.Repositories;
 
 namespace DentalSystem.Infrastructure.Common
 {
@@ -23,6 +24,8 @@ namespace DentalSystem.Infrastructure.Common
                 .AddDbContext<DentalSystemDbContext>(opt =>
                     opt.UseNpgsql(configuration.GetConnectionString("DentalSystemDbConnection"))
                 )
+                .AddScoped(typeof(IReadRepository<>), typeof(GenericRepository<>))
+                .AddScoped(typeof(IWriteRepository<>), typeof(GenericRepository<>))
                 .AddScoped<IInitializer, DatabaseInitializer>(
                     (sp) => new DatabaseInitializer(
                         db: sp.GetService<DentalSystemDbContext>(),
