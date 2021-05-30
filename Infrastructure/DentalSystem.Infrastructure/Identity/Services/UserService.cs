@@ -7,6 +7,7 @@ using DentalSystem.Application.Boundaries.Infrastructure.Identity.Dto.Output;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Identity.Services
 {
@@ -29,38 +30,38 @@ namespace DentalSystem.Infrastructure.Identity.Services
         public IHttpContextAccessor Accessor { get; }
 
         public User CurrentUser
-            => FindByNameAsync(Accessor?.HttpContext?.User?.Identity?.Name)
+            => FindByNameAsync(Accessor?.HttpContext?.User?.Identity?.Name, default)
                 .GetAwaiter()
                 .GetResult();
 
-        public async Task<IAuthResult> AddToRoleAsync(User user, string roleName)
+        public async Task<IAuthResult> AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
             return (await UserManager.AddToRoleAsync(user, roleName))
                 .Adapt<IAuthResult>(MappingConfig);
         }
 
-        public async Task<bool> CheckPasswordAsync(User user, string password)
+        public async Task<bool> CheckPasswordAsync(User user, string password, CancellationToken cancellationToken)
         {
             return (await UserManager.CheckPasswordAsync(user, password));
         }
 
-        public async Task<IAuthResult> CreateAsync(User user, string password)
+        public async Task<IAuthResult> CreateAsync(User user, string password, CancellationToken cancellationToken)
         {
             return (await UserManager.CreateAsync(user, password))
                 .Adapt<IAuthResult>(MappingConfig);
         }
 
-        public async Task<User> FindByNameAsync(string name)
+        public async Task<User> FindByNameAsync(string name, CancellationToken cancellationToken)
         {
             return await UserManager.FindByNameAsync(name);
         }
 
-        public async Task<IList<string>> GetRolesAsync(User user)
+        public async Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
         {
             return await UserManager.GetRolesAsync(user);
         }
 
-        public async Task<IAuthResult> UpdateAsync(User user)
+        public async Task<IAuthResult> UpdateAsync(User user, CancellationToken cancellationToken)
         {
             return (await UserManager.UpdateAsync(user))
                 .Adapt<IAuthResult>(MappingConfig);

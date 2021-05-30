@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Identity.Persistence.InitialData
 {
@@ -62,18 +63,18 @@ namespace DentalSystem.Infrastructure.Identity.Persistence.InitialData
                 }
             };
 
-        public async Task<bool> InitData()
+        public async Task<bool> InitData(CancellationToken cancellationToken)
         {
             var users = GetData().Cast<User>().ToList();
-            await UserService.CreateAsync(users[0], "Dentist_01#123456");
-            await UserService.AddToRoleAsync(users[0], "Dentist");
-            await UserService.CreateAsync(users[1], "Dentist_02#123456");
-            await UserService.AddToRoleAsync(users[1], "Dentist");
+            await UserService.CreateAsync(users[0], "Dentist_01#123456", cancellationToken);
+            await UserService.AddToRoleAsync(users[0], "Dentist", cancellationToken);
+            await UserService.CreateAsync(users[1], "Dentist_02#123456", cancellationToken);
+            await UserService.AddToRoleAsync(users[1], "Dentist", cancellationToken);
 
-            await UserService.CreateAsync(users[2], "DentistAssistant_01#123456");
-            await UserService.AddToRoleAsync(users[2], "DentistAssistant");
-            await UserService.CreateAsync(users[3], "DentistAssistant_02#123456");
-            await UserService.AddToRoleAsync(users[3], "DentistAssistant");
+            await UserService.CreateAsync(users[2], "DentistAssistant_01#123456", cancellationToken);
+            await UserService.AddToRoleAsync(users[2], "DentistAssistant", cancellationToken);
+            await UserService.CreateAsync(users[3], "DentistAssistant_02#123456", cancellationToken);
+            await UserService.AddToRoleAsync(users[3], "DentistAssistant", cancellationToken);
 
             return false;
         }

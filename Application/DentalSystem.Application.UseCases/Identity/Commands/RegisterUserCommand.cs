@@ -15,6 +15,7 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
@@ -60,7 +61,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             UoW = uoW;
         }
 
-        public async Task<IResult<IAccessTokenOutput>> RegisterAsync(IRegisterUserInput userInput)
+        public async Task<IResult<IAccessTokenOutput>> RegisterAsync(IRegisterUserInput userInput, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(userInput);
             if (validationResult.Errors.Count > 0)
@@ -77,7 +78,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            var identityResult = await UserService.CreateAsync(user, userInput.Password);
+            var identityResult = await UserService.CreateAsync(user, userInput.Password, cancellationToken);
 
             if (!identityResult.Succeeded)
             {
@@ -88,7 +89,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             {
                 UserName = userInput.UserName,
                 RoleName = RoleType.Patient.ToString()
-            });
+            }, cancellationToken);
 
             if (linkUserWithRoleResult.Errors.Count() > 0)
             {
@@ -98,16 +99,16 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             await PatientRepo.AddAsync(new Patient
             {
                 IdentityUserId = user.Id,
-            });
+            }, cancellationToken);
 
-            await UoW.SaveAsync();
+            await UoW.SaveAsync(cancellationToken);
 
             // Auto login after registrаtion (successful user registration should return access_token)
             return await LoginCommand.LoginAsync(new UserCredentialsInput()
             {
                 UserName = userInput.UserName,
                 Password = userInput.Password
-            });
+            }, cancellationToken);
         }
     }
 }

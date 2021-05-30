@@ -6,6 +6,7 @@ using DentalSystem.Entities.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Identity.Persistence.InitialData
 {
@@ -30,11 +31,11 @@ namespace DentalSystem.Infrastructure.Identity.Persistence.InitialData
                 new IdentityRole { Name = "Patient" }
             };
 
-        public async Task<bool> InitData()
+        public async Task<bool> InitData(CancellationToken cancellationToken)
         {
             foreach (var role in GetData().Cast<IdentityRole>())
             {
-                await RoleService.CreateAsync(role);
+                await RoleService.CreateAsync(role, cancellationToken);
             }
 
             return false;

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData.Query;
+using System.Threading;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -66,15 +67,16 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// Creates treatment session.
         /// </summary>
         /// <param name="input">Treatment session input</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <response code="201">Returns message for successfully created treatment session</response>
         /// <response code="400">Returns errors</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PostAsync(TreatmentSessionInput input)
+        public async Task<IActionResult> PostAsync(TreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
-            var result = await AddTreatmentSessionCommand.Value.ExecuteAsync(input);
+            var result = await AddTreatmentSessionCommand.Value.ExecuteAsync(input, cancellationToken);
 
             return PresentResult(result);
         }
@@ -83,6 +85,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// Updates treatment session.
         /// </summary>
         /// <param name="input">Treatment session input</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <response code="201">Returns message for successfully updated treatment session</response>
         /// <response code="404">Treatment session not found</response>
@@ -91,9 +94,9 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PutAsync(TreatmentSessionInput input)
+        public async Task<IActionResult> PutAsync(TreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
-            var result = await UpdateTreatmentSessionCommand.Value.ExecuteAsync(input);
+            var result = await UpdateTreatmentSessionCommand.Value.ExecuteAsync(input, cancellationToken);
 
             return PresentResult(result);
         }

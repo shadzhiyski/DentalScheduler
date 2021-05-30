@@ -9,6 +9,7 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
@@ -30,7 +31,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             Validator = validator;
         }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(ILinkUserAndRoleInput inputModel)
+        public async Task<IResult<IMessageOutput>> ExecuteAsync(ILinkUserAndRoleInput inputModel, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(inputModel);
             if (validationResult.Errors.Count > 0)
@@ -38,7 +39,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
 
-            var role = await RoleService.FindByNameAsync(inputModel.RoleName);
+            var role = await RoleService.FindByNameAsync(inputModel.RoleName, cancellationToken);
             if (role == null)
             {
                 var validationError = new ValidationError()
@@ -52,7 +53,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 validationResult.Errors.Add(validationError);
             }
 
-            var user = await UserService.FindByNameAsync(inputModel.UserName);
+            var user = await UserService.FindByNameAsync(inputModel.UserName, cancellationToken);
             if (user == null)
             {
                 var validationError = new ValidationError()
@@ -71,7 +72,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
 
-            await UserService.AddToRoleAsync(user, role.Name);
+            await UserService.AddToRoleAsync(user, role.Name, cancellationToken);
 
             return new Result<IMessageOutput>(
                 new MessageOutput($"\"{inputModel.RoleName}\" role set to user \"{inputModel.UserName}\"")

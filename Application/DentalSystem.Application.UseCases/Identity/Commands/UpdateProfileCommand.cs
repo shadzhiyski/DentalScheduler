@@ -7,6 +7,7 @@ using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using Mapster;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
@@ -28,7 +29,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
 
         public IUserService<User> UserService { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(IUserProfileInput input)
+        public async Task<IResult<IMessageOutput>> ExecuteAsync(IUserProfileInput input, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)
@@ -40,7 +41,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
 
             input.Adapt(user, MappingConfig);
 
-            await UserService.UpdateAsync(user);
+            await UserService.UpdateAsync(user, cancellationToken);
 
             return new Result<IMessageOutput>(new MessageOutput("User profile successfully updated."));
         }

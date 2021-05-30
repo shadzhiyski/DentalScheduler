@@ -49,7 +49,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             input.Status = "Requested";
 
             // Act
-            var result = await Sut.ExecuteAsync(input);
+            var result = await Sut.ExecuteAsync(input, default);
             var messageOutput = result.Value;
 
             // Assert
@@ -63,7 +63,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             var input = new TreatmentSessionInput();
 
             // Act
-            var result = await Sut.ExecuteAsync(input);
+            var result = await Sut.ExecuteAsync(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>()
@@ -90,8 +90,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             input.Status = "Requested";
 
             // Act
-            await Sut.ExecuteAsync(input);
-            var result = await Sut.ExecuteAsync(input);
+            await Sut.ExecuteAsync(input, default);
+            var result = await Sut.ExecuteAsync(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>()
@@ -118,10 +118,10 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             };
 
             var userService = ServiceProvider.GetRequiredService<IUserService<User>>();
-            userService.CreateAsync(patientUser, "patient#123")
+            userService.CreateAsync(patientUser, "patient#123", default)
                 .GetAwaiter()
                 .GetResult();
-            userService.AddToRoleAsync(patientUser, "Patient")
+            userService.AddToRoleAsync(patientUser, "Patient", default)
                 .GetAwaiter()
                 .GetResult();
 
@@ -131,7 +131,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             };
 
             ServiceProvider.GetRequiredService<IGenericRepository<Patient>>()
-                .AddAsync(patient)
+                .AddAsync(patient, default)
                 .GetAwaiter()
                 .GetResult();
             ServiceProvider.GetRequiredService<IUnitOfWork>().Save();

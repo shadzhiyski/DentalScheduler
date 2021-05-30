@@ -53,7 +53,7 @@ namespace DentalSystem.Application.UseCases.Tests.Common
         private void InitMainData()
         {
             var treatmentDataProvider = ServiceProvider.GetRequiredService<IInitializer>();
-            treatmentDataProvider.Initialize().GetAwaiter().GetResult();
+            treatmentDataProvider.Initialize(default).GetAwaiter().GetResult();
 
             Treatments = ServiceProvider.GetRequiredService<IGenericRepository<Treatment>>()
                 .AsNoTracking()

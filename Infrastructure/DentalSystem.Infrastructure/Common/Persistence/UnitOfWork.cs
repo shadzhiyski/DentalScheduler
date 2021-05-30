@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace DentalSystem.Infrastructure.Common.Persistence
         public Task<int> SaveAsync()
         {
             return DbContext.SaveChangesAsync();
+        }
+
+        public Task<int> SaveAsync(CancellationToken cancellationToken)
+        {
+            return DbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

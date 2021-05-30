@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Scheduling.Persistence.InitialData
 {
@@ -19,7 +20,7 @@ namespace DentalSystem.Infrastructure.Scheduling.Persistence.InitialData
                 new Room() { Id = new Guid("1b25130c-d75c-4daa-a408-45f1dd890ec9"), Name = "Room 02" },
             };
 
-        public Task<bool> InitData()
+        public Task<bool> InitData(CancellationToken cancellationToken)
         {
             return Task.FromResult(true);
         }

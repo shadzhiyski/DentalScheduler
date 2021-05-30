@@ -6,6 +6,7 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Commands
 {
@@ -39,7 +40,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
 
         public IUnitOfWork UoW { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(ITreatmentSessionInput input)
+        public async Task<IResult<IMessageOutput>> ExecuteAsync(ITreatmentSessionInput input, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)
@@ -47,9 +48,9 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
                 return new Result<IMessageOutput>(validationResult.Errors);
             }
 
-            var patient = await PatientRepository.SingleOrDefaultAsync(p => p.ReferenceId == input.PatientReferenceId);
-            var dentalTeam = await DentalTeamRepository.SingleOrDefaultAsync(dt => dt.ReferenceId == input.DentalTeamReferenceId);
-            var treatment = await TreatmentRepository.SingleOrDefaultAsync(t => t.ReferenceId == input.TreatmentReferenceId);
+            var patient = await PatientRepository.SingleOrDefaultAsync(p => p.ReferenceId == input.PatientReferenceId, cancellationToken);
+            var dentalTeam = await DentalTeamRepository.SingleOrDefaultAsync(dt => dt.ReferenceId == input.DentalTeamReferenceId, cancellationToken);
+            var treatment = await TreatmentRepository.SingleOrDefaultAsync(t => t.ReferenceId == input.TreatmentReferenceId, cancellationToken);
             var treatmentSession = new TreatmentSession()
             {
                 PatientId = patient.Id,
@@ -59,9 +60,9 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
                 End = input.End.Value
             };
 
-            await TreatmentSessionRepository.AddAsync(treatmentSession);
+            await TreatmentSessionRepository.AddAsync(treatmentSession, cancellationToken);
 
-            await UoW.SaveAsync();
+            await UoW.SaveAsync(cancellationToken);
 
             return new Result<IMessageOutput>(
                 value: new MessageOutput("Treatment Session successfully created."),

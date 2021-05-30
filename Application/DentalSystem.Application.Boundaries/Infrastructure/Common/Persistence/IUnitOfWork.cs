@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence
@@ -7,5 +8,7 @@ namespace DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence
         int Save();
 
         Task<int> SaveAsync();
+
+        Task<int> SaveAsync(CancellationToken cancellationToken);
     }
 }

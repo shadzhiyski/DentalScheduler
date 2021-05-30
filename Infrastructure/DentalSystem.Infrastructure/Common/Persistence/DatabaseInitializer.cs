@@ -5,6 +5,7 @@ using DentalSystem.Entities.Identity;
 using DentalSystem.Infrastructure.Migrations;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Common.Persistence
 {
@@ -21,7 +22,7 @@ namespace DentalSystem.Infrastructure.Common.Persistence
             this.initialDataProviders = initialDataProviders;
         }
 
-        public async Task Initialize()
+        public async Task Initialize(CancellationToken cancellationToken)
         {
             var appliedMigrations = this.db.Database.GetAppliedMigrations();
             if (appliedMigrations.Any(m => m.EndsWith(nameof(Initial_Migration))))
@@ -31,7 +32,7 @@ namespace DentalSystem.Infrastructure.Common.Persistence
                 {
                     foreach (var initialDataProvider in this.initialDataProviders)
                     {
-                        var applyData = await initialDataProvider.InitData();
+                        var applyData = await initialDataProvider.InitData(cancellationToken);
 
                         if (applyData)
                         {

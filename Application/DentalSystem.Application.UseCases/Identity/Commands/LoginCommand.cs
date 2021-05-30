@@ -13,6 +13,7 @@ using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
@@ -38,7 +39,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             JwtAuthManager = jwtAuthManager;
         }
 
-        public async Task<IResult<IAccessTokenOutput>> LoginAsync(IUserCredentialsInput userInput)
+        public async Task<IResult<IAccessTokenOutput>> LoginAsync(IUserCredentialsInput userInput, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(userInput);
             if (validationResult.Errors.Count > 0)
@@ -46,7 +47,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 return new Result<IAccessTokenOutput>(validationResult.Errors);
             }
 
-            var user = await UserService.FindByNameAsync(userInput.UserName);
+            var user = await UserService.FindByNameAsync(userInput.UserName, cancellationToken);
             if (user == null)
             {
                 validationResult.Errors.Add(
@@ -58,7 +59,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 );
             }
 
-            if (user != null && !(await UserService.CheckPasswordAsync(user, userInput.Password)))
+            if (user != null && !(await UserService.CheckPasswordAsync(user, userInput.Password, cancellationToken)))
             {
                 validationResult.Errors.Add(
                     new ValidationError()
@@ -74,8 +75,8 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 return new Result<IAccessTokenOutput>(validationResult.Errors);
             }
 
-            var roleName = (await UserService.GetRolesAsync(user)).FirstOrDefault();
-            var tokenString = await JwtAuthManager.GenerateJwtAsync(userInput, roleName);
+            var roleName = (await UserService.GetRolesAsync(user, cancellationToken)).FirstOrDefault();
+            var tokenString = await JwtAuthManager.GenerateJwtAsync(userInput, roleName, cancellationToken);
 
             return new Result<IAccessTokenOutput>(new AccessTokenOutput(tokenString));
         }

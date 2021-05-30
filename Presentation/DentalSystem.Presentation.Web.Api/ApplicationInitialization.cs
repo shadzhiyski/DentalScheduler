@@ -15,7 +15,7 @@ namespace DentalSystem.Presentation.Web.Api
 
             foreach (var initializer in initializers)
             {
-                initializer.Initialize()
+                initializer.Initialize(default)
                     .GetAwaiter()
                     .GetResult();
             }

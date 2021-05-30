@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Tests.Common
 {
@@ -18,11 +19,11 @@ namespace DentalSystem.Application.UseCases.Tests.Common
             this.initialDataProviders = initialDataProviders;
         }
 
-        public async Task Initialize()
+        public async Task Initialize(CancellationToken cancellationToken)
         {
             foreach (var initialDataProvider in this.initialDataProviders)
             {
-                var applyData = await initialDataProvider.InitData();
+                var applyData = await initialDataProvider.InitData(cancellationToken);
 
                 if (applyData)
                 {

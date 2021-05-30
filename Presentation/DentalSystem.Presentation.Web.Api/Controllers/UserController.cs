@@ -7,6 +7,7 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Threading;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -69,6 +70,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// Updates logged in user profile.
         /// </summary>
         /// <param name="input">User profile input</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <response code="200">User profile successfully updated</response>
         /// <response code="400">Returns errors</response>
@@ -76,9 +78,9 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [Route("profile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input)
+        public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input, CancellationToken cancellationToken)
         {
-            var result = await UpdateProfileCommand.Value.ExecuteAsync(input);
+            var result = await UpdateProfileCommand.Value.ExecuteAsync(input, cancellationToken);
 
             return PresentResult(result);
         }

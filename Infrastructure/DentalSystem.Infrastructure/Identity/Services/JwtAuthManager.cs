@@ -12,6 +12,7 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Identity.Services
 {
@@ -41,7 +42,7 @@ namespace DentalSystem.Infrastructure.Identity.Services
             DentalTeamRepository = dentalTeamRepository;
         }
 
-        public async Task<string> GenerateJwtAsync(IUserCredentialsInput userInfo, string roleName)
+        public async Task<string> GenerateJwtAsync(IUserCredentialsInput userInfo, string roleName, CancellationToken cancellationToken)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["Jwt:SecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -58,7 +59,7 @@ namespace DentalSystem.Infrastructure.Identity.Services
 
             if (roleName.Equals(RoleType.Patient.ToString()))
             {
-                var patient = await PatientRepository.SingleOrDefaultAsync(p => p.IdentityUser.UserName == userInfo.UserName);
+                var patient = await PatientRepository.SingleOrDefaultAsync(p => p.IdentityUser.UserName == userInfo.UserName, cancellationToken);
                 var patientClaims = new Claim("PatientReferenceId", patient.ReferenceId.ToString());
                 claims.Add(patientClaims);
             }
@@ -82,7 +83,7 @@ namespace DentalSystem.Infrastructure.Identity.Services
                         {
                             dt.ReferenceId
                         }
-                    ).SingleOrDefaultAsync();
+                    ).SingleOrDefaultAsync(cancellationToken);
                 var dentalWorkerClaims = new Claim("DentalTeamReferenceId", dentalTeamReferenceId.ReferenceId.ToString());
                 claims.Add(dentalWorkerClaims);
             }

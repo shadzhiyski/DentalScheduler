@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity.Dto.Output;
@@ -17,13 +18,13 @@ namespace DentalSystem.Infrastructure.Identity.Services
             MappingConfig = mappingConfig;
             RoleManager = roleManager;
         }
-        public async Task<IAuthResult> CreateAsync(IdentityRole role)
+        public async Task<IAuthResult> CreateAsync(IdentityRole role, CancellationToken cancellationToken)
         {
             return (await RoleManager.CreateAsync(role))
                 .Adapt<IAuthResult>(MappingConfig);
         }
 
-        public async Task<IdentityRole> FindByNameAsync(string name)
+        public async Task<IdentityRole> FindByNameAsync(string name, CancellationToken cancellationToken)
         {
             return await RoleManager.FindByNameAsync(name);
         }

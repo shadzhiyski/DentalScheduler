@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using System.Threading;
 
 namespace DentalSystem.Infrastructure.Scheduling.Persistence.InitialData
 {
@@ -25,7 +26,7 @@ namespace DentalSystem.Infrastructure.Scheduling.Persistence.InitialData
                 new Treatment() { Name = "Examination", DurationInMinutes = 30 },
             };
 
-        public Task<bool> InitData()
+        public Task<bool> InitData(CancellationToken cancellationToken)
         {
             return Task.FromResult(true);
         }

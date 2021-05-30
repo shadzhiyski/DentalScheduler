@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence
@@ -12,6 +13,6 @@ namespace DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence
 
         IEnumerable<object> GetData();
 
-        Task<bool> InitData();
+        Task<bool> InitData(CancellationToken cancellationToken);
     }
 }

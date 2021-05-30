@@ -5,6 +5,7 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Threading;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -37,6 +38,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// Register user.
         /// </summary>
         /// <param name="model">User registration input</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <response code="200">User successfully registered</response>
         /// <response code="400">Returns errors</response>
@@ -45,9 +47,9 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [Route ("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register(RegisterUserInput model)
+        public async Task<IActionResult> Register(RegisterUserInput model, CancellationToken cancellationToken)
         {
-            var result =  await RegisterUserCommand.Value.RegisterAsync(model);
+            var result =  await RegisterUserCommand.Value.RegisterAsync(model, cancellationToken);
             return PresentResult(result);
         }
 
@@ -55,6 +57,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// Login user.
         /// </summary>
         /// <param name="loginCredentials">User credentials input</param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <response code="200">User successfully logged in</response>
         /// <response code="400">Returns errors</response>
@@ -63,9 +66,9 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [Route ("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials)
+        public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials, CancellationToken cancellationToken)
         {
-            var result =  await LoginCommand.Value.LoginAsync(loginCredentials);
+            var result =  await LoginCommand.Value.LoginAsync(loginCredentials, cancellationToken);
             return PresentResult(result);
         }
     }
