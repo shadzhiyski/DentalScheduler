@@ -120,7 +120,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             var simpleLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var simpleValidator = new TreatmentSessionValidator(simpleLocalizer);
-            var mockedRepository = new Mock<IGenericRepository<TreatmentSession>>();
+            var mockedRepository = new Mock<IReadRepository<TreatmentSession>>();
 
             var filteredData = presentData;
             mockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<TreatmentSession, bool>>>()))

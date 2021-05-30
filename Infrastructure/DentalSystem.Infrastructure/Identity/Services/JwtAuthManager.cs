@@ -20,20 +20,20 @@ namespace DentalSystem.Infrastructure.Identity.Services
     {
         public IConfiguration Config { get; }
 
-        public IGenericRepository<Patient> PatientRepository { get; }
+        public IReadRepository<Patient> PatientRepository { get; }
 
-        public IGenericRepository<DentalWorker> DentalWorkerRepository { get; }
+        public IReadRepository<DentalWorker> DentalWorkerRepository { get; }
 
-        public IGenericRepository<DentalTeamParticipant> DentalTeamParticipantRepository { get; }
+        public IReadRepository<DentalTeamParticipant> DentalTeamParticipantRepository { get; }
 
-        public IGenericRepository<DentalTeam> DentalTeamRepository { get; }
+        public IReadRepository<DentalTeam> DentalTeamRepository { get; }
 
         public JwtAuthManager(
             IConfiguration config,
-            IGenericRepository<Patient> patientRepository,
-            IGenericRepository<DentalWorker> dentalWorkerRepository,
-            IGenericRepository<DentalTeamParticipant> dentalTeamParticipantRepository,
-            IGenericRepository<DentalTeam> dentalTeamRepository)
+            IReadRepository<Patient> patientRepository,
+            IReadRepository<DentalWorker> dentalWorkerRepository,
+            IReadRepository<DentalTeamParticipant> dentalTeamParticipantRepository,
+            IReadRepository<DentalTeam> dentalTeamRepository)
         {
             Config = config;
             PatientRepository = patientRepository;
