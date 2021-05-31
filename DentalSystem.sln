@@ -1,23 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.Api", "Presentation\DentalSystem.Presentation.Web.Api\DentalSystem.Presentation.Web.Api.csproj", "{2AECA935-07C8-4117-B14A-79244383BB16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Presentation.Web.Api", "Presentation\DentalSystem.Presentation.Web.Api\DentalSystem.Presentation.Web.Api.csproj", "{2AECA935-07C8-4117-B14A-79244383BB16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Presentation.Web.UI", "Presentation\DentalSystem.Presentation.Web.UI\DentalSystem.Presentation.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Presentation.Web.UI", "Presentation\DentalSystem.Presentation.Web.UI\DentalSystem.Presentation.Web.UI.csproj", "{DC3FE0DE-890F-4E3B-AD65-742D41460E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Infrastructure", "Infrastructure\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Infrastructure", "Infrastructure\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Entities", "Entities\DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Entities", "Entities\DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.Boundaries", "Application\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Application.Boundaries", "Application\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases", "Application\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj", "{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Application.UseCases", "Application\DentalSystem.Application.UseCases\DentalSystem.Application.UseCases.csproj", "{223C9126-A2BF-4F61-BE18-2DE1D8F29B61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Application.UseCases.Tests", "Application\DentalSystem.Application.UseCases.Tests\DentalSystem.Application.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Application.UseCases.Tests", "Application\DentalSystem.Application.UseCases.Tests\DentalSystem.Application.UseCases.Tests.csproj", "{02580A82-759D-47E5-A00B-7E9B7572ABBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalSystem.Common", "Common\DentalSystem.Common\DentalSystem.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Common", "Common\DentalSystem.Common\DentalSystem.Common.csproj", "{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{2A4E02D0-E7E4-451A-B310-4691E5E9A875}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F32FB1D7-75DF-42FB-98D4-396E506DBDD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{774ABB60-3C7C-4A50-925A-414ED95C9787}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{44F3038A-91C5-4DED-9AB1-C8F9DAAA4E95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{AA00B6D8-4BD7-457C-BEDA-7701C04F4ABE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2AECA935-07C8-4117-B14A-79244383BB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -128,5 +135,21 @@ Global
 		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x64.Build.0 = Release|Any CPU
 		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x86.ActiveCfg = Release|Any CPU
 		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2AECA935-07C8-4117-B14A-79244383BB16} = {AA00B6D8-4BD7-457C-BEDA-7701C04F4ABE}
+		{DC3FE0DE-890F-4E3B-AD65-742D41460E41} = {AA00B6D8-4BD7-457C-BEDA-7701C04F4ABE}
+		{5037E98D-7A87-4364-BA4A-5F2790CB0B28} = {44F3038A-91C5-4DED-9AB1-C8F9DAAA4E95}
+		{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E} = {774ABB60-3C7C-4A50-925A-414ED95C9787}
+		{C660454C-166A-4AF8-AB03-DA5DC6E32620} = {2A4E02D0-E7E4-451A-B310-4691E5E9A875}
+		{223C9126-A2BF-4F61-BE18-2DE1D8F29B61} = {2A4E02D0-E7E4-451A-B310-4691E5E9A875}
+		{02580A82-759D-47E5-A00B-7E9B7572ABBB} = {2A4E02D0-E7E4-451A-B310-4691E5E9A875}
+		{D20B4FB6-5C6E-4C61-802A-38F2E50AD04A} = {F32FB1D7-75DF-42FB-98D4-396E506DBDD0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3AFE2C6-1779-4EA7-BE40-42B4092D85E6}
 	EndGlobalSection
 EndGlobal
