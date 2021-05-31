@@ -33,9 +33,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
 
         public ILinkUserAndRoleCommand LinkUserAndRoleCommand { get; }
 
-        public IGenericRepository<Patient> PatientRepo { get; }
-
-        public IGenericRepository<DentalWorker> DentalWorkerRepo { get; }
+        public IWriteRepository<Patient> PatientRepo { get; }
 
         public IUnitOfWork UoW { get; }
 
@@ -46,8 +44,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             IJwtAuthManager jwtAuthManager,
             ILoginCommand loginCommand,
             ILinkUserAndRoleCommand linkUserAndRoleCommand,
-            IGenericRepository<Patient> patientRepo,
-            IGenericRepository<DentalWorker> dentalWorkerRepo,
+            IWriteRepository<Patient> patientRepo,
             IUnitOfWork uoW)
         {
             Config = config;
@@ -57,7 +54,6 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             LoginCommand = loginCommand;
             LinkUserAndRoleCommand = linkUserAndRoleCommand;
             PatientRepo = patientRepo;
-            DentalWorkerRepo = dentalWorkerRepo;
             UoW = uoW;
         }
 

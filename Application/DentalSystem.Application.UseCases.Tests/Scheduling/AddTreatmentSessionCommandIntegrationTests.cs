@@ -25,7 +25,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
 
             Patient = CreatePatientUser();
 
-            DentalTeam = ServiceProvider.GetRequiredService<IGenericRepository<DentalTeam>>()
+            DentalTeam = ServiceProvider.GetRequiredService<IReadRepository<DentalTeam>>()
                 .AsNoTracking()
                 .SingleOrDefault(dt => dt.Name == "DentalTeam 01");
         }
@@ -130,7 +130,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
                 IdentityUserId = patientUser.Id
             };
 
-            ServiceProvider.GetRequiredService<IGenericRepository<Patient>>()
+            ServiceProvider.GetRequiredService<IWriteRepository<Patient>>()
                 .AddAsync(patient, default)
                 .GetAwaiter()
                 .GetResult();

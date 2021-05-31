@@ -23,7 +23,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <param name="repository"></param>
         public TreatmentController(
             TypeAdapterConfig mappingConfig,
-            IGenericRepository<Treatment> repository)
+            IReadRepository<Treatment> repository)
         {
             MappingConfig = mappingConfig;
             Repository = repository;
@@ -31,7 +31,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
 
         private TypeAdapterConfig MappingConfig { get; }
 
-        private IGenericRepository<Treatment> Repository { get; }
+        private IReadRepository<Treatment> Repository { get; }
 
         /// <summary>
         /// Gets Treatments.
