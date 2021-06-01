@@ -21,6 +21,9 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Components
         [Parameter]
         public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
 
+        [Parameter]
+        public PatientViewModel PatientInfo { get; set; } = new PatientViewModel();
+
         [CascadingParameter]
         public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
@@ -54,8 +57,6 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Components
 
         public TreatmentSessionPeriodWrapperModel PeriodWrapperModel => new TreatmentSessionPeriodWrapperModel(Model);
 
-        public PatientViewModel PatientInfo { get; set; } = new PatientViewModel();
-
         public string ImageBase64 { get; set; }
 
         protected async override Task OnInitializedAsync()
@@ -65,30 +66,6 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Components
             var user = (await AuthenticationStateTask).User;
             IsTreatmentDropDownDisabled = user.IsInRole("Dentist");
             IsDentalTeamDropDownDisabled = user.IsInRole("Dentist");
-
-            await LoadTreatmentSession();
-        }
-
-        async Task LoadTreatmentSession()
-        {
-            if (Model.ReferenceId != Guid.Empty)
-            {
-                var result = await TreatmentSessionService.GetAppointment(
-                    Model.ReferenceId,
-                    Model.PatientReferenceId.Value
-                );
-
-                Model.Status = result.Status;
-                Model.DentalTeamReferenceId = result.DentalTeam.ReferenceId;
-                Model.PatientReferenceId = result.PatientReferenceId;
-                Model.TreatmentReferenceId = result.Treatment.ReferenceId;
-                Model.Start = result.Start;
-                Model.End = result.End;
-
-                result.Patient.Adapt(PatientInfo);
-
-                SetImageView(PatientInfo.Avatar);
-            }
         }
 
         private void SetImageView(byte[] imageContent)

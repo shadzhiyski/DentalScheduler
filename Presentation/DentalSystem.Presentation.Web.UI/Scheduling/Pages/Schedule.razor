@@ -91,22 +91,16 @@
             return;
         }
 
-        TreatmentSessionInput data = await DialogService.OpenAsync<EditTreatmentSession>(
+        TreatmentSessionInput data = await DialogService.OpenAsync<AddFormTreatmentSession>(
             "Add Treatment Session",
             new Dictionary<string, object>
             {
                 {
-                    "Model", new TreatmentSessionInput()
-                    {
-                        Status = "Requested",
-                        DentalTeamReferenceId = default,
-                        PatientReferenceId = await LocalStorage
-                            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId),
-                        TreatmentReferenceId = default,
-                        Start = args.Start,
-                        End = args.End
-                    }
-                }
+                    "PatientReferenceId", await LocalStorage
+                            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId)
+                },
+                { "Start", args.Start },
+                { "End", args.End }
             });
 
         if (data != null)
@@ -139,16 +133,14 @@
             return;
         }
 
-        TreatmentSessionInput dataToSet = new TreatmentSessionInput()
-        {
-            ReferenceId = args.Data.ReferenceId,
-            PatientReferenceId = args.Data.PatientReferenceId
-        };
-
         TreatmentSessionInput resultData = null;
 
-        resultData = await DialogService.OpenAsync<EditTreatmentSession>("Edit Treatment Session",
-            new Dictionary<string, object> { { "Model", dataToSet } });
+        resultData = await DialogService.OpenAsync<EditFormTreatmentSession>("Edit Treatment Session",
+            new Dictionary<string, object>
+            {
+                { "ReferenceId", args.Data.ReferenceId },
+                { "PatientReferenceId", args.Data.PatientReferenceId }
+            });
 
         if (resultData == null)
         {
