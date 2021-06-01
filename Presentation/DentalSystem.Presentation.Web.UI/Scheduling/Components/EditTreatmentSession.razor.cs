@@ -9,8 +9,7 @@ using Radzen;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Presentation.Web.UI.Scheduling.Services;
 using Microsoft.AspNetCore.Components.Authorization;
-using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
-using Mapster;
+using DentalSystem.Presentation.Web.UI.Scheduling.Models;
 
 namespace DentalSystem.Presentation.Web.UI.Scheduling.Components
 {
@@ -19,7 +18,7 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Components
         public const int DefaultDurationInMinutes = 30;
 
         [Parameter]
-        public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInput();
+        public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInputModel();
 
         [Parameter]
         public PatientViewModel PatientInfo { get; set; } = new PatientViewModel();

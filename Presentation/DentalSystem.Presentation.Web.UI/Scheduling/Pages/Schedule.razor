@@ -2,6 +2,8 @@
 @attribute [Authorize(Roles = "Patient, Dentist")]
 
 @using DentalSystem.Application.UseCases.Scheduling.Dto.Input
+@using Models
+@using Mapster
 
 @inject DialogService DialogService
 @inject NotificationService NotificationService
@@ -91,17 +93,19 @@
             return;
         }
 
-        TreatmentSessionInput data = await DialogService.OpenAsync<AddFormTreatmentSession>(
-            "Add Treatment Session",
-            new Dictionary<string, object>
-            {
+        TreatmentSessionInput data = (await DialogService.OpenAsync<AddFormTreatmentSession>(
+                "Add Treatment Session",
+                new Dictionary<string, object>
                 {
-                    "PatientReferenceId", await LocalStorage
-                            .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId)
-                },
-                { "Start", args.Start },
-                { "End", args.End }
-            });
+                    {
+                        "PatientReferenceId", await LocalStorage
+                                .GetItemAsync<Guid>(Scheduling.LocalStorageKeys.Patient.ReferenceId)
+                    },
+                    { "Start", args.Start },
+                    { "End", args.End }
+                }) as TreatmentSessionInputModel
+            )
+            .Adapt<TreatmentSessionInput>();
 
         if (data != null)
         {
@@ -135,12 +139,15 @@
 
         TreatmentSessionInput resultData = null;
 
-        resultData = await DialogService.OpenAsync<EditFormTreatmentSession>("Edit Treatment Session",
-            new Dictionary<string, object>
-            {
-                { "ReferenceId", args.Data.ReferenceId },
-                { "PatientReferenceId", args.Data.PatientReferenceId }
-            });
+        resultData = (await DialogService.OpenAsync<EditFormTreatmentSession>(
+                "Edit Treatment Session",
+                new Dictionary<string, object>
+                {
+                    { "ReferenceId", args.Data.ReferenceId },
+                    { "PatientReferenceId", args.Data.PatientReferenceId }
+                }) as TreatmentSessionInputModel
+            )
+            .Adapt<TreatmentSessionInput>();
 
         if (resultData == null)
         {

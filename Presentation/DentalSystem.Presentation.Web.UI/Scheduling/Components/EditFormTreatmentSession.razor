@@ -1,6 +1,6 @@
 @using Application.Boundaries.UseCases.Scheduling.Dto.Input
-@using Application.UseCases.Scheduling.Dto.Input
 @using Mapster;
+@using Models
 
 @if (Model != default)
 {
@@ -33,7 +33,7 @@
             PatientReferenceId
         );
 
-        Model = new TreatmentSessionInput();
+        Model = new TreatmentSessionInputModel();
 
         Model.Status = result.Status;
         Model.ReferenceId = ReferenceId;
