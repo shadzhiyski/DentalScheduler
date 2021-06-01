@@ -1,0 +1,48 @@
+@using Application.Boundaries.UseCases.Scheduling.Dto.Input
+@using Application.UseCases.Scheduling.Dto.Input
+@using Mapster;
+
+@if (Model != default)
+{
+    <EditTreatmentSession Model="Model" PatientInfo="PatientInfo" />
+}
+
+@code {
+    [Parameter]
+    public Guid ReferenceId { get; set; }
+
+    [Parameter]
+    public Guid PatientReferenceId { get; set; }
+
+    [Inject]
+    ITreatmentSessionService TreatmentSessionService { get; set; }
+
+    public ITreatmentSessionInput Model { get; set; }
+
+    public PatientViewModel PatientInfo { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await LoadTreatmentSession();
+    }
+
+    async Task LoadTreatmentSession()
+    {
+        var result = await TreatmentSessionService.GetAppointment(
+            ReferenceId,
+            PatientReferenceId
+        );
+
+        Model = new TreatmentSessionInput();
+
+        Model.Status = result.Status;
+        Model.ReferenceId = ReferenceId;
+        Model.DentalTeamReferenceId = result.DentalTeam.ReferenceId;
+        Model.PatientReferenceId = result.PatientReferenceId;
+        Model.TreatmentReferenceId = result.Treatment.ReferenceId;
+        Model.Start = result.Start;
+        Model.End = result.End;
+
+        result.Patient.Adapt(PatientInfo);
+    }
+}
