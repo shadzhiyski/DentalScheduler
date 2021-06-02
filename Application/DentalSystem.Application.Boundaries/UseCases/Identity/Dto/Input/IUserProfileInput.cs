@@ -6,8 +6,8 @@ namespace DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input
     {
         byte[] Avatar { get; }
 
-        string FirstName { get; set; }
+        string FirstName { get; }
 
-        string LastName { get; set; }
+        string LastName { get; }
     }
 }

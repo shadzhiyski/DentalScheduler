@@ -4,18 +4,18 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input
 {
     public interface ITreatmentSessionInput
     {
-        Guid ReferenceId { get; set; }
+        Guid ReferenceId { get; }
 
-        Guid? DentalTeamReferenceId { get; set; }
+        Guid? DentalTeamReferenceId { get; }
 
-        Guid? PatientReferenceId { get; set; }
+        Guid? PatientReferenceId { get; }
 
-        Guid? TreatmentReferenceId { get; set; }
+        Guid? TreatmentReferenceId { get; }
 
-        DateTimeOffset? Start { get; set; }
+        DateTimeOffset? Start { get; }
 
-        DateTimeOffset? End { get; set; }
+        DateTimeOffset? End { get; }
 
-        string Status { get; set; }
+        string Status { get; }
     }
 }

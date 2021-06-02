@@ -23,7 +23,8 @@ namespace DentalSystem.Application.UseCases.Identity.Queries
                 UserService.CurrentUser.Adapt<UserProfileOutput>()
             );
 
-            profile.Avatar = profile.Avatar ?? new byte[0];
+            profile = profile
+                with { Avatar = profile.Avatar ?? new byte[0] };
 
             return profile;
         }

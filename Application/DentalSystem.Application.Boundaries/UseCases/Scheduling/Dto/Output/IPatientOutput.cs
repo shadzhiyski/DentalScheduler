@@ -4,12 +4,12 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output
 {
     public interface IPatientOutput
     {
-        Guid? ReferenceId { get; set; }
+        Guid? ReferenceId { get; }
 
-        byte[] Avatar { get; set; }
+        byte[] Avatar { get; }
 
-        string FirstName { get; set; }
+        string FirstName { get; }
 
-        string LastName { get; set; }
+        string LastName { get; }
     }
 }

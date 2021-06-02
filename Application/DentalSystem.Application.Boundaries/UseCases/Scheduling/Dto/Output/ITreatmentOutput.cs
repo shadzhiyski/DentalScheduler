@@ -4,10 +4,10 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output
 {
     public interface ITreatmentOutput
     {
-        Guid? ReferenceId { get; set; }
+        Guid? ReferenceId { get; }
 
-        string Name { get; set; }
+        string Name { get; }
 
-        int DurationInMinutes { get; set; }
+        int DurationInMinutes { get; }
     }
 }

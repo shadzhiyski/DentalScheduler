@@ -2,11 +2,10 @@
 
 @layout Common.Layouts.LoginLayout
 
-@using DentalSystem.Application.Boundaries.UseCases.Common.Validation
 @using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input
 @using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output
 @using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output
-@using DentalSystem.Application.UseCases.Identity.Dto.Input
+@using Models
 
 @inject NavigationManager NavigationManager
 @inject ApplicationAuthenticationStateProvider AuthenticationStateProvider
@@ -78,7 +77,7 @@
 
     public EditContext EditContext { get; set; }
 
-    public IUserCredentialsInput Model { get; set; } = new UserCredentialsInput();
+    public UserCredentialsInputModel Model { get; set; } = new UserCredentialsInputModel();
 
     protected async override Task OnInitializedAsync()
     {

@@ -1,5 +1,5 @@
 @using Application.Boundaries.UseCases.Scheduling.Dto.Input
-@using Application.UseCases.Scheduling.Dto.Input
+@using Models
 
 <EditTreatmentSession Model="Model" PatientInfo="PatientInfo" />
 
@@ -13,13 +13,13 @@
     [Parameter]
     public DateTime End { get; set; }
 
-    public ITreatmentSessionInput Model { get; set; }
+    public TreatmentSessionInputModel Model { get; set; }
 
     public PatientViewModel PatientInfo { get; set; }
 
     protected override void OnInitialized()
     {
-        Model = new TreatmentSessionInput();
+        Model = new TreatmentSessionInputModel();
         PatientInfo = new PatientViewModel();
 
         Model.PatientReferenceId = PatientReferenceId;

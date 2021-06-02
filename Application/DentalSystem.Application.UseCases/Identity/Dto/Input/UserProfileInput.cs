@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Http;
 
 namespace DentalSystem.Application.UseCases.Identity.Dto.Input
 {
-    public class UserProfileInput : IUserProfileInput
+    public record UserProfileInput : IUserProfileInput
     {
-        public IFormFile Avatar { get; set; }
+        public IFormFile Avatar { get; init; }
 
         byte[] IUserProfileInput.Avatar => Avatar.ToArray();
 
-        public string FirstName { get; set; }
+        public string FirstName { get; init; }
 
-        public string LastName { get; set; }
+        public string LastName { get; init; }
     }
 }

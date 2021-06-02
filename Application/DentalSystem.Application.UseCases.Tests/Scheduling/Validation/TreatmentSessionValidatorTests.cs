@@ -43,8 +43,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.TreatmentReferenceId = default;
+            var invalidInput = ValidInput
+                with { TreatmentReferenceId = default };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -64,8 +64,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.PatientReferenceId = default;
+            var invalidInput = ValidInput
+                with { PatientReferenceId = default };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -85,8 +85,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.DentalTeamReferenceId = default;
+            var invalidInput = ValidInput
+                with { DentalTeamReferenceId = default };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -106,8 +106,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.Start = default;
+            var invalidInput = ValidInput
+                with { Start = default };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -127,8 +127,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.End = default;
+            var invalidInput = ValidInput
+                with { End = default };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -148,8 +148,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.End = invalidInput.Start.Value.AddHours(-1);
+            var invalidInput = ValidInput
+                with { End = ValidInput.Start.Value.AddHours(-1) };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -169,8 +169,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.End = invalidInput.Start.Value.AddHours(3);
+            var invalidInput = ValidInput
+                with { End = ValidInput.Start.Value.AddHours(3) };
 
             // Act
             var validationResult = validator.Validate(invalidInput);
@@ -190,8 +190,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
             var validator = new TreatmentSessionValidator(localizer);
 
-            var invalidInput = ValidInput;
-            invalidInput.Status = "Invalid Status";
+            var invalidInput = ValidInput
+                with { Status = "Invalid Status" };
 
             // Act
             var validationResult = validator.Validate(invalidInput);

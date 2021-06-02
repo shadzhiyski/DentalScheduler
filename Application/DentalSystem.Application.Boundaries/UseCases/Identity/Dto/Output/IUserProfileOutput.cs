@@ -2,10 +2,10 @@ namespace DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output
 {
     public interface IUserProfileOutput
     {
-        byte[] Avatar { get; set; }
+        byte[] Avatar { get; }
 
-        string FirstName { get; set; }
+        string FirstName { get; }
 
-        string LastName { get; set; }
+        string LastName { get; }
     }
 }
