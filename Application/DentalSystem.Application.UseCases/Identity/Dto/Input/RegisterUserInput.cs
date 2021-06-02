@@ -2,14 +2,14 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Identity.Dto.Input
 {
-    public class RegisterUserInput : IRegisterUserInput
+    public record RegisterUserInput : IRegisterUserInput
     {
-        public string UserName { get; set; }
+        public string UserName { get; init; }
 
-        public string Password { get; set; }
+        public string Password { get; init; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; init; }
 
-        public string LastName { get; set; }
+        public string LastName { get; init; }
     }
 }

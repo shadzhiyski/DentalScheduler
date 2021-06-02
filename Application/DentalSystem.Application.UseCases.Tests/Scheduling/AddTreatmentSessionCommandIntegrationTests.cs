@@ -40,13 +40,19 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
         public async void AddTreatmentSession_ValidInput_ShouldReturnSuccessfullMessage()
         {
             // Arrange
-            var input = new TreatmentSessionInput();
-            input.TreatmentReferenceId = Treatments.First().ReferenceId;
-            input.PatientReferenceId = Patient.ReferenceId;
-            input.DentalTeamReferenceId = DentalTeam.ReferenceId;
-            input.Start = DateTimeOffset.UtcNow;
-            input.End = input.Start.Value.AddHours(1);
-            input.Status = "Requested";
+            var input = new TreatmentSessionInput()
+                {
+                    TreatmentReferenceId = Treatments.First().ReferenceId,
+                    PatientReferenceId = Patient.ReferenceId,
+                    DentalTeamReferenceId = DentalTeam.ReferenceId,
+                    Start = DateTimeOffset.UtcNow,
+                    Status = "Requested"
+                };
+            input = input
+                with
+                {
+                    End = input.Start.Value.AddHours(1)
+                };
 
             // Act
             var result = await Sut.ExecuteAsync(input, default);
@@ -81,13 +87,19 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
         public async void AddTreatmentSession_ValidInputViolatingBusinessRules_ShouldReturnErrorResult()
         {
             // Arrange
-            var input = new TreatmentSessionInput();
-            input.TreatmentReferenceId = Treatments.First().ReferenceId;
-            input.PatientReferenceId = Patient.ReferenceId;
-            input.DentalTeamReferenceId = DentalTeam.ReferenceId;
-            input.Start = DateTimeOffset.UtcNow;
-            input.End = input.Start.Value.AddHours(1);
-            input.Status = "Requested";
+            var input = new TreatmentSessionInput()
+                {
+                    TreatmentReferenceId = Treatments.First().ReferenceId,
+                    PatientReferenceId = Patient.ReferenceId,
+                    DentalTeamReferenceId = DentalTeam.ReferenceId,
+                    Start = DateTimeOffset.UtcNow,
+                    Status = "Requested"
+                };
+            input = input
+                with
+                {
+                    End = input.Start.Value.AddHours(1)
+                };
 
             // Act
             await Sut.ExecuteAsync(input, default);

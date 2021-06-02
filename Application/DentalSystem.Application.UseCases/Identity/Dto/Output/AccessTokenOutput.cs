@@ -2,7 +2,7 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
 
 namespace DentalSystem.Application.UseCases.Identity.Dto.Output
 {
-    public class AccessTokenOutput : IAccessTokenOutput
+    public record AccessTokenOutput : IAccessTokenOutput
     {
         public AccessTokenOutput()
         { }
@@ -12,6 +12,6 @@ namespace DentalSystem.Application.UseCases.Identity.Dto.Output
             AccessToken = accessToken;
         }
 
-        public string AccessToken { get; set; }
+        public string AccessToken { get; init; }
     }
 }

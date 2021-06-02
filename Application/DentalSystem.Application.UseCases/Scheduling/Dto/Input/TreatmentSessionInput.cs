@@ -3,20 +3,20 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Dto.Input
 {
-    public class TreatmentSessionInput : ITreatmentSessionInput
+    public record TreatmentSessionInput : ITreatmentSessionInput
     {
-        public Guid ReferenceId { get; set; }
+        public Guid ReferenceId { get; init; }
 
-        public Guid? DentalTeamReferenceId { get; set; }
+        public Guid? DentalTeamReferenceId { get; init; }
 
-        public Guid? PatientReferenceId { get; set; }
+        public Guid? PatientReferenceId { get; init; }
 
-        public Guid? TreatmentReferenceId { get; set; }
+        public Guid? TreatmentReferenceId { get; init; }
 
-        public DateTimeOffset? Start { get; set; }
+        public DateTimeOffset? Start { get; init; }
 
-        public DateTimeOffset? End { get; set; }
+        public DateTimeOffset? End { get; init; }
 
-        public string Status { get; set; }
+        public string Status { get; init; }
     }
 }

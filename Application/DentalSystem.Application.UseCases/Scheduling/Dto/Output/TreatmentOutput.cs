@@ -3,12 +3,12 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Dto.Output
 {
-    public class TreatmentOutput : ITreatmentOutput
+    public record TreatmentOutput : ITreatmentOutput
     {
-        public Guid? ReferenceId { get; set; }
+        public Guid? ReferenceId { get; init; }
 
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public int DurationInMinutes { get; set; }
+        public int DurationInMinutes { get; init; }
     }
 }
