@@ -4,9 +4,9 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output
 {
     public interface IDentalTeamOutput
     {
-        Guid? ReferenceId { get; set; }
+        Guid? ReferenceId { get; }
 
-        string Name { get; set; }
+        string Name { get; }
 
         IRoomOutput Room { get; }
     }

@@ -4,9 +4,9 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output
 {
     public interface ITreatmentSessionOutput
     {
-        Guid? ReferenceId { get; set; }
+        Guid? ReferenceId { get; }
 
-        Guid? PatientReferenceId { get; set; }
+        Guid? PatientReferenceId { get; }
 
         IDentalTeamOutput DentalTeam { get; }
 
@@ -14,10 +14,10 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output
 
         IPatientOutput Patient { get; }
 
-        DateTimeOffset Start { get; set; }
+        DateTimeOffset Start { get; }
 
-        DateTimeOffset End { get; set; }
+        DateTimeOffset End { get; }
 
-        string Status { get; set; }
+        string Status { get; }
     }
 }

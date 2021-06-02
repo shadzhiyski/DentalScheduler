@@ -18,7 +18,7 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Components
         public const int DefaultDurationInMinutes = 30;
 
         [Parameter]
-        public ITreatmentSessionInput Model { get; set; } = new TreatmentSessionInputModel();
+        public TreatmentSessionInputModel Model { get; set; } = new TreatmentSessionInputModel();
 
         [Parameter]
         public PatientViewModel PatientInfo { get; set; } = new PatientViewModel();

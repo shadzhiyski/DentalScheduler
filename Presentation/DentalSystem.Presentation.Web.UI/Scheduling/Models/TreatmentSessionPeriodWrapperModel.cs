@@ -1,11 +1,12 @@
 using System;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Presentation.Web.UI.Scheduling.Models;
 
 namespace DentalSystem.Presentation.Web.UI.Models
 {
     public class TreatmentSessionPeriodWrapperModel
     {
-        public TreatmentSessionPeriodWrapperModel(ITreatmentSessionInput treatmentSessionInput)
+        public TreatmentSessionPeriodWrapperModel(TreatmentSessionInputModel treatmentSessionInput)
         {
             TreatmentSessionInput = treatmentSessionInput;
         }
@@ -26,6 +27,6 @@ namespace DentalSystem.Presentation.Web.UI.Models
             set => TreatmentSessionInput.End = value;
         }
 
-        public ITreatmentSessionInput TreatmentSessionInput { get; }
+        public TreatmentSessionInputModel TreatmentSessionInput { get; }
     }
 }

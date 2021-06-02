@@ -5,8 +5,8 @@ namespace DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output
 {
     public interface IValidationError : IError
     {
-        string PropertyName { get; set; }
+        string PropertyName { get; }
 
-        IList<string> Errors { get; set; }
+        IList<string> Errors { get; }
     }
 }
