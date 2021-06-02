@@ -1,13 +1,12 @@
 @page "/user/profile"
 
 @using System.IO
-@using System.Threading
 @using Application.Boundaries.UseCases.Identity.Dto.Input
-@using Application.UseCases.Identity.Dto.Input
 @using Mapster
 @using Microsoft.AspNetCore.Http.Internal
 @using DentalSystem.Common.Helpers.Extensions
 @using IdentityValidationConstants = DentalSystem.Application.UseCases.Identity.Validation.Constants
+@using Models
 
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> Loc
 
@@ -69,7 +68,7 @@
 
     public EditContext EditContext { get; set; }
 
-    public UserProfileInput Model { get; set; } = new UserProfileInput();
+    public UserProfileInputModel Model { get; set; } = new UserProfileInputModel();
 
     public ElementReference FileUpload { get; set; }
 
