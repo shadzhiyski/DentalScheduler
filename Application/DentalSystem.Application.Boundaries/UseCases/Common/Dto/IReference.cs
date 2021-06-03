@@ -4,6 +4,6 @@ namespace DentalSystem.Application.Boundaries.UseCases.Common.Dto
 {
     public interface IReference
     {
-        Guid? ReferenceId { get; set; }
+        Guid? ReferenceId { get; }
     }
 }
