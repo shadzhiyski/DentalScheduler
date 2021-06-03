@@ -98,9 +98,9 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Services
                 .FindEntryAsync();
 
         public async Task AddAppointmentsAsync(ITreatmentSessionInput input)
-            => await HttpClient.PostAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
+            => await HttpClient.PostAsJsonAsync<object>("TreatmentSession", input);
 
         public async Task EditAppointmentsAsync(ITreatmentSessionInput input)
-            => await HttpClient.PutAsJsonAsync<ITreatmentSessionInput>("TreatmentSession", input);
+            => await HttpClient.PutAsJsonAsync<object>("TreatmentSession", input);
     }
 }
