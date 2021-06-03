@@ -1,4 +1,4 @@
-using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 

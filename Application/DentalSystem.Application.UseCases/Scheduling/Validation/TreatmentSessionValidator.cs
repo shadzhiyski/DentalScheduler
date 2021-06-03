@@ -3,7 +3,7 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using DentalSystem.Application.UseCases.Common.Validation;
-using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Input;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {

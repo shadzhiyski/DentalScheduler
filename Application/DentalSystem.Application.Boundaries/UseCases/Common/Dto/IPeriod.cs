@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalSystem.Application.Boundaries.UseCases.Common.Dto.Input
+namespace DentalSystem.Application.Boundaries.UseCases.Common.Dto
 {
     public interface IPeriod
     {
