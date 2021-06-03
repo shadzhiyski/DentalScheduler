@@ -118,8 +118,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         private (TreatmentSessionBusinessValidator, IStringLocalizer<TreatmentSessionBusinessValidator>) GetBusinessValidator(
             IEnumerable<TreatmentSession> presentData)
         {
-            var simpleLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>();
-            var simpleValidator = new TreatmentSessionValidator(simpleLocalizer);
+            var simpleValidator = ServiceProvider.GetRequiredService<TreatmentSessionValidator>();
             var mockedRepository = new Mock<IReadRepository<TreatmentSession>>();
 
             var filteredData = presentData;

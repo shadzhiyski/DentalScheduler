@@ -14,6 +14,7 @@ using Microsoft.Extensions.Localization;
 using DentalSystem.Application.UseCases.Scheduling.Validation;
 using System.Collections.Generic;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
+using DentalSystem.Application.UseCases.Common.Validation;
 
 namespace DentalSystem.Application.UseCases.Tests.Scheduling
 {
@@ -74,6 +75,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>()
                 .GetAllStrings()
+                .Union(ServiceProvider.GetRequiredService<IStringLocalizer<PeriodValidator>>().GetAllStrings())
                 .Select(ls => ls.Value);
             var allUniqueValidationMessages = new HashSet<string>(allValidationMessages);
             result.Errors

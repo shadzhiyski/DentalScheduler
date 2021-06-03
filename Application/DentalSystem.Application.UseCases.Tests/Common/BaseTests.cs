@@ -1,3 +1,5 @@
+using System.Reflection;
+using DentalSystem.Application.UseCases.Common.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -9,7 +11,9 @@ namespace DentalSystem.Application.UseCases.Tests.Common
         {
             ServiceCollection = new ServiceCollection();
 
-            ServiceCollection.AddLocalization();
+            ServiceCollection
+                .AddLocalization()
+                .AddBasicValidation(Assembly.GetAssembly(typeof(ApplicationValidator<>)));
 
             ServiceCollection.AddSingleton<ILoggerFactory, LoggerFactory>();
             ServiceCollection.AddSingleton(typeof(ILogger<>), typeof(Fakes.FakeLogger<>));
