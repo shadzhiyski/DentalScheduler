@@ -1,10 +1,9 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using DentalSystem.Application.UseCases.Common.Validation;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -13,13 +12,12 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
         public const string RequiredDentalTeamMessageName = "RequiredDentalTeam";
         public const string RequiredPatientMessageName = "RequiredPatient";
         public const string RequiredTreatmentMessageName = "RequiredTreatment";
-        public const string RequiredStartMessageName = "RequiredStart";
-        public const string RequiredEndMessageName = "RequiredEnd";
-        public const string InvalidPeriodMessageName = "InvalidPeriod";
         public const string MaxDurationMessageName = "MaxDuration";
         public const string UnsupportedStatusMessageName = "UnsupportedStatus";
 
-        public TreatmentSessionValidator(IStringLocalizer<TreatmentSessionValidator> localizer)
+        public TreatmentSessionValidator(
+            IStringLocalizer<TreatmentSessionValidator> localizer,
+            AbstractValidator<IPeriod> periodValidator)
         {
             RuleFor(model => model.DentalTeamReferenceId)
                 .Cascade(CascadeMode.Stop)
@@ -36,19 +34,14 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                 .NotNull()
                 .WithMessage(localizer[RequiredTreatmentMessageName]);
 
-            RuleFor(model => model.Start)
-                .Cascade(CascadeMode.Stop)
-                .NotNull()
-                .WithMessage(localizer[RequiredStartMessageName]);
-
-            RuleFor(model => model.End)
-                .Cascade(CascadeMode.Stop)
-                .NotNull()
-                .WithMessage(localizer[RequiredEndMessageName])
-                .GreaterThan(model => model.Start)
-                .WithMessage(localizer[InvalidPeriodMessageName])
-                .LessThanOrEqualTo(model => model.Start.HasValue ? model.Start.Value.AddHours(2) : model.End.Value)
-                .WithMessage(localizer[MaxDurationMessageName]);
+            RuleFor(m => m)
+                .SetValidator(periodValidator)
+                .DependentRules(() =>
+                {
+                    RuleFor(m => m.End)
+                        .LessThanOrEqualTo(model => model.Start.HasValue ? model.Start.Value.AddHours(2) : model.End.Value)
+                        .WithMessage(localizer[MaxDurationMessageName]);
+                });
 
             RuleFor(model => model.Status)
                 .IsEnumName(typeof(TreatmentSessionStatus))
