@@ -117,24 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RequiredDentalTeam" xml:space="preserve">
-    <value>Зъболекарският екип е задължителен!</value>
+  <data name="RequiredStart" xml:space="preserve">
+    <value>Началото е задължително!</value>
     <comment/>
   </data>
-  <data name="RequiredPatient" xml:space="preserve">
-    <value>Пациентът е задължителен!</value>
+  <data name="RequiredEnd" xml:space="preserve">
+    <value>Краят е задължителен!</value>
     <comment/>
   </data>
-  <data name="RequiredTreatment" xml:space="preserve">
-    <value>Лечението е задължително!</value>
-    <comment/>
-  </data>
-  <data name="MaxDuration" xml:space="preserve">
-    <value>Продължителността на лечението не трябва да е по-дълга от 2 часа.</value>
-    <comment/>
-  </data>
-  <data name="UnsupportedStatus" xml:space="preserve">
-    <value>Статусът не се поддържа.</value>
+  <data name="InvalidPeriod" xml:space="preserve">
+    <value>Невалиден период!</value>
     <comment/>
   </data>
 </root>

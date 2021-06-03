@@ -34,11 +34,13 @@ namespace DentalSystem.Application.UseCases
         {
             var validatorsTypes = GetValidators(
                 assembly: assembly,
-                predicate: t => t.Namespace.Contains("Validation") && !t.Name.Contains("Business")
+                predicate: t =>
+                    t.Namespace.Contains("Validation")
+                    && !t.Name.Contains("Business")
+                    && t.Name.EndsWith("Validator")
             );
 
             validatorsTypes
-                .Where(t => !t.IsCommon)
                 .ToList()
                 .ForEach(t => services.AddTransient(t.AbstractClass, t.Implementation));
             validatorsTypes
@@ -57,7 +59,9 @@ namespace DentalSystem.Application.UseCases
 
             var businessValidatorsTypes = GetValidators(
                 assembly: assembly,
-                predicate: t => t.Namespace.Contains("Validation") && t.Name.Contains("Business")
+                predicate: t =>
+                    t.Namespace.Contains("Validation")
+                    && t.Name.EndsWith("BusinessValidator")
             );
 
             businessValidatorsTypes

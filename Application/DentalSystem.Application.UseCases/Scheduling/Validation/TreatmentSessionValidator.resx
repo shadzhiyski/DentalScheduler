@@ -129,18 +129,6 @@
     <value>Treatment is required!</value>
     <comment/>
   </data>
-  <data name="RequiredStart" xml:space="preserve">
-    <value>Start is required!</value>
-    <comment/>
-  </data>
-  <data name="RequiredEnd" xml:space="preserve">
-    <value>End is required!</value>
-    <comment/>
-  </data>
-  <data name="InvalidPeriod" xml:space="preserve">
-    <value>Invalid period!</value>
-    <comment/>
-  </data>
   <data name="MaxDuration" xml:space="preserve">
     <value>The duration of the treatment session must not be longer than 2 hours.</value>
     <comment/>
