@@ -38,7 +38,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
         public IReadRepository<DentalTeam> DentalTeamRepository { get; }
         public IUnitOfWork UoW { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(ITreatmentSessionInput input, CancellationToken cancellationToken)
+        public async Task<IResult<IMessageOutput>> ExecuteAsync(IUpdateTreatmentSessionInput input, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)
