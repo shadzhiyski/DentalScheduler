@@ -3,8 +3,10 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Dto.Input
 {
-    public record TreatmentSessionInput : ITreatmentSessionInput
+    public record UpdateTreatmentSessionInput : IUpdateTreatmentSessionInput
     {
+        public Guid? ReferenceId { get; init; }
+
         public Guid? DentalTeamReferenceId { get; init; }
 
         public Guid? PatientReferenceId { get; init; }

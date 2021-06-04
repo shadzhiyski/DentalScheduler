@@ -94,7 +94,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PutAsync(TreatmentSessionInput input, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> PutAsync(UpdateTreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
             var result = await UpdateTreatmentSessionCommand.Value.ExecuteAsync(input, cancellationToken);
 

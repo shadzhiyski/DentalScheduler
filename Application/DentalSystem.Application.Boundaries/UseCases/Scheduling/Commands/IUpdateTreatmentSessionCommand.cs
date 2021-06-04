@@ -7,6 +7,6 @@ namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands
 {
     public interface IUpdateTreatmentSessionCommand
     {
-        Task<IResult<IMessageOutput>> ExecuteAsync(ITreatmentSessionInput input, CancellationToken cancellationToken);
+        Task<IResult<IMessageOutput>> ExecuteAsync(IUpdateTreatmentSessionInput input, CancellationToken cancellationToken);
     }
 }

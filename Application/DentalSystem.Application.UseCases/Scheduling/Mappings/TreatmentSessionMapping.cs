@@ -28,7 +28,6 @@ namespace DentalSystem.Application.UseCases.Scheduling.Mappings
                 .MapWith((src) =>
                 new TreatmentSessionInput
                 {
-                    ReferenceId = src.ReferenceId ?? System.Guid.Empty,
                     PatientReferenceId = src.PatientReferenceId,
                     DentalTeamReferenceId = src.DentalTeam.ReferenceId,
                     TreatmentReferenceId = src.Treatment.ReferenceId,
