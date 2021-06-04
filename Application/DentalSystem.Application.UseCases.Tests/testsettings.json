@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "DentalSystemDbConnection" : "Data Source=DentalSystem_test;Mode=Memory;Cache=Shared"
+    "DentalSystemDbConnection" : "Data Source=DentalSystem_test;Mode=Memory"
   },
   "Logging": {
     "LogLevel": {
