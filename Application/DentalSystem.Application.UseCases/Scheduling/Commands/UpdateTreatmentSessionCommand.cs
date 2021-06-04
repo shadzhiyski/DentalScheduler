@@ -16,7 +16,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
     public class UpdateTreatmentSessionCommand : IUpdateTreatmentSessionCommand
     {
         public UpdateTreatmentSessionCommand(
-            IApplicationValidator<ITreatmentSessionInput> validator,
+            IApplicationValidator<IUpdateTreatmentSessionInput> validator,
             IReadRepository<TreatmentSession> treatmentSessionRepository,
             IReadRepository<Treatment> treatmentRepository,
             IReadRepository<DentalTeam> dentalTeamRepository,
@@ -29,7 +29,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
             UoW = uoW;
         }
 
-        public IApplicationValidator<ITreatmentSessionInput> Validator { get; }
+        public IApplicationValidator<IUpdateTreatmentSessionInput> Validator { get; }
 
         public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
@@ -52,20 +52,6 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
                 .Include(ts => ts.Treatment)
                 .Include(ts => ts.DentalTeam)
                 .SingleOrDefaultAsync(cancellationToken);
-
-            if (treatmentSession == null)
-            {
-                return new Result<IMessageOutput>(
-                    new List<IError>
-                    {
-                        new Error(
-                            ErrorType.NotFound,
-                            $"Treatment session for the given Patient, Dental Team and period cannot be found."
-                        )
-                    },
-                    ResultType.NotFound
-                );
-            }
 
             if (treatmentSession.Treatment.ReferenceId != input.TreatmentReferenceId)
             {
