@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
-using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using DentalSystem.Application.UseCases.Tests.Common;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
