@@ -1,9 +1,11 @@
 using System;
+using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
+using MediatR;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Dto.Input
 {
-    public record UpdateTreatmentSessionInput : IUpdateTreatmentSessionInput
+    public record UpdateTreatmentSessionInput : IUpdateTreatmentSessionInput, IRequest<IResult<IMessageOutput>>
     {
         public Guid? ReferenceId { get; init; }
 

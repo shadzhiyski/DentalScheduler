@@ -4,7 +4,6 @@ using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using System.Threading;
 using MediatR;

@@ -6,14 +6,15 @@ using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using MediatR;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Commands
 {
-    public class UpdateTreatmentSessionCommand : IUpdateTreatmentSessionCommand
+    public class UpdateTreatmentSessionCommand : IRequestHandler<UpdateTreatmentSessionInput, IResult<IMessageOutput>>
     {
         public UpdateTreatmentSessionCommand(
             IApplicationValidator<IUpdateTreatmentSessionInput> validator,
@@ -36,9 +37,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
         public IReadRepository<Treatment> TreatmentRepository { get; }
 
         public IReadRepository<DentalTeam> DentalTeamRepository { get; }
+
         public IUnitOfWork UoW { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(IUpdateTreatmentSessionInput input, CancellationToken cancellationToken)
+        public async Task<IResult<IMessageOutput>> Handle(UpdateTreatmentSessionInput input, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)
