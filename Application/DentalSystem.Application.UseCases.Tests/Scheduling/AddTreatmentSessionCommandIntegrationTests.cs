@@ -15,6 +15,7 @@ using DentalSystem.Application.UseCases.Scheduling.Validation;
 using System.Collections.Generic;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.UseCases.Common.Validation;
+using MediatR;
 
 namespace DentalSystem.Application.UseCases.Tests.Scheduling
 {
@@ -22,7 +23,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
     {
         public AddTreatmentSessionCommandIntegrationTests() : base(new ServiceCollection())
         {
-            Sut = ServiceProvider.GetRequiredService<IAddTreatmentSessionCommand>();
+            Sut = ServiceProvider.GetRequiredService<IMediator>();
 
             Patient = CreatePatientUser();
 
@@ -35,7 +36,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
 
         public DentalTeam DentalTeam { get; }
 
-        public IAddTreatmentSessionCommand Sut { get; }
+        public IMediator Sut { get; }
 
         [Fact]
         public async void AddTreatmentSession_ValidInput_ShouldReturnSuccessfullMessage()
@@ -56,7 +57,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
                 };
 
             // Act
-            var result = await Sut.ExecuteAsync(input, default);
+            var result = await Sut.Send(input, default);
             var messageOutput = result.Value;
 
             // Assert
@@ -70,7 +71,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             var input = new TreatmentSessionInput();
 
             // Act
-            var result = await Sut.ExecuteAsync(input, default);
+            var result = await Sut.Send(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>()
@@ -104,8 +105,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
                 };
 
             // Act
-            await Sut.ExecuteAsync(input, default);
-            var result = await Sut.ExecuteAsync(input, default);
+            await Sut.Send(input, default);
+            var result = await Sut.Send(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>()

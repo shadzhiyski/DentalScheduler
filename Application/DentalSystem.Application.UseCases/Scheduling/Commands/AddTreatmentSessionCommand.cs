@@ -7,10 +7,12 @@ using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using System.Threading;
+using MediatR;
+using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Commands
 {
-    public class AddTreatmentSessionCommand : IAddTreatmentSessionCommand
+    public class AddTreatmentSessionCommand : IRequestHandler<TreatmentSessionInput, IResult<IMessageOutput>>
     {
         public AddTreatmentSessionCommand(
             IApplicationValidator<ITreatmentSessionInput> validator,
@@ -40,7 +42,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Commands
 
         public IUnitOfWork UoW { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(ITreatmentSessionInput input, CancellationToken cancellationToken)
+        public async Task<IResult<IMessageOutput>> Handle(TreatmentSessionInput input, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)
