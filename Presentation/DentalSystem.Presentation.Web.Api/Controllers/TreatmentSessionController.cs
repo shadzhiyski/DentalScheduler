@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData.Query;
 using System.Threading;
+using MediatR;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -26,27 +27,27 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <summary>
         /// Creates Treatment Session Controller.
         /// </summary>
+        /// <param name="mediator"></param>
         /// <param name="mappingConfig"></param>
         /// <param name="repository"></param>
-        /// <param name="addTreatmentSessionCommand"></param>
         /// <param name="updateTreatmentSessionCommand"></param>
         public TreatmentSessionController(
+            Lazy<IMediator> mediator,
             Lazy<TypeAdapterConfig> mappingConfig,
             Lazy<IReadRepository<TreatmentSession>> repository,
-            Lazy<IAddTreatmentSessionCommand> addTreatmentSessionCommand,
             Lazy<IUpdateTreatmentSessionCommand> updateTreatmentSessionCommand)
         {
+            Mediator = mediator;
             MappingConfig = mappingConfig;
             Repository = repository;
-            AddTreatmentSessionCommand = addTreatmentSessionCommand;
             UpdateTreatmentSessionCommand = updateTreatmentSessionCommand;
         }
+
+        private Lazy<IMediator> Mediator { get; }
 
         private Lazy<TypeAdapterConfig> MappingConfig { get; }
 
         private Lazy<IReadRepository<TreatmentSession>> Repository { get; }
-
-        private Lazy<IAddTreatmentSessionCommand> AddTreatmentSessionCommand { get; }
 
         private Lazy<IUpdateTreatmentSessionCommand> UpdateTreatmentSessionCommand { get; }
 
@@ -76,7 +77,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostAsync(TreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
-            var result = await AddTreatmentSessionCommand.Value.ExecuteAsync(input, cancellationToken);
+            var result = await Mediator.Value.Send(input, cancellationToken);
 
             return PresentResult(result);
         }

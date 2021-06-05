@@ -6,6 +6,7 @@ using DentalSystem.Common.Helpers.Extensions;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Common.Validation;
 using Microsoft.Extensions.DependencyInjection;
+using MediatR;
 
 namespace DentalSystem.Application.UseCases
 {
@@ -16,6 +17,7 @@ namespace DentalSystem.Application.UseCases
 
         public static IServiceCollection AddUseCases(this IServiceCollection services)
             => services
+                .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddTypes(
                     abstractionsAssembly: Assembly.GetAssembly(typeof(IApplicationValidator<>)),
                     implementationsAssembly: CurrentAssembly
