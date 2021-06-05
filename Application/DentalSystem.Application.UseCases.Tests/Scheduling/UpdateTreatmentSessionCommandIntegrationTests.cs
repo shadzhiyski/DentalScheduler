@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
-using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using DentalSystem.Application.UseCases.Tests.Common;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +15,7 @@ using System.Collections.Generic;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.UseCases.Common.Validation;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
 
 namespace DentalSystem.Application.UseCases.Tests.Scheduling
 {
@@ -23,7 +23,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
     {
         public UpdateTreatmentSessionCommandIntegrationTests() : base(new ServiceCollection())
         {
-            Sut = ServiceProvider.GetRequiredService<IUpdateTreatmentSessionCommand>();
+            Sut = ServiceProvider.GetRequiredService<IMediator>();
 
             Patient = CreatePatientUser();
 
@@ -48,7 +48,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
 
         public TreatmentSession TreatmentSession { get; }
 
-        public IUpdateTreatmentSessionCommand Sut { get; }
+        public IMediator Sut { get; }
 
         [Fact]
         public async void UpdateTreatmentSession_ValidInput_ShouldReturnSuccessfullMessage()
@@ -66,7 +66,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
                 };
 
             // Act
-            var result = await Sut.ExecuteAsync(input, default);
+            var result = await Sut.Send(input, default);
             var messageOutput = result.Value;
 
             // Assert
@@ -80,7 +80,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             var input = new UpdateTreatmentSessionInput();
 
             // Act
-            var result = await Sut.ExecuteAsync(input, default);
+            var result = await Sut.Send(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionValidator>>()
@@ -120,7 +120,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             );
 
             // Act
-            var result = await Sut.ExecuteAsync(input, default);
+            var result = await Sut.Send(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>()
@@ -150,7 +150,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
                 };
 
             // Act
-            var result = await Sut.ExecuteAsync(input, default);
+            var result = await Sut.Send(input, default);
 
             // Assert
             var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<UpdateTreatmentSessionBusinessValidator>>()

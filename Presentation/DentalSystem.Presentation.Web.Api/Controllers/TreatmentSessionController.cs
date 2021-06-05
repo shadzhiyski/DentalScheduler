@@ -5,7 +5,6 @@ using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
-using DentalSystem.Application.Boundaries.UseCases.Scheduling.Commands;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,17 +29,14 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <param name="mediator"></param>
         /// <param name="mappingConfig"></param>
         /// <param name="repository"></param>
-        /// <param name="updateTreatmentSessionCommand"></param>
         public TreatmentSessionController(
             Lazy<IMediator> mediator,
             Lazy<TypeAdapterConfig> mappingConfig,
-            Lazy<IReadRepository<TreatmentSession>> repository,
-            Lazy<IUpdateTreatmentSessionCommand> updateTreatmentSessionCommand)
+            Lazy<IReadRepository<TreatmentSession>> repository)
         {
             Mediator = mediator;
             MappingConfig = mappingConfig;
             Repository = repository;
-            UpdateTreatmentSessionCommand = updateTreatmentSessionCommand;
         }
 
         private Lazy<IMediator> Mediator { get; }
@@ -48,8 +44,6 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         private Lazy<TypeAdapterConfig> MappingConfig { get; }
 
         private Lazy<IReadRepository<TreatmentSession>> Repository { get; }
-
-        private Lazy<IUpdateTreatmentSessionCommand> UpdateTreatmentSessionCommand { get; }
 
         /// <summary>
         /// Gets Treatment Sessions.
@@ -97,7 +91,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutAsync(UpdateTreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
-            var result = await UpdateTreatmentSessionCommand.Value.ExecuteAsync(input, cancellationToken);
+            var result = await Mediator.Value.Send(input, cancellationToken);
 
             return PresentResult(result);
         }
