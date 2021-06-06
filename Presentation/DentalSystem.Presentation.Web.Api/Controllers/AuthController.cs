@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -20,18 +19,12 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
     {
         private Lazy<IMediator> Mediator { get; }
 
-        private Lazy<IRegisterUserCommand> RegisterUserCommand { get; }
-
         /// <summary>
         /// Creates Auth Controller.
         /// </summary>
         /// <param name="mediator"></param>
-        /// <param name="registerUserCommand"></param>
-        public AuthController(
-            Lazy<IMediator> mediator,
-            Lazy<IRegisterUserCommand> registerUserCommand)
+        public AuthController(Lazy<IMediator> mediator)
         {
-            RegisterUserCommand = registerUserCommand;
             Mediator = mediator;
         }
 
@@ -50,7 +43,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(RegisterUserInput model, CancellationToken cancellationToken)
         {
-            var result =  await RegisterUserCommand.Value.RegisterAsync(model, cancellationToken);
+            var result =  await Mediator.Value.Send(model, cancellationToken);
             return PresentResult(result);
         }
 

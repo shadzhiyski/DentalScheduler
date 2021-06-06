@@ -5,15 +5,16 @@ using DentalSystem.Entities.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 using System.Threading;
+using MediatR;
+using DentalSystem.Application.UseCases.Identity.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
-    public class LinkUserAndRoleCommand : ILinkUserAndRoleCommand
+    public class LinkUserAndRoleCommand : IRequestHandler<LinkUserAndRoleInput, IResult<IMessageOutput>>
     {
         public IUserService<User> UserService { get; }
 
@@ -31,7 +32,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             Validator = validator;
         }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(ILinkUserAndRoleInput inputModel, CancellationToken cancellationToken)
+        public async Task<IResult<IMessageOutput>> Handle(LinkUserAndRoleInput inputModel, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(inputModel);
             if (validationResult.Errors.Count > 0)

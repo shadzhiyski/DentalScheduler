@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
-using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.UseCases.Common.Dto.Output;
 using DentalSystem.Entities.Scheduling;
 using DentalSystem.Entities.Identity;
@@ -13,14 +12,13 @@ using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
 using MediatR;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
-    public class RegisterUserCommand : IRegisterUserCommand
+    public class RegisterUserCommand : IRequestHandler<RegisterUserInput, IResult<IAccessTokenOutput>>
     {
         public IConfiguration Config { get; }
 
@@ -32,8 +30,6 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
 
         public IMediator Mediator { get; }
 
-        public ILinkUserAndRoleCommand LinkUserAndRoleCommand { get; }
-
         public IWriteRepository<Patient> PatientRepo { get; }
 
         public IUnitOfWork UoW { get; }
@@ -44,7 +40,6 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             IApplicationValidator<IUserCredentialsInput> validator,
             IJwtAuthManager jwtAuthManager,
             IMediator mediator,
-            ILinkUserAndRoleCommand linkUserAndRoleCommand,
             IWriteRepository<Patient> patientRepo,
             IUnitOfWork uoW)
         {
@@ -53,12 +48,11 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             Validator = validator;
             JwtAuthManager = jwtAuthManager;
             Mediator = mediator;
-            LinkUserAndRoleCommand = linkUserAndRoleCommand;
             PatientRepo = patientRepo;
             UoW = uoW;
         }
 
-        public async Task<IResult<IAccessTokenOutput>> RegisterAsync(IRegisterUserInput userInput, CancellationToken cancellationToken)
+        public async Task<IResult<IAccessTokenOutput>> Handle(RegisterUserInput userInput, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(userInput);
             if (validationResult.Errors.Count > 0)
@@ -82,7 +76,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
                 return new Result<IAccessTokenOutput>(identityResult.Errors);
             }
 
-            var linkUserWithRoleResult = await LinkUserAndRoleCommand.ExecuteAsync(new LinkUserAndRoleInput
+            var linkUserWithRoleResult = await Mediator.Send(new LinkUserAndRoleInput
             {
                 UserName = userInput.UserName,
                 RoleName = RoleType.Patient.ToString()
