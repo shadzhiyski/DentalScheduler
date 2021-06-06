@@ -2,12 +2,12 @@ using System;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
+using MediatR;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -23,18 +23,18 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// Creates User Controller.
         /// </summary>
         /// <param name="getUserProfileQuery"></param>
-        /// <param name="updateProfileCommand"></param>
+        /// <param name="mediator"></param>
         public UserController(
             Lazy<IGetUserProfileQuery> getUserProfileQuery,
-            Lazy<IUpdateProfileCommand> updateProfileCommand)
+            Lazy<IMediator> mediator)
         {
             GetUserProfileQuery = getUserProfileQuery;
-            UpdateProfileCommand = updateProfileCommand;
+            Mediator = mediator;
         }
 
         private Lazy<IGetUserProfileQuery> GetUserProfileQuery { get; }
 
-        private Lazy<IUpdateProfileCommand> UpdateProfileCommand { get; }
+        private Lazy<IMediator> Mediator { get; }
 
         /// <summary>
         /// Gets logged in user avatar.
@@ -80,7 +80,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input, CancellationToken cancellationToken)
         {
-            var result = await UpdateProfileCommand.Value.ExecuteAsync(input, cancellationToken);
+            var result = await Mediator.Value.Send(input, cancellationToken);
 
             return PresentResult(result);
         }
