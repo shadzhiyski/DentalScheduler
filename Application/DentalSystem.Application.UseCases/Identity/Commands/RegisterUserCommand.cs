@@ -16,6 +16,7 @@ using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
+using MediatR;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
@@ -29,7 +30,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
 
         public IJwtAuthManager JwtAuthManager { get; }
 
-        public ILoginCommand LoginCommand { get; }
+        public IMediator Mediator { get; }
 
         public ILinkUserAndRoleCommand LinkUserAndRoleCommand { get; }
 
@@ -42,7 +43,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             IUserService<User> userService,
             IApplicationValidator<IUserCredentialsInput> validator,
             IJwtAuthManager jwtAuthManager,
-            ILoginCommand loginCommand,
+            IMediator mediator,
             ILinkUserAndRoleCommand linkUserAndRoleCommand,
             IWriteRepository<Patient> patientRepo,
             IUnitOfWork uoW)
@@ -51,7 +52,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             UserService = userService;
             Validator = validator;
             JwtAuthManager = jwtAuthManager;
-            LoginCommand = loginCommand;
+            Mediator = mediator;
             LinkUserAndRoleCommand = linkUserAndRoleCommand;
             PatientRepo = patientRepo;
             UoW = uoW;
@@ -100,7 +101,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             await UoW.SaveAsync(cancellationToken);
 
             // Auto login after registrаtion (successful user registration should return access_token)
-            return await LoginCommand.LoginAsync(new UserCredentialsInput()
+            return await Mediator.Send(new UserCredentialsInput()
             {
                 UserName = userInput.UserName,
                 Password = userInput.Password
