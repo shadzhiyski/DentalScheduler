@@ -2,12 +2,12 @@ using System;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
 using MediatR;
+using DentalSystem.Application.UseCases.Identity.Queries;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -22,17 +22,11 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <summary>
         /// Creates User Controller.
         /// </summary>
-        /// <param name="getUserProfileQuery"></param>
         /// <param name="mediator"></param>
-        public UserController(
-            Lazy<IGetUserProfileQuery> getUserProfileQuery,
-            Lazy<IMediator> mediator)
+        public UserController(Lazy<IMediator> mediator)
         {
-            GetUserProfileQuery = getUserProfileQuery;
             Mediator = mediator;
         }
-
-        private Lazy<IGetUserProfileQuery> GetUserProfileQuery { get; }
 
         private Lazy<IMediator> Mediator { get; }
 
@@ -46,7 +40,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAvatar()
         {
-            var result = await GetUserProfileQuery.Value.ExecuteAsync();
+            var result = await Mediator.Value.Send(new GetUserProfileInput());
 
             return File(result.Avatar, "image/jpeg");
         }
@@ -61,7 +55,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IUserProfileOutput> GetProfile()
         {
-            var result = await GetUserProfileQuery.Value.ExecuteAsync();
+            var result = await Mediator.Value.Send(new GetUserProfileInput());
 
             return result;
         }

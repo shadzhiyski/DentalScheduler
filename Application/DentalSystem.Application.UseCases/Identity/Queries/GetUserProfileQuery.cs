@@ -3,12 +3,15 @@ using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Entities.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Queries;
 using Mapster;
+using MediatR;
+using System.Threading;
 
 namespace DentalSystem.Application.UseCases.Identity.Queries
 {
-    public class GetUserProfileQuery : IGetUserProfileQuery
+    public record GetUserProfileInput() : IRequest<IUserProfileOutput>;
+
+    public class GetUserProfileQuery : IRequestHandler<GetUserProfileInput, IUserProfileOutput>
     {
         public GetUserProfileQuery(IUserService<User> userService)
         {
@@ -17,7 +20,7 @@ namespace DentalSystem.Application.UseCases.Identity.Queries
 
         public IUserService<User> UserService { get; }
 
-        public async Task<IUserProfileOutput> ExecuteAsync()
+        public async Task<IUserProfileOutput> Handle(GetUserProfileInput request, CancellationToken cancellationToken)
         {
             var profile = await Task.FromResult(
                 UserService.CurrentUser.Adapt<UserProfileOutput>()
