@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
+using MediatR;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -17,21 +18,21 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
     [Authorize (AuthenticationSchemes = "Bearer")]
     public class AuthController : BaseApiController
     {
-        private Lazy<ILoginCommand> LoginCommand { get; }
+        private Lazy<IMediator> Mediator { get; }
 
         private Lazy<IRegisterUserCommand> RegisterUserCommand { get; }
 
         /// <summary>
         /// Creates Auth Controller.
         /// </summary>
-        /// <param name="loginCommand"></param>
+        /// <param name="mediator"></param>
         /// <param name="registerUserCommand"></param>
         public AuthController(
-            Lazy<ILoginCommand> loginCommand,
+            Lazy<IMediator> mediator,
             Lazy<IRegisterUserCommand> registerUserCommand)
         {
             RegisterUserCommand = registerUserCommand;
-            LoginCommand = loginCommand;
+            Mediator = mediator;
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials, CancellationToken cancellationToken)
         {
-            var result =  await LoginCommand.Value.LoginAsync(loginCredentials, cancellationToken);
+            var result =  await Mediator.Value.Send(loginCredentials, cancellationToken);
             return PresentResult(result);
         }
     }

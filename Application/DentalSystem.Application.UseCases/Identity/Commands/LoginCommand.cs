@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.UseCases.Common.Dto.Output;
@@ -8,16 +7,16 @@ using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Common.Validation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
+using MediatR;
+using DentalSystem.Application.UseCases.Identity.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
-    public class LoginCommand : ILoginCommand
+    public class LoginCommand : IRequestHandler<UserCredentialsInput, IResult<IAccessTokenOutput>>
     {
         public IConfiguration Config { get; }
 
@@ -39,7 +38,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
             JwtAuthManager = jwtAuthManager;
         }
 
-        public async Task<IResult<IAccessTokenOutput>> LoginAsync(IUserCredentialsInput userInput, CancellationToken cancellationToken)
+        public async Task<IResult<IAccessTokenOutput>> Handle(UserCredentialsInput userInput, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(userInput);
             if (validationResult.Errors.Count > 0)
