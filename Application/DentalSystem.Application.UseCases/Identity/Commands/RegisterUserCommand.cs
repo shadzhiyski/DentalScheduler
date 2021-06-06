@@ -10,7 +10,6 @@ using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
 using Microsoft.Extensions.Configuration;
 using System.Threading;
