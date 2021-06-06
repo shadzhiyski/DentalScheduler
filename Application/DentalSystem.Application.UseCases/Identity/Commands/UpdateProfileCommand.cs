@@ -5,13 +5,14 @@ using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using DentalSystem.Application.Boundaries.UseCases.Common.Validation;
-using DentalSystem.Application.Boundaries.UseCases.Identity.Commands;
 using Mapster;
 using System.Threading;
+using MediatR;
+using DentalSystem.Application.UseCases.Identity.Dto.Input;
 
 namespace DentalSystem.Application.UseCases.Identity.Commands
 {
-    public class UpdateProfileCommand : IUpdateProfileCommand
+    public class UpdateProfileCommand : IRequestHandler<UserProfileInput, IResult<IMessageOutput>>
     {
         public UpdateProfileCommand(
             TypeAdapterConfig mappingConfig,
@@ -29,7 +30,7 @@ namespace DentalSystem.Application.UseCases.Identity.Commands
 
         public IUserService<User> UserService { get; }
 
-        public async Task<IResult<IMessageOutput>> ExecuteAsync(IUserProfileInput input, CancellationToken cancellationToken)
+        public async Task<IResult<IMessageOutput>> Handle(UserProfileInput input, CancellationToken cancellationToken)
         {
             var validationResult = Validator.Validate(input);
             if (validationResult.Errors.Count > 0)
