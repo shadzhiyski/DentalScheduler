@@ -1,0 +1,10 @@
+.vs/*
+.vscode/*
+.git/*
+.github/*
+*/*/.vscode/*
+*/*/TestResults/*
+*/*/coverage/*
+*/*/Dockerfile*
+Assets/*
+README.md

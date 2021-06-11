@@ -23,6 +23,8 @@ namespace DentalSystem.Infrastructure.Common.Persistence
 
         public async Task Initialize(CancellationToken cancellationToken)
         {
+            await this.db.Database.MigrateAsync();
+
             var appliedMigrations = this.db.Database.GetAppliedMigrations();
             if (appliedMigrations.Any(m => m.EndsWith("Initial_Migration")))
             {
