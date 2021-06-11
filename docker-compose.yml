@@ -3,6 +3,7 @@ version: '3.5'
 services:
 
     db:
+        container_name: dentalsystem-db
         image: postgres
         ports:
             - 5438:5432
@@ -20,6 +21,7 @@ services:
             - dental-system-network
 
     dentalsystemwebapi:
+        container_name: dentalsystem-webapi
         image: dental-system-web-api
         build:
             context: .
