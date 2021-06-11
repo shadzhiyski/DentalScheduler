@@ -75,3 +75,35 @@ The Web UI of the system. It communicates with the Web API to fetch/update data 
 * EF Core 5
 * FluentValidation
 * PostgreSQL
+
+## Launch
+
+### Prerequisites
+
+To launch the project you need to have [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed on your machine. You can get docker from [here](https://docs.docker.com/get-docker/) and docker-compose from [here](https://docs.docker.com/compose/install/).
+
+### Steps
+
+From the top directory of the entire solution run the following commands:
+
+1. Build and run. `docker-compose up -d` creates the images and builds and runs the containers of the database and the REST API. It may take a few minutes for the first execution of this command.
+
+```shell
+DentalScheduler:~$ docker-compose up -d
+```
+
+2. Get the REST API's IP address. To see the IP address given to the container of the server you need to execute the following script:
+
+```shell
+DentalScheduler:~$ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dentalsystem-webapi
+```
+
+3. Open the REST API. Enter the IP address on the browser's address bar as shown in the example below and you are ready.
+
+![address bar example](Assets/brower_address_bar_example.png)
+
+To stop the running containers execute `docker-compose down`.
+
+```shell
+DentalScheduler:~$ docker-compose down
+```
