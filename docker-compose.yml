@@ -28,6 +28,8 @@ services:
             dockerfile: Presentation/DentalSystem.Presentation.Web.Api/Dockerfile
         ports:
             - 5555:5555
+        environment:
+            - ConnectionStrings__DentalSystemDbConnection=User ID=postgres;Password=postgres;Server=db;Port=5432;Database=DentalSystem_dev;Integrated Security=true; Pooling=true;
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys
         networks:
