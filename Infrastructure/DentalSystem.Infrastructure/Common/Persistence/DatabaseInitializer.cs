@@ -5,6 +5,7 @@ using DentalSystem.Entities.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using DentalSystem.Infrastructure.Migrations;
 
 namespace DentalSystem.Infrastructure.Common.Persistence
 {
@@ -26,7 +27,7 @@ namespace DentalSystem.Infrastructure.Common.Persistence
             await this.db.Database.MigrateAsync();
 
             var appliedMigrations = this.db.Database.GetAppliedMigrations();
-            if (appliedMigrations.Any(m => m.EndsWith("Initial_Migration")))
+            if (appliedMigrations.Any(m => m.EndsWith(nameof(Initial_Migration))))
             {
                 var usersCount = await this.db.Set<User>().CountAsync();
                 if (usersCount == 0)

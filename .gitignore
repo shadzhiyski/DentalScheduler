@@ -3,7 +3,7 @@
 .vs/*
 .vscode/*
 */*/.vscode/*
-*/*/*/*/Migrations/*
 */*/TestResults/*
 */*/coverage/*
+database/*
 Presentation/DentalSystem.Presentation.Web.Api/DentalSystem_dev.db
