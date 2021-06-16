@@ -1,5 +1,6 @@
 # Dental System
 
+![build status badge](https://github.com/stoian2662/DentalScheduler/actions/workflows/dotnet.yml/badge.svg)
 <!-- https://github.com/fkhoda/checkout-shoppinglist-api -->
 
 ## Description
