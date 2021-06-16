@@ -9,15 +9,15 @@ using FluentAssertions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DentalSystem.Presentation.Web.Api.Tests.Steps
+namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Login.Steps
 {
     [Binding]
-    public class IdentitySteps
+    public class LoginSteps
     {
         private readonly HttpClient _httpClient;
         private readonly ScenarioContext _scenarioContext;
 
-        public IdentitySteps(HttpClient httpClient, ScenarioContext scenarioContext)
+        public LoginSteps(HttpClient httpClient, ScenarioContext scenarioContext)
         {
             _httpClient = httpClient;
             _scenarioContext = scenarioContext;

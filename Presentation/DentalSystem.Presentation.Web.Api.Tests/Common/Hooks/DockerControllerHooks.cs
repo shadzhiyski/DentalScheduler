@@ -9,7 +9,7 @@ using System.Net.Http;
 using System;
 using System.Threading;
 
-namespace DentalSystem.Presentation.Web.Api.Tests.Hooks
+namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
 {
     [Binding]
     public class DockerControllerHooks
