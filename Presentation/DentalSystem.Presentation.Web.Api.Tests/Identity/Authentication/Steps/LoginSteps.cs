@@ -23,8 +23,8 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Login.Steps
             _scenarioContext = scenarioContext;
         }
 
-        [When(@"Login with user details")]
-        public void WhenLoginWithUserDetails(Table table)
+        [When(@"Login with dental worker user details")]
+        public void WhenLoginWithDentalWorkerUserDetails(Table table)
         {
             var inputSet = table.CreateSet<UserCredentialsInput>();
             var queries = inputSet
