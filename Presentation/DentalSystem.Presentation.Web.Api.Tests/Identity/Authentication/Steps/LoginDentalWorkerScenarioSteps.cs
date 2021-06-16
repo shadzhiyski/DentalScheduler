@@ -12,12 +12,12 @@ using TechTalk.SpecFlow.Assist;
 namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Login.Steps
 {
     [Binding]
-    public class LoginSteps
+    public class LoginDentalWorkerScenarioSteps
     {
         private readonly HttpClient _httpClient;
         private readonly ScenarioContext _scenarioContext;
 
-        public LoginSteps(HttpClient httpClient, ScenarioContext scenarioContext)
+        public LoginDentalWorkerScenarioSteps(HttpClient httpClient, ScenarioContext scenarioContext)
         {
             _httpClient = httpClient;
             _scenarioContext = scenarioContext;
@@ -44,8 +44,8 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Login.Steps
             _scenarioContext.Add("AccessTokens", accessTokens);
         }
 
-        [Then(@"Should receive access token")]
-        public void ThenShouldReceiveAccessToken()
+        [Then(@"Should receive dental worker access token")]
+        public void ThenShouldReceiveDentalWorkerAccessToken()
         {
             var accessTokens = _scenarioContext
                 .Get<List<AccessTokenOutput>>("AccessTokens");
