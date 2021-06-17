@@ -23,3 +23,9 @@ Feature: Authentication
         | userName | password |
         | patient_01@mail.com | Patient_01#123456 |
     Then Should receive client access token
+
+    Scenario: Login with registered client
+    When Login client with user details
+        | userName | password |
+        | patient_01@mail.com | Patient_01#123456 |
+    Then Should receive registered client access token
