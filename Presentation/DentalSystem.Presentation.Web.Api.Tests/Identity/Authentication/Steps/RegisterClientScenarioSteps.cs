@@ -9,7 +9,7 @@ using FluentAssertions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Login.Steps
+namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Authentication.Steps
 {
     [Binding]
     public class RegisterClientScenarioSteps
