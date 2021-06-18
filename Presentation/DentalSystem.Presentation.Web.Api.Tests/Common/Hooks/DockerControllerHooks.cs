@@ -8,6 +8,7 @@ using BoDi;
 using System.Net.Http;
 using System;
 using System.Threading;
+using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
 
 namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
 {
@@ -55,7 +56,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
         }
 
         [BeforeScenario]
-        public void AddHttpContext()
+        public void AddScenarioPrerequisites()
         {
             var config = LoadConfig();
             var httpClient = new HttpClient()
@@ -64,6 +65,10 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
             };
 
             _objectContainer.RegisterInstanceAs(httpClient);
+
+            _objectContainer.RegisterTypeAs<LoginStep, LoginStep>();
+            _objectContainer.RegisterTypeAs<ShouldReceiveAccessTokenStep, ShouldReceiveAccessTokenStep>();
+            _objectContainer.RegisterTypeAs<ShouldReceiveLoginErrorsStep, ShouldReceiveLoginErrorsStep>();
         }
 
         private static IConfiguration LoadConfig()
