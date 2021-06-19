@@ -18,6 +18,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.ProfileManagement.Ste
     public class UpdateProfileWithInvalidInputScenarioSteps
     {
         private const string UpdateProfileInputErrorsLabel = "UpdateProfileInputErrors";
+        private const string UserInputAccessTokenPairsLabel = "UserInputAccessTokenPairs";
 
         private readonly HttpClient _httpClient;
         private readonly ScenarioContext _scenarioContext;
