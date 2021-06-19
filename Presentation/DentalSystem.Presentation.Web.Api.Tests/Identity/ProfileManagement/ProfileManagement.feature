@@ -13,3 +13,16 @@ Feature: Profile Management
     Then Should update profile info successfully
     When Get profile info
     Then Should get updated profile info
+
+    Scenario: Update profile with invalid input
+    Given Authorized user with auth token
+        | userName | password |
+        | dentist_01@mail.com | Dentist_01#123456 |
+        | dentist_01@mail.com | Dentist_01#123456 |
+        | dentist_01@mail.com | Dentist_01#123456 |
+    When Update profile with invalid details
+        | firstName | lastName |
+        | Dental 2 | |
+        | | Worker 2 |
+        | | |
+    Then Should get user profile input errors
