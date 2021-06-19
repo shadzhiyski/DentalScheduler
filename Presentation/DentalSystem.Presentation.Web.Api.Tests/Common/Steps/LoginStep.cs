@@ -7,37 +7,31 @@ using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.UseCases.Identity.Dto.Output;
-using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
-using FluentAssertions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Authentication.Steps
+namespace DentalSystem.Presentation.Web.Api.Tests.Common.Steps
 {
-    [Binding]
-    public class RegisterClientScenarioSteps
+    public class LoginStep
     {
+        public const string AccessTokensLabel = "AccessTokens";
+        public const string ErrorsLabel = "Errors";
+
         private readonly HttpClient _httpClient;
         private readonly ScenarioContext _scenarioContext;
-        private readonly ShouldReceiveAccessTokenStep _shouldReceiveAccessTokenStep;
 
-        public RegisterClientScenarioSteps(
-            HttpClient httpClient,
-            ScenarioContext scenarioContext,
-            ShouldReceiveAccessTokenStep shouldReceiveAccessTokenStep)
+        public LoginStep(HttpClient httpClient, ScenarioContext scenarioContext)
         {
             _httpClient = httpClient;
-            _shouldReceiveAccessTokenStep = shouldReceiveAccessTokenStep;
             _scenarioContext = scenarioContext;
         }
 
-        [When(@"Register client with user details")]
-        public void RegisterClientWithUserDetails(Table table)
+        public void LoginUsers(Table table)
         {
             var inputSet = table.CreateSet<UserCredentialsInput>();
             var queries = inputSet
                 .ToList()
-                .Select(uc => _httpClient.PostAsJsonAsync("api/Auth/register", uc))
+                .Select(uc => _httpClient.PostAsJsonAsync("api/Auth/login", uc))
                 .ToArray();
 
             Task.WaitAll(queries);
@@ -48,6 +42,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Authentication.Steps
                 .Select(r => r.Result)
                 .ToList();
 
+
             var accessTokens = results
                 .Where(r => r.AccessToken != default)
                 .Select(r => r.AccessToken)
@@ -57,13 +52,9 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Authentication.Steps
                 .Select(r => r.Errors)
                 .ToList();
 
-            _scenarioContext.Add(LoginStep.AccessTokensLabel, accessTokens);
-            _scenarioContext.Add(LoginStep.ErrorsLabel, errors);
+            _scenarioContext.Add(AccessTokensLabel, accessTokens);
+            _scenarioContext.Add(ErrorsLabel, errors);
         }
-
-        [Then(@"Should receive client access token")]
-        public void ThenShouldReceiveClientAccessToken()
-            => _shouldReceiveAccessTokenStep.ShouldReceiveAccessToken();
 
         private async Task<(AccessTokenOutput AccessToken, List<ValidationError> Errors)> ReadResponseAsync(
                 HttpResponseMessage response)
