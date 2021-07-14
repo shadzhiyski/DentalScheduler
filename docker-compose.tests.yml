@@ -16,7 +16,7 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
         volumes:
-            - ./testdb:/var/lib/postgresql/data
+            - ./data/testdb:/var/lib/postgresql/data
         networks:
             - dental-system-network
 

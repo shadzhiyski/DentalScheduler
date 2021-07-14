@@ -6,5 +6,5 @@
 */*/TestResults/*
 */*/coverage/*
 **/*.feature.cs
-database/*
+.data/*
 Presentation/DentalSystem.Presentation.Web.Api/DentalSystem_dev.db
