@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence
+namespace DentalSystem.Application.Boundaries.Infrastructure.Common
 {
     public interface IInitializer
     {

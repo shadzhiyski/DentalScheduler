@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DentalSystem.Infrastructure.Common.Persistence;
+using DentalSystem.Application.Boundaries.Infrastructure.Common;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using System.Threading;
 

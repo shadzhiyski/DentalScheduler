@@ -3,6 +3,7 @@ using System.Reflection;
 using DentalSystem.Common.Helpers.Extensions;
 using DentalSystem.Infrastructure.Common.Persistence;
 using DentalSystem.Infrastructure.Identity;
+using DentalSystem.Application.Boundaries.Infrastructure.Common;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
