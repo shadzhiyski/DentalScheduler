@@ -1,5 +1,6 @@
 using System.Linq;
 using DentalSystem.Infrastructure.Common.Persistence;
+using DentalSystem.Application.Boundaries.Infrastructure.Common;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
