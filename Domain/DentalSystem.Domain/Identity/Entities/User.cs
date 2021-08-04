@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalSystem.Domain.Identity
+namespace DentalSystem.Domain.Identity.Entities
 {
     public class User : IdentityUser
     {

@@ -1,5 +1,5 @@
 using System;
-using DentalSystem.Domain.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace DentalSystem.Domain.Scheduling.Entities

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Output;
-using DentalSystem.Domain.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
 using Mapster;

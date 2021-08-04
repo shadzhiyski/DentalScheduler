@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
-using DentalSystem.Domain.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using Microsoft.Extensions.Localization;
 using DentalSystem.Application.UseCases.Scheduling.Validation;
