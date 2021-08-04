@@ -27,9 +27,9 @@ This architecture follows a **use case driven approach**. See more about [scream
 
 ![Dental Scheduler Architecture](/Assets/dental-scheduler-archtecture.svg)
 
-### Entities
+### Domain
 
-<img src="/Assets/dental-scheduler-archtecture-entities.svg" width="450" />
+<img src="/Assets/dental-scheduler-archtecture-domain.svg" width="450" />
 
 This layer is a place for all entities. They are basic building blocks for the system.
 

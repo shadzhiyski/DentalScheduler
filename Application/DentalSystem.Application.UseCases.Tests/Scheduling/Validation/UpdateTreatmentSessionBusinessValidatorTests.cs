@@ -1,5 +1,6 @@
 using System;
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling.Entities;
+using DentalSystem.Domain.Scheduling.Enumerations;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.UseCases.Scheduling.Validation;
 using DentalSystem.Application.UseCases.Tests.Common;

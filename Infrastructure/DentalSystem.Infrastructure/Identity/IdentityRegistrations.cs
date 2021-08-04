@@ -1,5 +1,5 @@
 using DentalSystem.Infrastructure.Common.Persistence;
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

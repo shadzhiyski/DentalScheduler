@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;

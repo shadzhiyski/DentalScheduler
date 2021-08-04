@@ -39,7 +39,7 @@
    <textPath startOffset="74%" xlink:href="#web">Web UI</textPath>
   </text>
 
-  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_9" y="374" x="304" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff">Entities</text>
+  <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_9" y="374" x="303" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff">Domain</text>
   <text xml:space="preserve" text-anchor="start" font-family="'Open Sans', Helvetica, Arial, sans-serif" font-size="34" font-weight="bold" id="svg_13" y="156.4375" x="408" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff">
    <textPath startOffset="36%" xlink:href="#presentation">Presentation</textPath>
   </text>

@@ -3,7 +3,7 @@ using DentalSystem.Application.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.UseCases.Scheduling.Validation;
 using DentalSystem.Application.UseCases.Tests.Common;
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling.Enumerations;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;

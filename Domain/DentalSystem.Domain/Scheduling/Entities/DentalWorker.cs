@@ -1,8 +1,9 @@
 using System;
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
+using DentalSystem.Domain.Scheduling.Enumerations;
 
-namespace DentalSystem.Entities.Scheduling
+namespace DentalSystem.Domain.Scheduling.Entities
 {
     public class DentalWorker
     {
