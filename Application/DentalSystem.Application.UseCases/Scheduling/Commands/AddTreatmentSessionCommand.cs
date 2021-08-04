@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Common.Dto.Output;
-using DentalSystem.Domain.Scheduling;
+using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;

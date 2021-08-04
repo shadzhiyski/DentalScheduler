@@ -1,4 +1,4 @@
-using DentalSystem.Domain.Scheduling;
+using DentalSystem.Domain.Scheduling.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

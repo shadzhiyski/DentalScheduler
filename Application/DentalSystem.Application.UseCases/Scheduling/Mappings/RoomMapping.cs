@@ -1,5 +1,5 @@
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Domain.Scheduling;
+using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Output;
 using Mapster;
 

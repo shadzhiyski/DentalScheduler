@@ -2,7 +2,7 @@ using System;
 using DentalSystem.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 
-namespace DentalSystem.Domain.Scheduling
+namespace DentalSystem.Domain.Scheduling.Entities
 {
     public class Patient
     {

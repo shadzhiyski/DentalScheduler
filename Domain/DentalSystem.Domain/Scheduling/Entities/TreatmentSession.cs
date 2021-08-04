@@ -1,7 +1,7 @@
 using System;
 using DentalSystem.Domain.Scheduling.Enumerations;
 
-namespace DentalSystem.Domain.Scheduling
+namespace DentalSystem.Domain.Scheduling.Entities
 {
     public class TreatmentSession
     {

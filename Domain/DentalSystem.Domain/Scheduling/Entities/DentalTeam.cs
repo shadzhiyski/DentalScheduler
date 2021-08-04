@@ -1,6 +1,6 @@
 using System;
 
-namespace DentalSystem.Domain.Scheduling
+namespace DentalSystem.Domain.Scheduling.Entities
 {
     public class DentalTeam
     {

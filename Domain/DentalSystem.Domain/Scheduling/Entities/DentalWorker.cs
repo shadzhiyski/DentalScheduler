@@ -3,7 +3,7 @@ using DentalSystem.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using DentalSystem.Domain.Scheduling.Enumerations;
 
-namespace DentalSystem.Domain.Scheduling
+namespace DentalSystem.Domain.Scheduling.Entities
 {
     public class DentalWorker
     {
