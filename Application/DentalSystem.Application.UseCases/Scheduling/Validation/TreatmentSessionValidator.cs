@@ -1,4 +1,4 @@
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;

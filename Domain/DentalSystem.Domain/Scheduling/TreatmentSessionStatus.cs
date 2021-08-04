@@ -1,4 +1,4 @@
-namespace DentalSystem.Entities.Scheduling
+namespace DentalSystem.Domain.Scheduling
 {
     public enum TreatmentSessionStatus
     {

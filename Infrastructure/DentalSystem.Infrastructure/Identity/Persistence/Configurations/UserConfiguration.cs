@@ -1,4 +1,4 @@
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

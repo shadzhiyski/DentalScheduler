@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Presentation.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Infrastructure", "Infrastructure\DentalSystem.Infrastructure\DentalSystem.Infrastructure.csproj", "{5037E98D-7A87-4364-BA4A-5F2790CB0B28}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Entities", "Entities\DentalSystem.Entities\DentalSystem.Entities.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Domain", "Domain\DentalSystem.Domain\DentalSystem.Domain.csproj", "{6DF240DE-EADD-4AB5-B2BD-516ADBE2077E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DentalSystem.Application.Boundaries", "Application\DentalSystem.Application.Boundaries\DentalSystem.Application.Boundaries.csproj", "{C660454C-166A-4AF8-AB03-DA5DC6E32620}"
 EndProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F32FB1D7-75DF-42FB-98D4-396E506DBDD0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{774ABB60-3C7C-4A50-925A-414ED95C9787}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{774ABB60-3C7C-4A50-925A-414ED95C9787}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{44F3038A-91C5-4DED-9AB1-C8F9DAAA4E95}"
 EndProject

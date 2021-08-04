@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity.Dto.Output;
 using Mapster;

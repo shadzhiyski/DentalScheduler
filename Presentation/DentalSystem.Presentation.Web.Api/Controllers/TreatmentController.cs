@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;

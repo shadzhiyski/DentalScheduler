@@ -7,7 +7,7 @@ using System;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.Data.Sqlite;
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 

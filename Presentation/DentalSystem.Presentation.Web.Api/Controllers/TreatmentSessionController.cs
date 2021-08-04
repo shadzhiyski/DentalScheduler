@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;

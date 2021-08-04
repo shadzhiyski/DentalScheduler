@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Common;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
