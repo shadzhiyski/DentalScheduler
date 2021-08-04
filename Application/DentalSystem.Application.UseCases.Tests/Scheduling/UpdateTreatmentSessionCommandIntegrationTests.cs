@@ -6,6 +6,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using DentalSystem.Domain.Scheduling;
+using DentalSystem.Domain.Scheduling.Enumerations;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Domain.Identity;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;

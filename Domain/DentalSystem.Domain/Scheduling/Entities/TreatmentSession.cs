@@ -1,4 +1,5 @@
 using System;
+using DentalSystem.Domain.Scheduling.Enumerations;
 
 namespace DentalSystem.Domain.Scheduling
 {

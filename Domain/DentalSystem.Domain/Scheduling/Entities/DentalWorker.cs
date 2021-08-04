@@ -1,6 +1,7 @@
 using System;
 using DentalSystem.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
+using DentalSystem.Domain.Scheduling.Enumerations;
 
 namespace DentalSystem.Domain.Scheduling
 {
