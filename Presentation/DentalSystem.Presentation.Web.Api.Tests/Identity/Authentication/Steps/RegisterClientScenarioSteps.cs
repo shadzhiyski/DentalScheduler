@@ -8,7 +8,6 @@ using DentalSystem.Application.UseCases.Common.Validation;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
-using FluentAssertions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -32,7 +31,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Authentication.Steps
         }
 
         [When(@"Register client with user details")]
-        public void RegisterClientWithUserDetails(Table table)
+        public async Task RegisterClientWithUserDetails(Table table)
         {
             var inputSet = table.CreateSet<UserCredentialsInput>();
             var queries = inputSet
@@ -40,11 +39,16 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.Authentication.Steps
                 .Select(uc => _httpClient.PostAsJsonAsync("api/Auth/register", uc))
                 .ToArray();
 
-            Task.WaitAll(queries);
+            await Task.WhenAll(queries);
 
-            var results = queries
+            var responses = queries
                 .Select(r => r.Result)
                 .Select(ReadResponseAsync)
+                .ToArray();
+
+            await Task.WhenAll(responses);
+
+            var results = responses
                 .Select(r => r.Result)
                 .ToList();
 
