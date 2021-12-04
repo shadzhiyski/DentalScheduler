@@ -1,7 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using DentalSystem.Common.Helpers.Extensions;
-using DentalSystem.Entities.Scheduling;
+using DentalSystem.Domain.Scheduling.Entities;
+using DentalSystem.Domain.Scheduling.Enumerations;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;

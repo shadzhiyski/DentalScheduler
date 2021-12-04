@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.UseCases.Common.Dto.Output;
-using DentalSystem.Entities.Identity;
+using DentalSystem.Domain.Identity.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Identity;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;

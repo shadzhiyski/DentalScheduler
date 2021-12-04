@@ -1,5 +1,6 @@
 # Dental System
 
+![build status badge](https://github.com/stoian2662/DentalScheduler/actions/workflows/dotnet.yml/badge.svg)
 <!-- https://github.com/fkhoda/checkout-shoppinglist-api -->
 
 ## Description
@@ -26,9 +27,9 @@ This architecture follows a **use case driven approach**. See more about [scream
 
 ![Dental Scheduler Architecture](/Assets/dental-scheduler-archtecture.svg)
 
-### Entities
+### Domain
 
-<img src="/Assets/dental-scheduler-archtecture-entities.svg" width="450" />
+<img src="/Assets/dental-scheduler-archtecture-domain.svg" width="450" />
 
 This layer is a place for all entities. They are basic building blocks for the system.
 
@@ -68,13 +69,14 @@ The Web UI of the system. It communicates with the Web API to fetch/update data 
 
 ## Technologies
 
-* .NET 5.0
-* ASP.NET Core
-* OData
-* Blazor
-* EF Core 5
-* FluentValidation
-* PostgreSQL
+* [.NET 5](https://dotnet.microsoft.com/)
+* [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0)
+* [OData](https://www.odata.org/)
+* [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
+* [EF Core 5](https://docs.microsoft.com/en-us/ef/core/)
+* [FluentValidation](https://fluentvalidation.net/)
+* [XUnit](https://xunit.net/), [FluentAssertions](https://fluentassertions.com/) & [Moq](https://github.com/Moq/moq4/wiki/Quickstart)
+* [PostgreSQL](https://www.postgresql.org/)
 
 ## Launch
 
