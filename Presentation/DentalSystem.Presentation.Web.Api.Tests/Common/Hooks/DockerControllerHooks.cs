@@ -9,6 +9,7 @@ using System.Net.Http;
 using System;
 using System.Threading;
 using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
+using Simple.OData.Client;
 
 namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
 {
@@ -65,6 +66,14 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
             };
 
             _objectContainer.RegisterInstanceAs(httpClient);
+
+            var oDataHttpClient = new HttpClient()
+            {
+                BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
+            };
+
+            var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
+            _objectContainer.RegisterInstanceAs(new ODataClient(oDataClientSettings));
 
             _objectContainer.RegisterTypeAs<LoginStep, LoginStep>();
             _objectContainer.RegisterTypeAs<ShouldReceiveAccessTokenStep, ShouldReceiveAccessTokenStep>();
