@@ -40,7 +40,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.ProfileManagement.Ste
             => _loginStep.LoginUsers(table);
 
         [When(@"Update profile with valid details")]
-        public void WhenLoginWithInvalidUserDetails(Table table)
+        public async Task WhenLoginWithInvalidUserDetails(Table table)
         {
             var inputSet = table.CreateSet<UserProfileInput>();
             var accessTokens = _scenarioContext.Get<List<AccessTokenOutput>>(LoginStep.AccessTokensLabel);
@@ -71,7 +71,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Identity.ProfileManagement.Ste
                 })
                 .ToArray();
 
-            Task.WaitAll(queries);
+            await Task.WhenAll(queries);
 
             var results = queries
                 .Select(q => q.Result.StatusCode)
