@@ -23,6 +23,10 @@ Supports main identity features - user registration (only for clients of the den
 
 ## Architecture
 
+Here is a diagram of components relationships:
+
+![Components Relationships](/Assets/components_relationship.png)
+
 This architecture follows a **use case driven approach**. See more about [screaming architecture](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html).
 
 ![Dental Scheduler Architecture](/Assets/dental-scheduler-archtecture.svg)
@@ -76,7 +80,9 @@ The Web UI of the system. It communicates with the Web API to fetch/update data 
 * [EF Core 5](https://docs.microsoft.com/en-us/ef/core/)
 * [FluentValidation](https://fluentvalidation.net/)
 * [XUnit](https://xunit.net/), [FluentAssertions](https://fluentassertions.com/) & [Moq](https://github.com/Moq/moq4/wiki/Quickstart)
+* [Specflow](https://specflow.org/)
 * [PostgreSQL](https://www.postgresql.org/)
+* [Docker](https://www.docker.com/)
 
 ## Launch
 
