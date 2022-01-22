@@ -40,7 +40,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
                 .FromFile(dockerComposePath)
                 .RemoveOrphans()
                 .WaitForHttp(
-                    "dentalsystemwebapi", "https://localhost:5555/index.html",//$"{confirmationUrl}",
+                    "dentalsystemwebapi", $"{confirmationUrl}/index.html",
                     continuation: (response, _) => response.Code != System.Net.HttpStatusCode.OK ? 5000 : 0
                 )
                 .Build()

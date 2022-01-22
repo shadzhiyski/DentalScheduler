@@ -1,6 +1,6 @@
 {
     "DockerComposeFileName": "docker-compose.tests.yml",
     "DentalSystem.Presentation.Web.Api": {
-        "BaseAddress": "http://localhost:80"
+        "BaseAddress": "http://localhost:5555"
     }
 }
