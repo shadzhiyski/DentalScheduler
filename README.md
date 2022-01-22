@@ -5,7 +5,7 @@
 
 ## Description
 
-This repository contains demo source code of my **Dental System** project realized with ASP.NET Core following clean architecture.
+This repository contains demo source code of my **Dental System** project following Clean Architecture and BDD (Behavior Driven Development).
 
 **Dental System** is a system providing appointment scheduling for dental services. Clients can easily request appointment to their desired Dental Team, track history, etc. It supports various Dental Teams and Treatment services.
 
@@ -33,12 +33,17 @@ Supports main identity features - user registration (only for clients of the den
 * [Specflow](https://specflow.org/)
 * [PostgreSQL](https://www.postgresql.org/)
 * [Docker](https://www.docker.com/)
+* [NGINX](https://nginx.org/)
 
 ## Architecture
 
-Here is a diagram of components relationships:
+### Components Relationships
+
+Main components of the system are PostgreSQL database, ASP.NET Web API and Blazor WebAssembly(WASM) App. When published, Blazor WebAssembly project produces static files. NGINX is configured to serve these files. Below is a diagram of components relationships:
 
 ![Components Relationships](/Assets/components_relationship.png)
+
+### Layers
 
 This architecture follows a **use case driven approach**. See more about [screaming architecture](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html).
 
@@ -92,31 +97,15 @@ To launch the project you need to have [docker](https://www.docker.com/) and [do
 
 ### Instructions
 
-From the top directory of the solution (where **docker-compose.yml** is located) run the following commands:
-
-1. Build and run. `docker-compose up -d` creates the images and builds and runs the containers of the database and the REST API. It may take a few minutes for the first execution of this command.
+Clone the solution locally. Go to root directory and run the following command:
 
 ```shell
 docker-compose up -d
 ```
 
-Check if containers are up and running with:
+`docker-compose up -d` builds the images and starts the containers of the database, Web API and Web UI. It may take a few minutes.
 
-```shell
-docker-compose ps
-```
-
-if any State is not "Up" execute `docker-compose down` and then again `docker-compose up -d`.
-
-2. Get the REST API's IP address. To see the IP address given to the container of the server you need to execute the following script:
-
-```shell
-docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dentalsystem-webapi
-```
-
-3. Open the REST API. Enter the IP address on the browser's address bar as shown in the example below and you are ready.
-
-![address bar example](Assets/brower_address_bar_example.png)
+After the containers are started, the Web API is accessible on <http://localhost:5555> and the Web UI is accessible on <http://localhost>.
 
 To stop the running containers execute `docker-compose down`.
 

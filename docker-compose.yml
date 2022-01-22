@@ -26,16 +26,27 @@ services:
         build:
             context: .
             dockerfile: Presentation/DentalSystem.Presentation.Web.Api/Dockerfile
-        ports:
-            - 5555:5555
         environment:
-            - ConnectionStrings__DentalSystemDbConnection=User ID=postgres;Password=postgres;Server=db;Port=5432;Database=DentalSystem_dev;Integrated Security=true; Pooling=true;
+            - ConnectionStrings__DentalSystemDbConnection=User ID=postgres;Password=postgres;Server=localhost;Port=5438;Database=DentalSystem_dev;Integrated Security=true; Pooling=true;
+            - AllowedOrigins__0=https://localhost:5001
+            - AllowedOrigins__1=http://localhost
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys
-        networks:
-            - dental-system-network
+        network_mode: host
         depends_on:
             - db
+
+    dentalsystemwebui:
+        container_name: dentalsystem-webui
+        image: dental-system-web-ui
+        build:
+            context: .
+            dockerfile: Presentation/DentalSystem.Presentation.Web.UI/Dockerfile
+        volumes:
+            - data-protection:/root/.aspnet/DataProtection-Keys
+        network_mode: host
+        depends_on:
+            - dentalsystemwebapi
 
 networks:
     dental-system-network:

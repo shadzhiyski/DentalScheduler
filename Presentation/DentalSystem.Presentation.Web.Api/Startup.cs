@@ -18,6 +18,7 @@ namespace DentalSystem.Presentation.Web.Api
 
         public void ConfigureServices(IServiceCollection services) =>
             services
+                .Configure<AppSettings>(Configuration)
                 .AddInfrastructure(Configuration)
                 .AddUseCases()
                 .AddTransient(typeof(Lazy<>), typeof(Lazy<>))
@@ -39,7 +40,7 @@ namespace DentalSystem.Presentation.Web.Api
                 .UseAuthorization()
                 .UseLocalizationMiddleware()
                 .UseSwaggerMiddleware()
-                .UseCorsMiddleware()
+                .UseCorsMiddleware(Configuration.Get<AppSettings>())
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
