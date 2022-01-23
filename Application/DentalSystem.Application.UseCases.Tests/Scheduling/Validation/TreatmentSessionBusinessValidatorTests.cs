@@ -14,6 +14,7 @@ using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Linq;
+using MockQueryable.Moq;
 
 namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
 {
@@ -127,7 +128,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 .Callback<Expression<Func<TreatmentSession, bool>>>(
                     (filterExpression) => filteredData = presentData.Where(filterExpression.Compile())
                 )
-                .Returns(() => filteredData.AsQueryable());
+                .Returns(() => filteredData.AsQueryable().BuildMock().Object);
 
             var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
             var businessValidator = new TreatmentSessionBusinessValidator(
