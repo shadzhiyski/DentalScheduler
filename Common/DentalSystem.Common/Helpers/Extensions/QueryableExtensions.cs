@@ -9,12 +9,12 @@ namespace DentalSystem.Common.Helpers.Extensions
 {
     public static class QueryableExtensions
     {
-        public static bool None<TSource>(this IQueryable<TSource> source) => source.Any();
+        public static bool None<TSource>(this IQueryable<TSource> source) => !source.Any();
 
         public static bool None<TSource>(
             this IQueryable<TSource> source,
             Func<TSource, bool> predicate)
-            => source.Any(predicate);
+            => !source.Any(predicate);
 
         public static async Task<bool> NoneAsync<TSource>(
             this IQueryable<TSource> source,
