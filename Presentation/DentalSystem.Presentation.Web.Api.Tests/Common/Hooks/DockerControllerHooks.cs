@@ -76,6 +76,7 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
             _objectContainer.RegisterInstanceAs(new ODataClient(oDataClientSettings));
 
             _objectContainer.RegisterTypeAs<LoginStep, LoginStep>();
+            _objectContainer.RegisterTypeAs<RegisterUserStep, RegisterUserStep>();
             _objectContainer.RegisterTypeAs<ShouldReceiveAccessTokenStep, ShouldReceiveAccessTokenStep>();
             _objectContainer.RegisterTypeAs<ShouldReceiveLoginErrorsStep, ShouldReceiveLoginErrorsStep>();
         }
