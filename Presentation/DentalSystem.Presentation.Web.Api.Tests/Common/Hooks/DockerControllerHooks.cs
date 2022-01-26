@@ -10,6 +10,7 @@ using System;
 using System.Threading;
 using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
 using Simple.OData.Client;
+using DentalSystem.Presentation.Web.Api.Tests.Common.Handlers;
 
 namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
 {
@@ -59,15 +60,17 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
         [BeforeScenario]
         public void AddScenarioPrerequisites()
         {
+            _objectContainer.RegisterTypeAs<AuthorizationHeaderHttpHandler, AuthorizationHeaderHttpHandler>();
+
             var config = LoadConfig();
-            var httpClient = new HttpClient()
+            var httpClient = new HttpClient(handler: _objectContainer.Resolve<AuthorizationHeaderHttpHandler>())
             {
                 BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
             };
 
             _objectContainer.RegisterInstanceAs(httpClient);
 
-            var oDataHttpClient = new HttpClient()
+            var oDataHttpClient = new HttpClient(handler: _objectContainer.Resolve<AuthorizationHeaderHttpHandler>())
             {
                 BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
             };
