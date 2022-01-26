@@ -20,8 +20,8 @@ services:
         networks:
             - dental-system-network
 
-    dentalsystemwebapi:
-        container_name: dentalsystem-testwebapi
+    dentalsystemtestwebapi:
+        container_name: dentalsystemtestwebapi
         image: dental-system-web-api
         build:
             context: .

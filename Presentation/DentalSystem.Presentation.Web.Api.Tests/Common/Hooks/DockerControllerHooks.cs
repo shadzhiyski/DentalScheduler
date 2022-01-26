@@ -41,13 +41,11 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
                 .FromFile(dockerComposePath)
                 .RemoveOrphans()
                 .WaitForHttp(
-                    "dentalsystemwebapi", $"{confirmationUrl}/index.html",
-                    continuation: (response, _) => response.Code != System.Net.HttpStatusCode.OK ? 5000 : 0
+                    "dentalsystemtestwebapi", $"{confirmationUrl}/index.html",
+                    continuation: (response, _) => response.Code != System.Net.HttpStatusCode.OK ? 100 : 0
                 )
                 .Build()
                 .Start();
-
-            Thread.Sleep(5000);
         }
 
         [AfterTestRun]
