@@ -68,15 +68,22 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
                 BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
             };
 
-            _objectContainer.RegisterInstanceAs(httpClient);
-
-            var oDataHttpClient = new HttpClient(handler: _objectContainer.Resolve<AuthorizationHeaderHttpHandler>())
+            _objectContainer.RegisterFactoryAs<HttpClient>((objContainer) => new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
             {
-                BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
-            };
+                BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
+            });
 
-            var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
-            _objectContainer.RegisterInstanceAs(new ODataClient(oDataClientSettings));
+
+            _objectContainer.RegisterFactoryAs<ODataClient>((objContainer) =>
+            {
+                var oDataHttpClient = new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
+                {
+                    BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
+                };
+
+                var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
+                return new ODataClient(oDataClientSettings);
+            });
 
             _objectContainer.RegisterTypeAs<LoginStep, LoginStep>();
             _objectContainer.RegisterTypeAs<RegisterUserStep, RegisterUserStep>();

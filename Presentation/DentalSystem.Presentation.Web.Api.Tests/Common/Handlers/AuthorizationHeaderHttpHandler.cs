@@ -12,17 +12,21 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Handlers
 {
     public class AuthorizationHeaderHttpHandler : DelegatingHandler
     {
-        public AuthorizationHeaderHttpHandler()
+        public AuthorizationHeaderHttpHandler(ScenarioContext scenarioContext)
         {
             InnerHandler = new HttpClientHandler();
+            ScenarioContext = scenarioContext;
         }
-        public ScenarioContext ScenarioContext { get; set; }
+
+        public ScenarioContext ScenarioContext { get; init; }
 
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            if (request.Headers.Authorization == default && ScenarioContext != default)
+            if (request.Headers.Authorization == default
+                && ScenarioContext != default
+                && ScenarioContext.ContainsKey(LoginStep.AccessTokenLabel))
             {
                 var accessToken = ScenarioContext.Get<AccessTokenOutput>(LoginStep.AccessTokenLabel);
 
