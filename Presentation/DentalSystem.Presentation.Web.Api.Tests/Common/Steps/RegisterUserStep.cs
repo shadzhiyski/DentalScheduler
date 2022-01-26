@@ -55,6 +55,23 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Steps
             _scenarioContext.Add(LoginStep.ErrorsLabel, errors);
         }
 
+        public async Task RegisterUser(UserCredentialsInput credentials)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/Auth/register", credentials);
+
+            (AccessTokenOutput accessToken, List<ValidationError> errors) = await ReadResponseAsync(response);
+
+            if (accessToken != default)
+            {
+                _scenarioContext.Add(LoginStep.AccessTokenLabel, accessToken);
+            }
+
+            if (errors != default)
+            {
+                _scenarioContext.Add(LoginStep.SingleCallErrorsLabel, errors);
+            }
+        }
+
         private async Task<(AccessTokenOutput AccessToken, List<ValidationError> Errors)> ReadResponseAsync(
                 HttpResponseMessage response)
             => HttpStatusCode.OK.Equals(response.StatusCode)

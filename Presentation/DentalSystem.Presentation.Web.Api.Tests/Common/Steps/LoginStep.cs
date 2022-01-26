@@ -14,7 +14,9 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Steps
 {
     public class LoginStep
     {
+        public const string AccessTokenLabel = "AccessToken";
         public const string AccessTokensLabel = "AccessTokens";
+        public const string SingleCallErrorsLabel = "SingleCallErrors";
         public const string ErrorsLabel = "Errors";
 
         private readonly HttpClient _httpClient;
