@@ -10,6 +10,7 @@ using System;
 using System.Threading;
 using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
 using Simple.OData.Client;
+using DentalSystem.Presentation.Web.Api.Tests.Common.Handlers;
 
 namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
 {
@@ -40,13 +41,11 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
                 .FromFile(dockerComposePath)
                 .RemoveOrphans()
                 .WaitForHttp(
-                    "dentalsystemwebapi", $"{confirmationUrl}/index.html",
-                    continuation: (response, _) => response.Code != System.Net.HttpStatusCode.OK ? 5000 : 0
+                    "dentalsystemtestwebapi", $"{confirmationUrl}/index.html",
+                    continuation: (response, _) => response.Code != System.Net.HttpStatusCode.OK ? 100 : 0
                 )
                 .Build()
                 .Start();
-
-            Thread.Sleep(5000);
         }
 
         [AfterTestRun]
@@ -59,23 +58,52 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
         [BeforeScenario]
         public void AddScenarioPrerequisites()
         {
+            _objectContainer.RegisterTypeAs<AuthorizationHeaderHttpHandler, AuthorizationHeaderHttpHandler>();
+
             var config = LoadConfig();
-            var httpClient = new HttpClient()
-            {
-                BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
-            };
 
-            _objectContainer.RegisterInstanceAs(httpClient);
+            _objectContainer
+                .RegisterFactoryAs<HttpClient>((objContainer) => new HttpClient()
+                    {
+                        BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
+                    }
+                );
+            _objectContainer
+                .RegisterFactoryAs<HttpClient>((objContainer) => new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
+                    {
+                        BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
+                    },
+                    "Authorized"
+                );
 
-            var oDataHttpClient = new HttpClient()
-            {
-                BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
-            };
+            _objectContainer
+                .RegisterFactoryAs<ODataClient>((objContainer) =>
+                    {
+                        var oDataHttpClient = new HttpClient()
+                        {
+                            BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
+                        };
 
-            var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
-            _objectContainer.RegisterInstanceAs(new ODataClient(oDataClientSettings));
+                        var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
+                        return new ODataClient(oDataClientSettings);
+                    }
+                );
+            _objectContainer
+                .RegisterFactoryAs<ODataClient>((objContainer) =>
+                    {
+                        var oDataHttpClient = new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
+                        {
+                            BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
+                        };
+
+                        var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
+                        return new ODataClient(oDataClientSettings);
+                    },
+                    "Authorized"
+                );
 
             _objectContainer.RegisterTypeAs<LoginStep, LoginStep>();
+            _objectContainer.RegisterTypeAs<RegisterUserStep, RegisterUserStep>();
             _objectContainer.RegisterTypeAs<ShouldReceiveAccessTokenStep, ShouldReceiveAccessTokenStep>();
             _objectContainer.RegisterTypeAs<ShouldReceiveLoginErrorsStep, ShouldReceiveLoginErrorsStep>();
         }
