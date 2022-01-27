@@ -73,9 +73,6 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Scheduling.Steps
         public async Task GivenHaveRequestedTreatmentSessionForTreatmentAndDentalTeam(
             DateTimeOffset start, DateTimeOffset end, string treatmentName, string dentalTeamName)
         {
-            // var authHandler = _objectContainer.Resolve<AuthorizationHeaderHttpHandler>();
-            // authHandler.ScenarioContext = _scenarioContext;
-
             var patientReferenceId = _scenarioContext.Get<Guid>(PatientReferenceIdLabel);
             var treatmentReferenceId = await _oDataClient
                 .For<TreatmentOutput>("Treatment")
@@ -104,9 +101,6 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Scheduling.Steps
         [Given(@"Dental team ReferenceId of ""(.*)""")]
         public async Task GivenDentalTeamReferenceIdOf(string dentalTeamName)
         {
-            // var authHandler = _objectContainer.Resolve<AuthorizationHeaderHttpHandler>();
-            // authHandler.ScenarioContext = _scenarioContext; // TODO: find ScenarioContext provider ???
-
             var dentalTeamReferenceId = await _oDataClient
                 .For<DentalTeamOutput>("DentalTeam")
                 .Filter(dt => dt.Name == dentalTeamName)
@@ -119,9 +113,6 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Scheduling.Steps
         [Given(@"Treatment ReferenceId of ""(.*)""")]
         public async Task GivenTreatmentReferenceIdOf(string treatmentName)
         {
-            // var authHandler = _objectContainer.Resolve<AuthorizationHeaderHttpHandler>();
-            // authHandler.ScenarioContext = _scenarioContext;
-
             var treatmentReferenceId = await _oDataClient
                 .For<TreatmentOutput>("Treatment")
                 .Filter(dt => dt.Name == treatmentName)
