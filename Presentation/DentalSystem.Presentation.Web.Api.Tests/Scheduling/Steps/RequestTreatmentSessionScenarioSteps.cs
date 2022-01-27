@@ -42,8 +42,8 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Scheduling.Steps
             RegisterUserStep registerUserStep)
         {
             _objectContainer = objectContainer;
-            _httpClient = httpClient;
-            _oDataClient = oDataClient;
+            _httpClient = objectContainer.Resolve<HttpClient>("Authorized");
+            _oDataClient = objectContainer.Resolve<ODataClient>("Authorized");
             _scenarioContext = scenarioContext;
             _registerUserStep = registerUserStep;
         }

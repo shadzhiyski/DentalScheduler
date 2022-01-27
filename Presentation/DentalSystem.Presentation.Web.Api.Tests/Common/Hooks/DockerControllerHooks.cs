@@ -61,27 +61,46 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Common.Hooks
             _objectContainer.RegisterTypeAs<AuthorizationHeaderHttpHandler, AuthorizationHeaderHttpHandler>();
 
             var config = LoadConfig();
-            var httpClient = new HttpClient(handler: _objectContainer.Resolve<AuthorizationHeaderHttpHandler>())
-            {
-                BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
-            };
 
-            _objectContainer.RegisterFactoryAs<HttpClient>((objContainer) => new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
-            {
-                BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
-            });
+            _objectContainer
+                .RegisterFactoryAs<HttpClient>((objContainer) => new HttpClient()
+                    {
+                        BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
+                    }
+                );
+            _objectContainer
+                .RegisterFactoryAs<HttpClient>((objContainer) => new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
+                    {
+                        BaseAddress = new Uri(config["DentalSystem.Presentation.Web.Api:BaseAddress"])
+                    },
+                    "Authorized"
+                );
 
+            _objectContainer
+                .RegisterFactoryAs<ODataClient>((objContainer) =>
+                    {
+                        var oDataHttpClient = new HttpClient()
+                        {
+                            BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
+                        };
 
-            _objectContainer.RegisterFactoryAs<ODataClient>((objContainer) =>
-            {
-                var oDataHttpClient = new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
-                {
-                    BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
-                };
+                        var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
+                        return new ODataClient(oDataClientSettings);
+                    }
+                );
+            _objectContainer
+                .RegisterFactoryAs<ODataClient>((objContainer) =>
+                    {
+                        var oDataHttpClient = new HttpClient(handler: objContainer.Resolve<AuthorizationHeaderHttpHandler>())
+                        {
+                            BaseAddress = new Uri($"{config["DentalSystem.Presentation.Web.Api:BaseAddress"]}/odata")
+                        };
 
-                var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
-                return new ODataClient(oDataClientSettings);
-            });
+                        var oDataClientSettings = new ODataClientSettings(oDataHttpClient);
+                        return new ODataClient(oDataClientSettings);
+                    },
+                    "Authorized"
+                );
 
             _objectContainer.RegisterTypeAs<LoginStep, LoginStep>();
             _objectContainer.RegisterTypeAs<RegisterUserStep, RegisterUserStep>();
