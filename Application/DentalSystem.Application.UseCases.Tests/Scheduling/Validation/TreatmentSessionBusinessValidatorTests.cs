@@ -65,25 +65,27 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             // Arrange
             var validInput = ValidInput;
             var (validator, localizer) = GetBusinessValidator(new List<TreatmentSession>()
-            {
-                new TreatmentSession
                 {
-                    Id = Guid.NewGuid(),
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = validInput.PatientReferenceId.Value
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.PatientReferenceId.Value
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
+                },
+                new List<DentalTeam> { TestDentalTeam }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -102,25 +104,27 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             // Arrange
             var validInput = ValidInput;
             var (validator, localizer) = GetBusinessValidator(new List<TreatmentSession>()
-            {
-                new TreatmentSession
                 {
-                    Id = Guid.NewGuid(),
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = validInput.DentalTeamReferenceId.Value
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.DentalTeamReferenceId.Value
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
+                },
+                new List<DentalTeam> { TestDentalTeam }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
