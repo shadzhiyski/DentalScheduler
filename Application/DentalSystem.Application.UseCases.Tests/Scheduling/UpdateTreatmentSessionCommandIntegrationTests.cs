@@ -124,7 +124,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling
             var result = await Sut.Send(input, default);
 
             // Assert
-            var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>()
+            var allValidationMessages = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>()
                 .GetAllStrings()
                 .Select(ls => ls.Value);
             var allUniqueValidationMessages = new HashSet<string>(allValidationMessages);

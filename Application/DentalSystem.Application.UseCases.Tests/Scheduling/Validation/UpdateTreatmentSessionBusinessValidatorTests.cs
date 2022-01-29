@@ -20,7 +20,9 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
 {
     public class UpdateTreatmentSessionBusinessValidatorTests : BaseTests
     {
-        public UpdateTreatmentSessionInput ValidInput => new UpdateTreatmentSessionInput()
+        public UpdateTreatmentSessionBusinessValidatorTests() : base()
+        {
+            ValidInput = new UpdateTreatmentSessionInput()
             {
                 ReferenceId = Guid.NewGuid(),
                 TreatmentReferenceId = Guid.NewGuid(),
@@ -31,32 +33,60 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 End = DateTimeOffset.UtcNow.AddMinutes(30)
             };
 
+            TestDentalTeam = new DentalTeam
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Dental Team",
+                ReferenceId = ValidInput.DentalTeamReferenceId.Value,
+            };
+
+            TestTreatment = new Treatment
+            {
+                ReferenceId = ValidInput.TreatmentReferenceId.Value,
+                Name = "Test Treatment"
+            };
+
+            TestPatient = new Patient
+            {
+                ReferenceId = ValidInput.PatientReferenceId.Value,
+            };
+        }
+
+        public UpdateTreatmentSessionInput ValidInput { get; init; }
+        public DentalTeam TestDentalTeam { get; init; }
+        public Treatment TestTreatment { get; init; }
+        public Patient TestPatient { get; init; }
+
         [Fact]
         public void ValidInput_ShouldReturnValidResult()
         {
             // Arrange
             var validInput = ValidInput;
             var validator = GetBusinessValidator(new List<TreatmentSession>()
-            {
-                new TreatmentSession
                 {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = validInput.ReferenceId.Value,
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                        ReferenceId = validInput.ReferenceId.Value,
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
+                },
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment },
+                new List<Patient>() { TestPatient }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -71,7 +101,12 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             // Arrange
             var validInput = ValidInput;
             var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<UpdateTreatmentSessionBusinessValidator>>();
-            var validator = GetBusinessValidator(new List<TreatmentSession>());
+            var validator = GetBusinessValidator(
+                new List<TreatmentSession>(),
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment },
+                new List<Patient>() { TestPatient }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -89,46 +124,50 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
-            {
-                new TreatmentSession
                 {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = validInput.ReferenceId.Value,
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = validInput.PatientReferenceId.Value
+                        ReferenceId = validInput.ReferenceId.Value,
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.PatientReferenceId.Value
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.DentalTeamReferenceId.Value
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
                     },
-                    DentalTeam = new DentalTeam
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = validInput.DentalTeamReferenceId.Value
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                        ReferenceId = Guid.NewGuid(),
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.PatientReferenceId.Value
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
                 },
-                new TreatmentSession
-                {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = Guid.NewGuid(),
-                    Patient = new Patient
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = validInput.PatientReferenceId.Value
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment },
+                new List<Patient>() { TestPatient }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -137,7 +176,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(UpdateTreatmentSessionInput.PatientReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]
             );
         }
 
@@ -146,28 +185,34 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
-            var validator = GetBusinessValidator(new List<TreatmentSession>()
+            var otherDentalTeam = new DentalTeam
             {
-                new TreatmentSession
+                Id = Guid.NewGuid(),
+                ReferenceId = Guid.NewGuid()
+            };
+
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
+            var validator = GetBusinessValidator(new List<TreatmentSession>()
                 {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = validInput.ReferenceId.Value,
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = validInput.PatientReferenceId.Value
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                        ReferenceId = validInput.ReferenceId.Value,
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.PatientReferenceId.Value
+                        },
+                        DentalTeam = otherDentalTeam,
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
+                },
+                new List<DentalTeam> { TestDentalTeam, otherDentalTeam },
+                new List<Treatment>() { TestTreatment },
+                new List<Patient>() { TestPatient }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -181,46 +226,50 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
-            {
-                new TreatmentSession
                 {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = validInput.ReferenceId.Value,
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = validInput.PatientReferenceId.Value
+                        ReferenceId = validInput.ReferenceId.Value,
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.PatientReferenceId.Value
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.DentalTeamReferenceId.Value
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
                     },
-                    DentalTeam = new DentalTeam
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = validInput.DentalTeamReferenceId.Value
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                        ReferenceId = Guid.NewGuid(),
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.DentalTeamReferenceId.Value
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
                 },
-                new TreatmentSession
-                {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = Guid.NewGuid(),
-                    Patient = new Patient
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = validInput.DentalTeamReferenceId.Value
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment },
+                new List<Patient>() { TestPatient }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -229,7 +278,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(UpdateTreatmentSessionInput.DentalTeamReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]
             );
         }
 
@@ -238,28 +287,32 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
-            {
-                new TreatmentSession
                 {
-                    Id = Guid.NewGuid(),
-                    ReferenceId = validInput.ReferenceId.Value,
-                    Patient = new Patient
+                    new TreatmentSession
                     {
                         Id = Guid.NewGuid(),
-                        ReferenceId = Guid.NewGuid()
-                    },
-                    DentalTeam = new DentalTeam
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = validInput.DentalTeamReferenceId.Value
-                    },
-                    Start = validInput.Start.Value,
-                    End = validInput.End.Value,
-                    Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                }
-            });
+                        ReferenceId = validInput.ReferenceId.Value,
+                        Patient = new Patient
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = Guid.NewGuid()
+                        },
+                        DentalTeam = new DentalTeam
+                        {
+                            Id = Guid.NewGuid(),
+                            ReferenceId = validInput.DentalTeamReferenceId.Value
+                        },
+                        Start = validInput.Start.Value,
+                        End = validInput.End.Value,
+                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
+                    }
+                },
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment },
+                new List<Patient>() { TestPatient }
+            );
 
             // Act
             var validationResult = validator.Validate(validInput);
@@ -269,7 +322,10 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         }
 
         private UpdateTreatmentSessionBusinessValidator GetBusinessValidator(
-            IEnumerable<TreatmentSession> presentData)
+            IEnumerable<TreatmentSession> presentData,
+            IEnumerable<DentalTeam> dentalTeamsPresentData,
+            IEnumerable<Treatment> treatmentPresentData,
+            IEnumerable<Patient> patientPresentData)
         {
             var simpleValidator = ServiceProvider.GetRequiredService<UpdateTreatmentSessionValidator>();
             var mockedRepository = new Mock<IReadRepository<TreatmentSession>>();
@@ -284,12 +340,44 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 )
                 .Returns(() => filteredData.AsQueryable().BuildMock().Object);
 
-            var addBusinessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var dentalTeamMockedRepository = new Mock<IReadRepository<DentalTeam>>();
+            var dentalTeamsFilteredData = dentalTeamsPresentData;
+            dentalTeamMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<DentalTeam, bool>>>()))
+                .Callback<Expression<Func<DentalTeam, bool>>>(
+                    (filterExpression) => dentalTeamsFilteredData = dentalTeamsPresentData.Where(filterExpression.Compile())
+                )
+                .Returns(() => dentalTeamsFilteredData.AsQueryable().BuildMock().Object);
+
+            var treatmentMockedRepository = new Mock<IReadRepository<Treatment>>();
+            var treatmentFilteredData = treatmentPresentData;
+            treatmentMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<Treatment, bool>>>()))
+                .Callback<Expression<Func<Treatment, bool>>>(
+                    (filterExpression) => treatmentFilteredData = treatmentPresentData.Where(filterExpression.Compile())
+                )
+                .Returns(() => treatmentFilteredData.AsQueryable().BuildMock().Object);
+
+            var patientMockedRepository = new Mock<IReadRepository<Patient>>();
+            var patientFilteredData = patientPresentData;
+            patientMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<Patient, bool>>>()))
+                .Callback<Expression<Func<Patient, bool>>>(
+                    (filterExpression) => patientFilteredData = patientPresentData.Where(filterExpression.Compile())
+                )
+                .Returns(() => patientFilteredData.AsQueryable().BuildMock().Object);
+
+            var treatmentSessionReferencesBusinessValidator = new TreatmentSessionReferencesBusinessValidator(
+                ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionReferencesBusinessValidator>>(),
+                dentalTeamMockedRepository.Object,
+                treatmentMockedRepository.Object,
+                patientMockedRepository.Object
+            );
+
+            var addBusinessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<UpdateTreatmentSessionBusinessValidator>>();
             var businessValidator = new UpdateTreatmentSessionBusinessValidator(
                 businessLocalizer,
                 addBusinessLocalizer,
                 simpleValidator,
+                treatmentSessionReferencesBusinessValidator,
                 mockedRepository.Object
             );
 

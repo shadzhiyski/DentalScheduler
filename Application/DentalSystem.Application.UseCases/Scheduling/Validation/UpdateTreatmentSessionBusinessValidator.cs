@@ -8,6 +8,7 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -17,8 +18,9 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
 
         public UpdateTreatmentSessionBusinessValidator(
             IStringLocalizer<UpdateTreatmentSessionBusinessValidator> localizer,
-            IStringLocalizer<TreatmentSessionBusinessValidator> addLocalizer,
+            IStringLocalizer<AddTreatmentSessionBusinessValidator> addLocalizer,
             UpdateTreatmentSessionValidator simpleValidator,
+            AbstractValidator<ITreatmentSessionReferencesInput> treatmentSessionReferencesBusinessValidator,
             IReadRepository<TreatmentSession> treatmentSessionRepository)
         {
             RuleFor(m => m)
@@ -30,13 +32,16 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                         .WithMessage(localizer[NotExistingTreatmentSessionMessageName])
                         .DependentRules(() =>
                         {
+                            RuleFor(m => m)
+                                .SetValidator(treatmentSessionReferencesBusinessValidator);
+
                             RuleFor(m => m.PatientReferenceId)
                                 .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct))
-                                .WithMessage(addLocalizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]);
+                                .WithMessage(addLocalizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]);
 
                             RuleFor(m => m.DentalTeamReferenceId)
                                 .MustAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct))
-                                .WithMessage(addLocalizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]);
+                                .WithMessage(addLocalizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]);
                         });
                 });
 

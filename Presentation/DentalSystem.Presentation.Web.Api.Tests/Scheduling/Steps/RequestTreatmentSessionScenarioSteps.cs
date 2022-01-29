@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,7 @@ using DentalSystem.Application.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.UseCases.Identity.Dto.Output;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
+using DentalSystem.Presentation.Web.Api.Tests.Common.Extensions;
 using DentalSystem.Presentation.Web.Api.Tests.Common.Handlers;
 using DentalSystem.Presentation.Web.Api.Tests.Common.Steps;
 using FluentAssertions;
@@ -125,9 +127,9 @@ namespace DentalSystem.Presentation.Web.Api.Tests.Scheduling.Steps
         [Given(@"Treatment session details ""(.*)"" ""(.*)""")]
         public void GivenTreatmentSessionDetails(DateTimeOffset start, DateTimeOffset end)
         {
-            var dentalTeamReferenceId = _scenarioContext.Get<Guid>(DentalTeamReferenceIdLabel);
-            var treatmentReferenceId = _scenarioContext.Get<Guid>(TreatmentReferenceIdLabel);
-            var patientReferenceId = _scenarioContext.Get<Guid>(PatientReferenceIdLabel);
+            var dentalTeamReferenceId = _scenarioContext.GetValueOrDefault<Guid>(DentalTeamReferenceIdLabel, Guid.Empty);
+            var treatmentReferenceId = _scenarioContext.GetValueOrDefault<Guid>(TreatmentReferenceIdLabel, Guid.Empty);
+            var patientReferenceId = _scenarioContext.GetValueOrDefault<Guid>(PatientReferenceIdLabel, Guid.Empty);
             var input = new TreatmentSessionInput
                 {
                     Start = start,
