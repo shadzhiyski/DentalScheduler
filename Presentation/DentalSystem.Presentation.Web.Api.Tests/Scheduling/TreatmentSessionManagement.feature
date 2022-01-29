@@ -47,3 +47,11 @@ Feature: Treatment Session Management
     And Treatment session details "2020-06-25T09:30:00Z" "2020-06-25T10:15:00Z"
     When Request treatment session
     Then Should fail to create treatment session
+
+    Scenario: Request treatment session for not existing Patient
+    Given Register client "patient_tsm_6@mail.com" with password "Patient_01#123456"
+    And Dental team ReferenceId of "DentalTeam 01"
+    And Treatment ReferenceId of "Bonding"
+    And Treatment session details "2020-06-26T09:30:00Z" "2020-06-26T10:15:00Z"
+    When Request treatment session
+    Then Should fail to create treatment session

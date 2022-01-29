@@ -13,11 +13,13 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
     {
         public const string InvalidDentalTeamMessageName = "InvalidDentalTeam";
         public const string InvalidTreatmentMessageName = "InvalidTreatment";
+        public const string InvalidPatientMessageName = "InvalidPatient";
 
         public TreatmentSessionReferencesBusinessValidator(
             IStringLocalizer<TreatmentSessionReferencesBusinessValidator> localizer,
             IReadRepository<DentalTeam> dentalTeamReadRepository,
-            IReadRepository<Treatment> treatmentReadRepository)
+            IReadRepository<Treatment> treatmentReadRepository,
+            IReadRepository<Patient> patientReadRepository)
         {
             RuleFor(m => m.DentalTeamReferenceId)
                 .MustAsync((m, ctx, ct) => HasDentalTeam(m, ct))
@@ -27,12 +29,18 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                 .MustAsync((m, ctx, ct) => HasTreatment(m, ct))
                 .WithMessage(localizer[InvalidTreatmentMessageName]);
 
+            RuleFor(m => m.PatientReferenceId)
+                .MustAsync((m, ctx, ct) => HasPatient(m, ct))
+                .WithMessage(localizer[InvalidPatientMessageName]);
+
             DentalTeamReadRepository = dentalTeamReadRepository;
             TreatmentReadRepository = treatmentReadRepository;
+            PatientReadRepository = patientReadRepository;
         }
 
         public IReadRepository<DentalTeam> DentalTeamReadRepository { get; }
         public IReadRepository<Treatment> TreatmentReadRepository { get; }
+        public IReadRepository<Patient> PatientReadRepository { get; }
 
         private Task<bool> HasDentalTeam(
             ITreatmentSessionReferencesInput model,
@@ -46,6 +54,13 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             CancellationToken cancellationToken)
             => TreatmentReadRepository
                 .Where(ts => ts.ReferenceId == model.TreatmentReferenceId)
+                .AnyAsync(cancellationToken);
+
+        private Task<bool> HasPatient(
+            ITreatmentSessionReferencesInput model,
+            CancellationToken cancellationToken)
+            => PatientReadRepository
+                .Where(ts => ts.ReferenceId == model.PatientReferenceId)
                 .AnyAsync(cancellationToken);
     }
 }
