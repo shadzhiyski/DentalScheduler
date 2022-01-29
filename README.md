@@ -51,13 +51,9 @@ This architecture follows a **use case driven approach**. See more about [scream
 
 ### Domain
 
-<img src="/Assets/dental-scheduler-archtecture-domain.svg" width="450" />
-
 This layer is a place for all entities. They are basic building blocks for the system.
 
 ### Application
-
-<img src="/Assets/dental-scheduler-archtecture-application.svg" width="450" />
 
 #### Use Cases
 
@@ -69,15 +65,11 @@ The second kind of building blocks which will always reside in this layer is an 
 
 ### Infrastructure
 
-<img src="/Assets/dental-scheduler-archtecture-infrastructure.svg" width="450" />
-
 Contains all the code needed for the project to use goodies from External World.
 
 **Persistence** of the database is sitting in this layer. In this project is used PostgreSQL for the primary data store.This layer also contains the Authentication and Authorization management of users.
 
 ### Presentation
-
-<img src="/Assets/dental-scheduler-archtecture-presentation.svg" width="450" />
 
 Presents data to user and handle user interactions.
 
