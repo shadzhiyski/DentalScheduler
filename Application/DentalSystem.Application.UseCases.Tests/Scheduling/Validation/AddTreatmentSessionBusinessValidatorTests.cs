@@ -18,9 +18,9 @@ using MockQueryable.Moq;
 
 namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
 {
-    public class TreatmentSessionBusinessValidatorTests : BaseTests
+    public class AddTreatmentSessionBusinessValidatorTests : BaseTests
     {
-        public TreatmentSessionBusinessValidatorTests() : base()
+        public AddTreatmentSessionBusinessValidatorTests() : base()
         {
             ValidInput = new TreatmentSessionInput()
             {
@@ -94,7 +94,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(TreatmentSessionInput.PatientReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]
             );
         }
 
@@ -133,7 +133,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(TreatmentSessionInput.DentalTeamReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]
             );
         }
 
@@ -153,11 +153,11 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(TreatmentSessionInput.DentalTeamReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]
             );
         }
 
-        private (TreatmentSessionBusinessValidator, IStringLocalizer<TreatmentSessionBusinessValidator>) GetBusinessValidator(
+        private (AddTreatmentSessionBusinessValidator, IStringLocalizer<AddTreatmentSessionBusinessValidator>) GetBusinessValidator(
             IEnumerable<TreatmentSession> presentData,
             IEnumerable<DentalTeam> dentalTeamsPresentData = default)
         {
@@ -181,8 +181,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 )
                 .Returns(() => dentalTeamsFilteredData.AsQueryable().BuildMock().Object);
 
-            var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
-            var businessValidator = new TreatmentSessionBusinessValidator(
+            var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
+            var businessValidator = new AddTreatmentSessionBusinessValidator(
                 businessLocalizer,
                 simpleValidator,
                 mockedRepository.Object,

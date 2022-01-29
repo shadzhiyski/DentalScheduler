@@ -107,7 +107,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
                 {
                     new TreatmentSession
@@ -157,7 +157,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(UpdateTreatmentSessionInput.PatientReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]
             );
         }
 
@@ -172,7 +172,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 ReferenceId = Guid.NewGuid()
             };
 
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
                 {
                     new TreatmentSession
@@ -205,7 +205,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
                 {
                     new TreatmentSession
@@ -255,7 +255,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(UpdateTreatmentSessionInput.DentalTeamReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]
             );
         }
 
@@ -264,7 +264,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
         {
             // Arrange
             var validInput = ValidInput;
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
                 {
                     new TreatmentSession
@@ -303,7 +303,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var notExistingDentalTeamReferenceId = Guid.Empty;
             var validInput = ValidInput
                 with { DentalTeamReferenceId = notExistingDentalTeamReferenceId };
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var validator = GetBusinessValidator(new List<TreatmentSession>()
                 {
                     new TreatmentSession
@@ -335,7 +335,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             AssertInvalidResult(
                 validationResult: validationResult,
                 propertyName: nameof(TreatmentSessionInput.DentalTeamReferenceId),
-                message: localizer[TreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]
+                message: localizer[AddTreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]
             );
         }
 
@@ -364,7 +364,7 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 )
                 .Returns(() => dentalTeamsFilteredData.AsQueryable().BuildMock().Object);
 
-            var addBusinessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionBusinessValidator>>();
+            var addBusinessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<UpdateTreatmentSessionBusinessValidator>>();
             var businessValidator = new UpdateTreatmentSessionBusinessValidator(
                 businessLocalizer,

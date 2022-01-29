@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
-    public class TreatmentSessionBusinessValidator : AbstractValidator<ITreatmentSessionInput>
+    public class AddTreatmentSessionBusinessValidator : AbstractValidator<ITreatmentSessionInput>
     {
         public const string OverlappingTreatmentSessionForPatientMessageName
             = "OverlappingTreatmentSessionForPatient";
@@ -19,8 +19,8 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             = "OverlappingTreatmentSessionForDentalTeam";
         public const string InvalidDentalTeamMessageName = "InvalidDentalTeam";
 
-        public TreatmentSessionBusinessValidator(
-            IStringLocalizer<TreatmentSessionBusinessValidator> localizer,
+        public AddTreatmentSessionBusinessValidator(
+            IStringLocalizer<AddTreatmentSessionBusinessValidator> localizer,
             TreatmentSessionValidator simpleValidator,
             IReadRepository<TreatmentSession> treatmentSessionRepository,
             IReadRepository<DentalTeam> dentalTeamReadRepository)

@@ -18,7 +18,7 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
 
         public UpdateTreatmentSessionBusinessValidator(
             IStringLocalizer<UpdateTreatmentSessionBusinessValidator> localizer,
-            IStringLocalizer<TreatmentSessionBusinessValidator> addLocalizer,
+            IStringLocalizer<AddTreatmentSessionBusinessValidator> addLocalizer,
             UpdateTreatmentSessionValidator simpleValidator,
             IReadRepository<TreatmentSession> treatmentSessionRepository,
             IReadRepository<DentalTeam> dentalTeamReadRepository)
@@ -34,15 +34,15 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                         {
                             RuleFor(m => m.DentalTeamReferenceId)
                                 .MustAsync((m, ctx, ct) => HasDentalTeam(m, ct))
-                                .WithMessage(addLocalizer[TreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]);
+                                .WithMessage(addLocalizer[AddTreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]);
 
                             RuleFor(m => m.PatientReferenceId)
                                 .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct))
-                                .WithMessage(addLocalizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]);
+                                .WithMessage(addLocalizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForPatientMessageName]);
 
                             RuleFor(m => m.DentalTeamReferenceId)
                                 .MustAsync((m, ctx, ct) => HasNoOverlappingsForDentalTeam(m, ct))
-                                .WithMessage(addLocalizer[TreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]);
+                                .WithMessage(addLocalizer[AddTreatmentSessionBusinessValidator.OverlappingTreatmentSessionForDentalTeamMessageName]);
                         });
                 });
 
