@@ -3,14 +3,8 @@ using DentalSystem.Application.Boundaries.UseCases.Common.Dto;
 
 namespace DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input
 {
-    public interface ITreatmentSessionInput : IPeriod
+    public interface ITreatmentSessionInput : IPeriod, ITreatmentSessionReferencesInput
     {
-        Guid? DentalTeamReferenceId { get; }
-
-        Guid? PatientReferenceId { get; }
-
-        Guid? TreatmentReferenceId { get; }
-
         string Status { get; }
     }
 }
