@@ -38,10 +38,17 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 Name = "Test Dental Team",
                 ReferenceId = ValidInput.DentalTeamReferenceId.Value,
             };
+
+            TestTreatment = new Treatment
+            {
+                ReferenceId = ValidInput.TreatmentReferenceId.Value,
+                Name = "Test Treatment"
+            };
         }
 
         public TreatmentSessionInput ValidInput { get; init; }
         public DentalTeam TestDentalTeam { get; init; }
+        public Treatment TestTreatment { get; init; }
 
         [Fact]
         public void ValidInput_ShouldReturnValidResult()
@@ -49,7 +56,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             // Arrange
             var (validator, localizer) = GetBusinessValidator(
                 new List<TreatmentSession>(),
-                new List<DentalTeam> { TestDentalTeam }
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment }
             );
 
             // Act
@@ -84,7 +92,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                         Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
                     }
                 },
-                new List<DentalTeam> { TestDentalTeam }
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment }
             );
 
             // Act
@@ -123,7 +132,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                         Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
                     }
                 },
-                new List<DentalTeam> { TestDentalTeam }
+                new List<DentalTeam> { TestDentalTeam },
+                new List<Treatment>() { TestTreatment }
             );
 
             // Act
@@ -139,7 +149,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
 
         private (AddTreatmentSessionBusinessValidator, IStringLocalizer<AddTreatmentSessionBusinessValidator>) GetBusinessValidator(
             IEnumerable<TreatmentSession> presentData,
-            IEnumerable<DentalTeam> dentalTeamsPresentData)
+            IEnumerable<DentalTeam> dentalTeamsPresentData,
+            IEnumerable<Treatment> treatmentPresentData)
         {
             var simpleValidator = ServiceProvider.GetRequiredService<TreatmentSessionValidator>();
             var mockedRepository = new Mock<IReadRepository<TreatmentSession>>();
@@ -159,9 +170,18 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 )
                 .Returns(() => dentalTeamsFilteredData.AsQueryable().BuildMock().Object);
 
+            var treatmentMockedRepository = new Mock<IReadRepository<Treatment>>();
+            var treatmentFilteredData = treatmentPresentData;
+            treatmentMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<Treatment, bool>>>()))
+                .Callback<Expression<Func<Treatment, bool>>>(
+                    (filterExpression) => treatmentFilteredData = treatmentPresentData.Where(filterExpression.Compile())
+                )
+                .Returns(() => treatmentFilteredData.AsQueryable().BuildMock().Object);
+
             var treatmentSessionReferencesBusinessValidator = new TreatmentSessionReferencesBusinessValidator(
                 ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionReferencesBusinessValidator>>(),
-                dentalTeamMockedRepository.Object
+                dentalTeamMockedRepository.Object,
+                treatmentMockedRepository.Object
             );
 
             var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
