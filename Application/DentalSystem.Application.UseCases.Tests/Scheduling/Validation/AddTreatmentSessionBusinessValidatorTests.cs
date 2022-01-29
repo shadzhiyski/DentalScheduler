@@ -137,32 +137,10 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             );
         }
 
-        // [Fact]
-        // public void NotExistingDentalTeam_ShouldReturnInvalidResult()
-        // {
-        //     // Arrange
-        //     var notExistingDentalTeamReferenceId = Guid.Empty;
-        //     var validInput = ValidInput
-        //         with { DentalTeamReferenceId = notExistingDentalTeamReferenceId };
-        //     var (validator, localizer) = GetBusinessValidator(new List<TreatmentSession>() { });
-
-        //     // Act
-        //     var validationResult = validator.Validate(validInput);
-
-        //     // Assert
-        //     AssertInvalidResult(
-        //         validationResult: validationResult,
-        //         propertyName: nameof(TreatmentSessionInput.DentalTeamReferenceId),
-        //         message: localizer[AddTreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]
-        //     );
-        // }
-
         private (AddTreatmentSessionBusinessValidator, IStringLocalizer<AddTreatmentSessionBusinessValidator>) GetBusinessValidator(
             IEnumerable<TreatmentSession> presentData,
-            IEnumerable<DentalTeam> dentalTeamsPresentData = default)
+            IEnumerable<DentalTeam> dentalTeamsPresentData)
         {
-            dentalTeamsPresentData ??= new List<DentalTeam>();
-
             var simpleValidator = ServiceProvider.GetRequiredService<TreatmentSessionValidator>();
             var mockedRepository = new Mock<IReadRepository<TreatmentSession>>();
 
