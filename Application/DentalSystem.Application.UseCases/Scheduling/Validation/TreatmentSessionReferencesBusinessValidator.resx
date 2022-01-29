@@ -121,4 +121,12 @@
     <value>Invalid Dental Team.</value>
     <comment/>
   </data>
+  <data name="InvalidTreatment" xml:space="preserve">
+    <value>Invalid Treatment.</value>
+    <comment/>
+  </data>
+  <data name="InvalidPatient" xml:space="preserve">
+    <value>Invalid Patient.</value>
+    <comment/>
+  </data>
 </root>

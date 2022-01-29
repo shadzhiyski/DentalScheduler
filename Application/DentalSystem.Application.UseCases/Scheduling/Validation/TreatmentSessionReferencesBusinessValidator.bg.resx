@@ -121,4 +121,12 @@
     <value>Невалиден зъболекарски екип.</value>
     <comment/>
   </data>
+  <data name="InvalidTreatment" xml:space="preserve">
+    <value>Невалидно лечение.</value>
+    <comment/>
+  </data>
+  <data name="InvalidPatient" xml:space="preserve">
+    <value>Невалиден пациент.</value>
+    <comment/>
+  </data>
 </root>
