@@ -117,12 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="OverlappingTreatmentSessionForPatient" xml:space="preserve">
-    <value>Съществува лечение към пациента със застъпващ се период.</value>
-    <comment/>
-  </data>
-  <data name="OverlappingTreatmentSessionForDentalTeam" xml:space="preserve">
-    <value>Съществува лечение към зъболекарския екип със застъпващ се период.</value>
+  <data name="InvalidDentalTeam" xml:space="preserve">
+    <value>Invalid Dental Team.</value>
     <comment/>
   </data>
 </root>

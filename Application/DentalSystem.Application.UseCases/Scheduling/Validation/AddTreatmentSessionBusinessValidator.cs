@@ -17,21 +17,19 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             = "OverlappingTreatmentSessionForPatient";
         public const string OverlappingTreatmentSessionForDentalTeamMessageName
             = "OverlappingTreatmentSessionForDentalTeam";
-        public const string InvalidDentalTeamMessageName = "InvalidDentalTeam";
 
         public AddTreatmentSessionBusinessValidator(
             IStringLocalizer<AddTreatmentSessionBusinessValidator> localizer,
             TreatmentSessionValidator simpleValidator,
-            IReadRepository<TreatmentSession> treatmentSessionRepository,
-            IReadRepository<DentalTeam> dentalTeamReadRepository)
+            AbstractValidator<ITreatmentSessionReferencesInput> treatmentSessionReferencesBusinessValidator,
+            IReadRepository<TreatmentSession> treatmentSessionRepository)
         {
             RuleFor(m => m)
                 .SetValidator(simpleValidator)
                 .DependentRules(() =>
                 {
-                    RuleFor(m => m.DentalTeamReferenceId)
-                        .MustAsync((m, ctx, ct) => HasDentalTeam(m, ct))
-                        .WithMessage(localizer[InvalidDentalTeamMessageName]);
+                    RuleFor(m => m)
+                        .SetValidator(treatmentSessionReferencesBusinessValidator);
 
                     RuleFor(m => m.PatientReferenceId)
                         .MustAsync((m, ctx, ct) => HasNoOverlappingsForPatient(m, ct))
@@ -43,19 +41,9 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                 });
 
             TreatmentSessionRepository = treatmentSessionRepository;
-            DentalTeamReadRepository = dentalTeamReadRepository;
         }
 
         public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
-
-        public IReadRepository<DentalTeam> DentalTeamReadRepository { get; }
-
-        private Task<bool> HasDentalTeam(
-            ITreatmentSessionInput model,
-            CancellationToken cancellationToken)
-            => DentalTeamReadRepository
-                .Where(ts => ts.ReferenceId == model.DentalTeamReferenceId)
-                .AnyAsync(cancellationToken);
 
         private async Task<bool> HasNoOverlappingsForPatient(
             ITreatmentSessionInput model,

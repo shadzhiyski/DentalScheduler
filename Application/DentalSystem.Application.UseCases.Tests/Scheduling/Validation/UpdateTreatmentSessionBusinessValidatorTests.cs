@@ -296,49 +296,6 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             validationResult.IsValid.Should().BeTrue();
         }
 
-        [Fact]
-        public void NotExistingDentalTeam_ShouldReturnInvalidResult()
-        {
-            // Arrange
-            var notExistingDentalTeamReferenceId = Guid.Empty;
-            var validInput = ValidInput
-                with { DentalTeamReferenceId = notExistingDentalTeamReferenceId };
-            var localizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
-            var validator = GetBusinessValidator(new List<TreatmentSession>()
-                {
-                    new TreatmentSession
-                    {
-                        Id = Guid.NewGuid(),
-                        ReferenceId = validInput.ReferenceId.Value,
-                        Patient = new Patient
-                        {
-                            Id = Guid.NewGuid(),
-                            ReferenceId = Guid.NewGuid()
-                        },
-                        DentalTeam = new DentalTeam
-                        {
-                            Id = Guid.NewGuid(),
-                            ReferenceId = validInput.DentalTeamReferenceId.Value
-                        },
-                        Start = validInput.Start.Value,
-                        End = validInput.End.Value,
-                        Status = Enum.Parse<TreatmentSessionStatus>(validInput.Status)
-                    }
-                },
-                new List<DentalTeam>()
-            );
-
-            // Act
-            var validationResult = validator.Validate(validInput);
-
-            // Assert
-            AssertInvalidResult(
-                validationResult: validationResult,
-                propertyName: nameof(TreatmentSessionInput.DentalTeamReferenceId),
-                message: localizer[AddTreatmentSessionBusinessValidator.InvalidDentalTeamMessageName]
-            );
-        }
-
         private UpdateTreatmentSessionBusinessValidator GetBusinessValidator(
             IEnumerable<TreatmentSession> presentData,
             IEnumerable<DentalTeam> dentalTeamsPresentData)
@@ -364,14 +321,19 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
                 )
                 .Returns(() => dentalTeamsFilteredData.AsQueryable().BuildMock().Object);
 
+            var treatmentSessionReferencesBusinessValidator = new TreatmentSessionReferencesBusinessValidator(
+                ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionReferencesBusinessValidator>>(),
+                dentalTeamMockedRepository.Object
+            );
+
             var addBusinessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<AddTreatmentSessionBusinessValidator>>();
             var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<UpdateTreatmentSessionBusinessValidator>>();
             var businessValidator = new UpdateTreatmentSessionBusinessValidator(
                 businessLocalizer,
                 addBusinessLocalizer,
                 simpleValidator,
-                mockedRepository.Object,
-                dentalTeamMockedRepository.Object
+                treatmentSessionReferencesBusinessValidator,
+                mockedRepository.Object
             );
 
             return businessValidator;

@@ -125,8 +125,4 @@
     <value>There is overlapping treatment session for dental team.</value>
     <comment/>
   </data>
-  <data name="InvalidDentalTeam" xml:space="preserve">
-    <value>Invalid Dental Team.</value>
-    <comment/>
-  </data>
 </root>
