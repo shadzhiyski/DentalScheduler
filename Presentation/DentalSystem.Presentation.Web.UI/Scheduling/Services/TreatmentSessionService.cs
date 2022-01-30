@@ -85,8 +85,8 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Services
                 )
                 .ToList();
 
-        public async Task<TreatmentSessionOutput> GetAppointment(Guid referenceId, Guid patientReferenceId)
-            => await ODataClient
+        public Task<TreatmentSessionOutput> GetAppointment(Guid referenceId, Guid patientReferenceId)
+            => ODataClient
                 .For<TreatmentSessionOutput>("TreatmentSession")
                 .Expand(m => m.DentalTeam)
                 .Expand(m => m.Treatment)
@@ -97,10 +97,10 @@ namespace DentalSystem.Presentation.Web.UI.Scheduling.Services
                 )
                 .FindEntryAsync();
 
-        public async Task AddAppointmentsAsync(ITreatmentSessionInput input)
-            => await HttpClient.PostAsJsonAsync<object>("TreatmentSession", input);
+        public Task AddAppointmentsAsync(ITreatmentSessionInput input)
+            => HttpClient.PostAsJsonAsync<object>("TreatmentSession", input);
 
-        public async Task EditAppointmentsAsync(ITreatmentSessionInput input)
-            => await HttpClient.PutAsJsonAsync<object>("TreatmentSession", input);
+        public Task EditAppointmentsAsync(ITreatmentSessionInput input)
+            => HttpClient.PutAsJsonAsync<object>("TreatmentSession", input);
     }
 }

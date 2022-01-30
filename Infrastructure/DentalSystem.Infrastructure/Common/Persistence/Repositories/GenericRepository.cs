@@ -19,44 +19,23 @@ namespace DentalSystem.Infrastructure.Common.Persistence.Repositories
             DbContext = dbContext;
         }
 
-        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
-        {
-            await DbContext.AddAsync(entity, cancellationToken);
-        }
+        public Task AddAsync(TEntity entity, CancellationToken cancellationToken)
+            => DbContext.AddAsync(entity, cancellationToken).AsTask();
 
-        public IQueryable<TEntity> AsQueryable()
-        {
-            return DbContext.Set<TEntity>();
-        }
+        public IQueryable<TEntity> AsQueryable() => DbContext.Set<TEntity>();
 
-        public IQueryable<TEntity> AsNoTracking()
-        {
-            return DbContext.Set<TEntity>().AsNoTracking();
-        }
+        public IQueryable<TEntity> AsNoTracking() => DbContext.Set<TEntity>().AsNoTracking();
 
-        public void Remove(TEntity entity)
-        {
-            DbContext.Remove(entity);
-        }
+        public void Remove(TEntity entity) => DbContext.Remove(entity);
 
-        public void Remove(IEnumerable<TEntity> entities)
-        {
-            DbContext.RemoveRange(entities);
-        }
+        public void Remove(IEnumerable<TEntity> entities) => DbContext.RemoveRange(entities);
 
-        public async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken)
-        {
-            return await DbContext.Set<TEntity>().SingleAsync(where, cancellationToken);
-        }
+        public Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken)
+            => DbContext.Set<TEntity>().SingleAsync(where, cancellationToken);
 
-         public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken)
-        {
-            return await DbContext.Set<TEntity>().SingleOrDefaultAsync(where, cancellationToken);
-        }
+        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> where, CancellationToken cancellationToken)
+            => DbContext.Set<TEntity>().SingleOrDefaultAsync(where, cancellationToken);
 
-        public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> where)
-        {
-            return DbContext.Set<TEntity>().Where(where);
-        }
+        public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> where) => DbContext.Set<TEntity>().Where(where);
     }
 }

@@ -7,7 +7,6 @@ using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -45,25 +44,27 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
 
         public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
-        private async Task<bool> HasNoOverlappingsForPatient(
+        private Task<bool> HasNoOverlappingsForPatient(
             ITreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
-                .Where(ts => ts.Patient.ReferenceId == model.PatientReferenceId)
+            => TreatmentSessionRepository
+                .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
+                    predicate: ts => ts.Patient.ReferenceId == model.PatientReferenceId
+                        && ts.Status != TreatmentSessionStatus.Rejected
                         && ts.Start <= model.End
                         && ts.End >= model.Start,
                     cancellationToken: cancellationToken
                 );
 
-        private async Task<bool> HasNoOverlappingsForDentalTeam(
+        private Task<bool> HasNoOverlappingsForDentalTeam(
             ITreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
-                .Where(ts => ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId)
+            => TreatmentSessionRepository
+                .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
+                    predicate: ts => ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId
+                        && ts.Status != TreatmentSessionStatus.Rejected
                         && ts.Start <= model.End
                         && ts.End >= model.Start,
                     cancellationToken: cancellationToken

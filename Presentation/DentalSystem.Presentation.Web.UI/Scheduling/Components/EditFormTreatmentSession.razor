@@ -21,10 +21,7 @@
 
     public PatientViewModel PatientInfo { get; set; }
 
-    protected async override Task OnInitializedAsync()
-    {
-        await LoadTreatmentSession();
-    }
+    protected override Task OnInitializedAsync() => LoadTreatmentSession();
 
     async Task LoadTreatmentSession()
     {

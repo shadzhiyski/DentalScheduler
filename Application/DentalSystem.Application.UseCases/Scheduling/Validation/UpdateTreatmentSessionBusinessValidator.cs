@@ -50,41 +50,36 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
 
         public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
-        private async Task<bool> ExistsTreatmentSession(
+        private Task<bool> ExistsTreatmentSession(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await Task.Run(() => TreatmentSessionRepository
-                    .AsNoTracking()
-                    .Any(
-                        ts => ts.ReferenceId == model.ReferenceId
-                    )
-                );
+            => TreatmentSessionRepository
+                .AsNoTracking()
+                .AnyAsync(ts => ts.ReferenceId == model.ReferenceId);
 
-        private async Task<bool> HasNoOverlappingsForPatient(
+        private Task<bool> HasNoOverlappingsForPatient(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
-                .Where(
-                    ts => ts.ReferenceId != model.ReferenceId
-                        && ts.Patient.ReferenceId == model.PatientReferenceId
-                )
+            => TreatmentSessionRepository
+                .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
+                    predicate: ts => ts.ReferenceId != model.ReferenceId
+                        && ts.Patient.ReferenceId == model.PatientReferenceId
+                        && ts.Status != TreatmentSessionStatus.Rejected
                         && ts.Start <= model.End
                         && ts.End >= model.Start,
                     cancellationToken: cancellationToken
                 );
 
-        private async Task<bool> HasNoOverlappingsForDentalTeam(
+        private Task<bool> HasNoOverlappingsForDentalTeam(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
-                .Where(
-                    ts => ts.ReferenceId != model.ReferenceId
-                        && ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId
-                )
+            => TreatmentSessionRepository
+                .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
+                    predicate: ts => ts.ReferenceId != model.ReferenceId
+                        && ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId
+                        && ts.Status != TreatmentSessionStatus.Rejected
                         && ts.Start <= model.End
                         && ts.End >= model.Start,
                     cancellationToken: cancellationToken
