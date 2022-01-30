@@ -156,28 +156,16 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             IEnumerable<Patient> patientPresentData)
         {
             var dentalTeamMockedRepository = new Mock<IReadRepository<DentalTeam>>();
-            var dentalTeamsFilteredData = dentalTeamsPresentData;
-            dentalTeamMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<DentalTeam, bool>>>()))
-                .Callback<Expression<Func<DentalTeam, bool>>>(
-                    (filterExpression) => dentalTeamsFilteredData = dentalTeamsPresentData.Where(filterExpression.Compile())
-                )
-                .Returns(() => dentalTeamsFilteredData.AsQueryable().BuildMock().Object);
+            dentalTeamMockedRepository.Setup(gr => gr.AsNoTracking())
+                .Returns(() => dentalTeamsPresentData.AsQueryable().BuildMock().Object);
 
             var treatmentMockedRepository = new Mock<IReadRepository<Treatment>>();
-            var treatmentFilteredData = treatmentPresentData;
-            treatmentMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<Treatment, bool>>>()))
-                .Callback<Expression<Func<Treatment, bool>>>(
-                    (filterExpression) => treatmentFilteredData = treatmentPresentData.Where(filterExpression.Compile())
-                )
-                .Returns(() => treatmentFilteredData.AsQueryable().BuildMock().Object);
+            treatmentMockedRepository.Setup(gr => gr.AsNoTracking())
+                .Returns(() => treatmentPresentData.AsQueryable().BuildMock().Object);
 
             var patientMockedRepository = new Mock<IReadRepository<Patient>>();
-            var patientFilteredData = patientPresentData;
-            patientMockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<Patient, bool>>>()))
-                .Callback<Expression<Func<Patient, bool>>>(
-                    (filterExpression) => patientFilteredData = patientPresentData.Where(filterExpression.Compile())
-                )
-                .Returns(() => patientFilteredData.AsQueryable().BuildMock().Object);
+            patientMockedRepository.Setup(gr => gr.AsNoTracking())
+                .Returns(() => patientPresentData.AsQueryable().BuildMock().Object);
 
             var businessLocalizer = ServiceProvider.GetRequiredService<IStringLocalizer<TreatmentSessionReferencesBusinessValidator>>();
             var treatmentSessionReferencesBusinessValidator = new TreatmentSessionReferencesBusinessValidator(

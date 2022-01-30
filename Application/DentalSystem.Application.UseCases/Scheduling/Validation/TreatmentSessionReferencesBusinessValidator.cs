@@ -46,21 +46,21 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             ITreatmentSessionReferencesInput model,
             CancellationToken cancellationToken)
             => DentalTeamReadRepository
-                .Where(ts => ts.ReferenceId == model.DentalTeamReferenceId)
-                .AnyAsync(cancellationToken);
+                .AsNoTracking()
+                .AnyAsync(ts => ts.ReferenceId == model.DentalTeamReferenceId, cancellationToken);
 
         private Task<bool> HasTreatment(
             ITreatmentSessionReferencesInput model,
             CancellationToken cancellationToken)
             => TreatmentReadRepository
-                .Where(ts => ts.ReferenceId == model.TreatmentReferenceId)
-                .AnyAsync(cancellationToken);
+                .AsNoTracking()
+                .AnyAsync(ts => ts.ReferenceId == model.TreatmentReferenceId, cancellationToken);
 
         private Task<bool> HasPatient(
             ITreatmentSessionReferencesInput model,
             CancellationToken cancellationToken)
             => PatientReadRepository
-                .Where(ts => ts.ReferenceId == model.PatientReferenceId)
-                .AnyAsync(cancellationToken);
+                .AsNoTracking()
+                .AnyAsync(ts => ts.ReferenceId == model.PatientReferenceId, cancellationToken);
     }
 }
