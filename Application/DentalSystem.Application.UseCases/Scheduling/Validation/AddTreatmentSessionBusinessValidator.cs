@@ -48,9 +48,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             ITreatmentSessionInput model,
             CancellationToken cancellationToken)
             => TreatmentSessionRepository
-                .Where(ts => ts.Patient.ReferenceId == model.PatientReferenceId)
+                .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
+                    predicate: ts => ts.Patient.ReferenceId == model.PatientReferenceId
+                        && ts.Status != TreatmentSessionStatus.Rejected
                         && ts.Start <= model.End
                         && ts.End >= model.Start,
                     cancellationToken: cancellationToken
@@ -60,9 +61,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             ITreatmentSessionInput model,
             CancellationToken cancellationToken)
             => TreatmentSessionRepository
-                .Where(ts => ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId)
+                .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
+                    predicate: ts => ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId
+                        && ts.Status != TreatmentSessionStatus.Rejected
                         && ts.Start <= model.End
                         && ts.End >= model.Start,
                     cancellationToken: cancellationToken
