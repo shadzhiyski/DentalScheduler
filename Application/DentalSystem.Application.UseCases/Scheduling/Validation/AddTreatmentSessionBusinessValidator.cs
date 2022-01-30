@@ -7,7 +7,6 @@ using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -45,10 +44,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
 
         public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
-        private async Task<bool> HasNoOverlappingsForPatient(
+        private Task<bool> HasNoOverlappingsForPatient(
             ITreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
+            => TreatmentSessionRepository
                 .Where(ts => ts.Patient.ReferenceId == model.PatientReferenceId)
                 .NoneAsync(
                     predicate: ts => ts.Status != TreatmentSessionStatus.Rejected
@@ -57,10 +56,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                     cancellationToken: cancellationToken
                 );
 
-        private async Task<bool> HasNoOverlappingsForDentalTeam(
+        private Task<bool> HasNoOverlappingsForDentalTeam(
             ITreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
+            => TreatmentSessionRepository
                 .Where(ts => ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId)
                 .NoneAsync(
                     predicate: ts => ts.Status != TreatmentSessionStatus.Rejected

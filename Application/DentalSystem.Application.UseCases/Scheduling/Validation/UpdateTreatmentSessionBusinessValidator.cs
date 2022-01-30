@@ -8,7 +8,6 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -50,20 +49,20 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
 
         public IReadRepository<TreatmentSession> TreatmentSessionRepository { get; }
 
-        private async Task<bool> ExistsTreatmentSession(
+        private Task<bool> ExistsTreatmentSession(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await Task.Run(() => TreatmentSessionRepository
+            => Task.Run(() => TreatmentSessionRepository
                     .AsNoTracking()
                     .Any(
                         ts => ts.ReferenceId == model.ReferenceId
                     )
                 );
 
-        private async Task<bool> HasNoOverlappingsForPatient(
+        private Task<bool> HasNoOverlappingsForPatient(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
+            => TreatmentSessionRepository
                 .Where(
                     ts => ts.ReferenceId != model.ReferenceId
                         && ts.Patient.ReferenceId == model.PatientReferenceId
@@ -75,10 +74,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
                     cancellationToken: cancellationToken
                 );
 
-        private async Task<bool> HasNoOverlappingsForDentalTeam(
+        private Task<bool> HasNoOverlappingsForDentalTeam(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => await TreatmentSessionRepository
+            => TreatmentSessionRepository
                 .Where(
                     ts => ts.ReferenceId != model.ReferenceId
                         && ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId
