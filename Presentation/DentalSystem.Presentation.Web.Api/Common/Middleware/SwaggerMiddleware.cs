@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using DentalSystem.Presentation.Web.Api.Middleware.Filters;
+using DentalSystem.Presentation.Web.Api.Common.Middleware.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace DentalSystem.Presentation.Web.Api.Middleware
+namespace DentalSystem.Presentation.Web.Api.Common.Middleware
 {
     public static class SwaggerMiddleware
     {
