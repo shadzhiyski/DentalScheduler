@@ -330,15 +330,8 @@ namespace DentalSystem.Application.UseCases.Tests.Scheduling.Validation
             var simpleValidator = ServiceProvider.GetRequiredService<UpdateTreatmentSessionValidator>();
             var mockedRepository = new Mock<IReadRepository<TreatmentSession>>();
 
-            var filteredData = presentData;
             mockedRepository.Setup(gr => gr.AsNoTracking())
-                .Returns(() => filteredData.AsQueryable());
-
-            mockedRepository.Setup(gr => gr.Where(It.IsAny<Expression<Func<TreatmentSession, bool>>>()))
-                .Callback<Expression<Func<TreatmentSession, bool>>>(
-                    (filterExpression) => filteredData = presentData.Where(filterExpression.Compile())
-                )
-                .Returns(() => filteredData.AsQueryable().BuildMock().Object);
+                .Returns(() => presentData.AsQueryable().BuildMock().Object);
 
             var dentalTeamMockedRepository = new Mock<IReadRepository<DentalTeam>>();
             dentalTeamMockedRepository.Setup(gr => gr.AsNoTracking())
