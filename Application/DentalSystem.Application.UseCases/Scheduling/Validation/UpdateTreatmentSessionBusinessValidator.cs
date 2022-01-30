@@ -8,6 +8,7 @@ using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -52,12 +53,9 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
         private Task<bool> ExistsTreatmentSession(
             IUpdateTreatmentSessionInput model,
             CancellationToken cancellationToken)
-            => Task.Run(() => TreatmentSessionRepository
-                    .AsNoTracking()
-                    .Any(
-                        ts => ts.ReferenceId == model.ReferenceId
-                    )
-                );
+            => TreatmentSessionRepository
+                .AsNoTracking()
+                .AnyAsync(ts => ts.ReferenceId == model.ReferenceId);
 
         private Task<bool> HasNoOverlappingsForPatient(
             IUpdateTreatmentSessionInput model,
