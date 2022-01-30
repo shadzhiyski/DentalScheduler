@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace DentalSystem.Presentation.Web.Api.Middleware
+namespace DentalSystem.Presentation.Web.Api.Common.Middleware
 {
     public static class LocalizationMiddleware
     {

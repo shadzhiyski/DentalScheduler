@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 
-namespace DentalSystem.Presentation.Web.Api.Middleware
+namespace DentalSystem.Presentation.Web.Api.Common.Middleware
 {
     public static class CorsMiddleware
     {

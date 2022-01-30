@@ -8,7 +8,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 
-namespace DentalSystem.Presentation.Web.Api.Middleware
+namespace DentalSystem.Presentation.Web.Api.Common.Middleware
 {
     public static class ODataMiddleware
     {

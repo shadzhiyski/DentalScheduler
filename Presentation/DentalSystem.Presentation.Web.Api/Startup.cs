@@ -1,7 +1,7 @@
 using System;
 using DentalSystem.Config.DI.Infrastructure;
 using DentalSystem.Application.UseCases;
-using DentalSystem.Presentation.Web.Api.Middleware;
+using DentalSystem.Presentation.Web.Api.Common.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

@@ -1,33 +1,33 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Presentation.Web.Api.Common;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Scheduling
 {
     /// <summary>
-    /// Dental Team.
+    /// Room.
     /// </summary>
     [ApiController]
     [Route("odata/[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class DentalTeamController : BaseApiController
+    public class RoomController : BaseApiController
     {
         /// <summary>
-        /// Creates Dental Team Controller.
+        /// Creates Room Controller.
         /// </summary>
         /// <param name="mappingConfig"></param>
         /// <param name="repository"></param>
-        public DentalTeamController(
+        public RoomController(
             TypeAdapterConfig mappingConfig,
-            IReadRepository<DentalTeam> repository)
+            IReadRepository<Room> repository)
         {
             MappingConfig = mappingConfig;
             Repository = repository;
@@ -35,19 +35,20 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
 
         private TypeAdapterConfig MappingConfig { get; }
 
-        private IReadRepository<DentalTeam> Repository { get; }
+        private IReadRepository<Room> Repository { get; }
 
         /// <summary>
-        /// Gets Dental Teams.
+        /// Gets Rooms.
         /// </summary>
         /// <returns></returns>
-        /// <response code="200">Returns dental teams</response>
+        /// <response code="200">Returns rooms</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<DentalTeamOutput> Get()
+        [SwaggerOperation(Tags = new string[] { "Scheduling" })]
+        public IQueryable<RoomOutput> Get()
         {
             return Repository.AsNoTracking()
-                .ProjectToType<DentalTeamOutput>(MappingConfig);
+                .ProjectToType<RoomOutput>(MappingConfig);
         }
     }
 }

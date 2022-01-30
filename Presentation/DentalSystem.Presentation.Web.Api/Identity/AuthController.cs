@@ -1,13 +1,15 @@
 using System;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
+using DentalSystem.Presentation.Web.Api.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Threading;
 using MediatR;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Identity
 {
     /// <summary>
     /// Authentication.
@@ -41,6 +43,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [Route ("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Tags = new string[] { "Identity" })]
         public async Task<IActionResult> Register(RegisterUserInput model, CancellationToken cancellationToken)
         {
             var result =  await Mediator.Value.Send(model, cancellationToken);
@@ -60,6 +63,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [Route ("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Tags = new string[] { "Identity" })]
         public async Task<IActionResult> Login([FromBody] UserCredentialsInput loginCredentials, CancellationToken cancellationToken)
         {
             var result =  await Mediator.Value.Send(loginCredentials, cancellationToken);

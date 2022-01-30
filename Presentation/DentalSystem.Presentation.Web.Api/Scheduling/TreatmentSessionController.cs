@@ -5,6 +5,7 @@ using DentalSystem.Application.UseCases.Scheduling.Dto.Input;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Presentation.Web.Api.Common;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData.Query;
 using System.Threading;
 using MediatR;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Scheduling
 {
     /// <summary>
     /// Treatment Session.
@@ -52,6 +54,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <response code="200">Returns treatment sessions</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
+        [SwaggerOperation(Tags = new string[] { "Scheduling" })]
         public IQueryable<TreatmentSessionOutput> Get()
         {
             return Repository.Value.AsNoTracking()
@@ -69,6 +72,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Tags = new string[] { "Scheduling" })]
         public async Task<IActionResult> PostAsync(TreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
             var result = await Mediator.Value.Send(input, cancellationToken);
@@ -89,6 +93,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Tags = new string[] { "Scheduling" })]
         public async Task<IActionResult> PutAsync(UpdateTreatmentSessionInput input, CancellationToken cancellationToken = default)
         {
             var result = await Mediator.Value.Send(input, cancellationToken);
