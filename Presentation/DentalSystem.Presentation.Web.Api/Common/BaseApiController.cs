@@ -2,7 +2,7 @@ using System.Linq;
 using DentalSystem.Application.Boundaries.UseCases.Common.Dto.Output;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Common
 {
     /// <summary>
     /// Base Api Controller.

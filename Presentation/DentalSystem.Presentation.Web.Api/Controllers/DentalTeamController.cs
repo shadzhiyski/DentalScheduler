@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Presentation.Web.Api.Common;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

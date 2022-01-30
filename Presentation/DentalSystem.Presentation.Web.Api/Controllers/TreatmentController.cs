@@ -3,6 +3,7 @@ using System.Linq;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
 using DentalSystem.Domain.Scheduling.Entities;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
+using DentalSystem.Presentation.Web.Api.Common;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;

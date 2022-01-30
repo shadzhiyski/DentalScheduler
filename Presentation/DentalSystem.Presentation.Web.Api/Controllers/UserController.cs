@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Identity.Dto.Input;
 using DentalSystem.Application.Boundaries.UseCases.Identity.Dto.Output;
+using DentalSystem.Presentation.Web.Api.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
