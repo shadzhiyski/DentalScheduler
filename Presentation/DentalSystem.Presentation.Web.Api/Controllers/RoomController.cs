@@ -7,6 +7,7 @@ using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -42,6 +43,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         /// <response code="200">Returns rooms</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
+        [SwaggerOperation(Tags = new string[] { "Scheduling" })]
         public IQueryable<RoomOutput> Get()
         {
             return Repository.AsNoTracking()

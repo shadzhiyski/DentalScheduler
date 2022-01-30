@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using System.Threading;
 using MediatR;
 using DentalSystem.Application.UseCases.Identity.Queries;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DentalSystem.Presentation.Web.Api.Controllers
 {
@@ -38,6 +39,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [HttpGet]
         [Route("avatar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerOperation(Tags = new string[] { "Identity" })]
         public async Task<IActionResult> GetAvatar()
         {
             var result = await Mediator.Value.Send(new GetUserProfileInput());
@@ -53,6 +55,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [HttpGet]
         [Route("profile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [SwaggerOperation(Tags = new string[] { "Identity" })]
         public async Task<IUserProfileOutput> GetProfile()
         {
             var result = await Mediator.Value.Send(new GetUserProfileInput());
@@ -72,6 +75,7 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
         [Route("profile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerOperation(Tags = new string[] { "Identity" })]
         public async Task<IActionResult> UpdateProfile([FromForm] UserProfileInput input, CancellationToken cancellationToken)
         {
             var result = await Mediator.Value.Send(input, cancellationToken);
