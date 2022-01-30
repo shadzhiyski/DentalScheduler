@@ -11,7 +11,7 @@ using MediatR;
 using DentalSystem.Application.UseCases.Identity.Queries;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Identity
 {
     /// <summary>
     /// User.

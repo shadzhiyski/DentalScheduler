@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Scheduling
 {
     /// <summary>
     /// Treatment.

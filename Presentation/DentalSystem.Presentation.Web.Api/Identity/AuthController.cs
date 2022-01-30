@@ -9,7 +9,7 @@ using System.Threading;
 using MediatR;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Identity
 {
     /// <summary>
     /// Authentication.

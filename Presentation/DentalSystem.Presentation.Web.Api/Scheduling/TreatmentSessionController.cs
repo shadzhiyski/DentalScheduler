@@ -15,7 +15,7 @@ using System.Threading;
 using MediatR;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Scheduling
 {
     /// <summary>
     /// Treatment Session.

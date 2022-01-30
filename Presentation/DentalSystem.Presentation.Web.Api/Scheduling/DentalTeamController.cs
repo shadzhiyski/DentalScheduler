@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DentalSystem.Application.UseCases.Scheduling.Dto.Output;
@@ -10,24 +12,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace DentalSystem.Presentation.Web.Api.Controllers
+namespace DentalSystem.Presentation.Web.Api.Scheduling
 {
     /// <summary>
-    /// Room.
+    /// Dental Team.
     /// </summary>
     [ApiController]
     [Route("odata/[controller]")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class RoomController : BaseApiController
+    public class DentalTeamController : BaseApiController
     {
         /// <summary>
-        /// Creates Room Controller.
+        /// Creates Dental Team Controller.
         /// </summary>
         /// <param name="mappingConfig"></param>
         /// <param name="repository"></param>
-        public RoomController(
+        public DentalTeamController(
             TypeAdapterConfig mappingConfig,
-            IReadRepository<Room> repository)
+            IReadRepository<DentalTeam> repository)
         {
             MappingConfig = mappingConfig;
             Repository = repository;
@@ -35,20 +37,20 @@ namespace DentalSystem.Presentation.Web.Api.Controllers
 
         private TypeAdapterConfig MappingConfig { get; }
 
-        private IReadRepository<Room> Repository { get; }
+        private IReadRepository<DentalTeam> Repository { get; }
 
         /// <summary>
-        /// Gets Rooms.
+        /// Gets Dental Teams.
         /// </summary>
         /// <returns></returns>
-        /// <response code="200">Returns rooms</response>
+        /// <response code="200">Returns dental teams</response>
         [HttpGet]
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
         [SwaggerOperation(Tags = new string[] { "Scheduling" })]
-        public IQueryable<RoomOutput> Get()
+        public IQueryable<DentalTeamOutput> Get()
         {
             return Repository.AsNoTracking()
-                .ProjectToType<RoomOutput>(MappingConfig);
+                .ProjectToType<DentalTeamOutput>(MappingConfig);
         }
     }
 }
