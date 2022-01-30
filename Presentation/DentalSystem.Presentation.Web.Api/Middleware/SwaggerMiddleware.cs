@@ -59,6 +59,8 @@ namespace DentalSystem.Presentation.Web.Api.Middleware
                     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                     c.IncludeXmlComments(xmlPath);
+
+                    c.EnableAnnotations();
                 });
 
         public static IApplicationBuilder UseSwaggerMiddleware(this IApplicationBuilder app)
