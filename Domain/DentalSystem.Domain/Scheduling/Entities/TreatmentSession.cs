@@ -1,9 +1,10 @@
 using System;
+using DentalSystem.Domain.Common.Entities;
 using DentalSystem.Domain.Scheduling.Enumerations;
 
 namespace DentalSystem.Domain.Scheduling.Entities
 {
-    public class TreatmentSession
+    public class TreatmentSession : IReferableEntity
     {
         public Guid Id { get; set; }
 

@@ -1,11 +1,11 @@
 using System;
 using DentalSystem.Domain.Identity.Entities;
-using Microsoft.AspNetCore.Identity;
 using DentalSystem.Domain.Scheduling.Enumerations;
+using DentalSystem.Domain.Common.Entities;
 
 namespace DentalSystem.Domain.Scheduling.Entities
 {
-    public class DentalWorker
+    public class DentalWorker : IEntity
     {
         public Guid Id { get; set; }
 

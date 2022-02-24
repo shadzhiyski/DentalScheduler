@@ -1,10 +1,10 @@
 using System;
+using DentalSystem.Domain.Common.Entities;
 using DentalSystem.Domain.Identity.Entities;
-using Microsoft.AspNetCore.Identity;
 
 namespace DentalSystem.Domain.Scheduling.Entities
 {
-    public class Patient
+    public class Patient : IReferableEntity
     {
         public Guid Id { get; set; }
 
