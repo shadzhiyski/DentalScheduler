@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
+using DentalSystem.Domain.Common.Specifications;
 using DentalSystem.Domain.Scheduling.Entities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -47,20 +48,29 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             CancellationToken cancellationToken)
             => DentalTeamReadRepository
                 .AsNoTracking()
-                .AnyAsync(ts => ts.ReferenceId == model.DentalTeamReferenceId, cancellationToken);
+                .AnyAsync(
+                    new EqualityByReferenceIdSpecification<DentalTeam>(model.DentalTeamReferenceId).Condition,
+                    cancellationToken
+                );
 
         private Task<bool> HasTreatment(
             ITreatmentSessionReferencesInput model,
             CancellationToken cancellationToken)
             => TreatmentReadRepository
                 .AsNoTracking()
-                .AnyAsync(ts => ts.ReferenceId == model.TreatmentReferenceId, cancellationToken);
+                .AnyAsync(
+                    new EqualityByReferenceIdSpecification<Treatment>(model.TreatmentReferenceId).Condition,
+                    cancellationToken
+                );
 
         private Task<bool> HasPatient(
             ITreatmentSessionReferencesInput model,
             CancellationToken cancellationToken)
             => PatientReadRepository
                 .AsNoTracking()
-                .AnyAsync(ts => ts.ReferenceId == model.PatientReferenceId, cancellationToken);
+                .AnyAsync(
+                    new EqualityByReferenceIdSpecification<Patient>(model.PatientReferenceId).Condition,
+                    cancellationToken
+                );
     }
 }
