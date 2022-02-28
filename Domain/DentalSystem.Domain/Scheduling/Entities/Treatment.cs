@@ -1,8 +1,9 @@
 using System;
+using DentalSystem.Domain.Common.Entities;
 
 namespace DentalSystem.Domain.Scheduling.Entities
 {
-    public class Treatment
+    public class Treatment : IReferableEntity
     {
         public Guid Id { get; set; }
 

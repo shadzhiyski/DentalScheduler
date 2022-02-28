@@ -2,13 +2,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using DentalSystem.Common.Helpers.Extensions;
 using DentalSystem.Domain.Scheduling.Entities;
-using DentalSystem.Domain.Scheduling.Enumerations;
 using DentalSystem.Application.Boundaries.Infrastructure.Common.Persistence;
 using DentalSystem.Application.Boundaries.UseCases.Scheduling.Dto.Input;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using DentalSystem.Domain.Scheduling.Specifications;
+using DentalSystem.Domain.Common.Specifications;
 
 namespace DentalSystem.Application.UseCases.Scheduling.Validation
 {
@@ -55,7 +55,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             CancellationToken cancellationToken)
             => TreatmentSessionRepository
                 .AsNoTracking()
-                .AnyAsync(ts => ts.ReferenceId == model.ReferenceId);
+                .AnyAsync(
+                    new EqualityByReferenceIdSpecification<TreatmentSession>(model.ReferenceId).Condition,
+                    cancellationToken
+                );
 
         private Task<bool> HasNoOverlappingsForPatient(
             IUpdateTreatmentSessionInput model,
@@ -63,11 +66,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             => TreatmentSessionRepository
                 .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.ReferenceId != model.ReferenceId
-                        && ts.Patient.ReferenceId == model.PatientReferenceId
-                        && ts.Status != TreatmentSessionStatus.Rejected
-                        && ts.Start <= model.End
-                        && ts.End >= model.Start,
+                    predicate: new OverlappingTreatmentSessionsForPatientSpecification(
+                        model.PatientReferenceId, model.Start, model.End
+                    ).And(new DifferenceByReferenceIdSpecification<TreatmentSession>(model.ReferenceId))
+                    .Condition,
                     cancellationToken: cancellationToken
                 );
 
@@ -77,11 +79,10 @@ namespace DentalSystem.Application.UseCases.Scheduling.Validation
             => TreatmentSessionRepository
                 .AsNoTracking()
                 .NoneAsync(
-                    predicate: ts => ts.ReferenceId != model.ReferenceId
-                        && ts.DentalTeam.ReferenceId == model.DentalTeamReferenceId
-                        && ts.Status != TreatmentSessionStatus.Rejected
-                        && ts.Start <= model.End
-                        && ts.End >= model.Start,
+                    predicate: new OverlappingTreatmentSessionsForDentalTeamSpecification(
+                        model.DentalTeamReferenceId, model.Start, model.End
+                    ).And(new DifferenceByReferenceIdSpecification<TreatmentSession>(model.ReferenceId))
+                    .Condition,
                     cancellationToken: cancellationToken
                 );
     }
