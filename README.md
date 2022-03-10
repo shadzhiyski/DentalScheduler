@@ -1,6 +1,7 @@
 # Dental System
 
 ![build status badge](https://github.com/stoian2662/DentalScheduler/actions/workflows/dotnet.yml/badge.svg)
+[![Lint Code Base](https://github.com/stoian2662/DentalScheduler/actions/workflows/super-linter.yml/badge.svg)](https://github.com/stoian2662/DentalScheduler/actions/workflows/super-linter.yml)
 <!-- https://github.com/fkhoda/checkout-shoppinglist-api -->
 
 ## Description
