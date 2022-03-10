@@ -1,6 +1,7 @@
 # Dental System
 
-![build status badge](https://github.com/stoian2662/DentalScheduler/actions/workflows/dotnet.yml/badge.svg)
+[![build status badge](https://github.com/stoian2662/DentalScheduler/actions/workflows/dotnet.yml/badge.svg)](https://github.com/stoian2662/DentalScheduler/actions/workflows/dotnet.yml)
+[![CodeQL](https://github.com/stoian2662/DentalScheduler/actions/workflows/codeql.yml/badge.svg)](https://github.com/stoian2662/DentalScheduler/actions/workflows/codeql.yml)
 [![Lint Code Base](https://github.com/stoian2662/DentalScheduler/actions/workflows/super-linter.yml/badge.svg)](https://github.com/stoian2662/DentalScheduler/actions/workflows/super-linter.yml)
 <!-- https://github.com/fkhoda/checkout-shoppinglist-api -->
 
