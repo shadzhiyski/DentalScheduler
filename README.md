@@ -41,7 +41,7 @@ Supports main identity features - user registration (only for clients of the den
 
 ### Components Relationships
 
-Main components of the system are PostgreSQL database, ASP.NET Web API and Blazor WebAssembly(WASM) App. When published, Blazor WebAssembly project produces static files. NGINX is configured to serve these files. Below is a diagram of components relationships:
+Main components of the system are PostgreSQL database, ASP.NET Web API and Blazor WebAssembly(Wasm) App. When published, Blazor WebAssembly project produces static files. NGINX is configured to serve these files. Below is a diagram of components relationships:
 
 ![Components Relationships](/Assets/components_relationship.png)
 
@@ -53,7 +53,7 @@ This architecture follows a **use case driven approach**. See more about [scream
 
 ### Domain
 
-This layer is a place for all entities. They are basic building blocks for the system.
+This layer is a place for all entities and [specifications](https://en.wikipedia.org/wiki/Specification_pattern). They are basic building blocks for the system.
 
 ### Application
 
