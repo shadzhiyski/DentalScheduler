@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://+:5555
-EXPOSE 5555
+ENV ASPNETCORE_URLS=http://+:5500
+EXPOSE 5500
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src

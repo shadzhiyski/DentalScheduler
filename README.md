@@ -99,7 +99,7 @@ docker-compose up -d
 
 `docker-compose up -d` builds the images and starts the containers of the database, Web API and Web UI. It may take a few minutes.
 
-After the containers are started, the Web API is accessible on <http://localhost:5555> and the Web UI is accessible on <http://localhost>.
+After the containers are started, the Web API is accessible on <http://localhost:5500> and the Web UI is accessible on <http://localhost>.
 
 To stop the running containers execute `docker-compose down`.
 
